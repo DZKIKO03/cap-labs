@@ -132,5 +132,5 @@ Upload the following screenshots inside `/screenshots/`:
 
 ## 9. Author
 
-Daniele — SAP Technical Architect Path 
+Daniele Zambrano — SAP Technical Architect
 
