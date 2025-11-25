@@ -28,9 +28,8 @@ orders/
 │ ├── tech-analysis.md
 │ └── domain-model.png
 ├── screenshots
-│ ├── service-catalog.png
-│ ├── calculate-total.png
-│ └── cds-watch.png
+│ ├── orders.pdf
+│ ├── orederitems.pdf
 ├── package.json
 ├── package-lock.json
 └── README.md
@@ -49,9 +48,7 @@ GET http://localhost:4004/odata/v4/orders/Orders
 Calculate Order Total
 POST http://localhost:4004/odata/v4/orders/calculateTotal
 
-
 Body:
-
 {
   "orderID": "<uuid>"
 }
