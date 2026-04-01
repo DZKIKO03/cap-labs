@@ -1,0 +1,1128 @@
+Identifying the Need for Side-By-Side Extensibility
+
+Introduzione
+
+Sei uno sviluppatore presso un’azienda che utilizza SAP S/4HANA Cloud. La tua azienda ha la necessità di estendere la soluzione standard SAP S/4HANA Cloud con logica di business personalizzata e interfacce utente (UI).
+Vuoi esplorare le opzioni per l’estensibilità side-by-side con SAP BTP e SAP S/4HANA Cloud. Quando costruisci estensioni in un sistema SAP, specialmente in un ambiente cloud come SAP S/4HANA Cloud, l’approccio tradizionale di sviluppare ed eseguire logica di business personalizzata direttamente sul server applicativo non è più possibile.
+Storicamente, le soluzioni SAP ERP venivano estese on-premise direttamente aggiungendo codice custom al server applicativo ABAP. Le capacità e i paradigmi di estensione delle soluzioni SAP sono cambiati con il passaggio a un ambiente cloud. Tuttavia, il sistema standard SAP S/4HANA Cloud può comunque essere adattato alle esigenze di business personalizzate.
+Esistono diverse possibilità per personalizzare il sistema standard, come l’utilizzo della key-user extensibility — ad esempio, per aggiungere campi personalizzati a un’interfaccia utente SAP Fiori (UI). Tuttavia, questo soddisfa solo requisiti di personalizzazione semplici. Per requisiti più complessi, come l’aggiunta di logica di business personalizzata, è necessario un approccio di estensibilità side-by-side. Esploriamo questo aspetto più nel dettaglio.
+
+Estensibilità Side-by-Side
+
+Come introdotto in precedenza, SAP BTP è una piattaforma di sviluppo basata su cloud che si concentra sulla centralità del business. SAP BTP fornisce un ambiente di sviluppo cloud(-native) a prova di futuro, armonizzando l’esperienza di sviluppo tra i prodotti SAP e offrendo un’esperienza fluida nel cloud.
+Tre runtime applicativi, ovvero SAP BTP, ABAP Runtime, SAP BTP, Cloud Foundry Runtime e SAP BTP, Kyma runtime, offrono diverse opzioni sia per sviluppatori ABAP sia non ABAP su SAP BTP per sviluppare ed eseguire applicazioni in modalità pro code. Allo stesso modo, per i citizen developer, SAP BTP offre una suite di prodotti low-code/no-code (LCNC) per costruire estensioni di livello enterprise in modo completamente low-code.
+SAP Build è composto da tre prodotti fortemente integrati: SAP Build Apps, SAP Build Process Automation e SAP Build Work Zone. Vale la pena sottolineare che entrambi i lati dello spettro, pro code e low-code, possono essere combinati per costruire estensioni con un approccio ibrido, in cui sviluppatori pro code e citizen developer collaborano nei cosiddetti “Fusion Teams” per realizzare estensioni.
+
+
+Sebbene sia ancora possibile sviluppare la soluzione core, è una best practice consolidata “mantenere il core pulito” (“keep the core clean”) e piuttosto consumare le Application Programming Interfaces (API) di questi sistemi e integrarle nelle proprie applicazioni di estensione. È proprio qui che entra in gioco SAP BTP.
+In quanto piattaforma di sviluppo basata su cloud, SAP BTP offre un’ampia gamma di funzionalità orientate al business per estendere i processi aziendali nei landscape SAP e oltre. Il livello fondamentale di SAP BTP fornisce agli sviluppatori diversi strumenti di sviluppo, servizi e componenti infrastrutturali per costruire ed eseguire applicazioni cloud-native sicure, scalabili e affidabili.
+Gli sviluppatori hanno accesso a strumenti di sviluppo, servizi e componenti infrastrutturali come SAP Business Application Studio o il runtime SAP BTP, Kyma.
+Scopri di più nel seguente video:
+
+Opzioni di Estensibilità in SAP BTP
+
+Con i tre runtime su SAP BTP, sono disponibili diverse opzioni di estensibilità. Per le estensioni basate su ABAP, SAP BTP, ABAP Environment è l’unica scelta per sviluppare ed eseguire le applicazioni. D’altra parte, la creazione di estensioni non basate su ABAP consente di utilizzare diversi stack tecnologici e scenari di sviluppo e deployment completamente cloud-native.
+Linguaggi di programmazione come (ma non limitati a) JavaScript (Node.js), Java, TypeScript, Go, Python e molti altri possono essere utilizzati per costruire un’estensione custom di livello enterprise su SAP BTP. Queste applicazioni possono essere sviluppate localmente nel proprio IDE preferito oppure nel SAP Business Application Studio su SAP BTP. Il deployment può avvenire nel SAP BTP, Cloud Foundry Runtime oppure nel SAP BTP, Kyma runtime.
+
+
+Nel contesto di questo percorso di apprendimento, imparerai solo le estensioni non basate su ABAP. Più precisamente, con il SAP Cloud Application Programming Model (CAP) utilizzando Node.js (JavaScript) e Cloud Foundry.
+
+Exploring the SAP Cloud Application Programming Model
+
+Introduzione
+Immagina di essere un project lead in un’azienda in rapida crescita. Ti trovi ad affrontare la sfida di trasformare digitalmente l’organizzazione, mantenendo allo stesso tempo un’integrazione fluida con le soluzioni SAP esistenti. È qui che entra in gioco il SAP Cloud Application Programming Model (CAP) come framework di riferimento.
+
+Che cos’è il SAP Cloud Application Programming Model?
+Il SAP Cloud Application Programming Model, spesso abbreviato come CAP, non è semplicemente un altro strumento nel tuo arsenale di sviluppo. È un framework completo progettato per alleviare la maggior parte delle difficoltà tradizionalmente associate allo sviluppo di applicazioni di livello enterprise. Fornisce un ricco insieme di linguaggi, librerie e strumenti per costruire servizi e applicazioni enterprise-grade. Guida gli sviluppatori lungo una “golden path” di best practice consolidate e offre un’ampia disponibilità di soluzioni pronte all’uso per attività ricorrenti.
+
+Man mano che approfondisci il mondo di CAP, incontri diversi componenti chiave che tengono insieme l’architettura.
+
+
+
+Core Data Services (CDS)
+
+CDS è l’infrastruttura di modellazione dei dati, nota anche come la spina dorsale del Programming Model, che ti fornisce i mezzi per definire servizi e modelli dati. Per le definizioni di servizio e i modelli dati viene utilizzato il Definition Language (CDL). Maggiori informazioni sono disponibili nella documentazione di riferimento del linguaggio nella documentazione ufficiale CAP (cap.cloud.sap).
+Service SDKs
+
+Il SAP Cloud Application Programming Model mette a disposizione librerie sia per Java sia per Node.js, che puoi utilizzare per fornire e consumare servizi tramite API sincrone e asincrone.
+Gli SDK includono integrazioni out-of-the-box con servizi di piattaforma di livello inferiore, come autenticazione e flussi di credenziali oppure l’onboarding e l’offboarding dei tenant SaaS.
+Development Tools
+
+SAP fornisce un ambiente di sviluppo web-based completo chiamato SAP Business Application Studio, dotato e preconfigurato con tutti gli strumenti necessari per lo sviluppo CAP. Inoltre, è supportato anche lo sviluppo locale in VS Code o in IDE specifici per Java.
+Databases
+
+Per il livello di persistenza della tua applicazione CAP, puoi scegliere tra diverse opzioni di database disponibili. SAP HANA Cloud è la scelta principale. Tuttavia, sono possibili anche altre tecnologie come PostgreSQL o SQLite (per lo sviluppo locale).
+Frontends
+
+Essendo un framework full stack, CAP è aperto a diverse tecnologie frontend. SAP Fiori è pienamente supportato, ma anche altri framework UI come Vue.js, Angular o React possono essere utilizzati sopra i tuoi servizi.
+Infrastructure
+
+Sono disponibili due stack: Java e Node.js. Il deployment può avvenire su SAP BTP, Cloud Foundry Runtime oppure su SAP BTP, Kyma runtime.
+Platform Services
+
+I servizi SAP BTP possono essere integrati e consumati tramite SDK.
+
+Panoramica delle Risorse Importanti di CAP
+Come sviluppatore CAP, dovresti essere familiare con alcune risorse chiave di CAP per iniziare oppure per esplorare scenari avanzati. La prima è la documentazione ufficiale CAP chiamata CAPire.
+
+All’interno di CAPire, trovi tutti gli aspetti di CAP sia per Node.js sia per Java. Sono disponibili numerosi progetti di esempio, sia per principianti sia avanzati, su GitHub.
+
+Ciclo di rilascio di CAP Node.js
+
+I rilasci di CAP Node.js sono collegati ai cicli di rilascio di Node.js. Il versioning di CAP è basato anche sul versionamento semantico (semver), che a sua volta si basa sul numero di versione MAJOR.MINOR.PATCH. I singoli elementi vengono incrementati come segue:
+MAJOR
+
+Le nuove versioni major di CAP vengono rilasciate ogni 12 mesi (di solito intorno a maggio). Quando si avvia un nuovo progetto, è fortemente raccomandato adottare l’ultima versione major disponibile. Le versioni precedenti ricevono solo correzioni di bug critici (PATCH).
+MINOR
+
+Le versioni major attive ricevono aggiornamenti minor mensili. Questi aggiornamenti minor contengono nuove funzionalità compatibili all’indietro all’interno della stessa versione major. Non ci sono quindi breaking changes nelle API pubbliche del framework CAP.
+PATCH
+Tra i rilasci ufficiali attivi e quelli in manutenzione, le versioni patch vengono rilasciate regolarmente per correggere bug.
+
+Leggi di più sulla pianificazione e consulta i changelog nella sezione delle note di rilascio della documentazione CAP.
+
+
+Introducing the SAP BTP Developer's Guide
+
+Introduzione
+Ti senti sopraffatto dalle diverse opzioni per sviluppare applicazioni business con SAP BTP? È qui che entra in gioco la SAP Developer's Guide. Questa guida rappresenta un supporto fondamentale per la creazione di applicazioni business sulla SAP Business Technology Platform (SAP BTP). Che tu sia nuovo in SAP o stia cercando di approfondire le tue conoscenze, questa guida ti aiuta a orientarti tra i componenti chiave e le best practice per uno sviluppo applicativo di successo.
+
+Perché utilizzare la SAP Developer's Guide?
+Blueprint per il successo: la guida fornisce un elenco curato di servizi che costituiscono il nucleo delle applicazioni business SAP su SAP BTP, aiutandoti a partire con basi solide.
+Setup automatizzato: offre strumenti per il provisioning automatico, la gestione e la configurazione delle risorse SAP BTP, facendoti risparmiare tempo e sforzo.
+Integrazione fluida: tecnologie standardizzate garantiscono un’integrazione senza attriti tra i diversi componenti, facilitando un processo di sviluppo coerente.
+Qualità cloud ed enterprise: riceverai indicazioni su come fornire qualità robuste tipiche del cloud SAP e della suite enterprise intelligente, assicurando che le tue applicazioni siano potenti e affidabili.
+
+Componenti Chiave
+
+SAP Cloud Application Programming Model (CAP): CAP è un framework versatile che supporta Java, JavaScript e TypeScript, guidandoti con best practice e strumenti integrati per uno sviluppo accelerato. I progetti CAP si concentrano sul dominio di business, proteggendo i tuoi investimenti in un panorama cloud in rapida evoluzione. In questo Learning Journey, l’attenzione è sullo sviluppo con CAP.
+ABAP Cloud: questo approccio moderno allo sviluppo ABAP consente di creare applicazioni business stabili nel ciclo di vita e pronte per il cloud. ABAP Cloud promuove nuove tecnologie e semplifica i cicli di upgrade separando il codice custom dal codice SAP.
+SAP Build Code: un ambiente di sviluppo basato su AI pensato per sviluppatori CAP e SAPUI5. Integra coding, testing e gestione delle applicazioni, semplificando il processo di sviluppo e garantendo l’aderenza alle best practice.
+Riepilogo
+
+La SAP Developer's Guide è una risorsa essenziale per creare applicazioni business sulla SAP Business Technology Platform (SAP BTP). Fornisce una roadmap completa per gli sviluppatori, consolidando best practice, tecnologie e metodologie per garantire uno sviluppo applicativo efficiente, scalabile e robusto.
+Ulteriori Letture
+Che cos’è la SAP BTP Developer’s Guide?
+Tutorial per SAP Cloud Application Programming Model
+
+
+Introducing the OData Protocol
+Che cos’è Odata?
+
+Open Data Protocol (OData) è uno standard OASIS che definisce le best practice per costruire e consumare API RESTful. OData ti aiuta a concentrarti sulla logica di business mentre costruisci API RESTful, senza doverti preoccupare degli approcci per definire header di richiesta e risposta, codici di stato, metodi HTTP, convenzioni URL, tipi di media, formati del payload, opzioni di query, e così via. È uno standard aperto definito dal consorzio OASIS.
+OData ti guida anche nel tracciamento delle modifiche, nella definizione di funzioni o azioni per procedure riutilizzabili, nell’invio di richieste asincrone o batch, e così via. Inoltre, OData fornisce una funzionalità di estensione per soddisfare eventuali esigenze personalizzate delle tue API RESTful.
+Le API RESTful OData sono facili da consumare. I metadati OData, una descrizione leggibile da macchina del modello dati delle API, consentono la creazione di potenti proxy client generici e strumenti. Alcuni di questi possono aiutarti a interagire con OData anche senza conoscere nulla del protocollo.
+Nozioni di base su Odata
+
+Una delle caratteristiche principali di OData è che utilizza i verbi HTTP esistenti GET, PUT, POST e DELETE su risorse indirizzabili identificate nell’URI. Concettualmente, OData è un modo per eseguire operazioni in stile database di creazione, lettura, aggiornamento ed eliminazione sulle risorse utilizzando i verbi HTTP:
+GET: Recupera la risorsa (una collezione di entità, una singola entità, una proprietà strutturale e così via).
+POST: Crea una nuova risorsa.
+PUT: Aggiorna una risorsa esistente sostituendola con un’istanza completa.
+PATCH: Aggiorna una risorsa esistente sostituendo parte delle sue proprietà con un’istanza parziale.
+DELETE: Rimuove la risorsa.
+
+Servizio Odata
+
+OData attualmente supporta due formati per rappresentare le risorse che espone:
+Il formato AtomPub basato su XML
+Il formato JSON
+JSON ha un overhead di protocollo inferiore rispetto al protocollo Atom Publishing. JSON può essere facilmente consumato con JavaScript e da SAPUI5.
+Ogni servizio OData è rappresentato da un URI (Uniform Resource Identifier), chiamato service root URI. Un URI è un identificatore uniforme di risorsa, ovvero una stringa di caratteri utilizzata per identificare una risorsa. Più precisamente, ogni risorsa può essere accessibile tramite un URL (Uniform Resource Locator). Un URL descrive come accedere alla risorsa. Questo tipo di identificazione consente l’interazione con le rappresentazioni della risorsa attraverso una rete utilizzando protocolli specifici come OData.
+
+Tipi di documenti associati a ciascun servizio Odata
+
+Esistono due tipi di documenti associati a ciascun servizio OData:
+Il service document
+Il service metadata document
+Il service document elenca gli entity set, le funzioni e i singleton che possono essere recuperati. I client possono utilizzare il service document per navigare il modello in modo guidato da ipermedia. Il service document è disponibile all’indirizzo http://://.
+Il metadata document descrive i tipi, gli insiemi, le funzioni e le azioni comprese dal servizio OData. I client possono utilizzare il metadata document per comprendere come interrogare e interagire con le entità nel servizio. Il service metadata document è disponibile all’indirizzo http://://$metadata. L’URL restituisce i metadati XML del servizio (modello dati delle entità). La risposta di un service metadata document supporta solo XML.
+
+OData e CAP
+In un’applicazione basata su CAP, i servizi sono definiti tramite modelli Core Data Services (CDS) e sono gestiti dall’ambiente di runtime CAP. Nel framework CAP, ogni componente funzionale è considerato come un servizio. Questi servizi rappresentano le caratteristiche interattive di un dominio, incluse le entità che espongono, le azioni che abilitano e gli eventi che attivano.
+
+Nota
+Sebbene il protocollo predefinito per i servizi esposti in CAP sia OData, è possibile utilizzare i Protocol Adapter in CAP per sovrascrivere il comportamento predefinito. Protocolli come REST e GraphQL sono supportati out-of-the-box. Inoltre, è anche possibile definire propri Custom Protocol Adapter.
+Riepilogo
+
+Ora hai una comprensione più approfondita del protocollo OData e sei in grado di descriverne i concetti chiave. Hai anche imparato come OData viene utilizzato in CAP e hai visto la possibilità di usare protocolli diversi tramite i protocol adapter.
+Approfondimenti
+OData - the Best Way to REST
+Understand OData in 6 steps
+Providing Services in CAP
+Protocol Adapters
+
+
+Explaining JSON/YAML
+JSON e YAML
+
+Scenario aziendale
+Ti trovi nella necessità di creare file di configurazione per vari servizi cloud-native. Dovresti usare JSON o YAML? Questa lezione ti guida attraverso le specificità di ciascuno, aiutandoti a prendere una decisione informata.
+Che cosa sono JSON e YAML?
+Panoramica su JSON
+
+JSON (JavaScript Object Notation) è un formato standard aperto per l’archiviazione e lo scambio di dati. Utilizza un testo facilmente leggibile per rappresentare oggetti dati, costituiti da coppie chiave-valore e array. Spesso utilizzato nelle applicazioni web per comunicare con i server, JSON rappresenta un mezzo versatile di interscambio dei dati.
+Sebbene sia influenzato dalla sintassi di JavaScript, JSON funziona in modo indipendente ed è supportato da diversi linguaggi di programmazione. I file che utilizzano questo formato hanno tipicamente estensione .json.
+JSON si basa fondamentalmente su due strutture principali:
+Un insieme di coppie chiave-valore: spesso implementato come “oggetto” in diversi linguaggi di programmazione.
+Una serie di valori ordinati in sequenza: la maggior parte dei linguaggi la interpreta come un “array”.
+La figura seguente, JSON Representation Describing a Business Partner, mostra una possibile rappresentazione JSON che descrive un Business Partner.
+
+Panoramica su YAML
+
+YAML è un linguaggio di serializzazione dei dati, leggibile dall’uomo, multi-linguaggio e basato su Unicode, progettato attorno ai comuni tipi di dati nativi dei linguaggi di programmazione agili. È ampiamente utilizzato per esigenze di programmazione che vanno dai file di configurazione alla messaggistica su internet, dalla persistenza degli oggetti al controllo dei dati. YAML è stato creato specificamente per funzionare bene nei casi d’uso comuni, come i seguenti: file di configurazione, file di log, messaggistica tra processi, condivisione dei dati tra linguaggi diversi, persistenza degli oggetti e debug di strutture dati complesse. Quando i dati sono facili da visualizzare e comprendere, la programmazione diventa un compito più semplice. I file YAML utilizzano l’estensione .yaml o .yml.
+YAML è un superset stretto di JSON e include funzionalità aggiuntive come il concetto di tagging dei tipi di dati, il supporto per strutture dati non gerarchiche, la possibilità di strutturare i dati tramite indentazione e diverse forme di quoting dei dati scalari. YAML è un formato aperto.
+La figura seguente, YAML Representation Describing a Business Partner, mostra una possibile rappresentazione YAML che descrive un Business Partner.
+
+YAML in relazione a JSON
+
+Sia JSON che YAML mirano a essere formati di interscambio dati leggibili dall’uomo. Tuttavia, JSON e YAML hanno priorità diverse.
+L’obiettivo principale di progettazione di JSON è la semplicità e l’universalità. Di conseguenza, JSON è semplice da generare e da analizzare (parse), a costo di una minore leggibilità per l’uomo. Utilizza inoltre un modello informativo minimo comune denominatore, garantendo che qualsiasi dato JSON possa essere facilmente elaborato da ogni ambiente di programmazione moderno.
+Al contrario, gli obiettivi principali di YAML sono la leggibilità per l’uomo e il supporto alla serializzazione di strutture dati native arbitrarie. Di conseguenza, YAML consente file più leggibili, ma è più complesso da generare e da analizzare. Inoltre, YAML va oltre i tipi di dati del minimo comune denominatore, richiedendo un’elaborazione più complessa quando si attraversano ambienti di programmazione diversi.
+YAML può quindi essere visto come un superset naturale di JSON, offrendo una migliore leggibilità per l’uomo e un modello informativo più completo. Questo vale anche nella pratica: ogni file JSON è anche un file YAML valido. Questo rende semplice migrare da JSON a YAML quando sono necessarie funzionalità aggiuntive.
+Riepilogo
+
+Ora hai una comprensione più approfondita di JSON e YAML.
+Approfondimenti
+JSON Specification
+YAML Specification
+
+
+Discovering the End-to-End Use Case
+Introduzione
+Caso aziendale
+Iniziamo considerando il seguente scenario.
+
+Analizziamo innanzitutto più da vicino il caso aziendale sottostante. La tua azienda ACME è un’azienda di elettronica che assume operatori di call center per elaborare e gestire gli incidenti dei clienti.
+Un operatore del call center (Processor) riceve una telefonata da un cliente esistente e crea un nuovo incidente in un’applicazione di gestione degli incidenti per conto del cliente. Il nuovo incidente creato si basa su un reclamo del cliente ricevuto durante la telefonata, quindi l’operatore del call center aggiunge anche la conversazione con il cliente all’incidente.
+Questa applicazione consente l’interazione tra i membri del team di supporto che stanno lavorando sull’incidente del cliente. L’applicazione è progettata per permettere ai membri del team di supporto di avviare report di incidente, che vengono poi elaborati da altri membri del team di supporto.
+
+Anteprima dell’applicazione finale
+
+Il frontend è costruito con SAP Fiori Elements ed è composto da due pagine: una List Page, che elenca tutti gli incidenti, e una Object Page per visualizzare ulteriori informazioni per ogni singola voce di incidente.
+Questa è la homepage dell’applicazione. Mostra gli incidenti correnti che richiedono l’attenzione del responsabile degli incidenti. Indica anche il cliente interessato e lo stato e l’urgenza dell’incidente. Gli utenti possono creare, modificare ed eliminare gli incidenti da qui.
+
+
+Gli utenti possono creare nuovi incidenti e inserire le informazioni nella object page. Il sistema recupera i dati del cliente da SAP S/4HANA Cloud.
+Per visualizzare o modificare un incidente, selezionalo per aprire la pagina dei dettagli.
+Cosa c’è dopo?
+Le unità seguenti ti guidano attraverso un processo di sviluppo end-to-end, dallo sviluppo al deployment.
+
+Creating CAP-Based Services
+DEMO
+
+Esempio aziendale
+
+Ora vedrai come creare un servizio basato su CAP.
+Opzioni dell’esercizio
+
+Puoi eseguire questo esercizio in due modi:
+Eseguire una pratica hands-on utilizzando le seguenti istruzioni passo-passo. Puoi eseguire i passaggi nel tuo ambiente SAP BTP.
+Simulazione registrata – segui le istruzioni passo-passo all’interno della simulazione selezionando il pulsante Start Exercise.
+Nota
+si raccomanda fortemente di eseguire i passaggi tramite pratica hands-on.
+Prerequisiti
+
+Prima di procedere con l’esercizio, assicurati di:
+Aver creato con successo un account SAP BTP Free Tier.
+Aver creato e aperto il tuo Dev Space per Full Stack Cloud Applications in SAP Business Application Studio.
+Esegui l’esercizio
+
+Apri l’esercizio Build a CAP Application nel tutorial e completa tutti i passaggi.
+Risultato
+
+Hai aggiunto un modello dati, dei dati e una definizione di servizio al tuo progetto. Nell’unità successiva creerai una UI per la tua applicazione.
+
+Serving User Interfaces in CAP
+Funzionalità del Frontend
+
+Supporto per Interfacce Utente
+
+
+CAP supporta l’integrazione delle interfacce utente. Tutti i servizi forniti da CAP non possono essere consumati solo da altri servizi, ma anche da interfacce utente (UI). CAP è aperto e i servizi possono essere consumati da qualsiasi framework UI inviando richieste AJAX standard. Dai un’occhiata al repository cap-samples per un esempio funzionante in Vue.js.
+
+CAP e SAP Fiori
+
+CAP fornisce supporto out-of-the-box per le interfacce SAP Fiori elements, ad esempio per quanto riguarda le annotazioni SAP Fiori e funzionalità avanzate come la ricerca, i value help e il draft SAP Fiori. I draft vengono utilizzati per prevenire la perdita di dati nel caso in cui un’app termini inaspettatamente o per evitare che un oggetto venga modificato contemporaneamente da più utenti.
+Un singolo progetto CAP può contenere più app SAP Fiori. Nonostante sia possibile utilizzare anche SAP UI5, qui ci concentriamo su SAP Fiori elements. Annotazioni specifiche per la UI rendono possibile arricchire il servizio esposto con istruzioni per SAP Fiori elements. SAP Fiori elements legge inoltre il documento dei metadati e la definizione dell’entità per generare la UI. Tutte le app SAP Fiori di un’applicazione CAP dovrebbero essere inserite nella cartella app.
+Per velocizzare lo sviluppo della UI, in particolare per SAP Fiori Elements, i SAP Fiori tools forniscono un supporto avanzato per aggiungere e progettare app SAP Fiori in progetti CAP esistenti. Offrono inoltre numerosi strumenti di produttività, che includono strumenti visuali per progettare le pagine SAP Fiori.
+
+SAP Fiori Tools
+
+I SAP Fiori Tools sono preinstallati in SAP Business Application Studio e possono essere utilizzati out-of-the-box. Puoi anche installare l’estensione in Visual Studio Code (VS Code), installando il SAP Fiori Tools - Extension Pack.
+
+Page Map Editor
+La Page Map è una funzionalità che fa parte dei SAP Fiori Tools e può essere utilizzata come strumento di produttività visuale per modificare e progettare le interfacce utente SAP Fiori. Dietro le quinte, genera tutti i file di annotazione necessari, che possono poi essere versionati nel sistema di controllo versione.
+
+Quanto segue visualizza le capacità della Page Map per una SAP Fiori List Page, dove l’intera pagina SAP Fiori, inclusi i campi della tabella e altro, può essere modificata. Nell’immagine, ad esempio, si vede che l’Header può essere impostato dinamicamente al rispettivo valore del titolo.
+
+Nel corso dei prossimi esercizi, utilizzerai direttamente questi strumenti.
+Riepilogo
+
+Ora hai familiarità con come diverse UI possono essere fornite in un progetto CAP e hai appreso il supporto out-of-the-box per le UI SAP Fiori e i SAP Fiori Tools per velocizzare lo sviluppo della UI.
+Letture aggiuntive
+CAP Docs: Serving Fiori UIs
+Learning the Basics of SAP Fiori
+Developing SAP UI5 and SAP Fiori Elements Applications
+Developing an SAP Fiori Elements App based on a CAP OData v4 Service
+
+Generating User Interfaces
+Generate a User Interface Using SAP Fiori Elements
+Demo
+
+Esempio di Business
+
+Ora vedremo come creare una UI SAP Fiori Elements.
+Opzioni dell’esercizio
+
+Puoi eseguire questo esercizio in due modi:
+Eseguire pratica hands-on utilizzando le seguenti istruzioni passo-passo. Puoi eseguire i passaggi nel tuo ambiente SAP BTP.
+Simulazione registrata – segui le istruzioni passo-passo all’interno della simulazione selezionando il pulsante Start Exercise.
+Nota
+Raccomandiamo fortemente di eseguire i passaggi facendo pratica hands-on.
+Prerequisiti
+
+Prima di procedere con l’esercizio, assicurati di:
+Aver costruito la tua applicazione CAP. Vedi Build a CAP application.
+Esegui l’esercizio
+
+Apri l’esercizio Add SAP Fiori Elements UIs nel tutorial e completa tutti i passaggi.
+Risultato
+Ben fatto! Hai creato una UI SAP Fiori Elements per la tua applicazione. Nella prossima unità, aggiungerai logica di business personalizzata alla tua applicazione per aggiungere evidenziazione ad alcuni campi.
+
+Explaining Event Handling in CAP
+
+Scenario di utilizzo
+
+La tua azienda sta pianificando di costruire un'applicazione di estensione utilizzando il SAP Cloud Application Programming Model (CAP). I gestori di servizio generici che il framework fornisce per le operazioni CRUD standard (CREATE, READ, UPDATE, DELETE) non soddisfano completamente i requisiti dell'applicazione. Vuoi implementare logica di business personalizzata sopra la funzionalità standard. Per farlo, devi comprendere il concetto di event handler in CAP.
+Guarda il video per conoscere gli event handler in CAP.
+
+Introduzione alla registrazione degli event handler
+
+Opzione 1
+In questo metodo, il file Javascript viene posizionato accanto al file CDS (.cds) utilizzato per definire il servizio; il file Javascript deve avere lo stesso nome del file .cds, in questo modo il framework collega automaticamente l’implementazione al file di servizio.
+Opzione 2
+Qui impostiamo il collegamento tramite l’annotazione impl nel file del modello CDS (.cds), dove può essere trovata la relativa implementazione del servizio. Questo è utile se i nomi dei file sono diversi o se si vuole rendere molto esplicito che i due file appartengono insieme.
+Opzione 3 e 4
+Queste sono opzioni piuttosto avanzate e vengono utilizzate con la CDS serve API per avviare i servizi in modo autonomo.
+Opzione 5
+Questa viene utilizzata quando si lavora con servizi esterni.
+
+Oggetti di richiesta
+
+
+Gli oggetti di richiesta vengono passati negli event handler. Forniscono diversi tipi di informazioni sul contesto, come i dati della richiesta o il metodo, come get, post e così via. Gli oggetti di richiesta vengono anche utilizzati per fornire messaggi di errore al client, oppure per registrare un altro insieme di handler per il ciclo di vita della richiesta, ad esempio quando la richiesta è completata, riuscita o fallita.
+
+Un esempio
+
+Pensa a una semplice applicazione che gestisce l’inventario IT della tua azienda. Per ogni categoria di asset esiste un’entità - ad esempio, Notebooks, Phones, Tablets. Le entità sono esposte tramite un servizio di inventario. Il servizio fornisce un’API OData che consente di interagire con le entità. Supponiamo che tu voglia vedere l’inventario corrente dei notebook. Esegui una richiesta GET al servizio inventory/Notebooks. All’interno di CAP, viene attivato un evento READ per l’entità Notebooks. Esiste un event handler integrato (noto anche come Generic Provider) che recupera i dati richiesti dal database in seguito a un evento READ per l’entità Notebooks.
+Utilizzare gli event handler
+
+CAP gestisce tutti gli eventi CRUD (CREATE, READ, UPDATE, DELETE) out-of-the-box. Non è necessario eseguire ulteriori passaggi dopo aver definito le entità e i servizi. Tuttavia, spesso la funzionalità standard non soddisfa tutti i requisiti. Si desidera implementare logica personalizzata. In questi casi, si utilizza l’API di registrazione degli handler del CAP Service SDK per Node.js.
+Estendere l’esempio sopra
+
+Supponiamo che tu stia costruendo una UI sopra il tuo servizio di inventario. Essa mostra quando un dispositivo è idoneo alla sostituzione. Il fatto che un dispositivo sia idoneo alla sostituzione dipende dal tipo di dispositivo, dalla data di acquisizione o dal paese - quindi non esiste una risposta semplice. Il tuo servizio deve determinarlo. All’interno delle tue entità, esiste un campo Booleano eligible_for_replacement, che è impostato su false di default.
+Ogni volta che si verifica un evento READ per una qualsiasi delle entità nel tuo servizio di inventario, dopo che le entità sono state lette, vuoi avere un event handler personalizzato che determini se i singoli dispositivi sono idonei alla sostituzione oppure no. Potrebbe apparire come segue:
+
+cds.serve('inventory-service') .with (function(){
+  this.after('READ', '*', (devices)=>{
+    for (let each of devices) {
+      var deviceAge = calculateDeviceAgeYears(each)
+      if (deviceAge >= 4) {
+        each.eligible_for_replacement = true
+      } else {
+        each.eligible_for_replacement = false
+      }
+ }  })
+})
+
+Il codice definisce che, dopo ogni READ di qualsiasi () entità nel tuo servizio di inventario, viene calcolata l’idoneità alla sostituzione. Il metodo scorre ogni riga dei dati che sono stati recuperati dal gestore di servizio generico. Nota che, invece di registrare il metodo handler per qualsiasi entità (), potresti anche registrare l’event handler per una specifica entità - ad esempio, Notebooks.
+In questo semplice esempio, l’idoneità alla sostituzione dipende solo dall’età del dispositivo, ma è chiaro che qui è possibile fare praticamente qualsiasi cosa.
+
+Fasi degli eventi
+
+Gli eventi vengono elaborati in tre fasi eseguite consecutivamente: Before, On e After. Quando si registra un event handler, deve essere specificata la fase in cui l’handler viene chiamato. Nell’esempio precedente il metodo handler è stato specificato per la fase After. È possibile registrare più event handler per ciascuna fase di evento. Allo stesso modo, un singolo handler può gestire più eventi.
+Nel caso di un servizio esterno, non ci sarebbe nulla che il framework possa fare, quindi è necessario fornire un handler “on”, ma è anche possibile utilizzare l’hook “on” per sovrascrivere gli handler CRUD generici. Tuttavia, è consigliato utilizzare un’implementazione generica e discostarsene solo quando è necessario applicare una logica diversa.
+Riepilogo
+
+Ora sei in grado di spiegare il concetto di event handler in CAP.
+Inoltre, sei in grado di valutare se è necessario un event handler personalizzato e sei in grado di eseguire l’implementazione di base degli event handler personalizzati.
+Approfondimenti
+
+Per ulteriori informazioni, consulta quanto segue:
+Event Handling
+CAP Service SDK per Node.js
+
+
+Explaining the Need for Custom Business Logic
+
+Scenario di Utilizzo
+
+Mentre CAP fornisce un’astrazione di alto livello per la costruzione di applicazioni cloud (native/side-by-side), ci saranno sempre casi in cui la logica personalizzata è essenziale per soddisfare le esigenze uniche del tuo business o per integrarsi con sistemi esterni. La logica personalizzata in CAP ti consente di estendere e personalizzare i comportamenti predefiniti del framework per creare un’applicazione completamente adattata e funzionale.
+Introduzione alla Service API per la Logica Personalizzata
+Il codice personalizzato è la logica che puoi aggiungere all’applicazione per esprimere elementi come la validazione dei dati, l’arricchimento, i calcoli, l’integrazione con sistemi esterni, o qualsiasi altro processo personalizzato richiesto dalla tua applicazione.
+
+Nella figura, The Service API for Custom Logic, vedi quattro tipi di API:
+Construct, Reflection API
+Questo riguarda la costruzione e la ricerca di elementi nei servizi o la connessione ad altri servizi richiesti. Queste non sono comunemente utilizzate. Di solito, non dovrai avere molto a che fare con queste.
+Querying API
+Questa è un’API di query, tramite la quale puoi inviare query sincrone ai servizi, inclusi i database.
+Messaging API
+Questa è la controparte asincrona della query API con cui i servizi possono inviare messaggi tra loro.
+Event Handling
+Queste sono utilizzate per registrare gestori di eventi personalizzati.
+Come vediamo nell’immagine, il riquadro per i servizi appare due volte.
+Questo mostra che i servizi possono significare i nostri servizi che forniamo come parte dell’applicazione, oppure indica servizi remoti di altre applicazioni oppure può significare database nei quali abbiamo le stesse API nel modello di programmazione.
+Per questa unità, ci concentreremo sulle API relative alla registrazione dei gestori di eventi nel sistema runtime (approfondimento nella prossima lezione: Explaining Event Handling in CAP).
+
+Riepilogo
+
+L’aggiunta di logica di business personalizzata a un’applicazione CAP consente di adattare l’applicazione alle proprie esigenze specifiche e di estenderne le funzionalità oltre le capacità predefinite fornite dal framework.
+Ulteriori letture
+
+Leggi di più su CAP Core Services qui.
+
+Describing Error Handling
+Perché ne abbiamo bisogno?
+
+Avere una buona gestione degli errori è fondamentale per garantire la robustezza, la correttezza e le prestazioni dell’applicazione. Costruire applicazioni robuste richiede di generare e gestire eccezioni, che si verificano durante l’esecuzione dell’applicazione. Pertanto, vengono introdotti i concetti base della gestione delle eccezioni in Node.js e le tecniche specifiche per il CAP Service SDK per Node.js.
+Gestione degli errori e tipi di errore
+
+Una corretta gestione degli errori è cruciale per le applicazioni aziendali moderne. Prima di entrare nei dettagli, è necessario distinguere tra due tipi di errori:
+Errori di programmazione
+
+Si verificano a causa di errori di programmazione (ad esempio, cannot read 'foo' of undefined). Devono essere corretti.
+Errori operativi
+
+Si verificano durante l’esecuzione (ad esempio, quando si invia una richiesta a un sistema remoto difettoso). Devono essere gestiti.
+Linee guida
+
+"Let it crash" è una filosofia presa dal linguaggio di programmazione Erlang (Joe Armstrong), che è anche (parzialmente) applicabile a Node.js.
+I punti chiave per gli errori di programmazione sono:
+Fallire in modo evidente: non nascondere gli errori e non continuare silenziosamente. Assicurati di registrare correttamente gli errori imprevisti. Non intercettare errori che non puoi gestire.
+Non sviluppare in modo difensivo: concentrati sulla logica di business e gestisci gli errori solo quando sai che si verificheranno. Usa blocchi try/catch solo quando necessario.
+Non cercare mai di intercettare e gestire errori imprevisti, rifiuti di promise e così via. Se è imprevisto, non puoi gestirlo correttamente. Se potessi, sarebbe previsto (e dovrebbe già essere gestito). Anche se le tue applicazioni sono stateless, non puoi mai essere sicuro al 100% che una risorsa condivisa non sia stata compromessa da un errore imprevisto. Pertanto, non devi mai permettere all’applicazione di continuare a funzionare dopo un evento simile, soprattutto nelle applicazioni multi-tenant dove esiste il rischio di divulgazione di informazioni.
+Seguire queste linee guida renderà il tuo codice più corto, chiaro e semplice.
+Non nascondere mai le cause degli errori
+
+Quando si verifica un errore, è essenziale identificare la causa principale. Il CAP SDK per Node.js, ad esempio, genera eccezioni quando si verificano determinate condizioni, come un’operazione CRUD che viola vincoli di chiave esterna. In questi casi, il framework solleva un’eccezione specifica, come UNIQUE_CONSTRAINT_VIOLATION. Tuttavia, se questi errori vengono intercettati e rilanciati senza mantenere i dettagli originali, diventa difficile tracciare e risolvere il problema sottostante. Di conseguenza, l’utente finale riceve solo un messaggio di errore criptico, rendendo difficile la risoluzione dei problemi.
+Ad esempio:
+
+try {
+  // something
+} catch (e) {
+  // augment instead of replace details
+  e.message = 'Oh no! ' + e.message
+  e.additionalInfo = 'This is just an example.'
+  // re-throw same object
+  throw e
+}
+
+È quindi utile fornire un messaggio di errore significativo.
+A questo scopo, puoi registrare un gestore degli errori nella tua implementazione del servizio, come mostrato nel seguente snippet.
+
+// Imports
+constcds=require("@sap/cds");
+
+/**
+   * The service implementation with all service handlers
+   */
+module.exports=cds.service.impl(asyncfunction(){
+  /**
+   * Custom error handler
+   *
+   * throw a new error with: throw new Error('something bad happened');
+   *
+   **/
+  this.on("error",(err,req)=>{
+    switch(err.message){
+      case"UNIQUE_CONSTRAINT_VIOLATION":
+        err.message="The entry already exists.";
+        break;
+
+      default:
+        err.message=
+          "An error occured. Please retry. Technical error message: "+
+          err.message;
+      break;
+    }
+  });
+});
+Questo gestore interviene ora ogni volta che questa eccezione viene generata e la sovrascrive con un messaggio di errore alternativo:
+
+Generazione e gestione delle eccezioni
+Aggiungerai certamente le tue implementazioni ai servizi. È probabile che tu voglia interrompere alcune operazioni prima che qualcosa vada in errore. In questo caso, puoi generare un’eccezione Node.js.
+
+Richiesta–risposta
+
+Puoi anche usare il metodo req.error() per raccogliere messaggi o errori e restituirli al chiamante nella richiesta–risposta. Leggi di più qui.
+
+this.on("submitOrder",async(req)=>{
+  const{ book, amount }=req.data;
+  let{ stock }=awaitdb.read(Books,book,(b)=>b.stock);
+  if(stock >= amount){
+    awaitdb.update(Books,book).with({stock: (stock-=amount)});
+    awaitthis.emit("OrderedBook",{ book, amount,buyer: req.user.id});
+    returnreq.reply({ stock });// <-- Normal reply
+  }else{
+    // Reply with error code 409 and a custom error message
+    returnreq.error(409,`${amount} exceeds stock for book #${book}`);
+  }
+});
+
+Riepilogo
+I concetti fondamentali della gestione degli errori nel CAP SDK per Node.js ti sono ora familiari. Si consiglia vivamente di incorporare questi concetti per garantire la robustezza complessiva della tua applicazione CAP.
+
+Adding Custom Business Logics
+
+Aggiungi logica di business personalizzata alla tua applicazione
+Demo
+
+Esempio di business
+
+Ora aggiungerai logica di business personalizzata alla tua applicazione CAP.
+Opzioni dell’esercizio
+
+Puoi eseguire questo esercizio in due modi:
+Pratica hands-on utilizzando le seguenti istruzioni passo dopo passo. Puoi eseguire i passaggi nel tuo ambiente SAP BTP.
+Simulazione registrata – segui le istruzioni passo dopo passo all’interno della simulazione selezionando il pulsante Start Exercise.
+Nota
+
+Raccomandiamo fortemente di eseguire i passaggi in modalità hands-on.
+Prerequisiti
+Prima di procedere con l’esercizio, assicurati di aver implementato l’interfaccia utente della tua applicazione. Vedi Add SAP Fiori Elements UIs.
+Esegui l’esercizio
+
+Apri l’esercizio Add Custom Logic nel tutorial e completa tutti i passaggi.
+Risultato
+
+Ottimo lavoro! Hai eseguito i passaggi necessari per aggiungere logica di business personalizzata alla tua applicazione. Ora sei in grado di aggiungere in modo flessibile logica personalizzata alle future applicazioni.
+
+Adding Local Launch Pages
+Aggiungi una Launch Page locale
+Demo
+
+Esempio di business
+
+Aggiungi una launch page per il testing locale.
+Opzioni dell’esercizio
+
+Puoi eseguire questo esercizio in due modi:
+Pratica hands-on utilizzando le seguenti istruzioni passo dopo passo. Puoi eseguire i passaggi nel tuo ambiente SAP BTP.
+Simulazione registrata – segui le istruzioni passo dopo passo all’interno della simulazione selezionando il pulsante Start Exercise.
+Nota
+
+Raccomandiamo fortemente di eseguire i passaggi in modalità hands-on.
+Prerequisiti
+
+Prima di procedere con l’esercizio, assicurati di: aver aggiunto logica di business alla tua applicazione. Vedi Add Custom Logic.
+Esegui l’esercizio
+Apri l’esercizio Use a Local Launch Page nel tutorial e completa tutti i passaggi.
+
+
+Describing Authorization and Trust Management (XSUAA)
+
+Caso di business
+
+La tua azienda sta sviluppando un insieme di applicazioni sulla SAP Business Technology Platform, ambiente Cloud Foundry. Poiché le applicazioni sono eseguite nel cloud, vuoi proteggerle da accessi non autorizzati. Il servizio SAP Authorization and Trust Management, insieme al servizio Extended Services - User Account and Authentication (XSUAA), forniscono tutte le funzionalità necessarie.
+Gestire le autorizzazioni degli utenti
+
+Il servizio SAP Authorization and Trust Management consente di gestire le autorizzazioni degli utenti e la fiducia verso i provider di identità. I provider di identità sono la base utenti per le applicazioni. Puoi utilizzare un tenant di identity authentication, un sistema SAP on-premise o un provider di identità aziendale personalizzato. Le autorizzazioni degli utenti sono gestite tramite ruoli tecnici a livello di applicazione, che possono essere aggregati in gruppi a livello di business e raccolte di ruoli per scenari cloud su larga scala.
+Utenti di piattaforma vs utenti business
+Utenti di piattaforma
+
+Gli utenti di piattaforma sono solitamente sviluppatori, amministratori o operatori che distribuiscono, amministrano e risolvono problemi delle applicazioni e dei servizi su SAP BTP.
+Per gli utenti di piattaforma, il provider di identità predefinito è il servizio SAP ID.
+Utenti business
+Gli utenti business utilizzano le applicazioni distribuite su SAP BTP. Ad esempio, gli utenti finali della tua applicazione distribuita o gli utenti di app o servizi sottoscritti, come SAP Business Application Studio o SAP Web IDE, sono utenti business.
+
+Extended Services - User Account and Authentication (XSUAA) Service
+Il servizio Extended Services - User Account and Authentication (XSUAA) è uno dei componenti più importanti da considerare quando sviluppi le tue applicazioni su Cloud Foundry. Autentica e autorizza i tuoi utenti e assegna i privilegi corretti alla sessione dell’utente, in modo che la tua applicazione possa fare quanto segue:
+Identificare l’utente tramite Email, UserId, Nome e Cognome.
+Verificare i suoi ruoli (scopes) per decidere se un utente è autorizzato a eseguire un’azione o per impedirla.
+XSUAA è uno sviluppo interno di SAP. SAP ha preso come base il provider OAuth2 UAA open source di Cloud Foundry e lo ha esteso con funzionalità specifiche SAP per essere utilizzato nelle applicazioni SAP. Un aspetto importante è che XSUAA NON memorizza utenti “reali”. Per questo motivo, XSUAA deve fidarsi di un Identity Provider (IdP) esterno.
+
+Nota
+Questa grafica si applica solo agli strumenti di gestione cloud della SAP Business Technology Platform Feature Set B. Consulta le pagine User and Member Management nel SAP Help Portal per comprendere meglio le differenze tra Feature Set A e Feature Set B in relazione alla gestione degli utenti.
+Nel Feature Set B, il tuo global account SAP BTP ha un proprio tenant XSUAA. Questo tenant XSUAA ha per impostazione predefinita una relazione di trust con il servizio SAP ID. Il servizio SAP ID gestisce un’ampia base di utenti che hanno creato un account utente con SAP. Puoi aggiungere utenti esistenti nel servizio SAP ID come membri del tuo global account e del subaccount. Affinché questi utenti possano eseguire attività amministrative, devono essere assegnati alle relative role collection. Esiste un set di role collection di piattaforma predefinite, come Global Account Administrator, Global Account Viewer, Subaccount Administrator o Cloud Connector Administrator, che puoi utilizzare per assegnare le autorizzazioni di gestione dell’account SAP BTP. Consulta questa pagina del SAP Help Portal per ulteriori informazioni sulle role collection predefinite per la gestione dell’account.
+A differenza degli utenti di piattaforma provenienti dal servizio SAP ID, i tuoi utenti business possono essere forniti anche tramite il tuo identity provider aziendale. Questi sono gli utenti a cui vuoi dare accesso alle tue applicazioni business. Possono essere applicazioni SaaS fornite da SAP, come SAP Business Application Studio o SAP Workflow Management, oppure le tue applicazioni sviluppate su SAP BTP. Le applicazioni business hanno le proprie role collection, come ad esempio Business_Application_Studio_Developer, WorkflowManagementAdmin o qualsiasi role collection personalizzata che crei per la tua applicazione.
+Le sezioni seguenti approfondiscono i termini role collection, role e scope, e la loro relazione tra loro.
+
+Role Collections, Ruoli e Scope
+
+La figura seguente, Role Collections, Roles, and Scopes, mostra le relazioni tra role collection, ruoli e scope.
+
+Scope
+
+Gli scope sono valori arbitrari che esprimono autorizzazioni/diritti di accesso in un’applicazione o servizio. Gli scope devono essere prefissati con un xsappname per essere identificabili in modo univoco.
+Ruoli
+
+I ruoli sono entità che contengono più scope. Gli scope possono essere inseriti in più ruoli, quindi non sei limitato ad avere scope presenti in un solo ruolo.
+Role collection
+
+Le role collection contengono uno o più ruoli. Un ruolo può essere utilizzato in più contesti. Tuttavia, è perfettamente valido avere, ad esempio, una role collection chiamata Admin che contiene solo un ruolo admin.
+Le role collection sono memorizzate come assegnazione nell’XSUAA e sono l’entità che può essere assegnata a uno specifico utente business.
+
+Come funziona nella pratica?
+
+La sezione seguente è un breve riepilogo della pagina ufficiale della guida.
+Guarda questo video per saperne di più su scope, role collection e ruoli. Nel video puoi vedere tre diverse figure. Una è lo sviluppatore che lavora all’interno di un progetto e di uno spazio. L’altra è un amministratore che si occupa dell’account Cloud Foundry come security admin.
+
+Cos’è xs-security.json?
+
+Per semplificare, possiamo chiamare xs-security.json la "dichiarazione della sicurezza della tua applicazione". Il seguente xs-security.json è un esempio per l’applicazione di gestione incidenti:
+
+{
+   "xsappname": "incident-management",
+   "tenant-mode": "dedicated",
+   "scopes": [
+     {
+       "name": "$XSAPPNAME.IncidentViewer",
+       "description": "IncidentViewer"
+     },
+     {
+       "name": "$XSAPPNAME.IncidentManager",
+       "description": "IncidentManager"
+     }
+   ],
+   "attributes": [],
+   "role-templates": [
+     {
+       "name": "IncidentViewer",
+       "description": "generated",
+       "scope-references": [
+         "$XSAPPNAME.IncidentViewer"
+       ],
+       "attribute-references": []
+     },
+     {
+       "name": "IncidentManager",
+       "description": "generated",
+       "scope-references": [
+         "$XSAPPNAME.IncidentManager"
+        ],
+       "attribute-references": []
+     }
+   ]
+ }
+
+Devi indicare al servizio XSUAA come chiamare la tua applicazione (xsappname) e definire inoltre i tuoi scope e role-template. Questo può essere definito anche nel file mta.yaml. Gli scope vengono utilizzati all’interno dell’applicazione per verificare permessi specifici ogni volta che un utente tenta di eseguire una determinata azione.
+Riepilogo
+
+Ora hai acquisito una comprensione generale del servizio SAP Authorization and Trust Management, della rilevanza del servizio Extended Services - User Account and Authentication (XSUAA) e dei concetti base di gestione e assegnazione degli utenti. Sai cos’è il file xs-security.json come descrittore di sicurezza dell’applicazione e come si relaziona a scope, ruoli e al servizio XSUAA. Sai anche dove trovare ulteriori informazioni.
+Ulteriori letture
+Parte del testo e delle immagini è stata presa dal blog Demystifying XSUAA in SAP Cloud Foundry. Dai un’occhiata al blog per ulteriori informazioni. Le spiegazioni relative alla gestione degli utenti nel blog fanno riferimento agli strumenti di gestione cloud SAP BTP, Feature Set A.
+The Application Security Descriptor
+
+Defining CDS Restrictions and Roles
+
+Definire restrizioni e ruoli in CDS
+Demo
+
+Business Example
+
+In questo esercizio, ora aggiungerai l'autorizzazione alla tua applicazione CAP.
+Exercise Options
+
+Puoi eseguire questo esercizio in due modi:
+Eseguire la pratica hands-on utilizzando le seguenti istruzioni passo-passo. Puoi eseguire i passaggi nel tuo ambiente SAP BTP.
+Simulazione registrata – segui le istruzioni passo-passo all'interno della simulazione selezionando il pulsante Start Exercise.
+Note
+
+Raccomandiamo fortemente di eseguire i passaggi praticando hands-on.
+Prerequisites
+
+Prima di procedere con l'esercizio, assicurati di: aver aggiunto alla tua applicazione una launch page per il test locale. Vedi Use a Local Launch Page.
+Perform the Exercise
+
+Apri l'esercizio Add authorization nel tutorial e completa tutti i passaggi.
+Result
+Hai abilitato l'autenticazione aggiungendo annotazioni alla definizione del tuo servizio. Hai anche aggiunto utenti mock per il test locale.
+
+Explaining Extensibility and Connectivity in CAP
+Usage Scenario
+
+In CAP, l'estensibilità e la connettività sono concetti fondamentali che consentono agli sviluppatori di costruire applicazioni flessibili e connesse che possono adattarsi alle esigenze aziendali in evoluzione e integrarsi senza problemi con varie fonti di dati e servizi.
+Extensibility in CAP
+
+L'estensibilità in CAP si riferisce alla capacità di personalizzare ed estendere i modelli di dati, la logica di business e le interfacce utente delle applicazioni per soddisfare specifici requisiti aziendali. CAP offre diversi meccanismi per ottenere l'estensibilità:
+Data Model Extensibility
+
+Gli sviluppatori possono definire modelli di dati utilizzando Core Data Services (CDS). CAP consente di aggiungere entità personalizzate, campi e relazioni al modello di dati per soddisfare specifiche esigenze aziendali. È possibile estendere i modelli di dati esistenti senza alterare la struttura principale, rendendo più semplice adattarsi ai requisiti di dati in evoluzione.
+Behavioral Extensibility
+
+CAP fornisce service handler ed event handler che consentono di definire logica di business personalizzata. È possibile implementare codice personalizzato che viene eseguito durante vari eventi dell'applicazione, come operazioni di create, read, update e delete (CRUD), validazioni e trasformazioni dei dati.
+UI Extensibility
+
+Quando si costruiscono interfacce utente (UI) con CAP, è possibile personalizzare ed estendere le applicazioni SAP Fiori. Questo include l'aggiunta di nuovi componenti UI, la modifica di viste esistenti o la creazione di pagine personalizzate per adattare l'esperienza utente alle esigenze della propria organizzazione.
+Service Extensibility
+
+CAP consente di creare servizi OData personalizzati che espongono funzionalità o dati aggiuntivi a consumatori esterni. Questi servizi possono integrarsi con altre applicazioni SAP o sistemi esterni, facilitando lo scambio di dati e l'interoperabilità.
+Localization
+
+CAP supporta funzionalità di localizzazione che consentono di adattare la tua applicazione a diverse lingue e regioni, aspetto cruciale per distribuzioni globali.
+Connectivity in CAP
+
+La connettività in CAP è la capacità di connettersi e integrarsi senza soluzione di continuità con varie fonti di dati, servizi e sistemi SAP interni o esterni. CAP fornisce diversi meccanismi per ottenere la connettività:
+Database Connectivity
+
+CAP astrae le interazioni con il database, consentendo di lavorare con i modelli di dati utilizzando Core Data Services (CDS) senza doversi preoccupare del sistema di database sottostante. CAP supporta vari sistemi di database, tra cui SAP HANA, SQLite, H2 (solo Java), PostgreSQL, offrendo flessibilità nella scelta del database per la tua applicazione.
+Service Connectivity
+
+Le applicazioni CAP possono interagire con servizi esterni e API utilizzando chiamate basate su HTTP, REST, GraphQL o altri protocolli. Questo consente l'integrazione con sistemi di terze parti e il consumo di dati esterni. In questa unità, approfondiremo l'integrazione con un servizio esterno.
+Event-based Connectivity
+
+CAP supporta un'architettura event-driven, consentendo alla tua applicazione di emettere e ascoltare eventi. Questo facilita la sincronizzazione dei dati in tempo reale e la comunicazione tra diverse parti della tua applicazione o con sistemi esterni.
+Message Queues and Event Brokers
+
+CAP può integrarsi con sistemi di code di messaggi ed event broker come SAP Enterprise Messaging o soluzioni di terze parti. Questo consente comunicazione asincrona ed elaborazione guidata da eventi, essenziali per applicazioni scalabili e reattive.
+SAP Integration
+
+CAP può integrarsi facilmente con altre soluzioni SAP, come SAP Integration Suite (Cloud Integration, API Management). Questo consente di creare processi aziendali end-to-end che attraversano più applicazioni e servizi SAP.
+Security and OAuth Integration
+
+CAP fornisce supporto integrato per autenticazione e autorizzazione, inclusa OAuth 2.0. Questo rende più semplice proteggere la tua applicazione e integrarla con identity provider o con i servizi di autenticazione SAP.
+
+SAP Business Accelerator Hub
+
+SAP Business Accelerator Hub è un repository centrale e una piattaforma fornita da SAP che offre un catalogo completo di API SAP e non SAP, incluse documentazione, specifiche e risorse per aiutare gli sviluppatori a scoprire, esplorare e consumare API in modo efficace.
+In questo esercizio dell’unità, per la nostra applicazione di risk management vogliamo aggiungere le informazioni del business partner chiamando la fonte dati esterna (sistema SAP S/4HANA Cloud) per leggere le informazioni su rischi e mitigazioni insieme ai business partner. L’applicazione aiuta a ridurre i rischi associati ai business partner utilizzando una chiamata API remota verso SAP S/4HANA Cloud. Per ottenere i dati del business partner, è necessario connettere il servizio all’ambiente Sandbox del SAP Business Accelerator Hub (approfondimento nell’esercizio).
+
+Per comunicare con servizi remoti, CAP deve conoscere le loro definizioni. Queste definizioni sono rese disponibili dal provider del servizio. Poiché non sono definite all’interno della tua applicazione ma importate dall’esterno, in CAP vengono chiamate external service APIs. Attualmente sono supportati file EDMX per OData V2 e V4.
+I passaggi per utilizzare l’API esterna Business Partner nel progetto di risk management sono i seguenti:
+Connettere la tua app con il Business Partner API Sandbox Environment del SAP API Business Hub. Per farlo, puoi configurare una destination definita dall’applicazione in Node.js semplicemente aggiungendo questa configurazione nel file package.json.
+
+"cds": {
+    "requires": {
+      "API_BUSINESS_PARTNER": {
+        "kind": "odata",
+        "model": "srv/external/API_BUSINESS_PARTNER",
+        "credentials": {
+          "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER/"
+        }
+      }
+    }
+  }
+
+
+Consuma il servizio esterno nella tua applicazione UI.
+
+Aggiungi il campo Business Partner alla UI.
+Per gestire la connettività verso sistemi o servizi esterni, puoi scegliere di utilizzare le destinazioni: SAP BTP destination oppure application defined destinations (esempio precedente). Forniscono un modo per definire e configurare i dettagli di connessione verso questi sistemi esterni, rendendo più semplice gestire vari aspetti dell’integrazione, come autenticazione, endpoint URL e altro, astraendo le informazioni di connessione sottostanti.
+Utilizzando SAP BTP destination, l’applicazione deve essere deployata su BTP. Questo perché sono richieste istanze del Destination Service e del Connectivity Service di SAP (nel caso di servizi esterni on-premise), che possono essere create e collegate a un’applicazione solo su BTP. Il Connectivity service fornisce un proxy di connettività che puoi utilizzare per accedere alle risorse on-premise. Utilizzando il Destination service, puoi recuperare e memorizzare le informazioni tecniche sulla risorsa di destinazione (destination) che devi usare per connettere la tua applicazione a un servizio o sistema remoto. Puoi utilizzare entrambi i servizi insieme o separatamente, a seconda delle esigenze del tuo scenario specifico.
+Se il sistema esterno è on-premise, il Cloud Connector deve essere configurato per poter utilizzare le risorse on-premise.
+Summary
+
+Ora hai una comprensione di alto livello delle possibilità di estensibilità e connettività utilizzando il framework CAP.
+Further Reading
+
+Per maggiori informazioni, consulta:
+The CAP Cookbook.
+Consuming Services.
+Using Destinations.
+Cloud Connector.
+BTP Connectivity.
+
+
+Explaining Unit Tests
+Scenario di utilizzo
+
+Immagina di sviluppare un backend Node.js per una grande piattaforma di e-commerce. La piattaforma gestisce varie attività come registrazione degli utenti, elenchi di prodotti, elaborazione degli ordini e pagamenti. Ognuna di queste funzionalità comporta molta logica, e qualsiasi bug in una parte può influenzare l’intero sistema. Testare manualmente ogni parte della funzionalità ogni volta che viene aggiunta una nuova feature è sia tedioso sia soggetto a errori. È qui che entra in gioco il unit testing.
+Che cos’è il Unit Testing?
+
+Il unit testing consiste nel testare singole funzioni o metodi del tuo codebase in isolamento. L’obiettivo è garantire che ogni unità si comporti come previsto in diverse condizioni. I test unitari possono essere caratterizzati come segue:
+• Isolati: un test unitario verifica solo una porzione di codice in isolamento da sistemi esterni (ad esempio database, API).
+• Veloci: i test unitari vengono eseguiti rapidamente per consentire un feedback rapido durante lo sviluppo.
+• Ripetibili: i test restituiscono sempre lo stesso risultato per lo stesso input.
+Perché il Unit Testing è importante?
+
+Rilevamento precoce dei bug: i test unitari aiutano gli sviluppatori a individuare i bug nelle prime fasi del ciclo di sviluppo, riducendo il costo e lo sforzo necessari per correggerli.
+• Fiducia nelle modifiche al codice: eseguendo frequentemente i test unitari, puoi refattorizzare il tuo codice o aggiungere nuove funzionalità con sicurezza senza preoccuparti di compromettere le funzionalità esistenti.
+• Test automatizzati: i test unitari possono essere automatizzati e integrati nelle pipeline CI/CD, riducendo la necessità di test manuali.
+• Migliore qualità del codice: scrivere test unitari porta spesso a codice più pulito, più modulare e più manutenibile.
+Esempio: Scrivere Unit Test in Node.js
+
+In Node.js, le librerie più comuni utilizzate per il unit testing sono Mocha (framework di test) e Chai (libreria di asserzioni). Vediamo un esempio:
+Scriveremo un test per una semplice funzione di addizione utilizzando Mocha e Chai.
+    1. Installa Mocha e Chai:
+npm install mocha chai –save-dev
+       2. Crea un file math.js con il seguente contenuto:
+
+function add(a, b) {
+    return a + b;
+}
+
+module.exports = { add };
+
+3. Scrivi il test unitario in un file separato test/math.test.js.
+
+const { expect } = require('chai');
+const { add } = require('../math');
+
+describe('Math Functions', () => {
+    it('should return the sum of two numbers', () => {
+        const result = add(2, 3);
+        expect(result).to.equal(5);
+    });
+});
+4.  Per eseguire i test, aggiungi il seguente script al file package.json
+
+
+"scripts": {
+  "test": "mocha"
+}
+
+5. Esegui il test utilizzando il seguente comando.
+npm test
+Questo esempio mostra un semplice test unitario utilizzando Mocha come test runner e Chai per le asserzioni.
+Riepilogo
+
+Il unit testing è una pratica cruciale nello sviluppo Node.js per verificare la correttezza di singole funzioni e metodi. Scrivendo test isolati, ripetibili e automatizzati, puoi garantire l’affidabilità della tua applicazione migliorando al contempo la qualità del codice. Strumenti come Mocha o Chai rendono il unit testing in Node.js semplice ed efficiente.
+Approfondimenti
+
+Documentazione Mocha
+Libreria di asserzioni Chai
+
+Adding Test Cases
+
+Aggiungi casi di test
+Demo
+
+
+Esempio aziendale
+
+In questo esercizio, aggiungerai test unitari alla tua applicazione.
+Opzioni dell’esercizio
+
+Puoi eseguire questo esercizio in due modi:
+Eseguire la pratica hands-on utilizzando le seguenti istruzioni passo-passo. Puoi eseguire i passaggi nel tuo ambiente SAP BTP.
+Simulazione registrata – segui le istruzioni passo-passo all’interno della simulazione selezionando il pulsante Start Exercise.
+Nota
+
+Si consiglia vivamente di eseguire i passaggi praticando hands-on.
+Prerequisiti
+
+Prima di procedere con l’esercizio, assicurati di: aver configurato l’accesso alla tua applicazione. Vedi Add Authorization.
+Esegui l’esercizio
+
+Apri l’esercizio Add Test Cases nel tutorial e completa tutti i passaggi.
+Risultato
+
+Hai aggiunto casi di test unitari e testato l’applicazione.
+
+Adding External Services
+Aggiungi un servizio esterno
+Demo
+Esempio aziendale
+
+Ora aggiungeremo un servizio esterno alla tua applicazione CAP.
+Opzioni dell’esercizio
+
+Puoi eseguire questo esercizio in due modi:
+Eseguire la pratica hands-on utilizzando le seguenti istruzioni passo-passo. Puoi eseguire i passaggi nel tuo ambiente SAP BTP.
+Simulazione registrata – segui le istruzioni passo-passo all’interno della simulazione selezionando il pulsante Start Exercise.
+Nota
+Si consiglia vivamente di eseguire i passaggi praticando hands-on.
+Passaggi
+
+Esegui l’esercizio Get the Business Partner API and Extend the Incident Management Application.
+Esegui Test the Extended Incident Management Application with the Business Partner API.
+Risultato
+Hai aggiunto un servizio esterno di business partner alla tua applicazione e lo hai testato.
+
+
+Identifying Deployment Options in CAP
+Introduzione
+
+Hai sviluppato una versione stabile del tuo progetto CAP e ora vuoi distribuirlo su SAP BTP. Hai diverse opzioni per distribuire il tuo progetto. In questa lezione, imparerai le diverse opzioni di distribuzione.
+Opzioni di Distribuzione
+Quando si distribuisce un’applicazione CAP, esistono diverse opzioni. La seguente figura, Opzioni di Distribuzione di un’Applicazione CAP, mostra le diverse opzioni.
+
+Sulla SAP Business Technology Platform (SAP BTP), i due runtime SAP BTP, Kyma Runtime e SAP BTP, Cloud Foundry Runtime possono essere scelti come destinazione per la distribuzione. Oltre a distribuirli in runtime su un subaccount specifico, è anche possibile distribuire l’applicazione CAP come servizio (SaaS) su SAP BTP, Cloud Foundry Runtime, oppure nell’ambiente SAP BTP, Kyma. L’applicazione può quindi essere sottoscritta da più consumatori SaaS (altri subaccount) dal Service Marketplace.
+La SAP BTP Developer's Guide fornisce inoltre una panoramica dei diversi approcci disponibili su SAP BTP.
+
+SAP BTP, Cloud Foundry Runtime
+
+La distribuzione su Cloud Foundry è semplice. CAP utilizza l’approccio Multitarget Application (MTA) per distribuire l’applicazione nell’ambiente Cloud Foundry. Una MTA è logicamente una singola applicazione composta da più parti correlate e interdipendenti (moduli) che sono sviluppate utilizzando diverse tecnologie o paradigmi di programmazione e progettate per essere eseguite su diversi ambienti di runtime di destinazione con un unico ciclo di vita coerente.
+Ulteriori informazioni sulle MTA più avanti in questo corso. Consulta la documentazione CAP per una guida completa alla distribuzione su Cloud Foundry.
+SAP BTP, Kyma Runtime
+
+La distribuzione su SAP BTP, Kyma Runtime è possibile. CAP utilizza Pack e Helm Charts per semplificare il processo di distribuzione. Non è necessario occuparsi della creazione dei propri Dockerfile e delle immagini container. Il set di strumenti gestirà questo per te. Se sei nuovo a Kyma e Kubernetes, assicurati di consultare il Kyma Learning Journey gratuito.
+Leggi di più sul processo di distribuzione Kyma nella documentazione CAP.
+Multitenancy (SaaS)
+
+Distribuire un’applicazione CAP (SAP Cloud Application Programming Model) come applicazione Software as a Service (SaaS) comporta rendere la tua applicazione accessibile a più tenant all’interno di un’infrastruttura condivisa. Queste applicazioni sono progettate per fornire isolamento dei dati, personalizzazione, sicurezza e scalabilità per ciascun tenant, utilizzando in modo efficiente le risorse condivise. Questo approccio è comune nelle applicazioni software-as-a-service (SaaS) e nelle applicazioni aziendali basate su cloud, dove più clienti o organizzazioni utilizzano la stessa istanza dell’applicazione mantenendo separati i propri dati e le proprie configurazioni.
+CAP ha un supporto integrato per la multitenancy con la libreria @sap/cds-mtxs, che fornisce un insieme di servizi CAP che implementano multitenancy, feature, toggle ed estensibilità.
+I passaggi per abilitare la multitenancy per la tua applicazione SaaS sono:
+npm add @sap/cds-mtxs
+Vai su package.json e aggiungi uno o più dei seguenti flag, a seconda dei requisiti:
+
+"cds": {
+   "requires": {
+     "multitenancy": true,
+     "extensibility": true,
+     "toggles": true
+   }
+ }
+
+Le applicazioni SaaS devono registrarsi con il servizio SAP BTP SaaS Provisioning per consentire a diversi tenant di sottoscrivere o annullare la sottoscrizione all’applicazione. Inoltre, il Service Manager può essere utilizzato per creare un nuovo container SAP HANA Deployment Infrastructure (HDI) per ciascun tenant e per recuperare le connessioni al database specifiche per tenant.
+Poiché si tratta di un’applicazione multitenant, l’utilizzo di un Standalone App Router è una best practice per la creazione di applicazioni multitenant su SAP BTP. L’App Router è una libreria Node.js utilizzata come punto di ingresso unico per un’applicazione in esecuzione su SAP BTP. Maggiori dettagli su questo nella prossima lezione.
+Leggi di più su Building SAAS Applications with CAP and MTX Services nella documentazione CAP.
+
+Custom Deployment
+
+La creazione di una build personalizzata di un’applicazione SAP Cloud Application Programming (CAP) per la distribuzione comporta tipicamente il processo di compilazione e pacchettizzazione del codice sorgente e degli asset della tua applicazione CAP in un bundle pronto per la produzione che può essere distribuito nell’ambiente di distribuzione scelto.
+cds build esegue attività di build sulle cartelle del tuo progetto per prepararle alla distribuzione. Puoi personalizzare il comportamento del processo cds build fornendo opzioni, flag o file di configurazione come parte delle impostazioni del tuo progetto o tramite argomenti da riga di comando.
+Un esempio di comando con opzioni: cds build --production.
+Leggi di più sulle Custom Builds per la distribuzione nella documentazione CAP.
+Summary
+Quando distribuisci un’applicazione SAP Cloud Application Programming (CAP), hai diverse opzioni di distribuzione, a seconda dei tuoi requisiti specifici, dell’infrastruttura e delle preferenze. Se SAP BTP è la piattaforma cloud scelta, gli ambienti che possono essere utilizzati sia per applicazioni multitenant (SAAS) sia single tenant sono Cloud Foundry o Kyma. Scegli Cloud Foundry quando hai bisogno di un modello di distribuzione più semplice con astrazioni di alto livello. Scegli Kyma quando richiedi un controllo esteso sulle applicazioni containerizzate e sui microservizi, specialmente in un ecosistema Kubernetes.
+
+
+Explaining the Deployment Process
+Usage Scenario
+
+Distribuire un’applicazione CAP su SAP Business Technology Platform comporta diversi passaggi, tra cui la configurazione dei servizi necessari, la configurazione dell’ambiente di distribuzione e la distribuzione dell’applicazione stessa.
+Set up SAP BTP Environment:
+
+Accedi al SAP BTP Cockpit.
+Configura i subaccount e le entitlements necessari per i servizi di cui hai bisogno.
+Assicurati che le entitlements necessarie per l’ambiente Cloud Foundry siano disponibili.
+Prepare Your CAP Application:
+
+Crea il tuo progetto CAP.
+Assicurati che l’applicazione sia pronta per la distribuzione e che abbia le configurazioni necessarie per l’ambiente di destinazione.
+Configura le impostazioni di distribuzione nel file mta.yaml.
+Definisci i servizi richiesti e i loro binding nel deployment descriptor.
+Build the Application:
+Usa gli strumenti CAP o gli strumenti di build appropriati per costruire l’applicazione.
+Assicurati che l’applicazione venga costruita con successo senza errori o warning.
+Deploy the Application:
+Usa la Cloud Foundry CLI o SAP Business Application Studio per distribuire l’applicazione su SAP BTP.
+Monitora il processo di distribuzione per eventuali errori o problemi che potrebbero emergere.
+Seguendo questi passaggi, puoi distribuire efficacemente un’applicazione CAP su SAP BTP e garantire il suo corretto funzionamento all’interno dell’ambiente cloud SAP.
+Deployment Process
+Considerando il passo 1 già eseguito (accesso a SAP BTP, ambiente Cloud Foundry, uno spazio CF creato e un’istanza di database SAP HANA Cloud configurata e in esecuzione), l’attenzione si concentrerà sui passaggi successivi, a partire dalla preparazione dell’applicazione per la distribuzione.
+
+
+Preparare la tua applicazione CAP:
+
+Prerequisiti per preparare l’applicazione al deployment:
+Il database SAP HANA Cloud è configurato nel nostro progetto CAP: cds add hana --for production
+L'autenticazione e l'autorizzazione sono configurate utilizzando il SAP Authorization and Trust Management Service: cds add xsuaa --for production. Questo genera un file xs-security.json, con ruoli e scope derivati dalle annotazioni relative all'autorizzazione presenti nei modelli CDS creati. Assicurati di rieseguire cds compile --to xsuaa in caso di modifiche alle annotazioni nel progetto.
+Per l'esecuzione effettiva del deployment verrà utilizzato un deployment basato su Multitarget Application, tramite il Cloud MTA Build Tool (cloud mta build tool): cds add mta
+Per comprendere il progetto Multitarget Application, approfondiremo nel prossimo argomento il progetto di sviluppo MTA.
+
+
+
+The Multitarget Application (MTA) Development Project
+Usage Scenario
+
+Il deployment di un'applicazione CAP su SAP Business Technology Platform coinvolge diversi passaggi, tra cui la configurazione dei servizi necessari, la configurazione dell'ambiente di deployment e il deployment dell'applicazione stessa.
+Configurare l’ambiente SAP BTP:
+Accedi al SAP BTP Cockpit.
+Configura i subaccount e gli entitlement necessari per i servizi di cui hai bisogno.
+Assicurati che gli entitlement necessari per l’ambiente Cloud Foundry siano disponibili.
+Preparare la tua applicazione CAP:
+Crea il tuo progetto CAP.
+Assicurati che l’applicazione sia pronta per il deployment e abbia le configurazioni necessarie per l’ambiente di destinazione.
+Configura le impostazioni di deployment nel file mta.yaml.
+Definisci i servizi richiesti e i relativi binding nel deployment descriptor.
+Build dell’applicazione:
+Usa gli strumenti CAP o gli strumenti di build appropriati per costruire l’applicazione.
+Assicurati che la build dell’applicazione venga completata con successo senza errori o warning.
+Deploy dell’applicazione:
+Usa la Cloud Foundry CLI o SAP Business Application Studio per eseguire il deployment dell’applicazione su SAP BTP.
+Monitora il processo di deployment per eventuali errori o problemi che potrebbero verificarsi.
+Seguendo questi passaggi, puoi effettuare efficacemente il deployment di un’applicazione CAP su SAP BTP e garantirne il corretto funzionamento nell’ambiente cloud SAP.
+Deployment Process
+
+Considerando che il passo 1 è già in essere (accesso a SAP BTP, ambiente Cloud Foundry, uno spazio CF creato e un’istanza di database SAP HANA Cloud configurata e in esecuzione), l’attenzione sarà sui passaggi successivi, a partire dalla preparazione dell’applicazione per il deployment.
+
+
+Prerequisiti per preparare l’applicazione al deployment:
+Il database SAP HANA Cloud è configurato nel nostro progetto CAP: cds add hana --for production
+Autenticazione e autorizzazione sono configurate utilizzando il SAP Authorization and Trust Management Service: cds add xsuaa --for production. Questo genera un file xs-security.json, con ruoli/scope derivati dalle annotazioni relative all’autorizzazione nei modelli CDS creati. Assicurati di rieseguire cds compile --to xsuaa in caso di modifiche alle annotazioni nel progetto.
+Utilizzando il deployment basato su Multitarget Application per l’esecuzione effettiva del deployment, verrà utilizzato il Cloud MTA Build tool (cloud mta build tool). cds add mta
+Per comprendere il progetto Multitarget Application, entreremo nel dettaglio nel prossimo argomento: il MTA Development Project.
+
+The Multitarget Application (MTA) Development Project
+Le recenti tendenze e i progressi nei linguaggi di programmazione, nelle architetture software come i micro-servizi, nei protocolli come OData e nella diversità delle piattaforme di deployment multi-tier e distribuite hanno accelerato la tendenza verso applicazioni costruite a partire da moduli più piccoli, disaccoppiati e diversificati.
+Oggi, le applicazioni business sono composte da più parti sviluppate utilizzando linguaggi e tecnologie differenti e distribuite su vari ambienti runtime di destinazione. Questa diversità introduce molte sfide nel ciclo di vita.
+Guarda il video per essere introdotto al concetto di Multi-Target Application.
+
+A Multitarget Application (MTA) è composta da più parti (moduli), create con tecnologie diverse e distribuite su target differenti, ma con un unico ciclo di vita comune.
+In altre parole, un’MTA è logicamente una singola applicazione, costituita da più parti correlate e interdipendenti (di seguito chiamate moduli) sviluppate utilizzando tecnologie o paradigmi di programmazione diversi e progettate per essere eseguite su differenti ambienti runtime di destinazione, con un unico ciclo di vita coerente.
+Gli strumenti di sviluppo forniti da SAP consentono di gestire più applicazioni (come “moduli”) in un unico progetto di sviluppo e di distribuirle tramite un unico file archivio (MTA archive (MTAR)).
+In SAP Business Application Studio, abbiamo la possibilità di creare un progetto MTA di base oppure un progetto SAP Cloud Application Programming Model (CAP). Durante questo corso, abbiamo sviluppato l’applicazione business e i relativi artefatti utilizzando un progetto di tipo CAP con la seguente struttura di cartelle:
+db : per il modello di schema a livello database
+srv : per il livello di definizione dei servizi
+app : per gli artefatti UI
+Guarda il video per approfondire il design e il runtime di MTA.
+
+Describing the MTA Development Descriptor File
+
+Descrivere il file descrittore di sviluppo MTA
+Un modello MTA è una descrizione indipendente dalla piattaforma dei diversi moduli dell’applicazione, delle loro interdipendenze e dei dati di configurazione che espongono, nonché delle risorse necessarie per la loro esecuzione. Questo modello è specificato, utilizzando YAML, nei file descrittori che accompagnano i processi di sviluppo e deployment.
+Un modello MTA ha i seguenti scopi:
+Definire un’applicazione composta da più sottocomponenti (eterogenei) (beneficio: gli strumenti possono stabilire un ciclo di vita unico per questi sottocomponenti).
+Dichiarare le risorse da cui l’applicazione dipende a runtime e/o in fase di deployment (beneficio: gli strumenti possono allocare e collegare tali risorse).
+Definire variabili di configurazione (e le loro relazioni), i cui valori distinguono diversi deployment dell’applicazione (beneficio: gli strumenti possono collegare i sottocomponenti, automatizzare il deployment basandosi su impostazioni di default oppure richiedere in modo interattivo i valori obbligatori mancanti).
+
+Guarda il video per apprendere il flusso dallo sviluppo al deployment.
+
+Come mostrato nell’immagine, lo sviluppatore dell’applicazione utilizza strumenti di sviluppo per creare i moduli di un’MTA e il corrispondente descrittore MTA (mta.yaml).
+L’applicazione può quindi essere distribuita sotto forma di archivio MTA che include il descrittore di deployment MTA (mtad.yaml). Questa specifica descrive un formato di archivio come file di distribuzione conveniente, come indicato dalla freccia diretta dagli strumenti di sviluppo al deployer.
+I deployer MTA possono anche accettare direttamente il contenuto puro di questo formato, ovvero la struttura di directory dei file con un descrittore di deployment (mtad.yaml).
+Un amministratore può opzionalmente estendere il modello MTA nel descrittore di deployment con un extension descriptor (mtaext.yaml) e utilizzare il deployer MTA per orchestrare il deployment effettivo.
+Elementi globali: includono l’identificatore dell’applicazione e la versione, una descrizione (opzionale), i copyright, l’autore e così via.
+Moduli: moduli creati nell’applicazione, come il modulo database SAP HANA e il modulo Node.js, inclusi nome, tipo, percorso e requisiti verso altri moduli.
+Risorse: una risorsa è qualcosa richiesto da un modulo dell’MTA a runtime o in fase di deployment, ma non fornito all’interno dell’MTA. Più precisamente, un descrittore MTA dichiara una dipendenza da una risorsa, non la risorsa stessa. Talvolta sono chiamate Backing Services, servizi dipendenti non forniti dall’applicazione, come XS Advanced User Account and Authentication (XSUAA), container XS Advanced HANA Deployment Infrastructure (XSHDI) e XSJob-Scheduler.
+Properties: possono essere specificate quando il valore deve essere determinato durante il deployment, ad esempio per URL generati di altri servizi o chiavi API.
+Parameters: variabili riservate di un modulo, accessibili da altri moduli, ad esempio user, app-name, default-host o default-uri tramite notazione placeholder. I parametri possono essere in sola lettura oppure lettura/scrittura.
+Utilizzo dell’Application Router
+I suoi compiti sono:
+L’App Router agisce come punto di ingresso unico per instradare le richieste. In particolare, garantisce il login utente e l’autenticazione in combinazione con XSUAA. I suoi compiti sono:
+L’App Router inoltra le richieste ai microservizi backend, agendo quindi come reverse proxy. I microservizi backend non dovrebbero essere direttamente accessibili dal client.
+L’App Router può servire contenuti statici come pagine web, SAPUI5 o altro codice lato client.
+L’App Router gestisce i flussi di autenticazione per l’intera applicazione. Per autenticazione (chi è l’utente) e autorizzazione (cosa può fare l’utente), l’App Router intercetta tutte le richieste in ingresso non autenticate e avvia un flusso OAuth2 (authorization code grant) con il servizio Extended Services for User Account and Authentication (XSUAA) di SAP BTP nell’ambiente Cloud Foundry.
+SAP offre due principali opzioni per utilizzare un approuter nel contesto dell’ambiente Cloud Foundry: SAP Managed Approuter e Standalone Approuter.
+SAP Managed Approuter: per scenari in cui un launchpad è il punto di ingresso per accedere alle applicazioni. La funzionalità managed approuter è inclusa con la sottoscrizione a SAP Build Workzone. Le applicazioni distribuite con il managed approuter sono disponibili nell’HTML5 repository.
+Standalone App Router: per scenari particolari in cui è necessaria l’estensibilità dell’approuter o per costruire applicazioni multi-tenant (SaaS) su SAP BTP. L’applicazione distribuita con questo approuter custom sarà disponibile nello spazio CF.
+Utilizza il seguente comando per estendere la configurazione dell’applicazione: cds add approuter – for production
+Utilizza il seguente comando per estendere la configurazione dell’applicazione: cds add approuter --for production.
+Build dell’applicazione
+Esegui il seguente comando per generare ulteriori artefatti di deployment e preparare tutto per la produzione in una cartella locale ./gen come area di staging. Sebbene cds build sia incluso nel passo successivo durante l’esecuzione di mbt build, puoi anche eseguirlo separatamente come test e per ispezionare ciò che viene generato.
+
+cds build –production
+
+Deploy su Cloud Foundry
+Eseguendo mbt build, viene creato un file archivio (MTA archive (MTAR)) nella cartella gen. Per effettuare il deployment dell’archivio generato, è necessario eseguire cf deploy gen/mta.tar. L’URL dell’applicazione approuter appare alla fine nell’output del log.
+
+Graphical MTA Editor
+
+In alternativa all’editor di codice per il file MTA, SAP Business Application Studio offre anche la possibilità di utilizzare l’editor grafico MTA per effettuare modifiche. È possibile trovare l’editor basato su form nel menu contestuale del file mta.yaml.
+Summary
+
+Per effettuare il deployment di un’applicazione CAP su Cloud Foundry, ci sono passaggi specifici che devono essere garantiti: l’ambiente BTP Cloud Foundry deve essere correttamente configurato, l’applicazione CAP deve essere preparata e il file descrittore MTA deve essere configurato tenendo conto di tutti i binding necessari. In questo modo, l’applicazione viene costruita e distribuita con successo.
+Further Reading
+
+Esempio:
+Applicazioni multitarget nell’ambiente CF
+Deployment CAP
+
+Preparing for Deployment in the SAP BTP, Cloud Foundry Runtime
+Preparazione dell’ambiente di produzione 
+Demo
+
+Business Example
+
+Ora vedremo come prepararsi al deployment su SAP BTP, runtime Cloud Foundry.
+Note
+Attenzione
+Se stai utilizzando questo materiale in un corso in aula SAP, non è necessario configurare un’istanza SAP HANA Cloud. Il tuo istruttore ha già preparato il landscape per te. Procedi gentilmente con il passo 2 qui sotto.
+Exercise Options
+
+Puoi eseguire questo esercizio in due modi:
+Esercitarti direttamente seguendo le istruzioni passo-passo. Puoi eseguire i passaggi nel tuo ambiente SAP BTP.
+Simulazione registrata – segui le istruzioni passo-passo all’interno della simulazione selezionando il pulsante Start Exercise.
+Note
+Raccomandiamo fortemente di eseguire i passaggi in modalità hands-on.
+Prerequisites
+
+Prima di procedere con l’esercizio, assicurati di aver completato gli esercizi precedenti.
+Steps
+
+Esegui l’esercizio “Prepare for Deployment in the SAP BTP, Cloud Foundry Runtime”.
+Attenzione
+Esegui questo passaggio solo se sei un e-learner in autoapprendimento. Per i corsi in aula, non devi eseguire questo passaggio.
+Prepara l’applicazione per la produzione.
+Finora hai sviluppato un’applicazione con un database in-memory e autenticazione di base. Per portare un’applicazione di questo tipo in produzione, è necessario effettuare le configurazioni appropriate.
+Apri il link all’esercizio e completa tutti i passaggi.
+Result
+Ora hai preparato con successo la tua applicazione multitarget per il deployment su SAP BTP.
+
+Deploying the Application
+Eseguire il deployment in SAP BTP, runtime Cloud Foundry 
+Demo
+
+Steps
+
+Esegui tutti i passaggi dell’esercizio “Deploy in SAP BTP, Cloud Foundry runtime”.
+Note
+Nel caso in cui la tua applicazione vada in crash dopo il deployment con l’errore "No credentials configured for API_BUSINESS_PARTNER", aggiungi l’oggetto credentials come segue alla configurazione del tuo file package.json. Successivamente, esegui nuovamente la build e il deployment della tua applicazione.
+
+
+    "API_BUSINESS_PARTNER": {
+        "kind": "odata-v2",
+        "model": "srv/external/API_BUSINESS_PARTNER",
+        "credentials": {
+          "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER/"
+        }
+      },
+
+Esegui tutti i passaggi dell’esercizio “Assign the User Roles”.
+Result
+Ora hai distribuito con successo la tua applicazione multitarget nel runtime SAP BTP, Cloud Foundry.
+
+
+Explaining SAP Build Work Zone, Standard Edition
+Introduzione
+
+Nel mondo odierno, la tua azienda deve sviluppare applicazioni basate su cloud che verranno utilizzate su diversi dispositivi, come telefoni cellulari, tablet e laptop. Garantire un aspetto e una user experience coerenti tra questi dispositivi è fondamentale per ridurre la curva di apprendimento degli utenti finali. Pertanto, è necessario un modo efficiente per progettare le interfacce utente di queste applicazioni, assicurando uniformità e facilità d’uso indipendentemente dal dispositivo.
+SAP Build Work Zone, edizione standard
+
+Nel moderno panorama aziendale, le organizzazioni si trovano spesso ad affrontare ambienti enterprise complessi. Questi ambienti possono essere un mix di diversi tipi di contenuti, strumenti UI, sistemi IT, repository di contenuti, applicazioni e canali. Questa complessità può rappresentare una sfida per gli utenti business quando cercano di trovare le informazioni di cui hanno bisogno.
+I dipendenti spesso esprimono difficoltà nel passare da un’applicazione all’altra e si sentono sopraffatti quando cercano di individuare l’applicazione giusta per un’attività. SAP Build Work Zone affronta queste sfide offrendo un punto di accesso centralizzato alle applicazioni e alle informazioni aziendali su qualsiasi dispositivo.
+Che cos’è SAP Build Work Zone? SAP Build Work Zone è uno strumento che consente di creare facilmente siti aziendali. Questi siti forniscono un accesso centralizzato alle applicazioni e alle informazioni aziendali. Grazie a template predefiniti, card dell’interfaccia utente e widget di contenuto, è possibile costruire e gestire visivamente i siti senza necessità di conoscenze tecniche approfondite.
+Vantaggi principali
+
+Accesso centralizzato: SAP Build Work Zone fornisce un unico punto di accesso per tutte le applicazioni aziendali. Questo rende più facile trovare e utilizzare gli strumenti necessari.
+Maggiore produttività: Si integra sia con sistemi cloud che on-premise. Questo semplifica le attività quotidiane e aumenta l’efficienza.
+Funzionalità di SAP Build Work Zone, edizione standard
+
+Integrazione delle applicazioni e accesso centralizzato: Offre un punto centrale di accesso per app e attività. Si integra perfettamente con diverse tecnologie UI e applicazioni di terze parti. Produttività migliorata: Riduce la necessità di passare tra diverse applicazioni, risparmiando tempo e fatica.
+Esperienza utente intuitiva e coinvolgente
+Siti personalizzati: Fornisce siti aziendali personalizzati basati sui ruoli, con strutture e design dei contenuti flessibili.
+Design user-friendly: Garantisce un’interfaccia coinvolgente e facile da navigare.
+Integrazioni
+Servizi SAP BTP: Si integra con i servizi centrali della SAP Business Technology Platform, come inbox e servizi di identità cloud.
+Integrazioni di terze parti: Consente l’integrazione con altri servizi di terze parti, migliorando la funzionalità dei siti aziendali.
+Estensibilità
+Personalizzazione: Offre un framework di estensibilità per personalizzazioni tramite shell plugin e branding personalizzato.
+Design flessibile: Supporta diverse personalizzazioni, tra cui traduzioni, branding, shell plug-in e URL di dominio.
+Per iniziare
+
+Per iniziare con SAP Build Work Zone, segui questi passaggi:
+Crea una sottoscrizione: Inizia creando una sottoscrizione a SAP Build Work Zone, edizione standard.
+Configura il tuo sito: Utilizza template predefiniti, card dell’interfaccia utente e widget di contenuto per configurare il tuo sito aziendale.
+Integra le applicazioni: Integra le applicazioni enterprise e i servizi di terze parti per fornire un punto di accesso centralizzato.
+Personalizza il tuo sito: Utilizza il framework di estensibilità per personalizzare il sito, inclusi branding e funzionalità aggiuntive.
+Riepilogo
+
+SAP Build Work Zone, edizione standard è uno strumento potente che può aiutarti a semplificare il tuo landscape enterprise e migliorare la produttività. Fornendo un punto di accesso centralizzato per tutte le applicazioni e le informazioni, rende più semplice per gli utenti business trovare ciò di cui hanno bisogno e completare le proprie attività in modo efficiente.
+Approfondimenti
+Che cos’è SAP Build Work Zone, edizione standard?
+SAP Build Work Zone, edizione standard
+
+
+Integrating the App with SAP Build Work Zone
+Integrazione con SAP Build Work Zone, edizione standard
+Demo
+Esempio di business
+
+In questo esercizio, aggiungerai unit test alla tua applicazione.
+Opzioni dell’esercizio
+
+Puoi eseguire questo esercizio in due modi:
+Pratica hands-on utilizzando le seguenti istruzioni passo-passo. Puoi eseguire i passaggi nel tuo ambiente SAP BTP.
+Simulazione registrata – segui le istruzioni passo-passo all’interno della simulazione selezionando il pulsante Start Exercise.
+Nota
+Raccomandiamo fortemente di eseguire i passaggi tramite pratica hands-on.
+Esegui l’esercizio
+
+Apri l’esercizio Integrate Your Application with SAP Build Work Zone, Standard Edition nel tutorial e completa tutti i passaggi.
+Risultato
+
+Congratulazioni! Hai ora completato lo sviluppo della tua applicazione e hai integrato il servizio SAP Build Work Zone, Standard Edition, per avere un unico punto di accesso centrale da cui mostrare tutte le tue applicazioni SAP BTP.
+
+
