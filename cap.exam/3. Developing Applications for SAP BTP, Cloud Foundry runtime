@@ -1,0 +1,1298 @@
+Explaining the Benefits of the SAP BTP, Cloud Foundry Runtime
+Introduzione
+
+Nel panorama digitale odierno, in rapida evoluzione, le aziende sono costantemente alla ricerca di soluzioni agili, efficienti e scalabili per sviluppare e gestire applicazioni. SAP Business Technology Platform (SAP BTP), runtime Cloud Foundry, offre una risposta convincente a queste sfide, fornendo una solida base per lo sviluppo e la gestione di applicazioni cloud-native. Questa lezione esplora i vantaggi e le caratteristiche uniche di SAP BTP, runtime Cloud Foundry, e come supporta gli sviluppatori nella creazione di soluzioni di business innovative.
+Che cos'è Cloud Foundry?
+
+Cloud Foundry è una piattaforma open-source che consente agli sviluppatori di creare, distribuire ed eseguire applicazioni. Astrae la gestione dell'infrastruttura, fornendo un modo semplificato ed efficiente per sviluppare applicazioni cloud-native ed è quindi conosciuta anche come platform-as-a-service (PaaS). Le caratteristiche principali includono:
+Supporto multilinguaggio: supporta una varietà di linguaggi di programmazione, come Java, Node.js, Python e Ruby.
+Architettura basata su container: utilizza la tecnologia dei container per gestire il deployment e il ridimensionamento delle applicazioni.
+Produttività degli sviluppatori: semplifica il processo di sviluppo con strumenti e livelli di astrazione che aumentano la produttività degli sviluppatori.
+SAP Business Technology Platform (SAP BTP) offre un ambiente runtime Cloud Foundry gestito chiamato SAP BTP, runtime Cloud Foundry. Consulta il seguente confronto tra runtime per saperne di più sul ruolo di SAP BTP, runtime Cloud Foundry, nell'ecosistema SAP BTP. Ottieni una panoramica completa di Cloud Foundry nella documentazione ufficiale di Cloud Foundry e, per quanto riguarda SAP BTP, runtime Cloud Foundry, nel SAP Help Portal.
+Vantaggi principali di SAP BTP, runtime Cloud Foundry
+
+I vantaggi principali di SAP BTP, runtime Cloud Foundry sono:
+Strumenti di sviluppo intuitivi: con strumenti intuitivi e packaging code-to-container, gli sviluppatori possono concentrarsi sulla creazione di soluzioni innovative senza doversi preoccupare della gestione dell’infrastruttura.
+Sicurezza gestita: fornisce patch di sicurezza e aggiornamenti della piattaforma, garantendo un ambiente di sviluppo sicuro e riducendo al minimo i rischi di vulnerabilità. SAP protegge la piattaforma e il sistema operativo di base dei container (quando vengono usati i buildpack). Gli sviluppatori proteggono il codice sorgente dell’applicazione e tutte le dipendenze fornite dallo sviluppatore, e ricompilano regolarmente la loro applicazione con buildpack aggiornati. Quando si utilizzano immagini container con Cloud Foundry, lo sviluppatore è responsabile della sicurezza dell’intera immagine container, incluso il sistema operativo, tutto il codice e tutte le dipendenze.
+Alta disponibilità: instradamento automatico delle applicazioni, load balancing, monitoraggio dello stato di salute e logging per garantire alta disponibilità e prestazioni delle applicazioni, se è in esecuzione più di un’istanza dell’applicazione.
+Servizi gestiti accessibili tramite API standardizzate: accesso a un’ampia gamma di servizi gestiti, inclusi database, monitoring, destinations, autorizzazioni e altro.
+Confronto con gli altri runtime SAP BTP
+
+SAP Business Technology Platform (SAP BTP) migliora lo sviluppo e la gestione delle applicazioni di business sfruttando tecnologie cloud-native, API, servizi e capability. È progettata per supportare più ambienti, inclusi Cloud Foundry, Kyma e ABAP, ciascuno con vantaggi distinti pensati per diverse esigenze di sviluppo.
+Opzioni di ambiente
+
+SAP BTP, runtime Cloud Foundry: offre un’esperienza semplificata per lo sviluppo di applicazioni di business, un’ampia scelta di linguaggi di programmazione, servizi gestiti e metodi di deployment intuitivi.
+Offre intenzionalmente un runtime container semplificato con funzionalità limitate rispetto agli altri, dando priorità a semplicità, facilità d’uso e a un ambiente favorevole agli sviluppatori. Nonostante queste limitazioni, soddisfa i requisiti della maggior parte delle applicazioni di business, offrendo un’esperienza più lineare senza compromettere le funzionalità essenziali per le tipiche esigenze enterprise.
+SAP BTP, runtime Kyma: si concentra sullo sfruttare pienamente un ambiente containerizzato fornito tramite Kubernetes, supportando microservizi e funzioni serverless, e fornendo servizi gestiti integrati per ridurre l’effort di sviluppo. Esplora i vantaggi di SAP BTP, runtime Kyma, nel learning journey dedicato.
+SAP BTP, ambiente ABAP: è pensato per il linguaggio di programmazione ABAP Cloud. Consente prototipazione rapida con l’ABAP RESTful application programming model (RAP) e un’integrazione fluida con SAP S/4HANA e altre soluzioni SAP. Il runtime consente di riutilizzare asset ABAP on-premise esistenti.
+Nota
+SAP BTP, runtime Cloud Foundry, supporta pienamente solo applicazioni cloud-native. Una buona pratica per costruire applicazioni cloud-native è descritta nella metodologia twelve-factor app.
+Riepilogo
+SAP BTP, runtime Cloud Foundry, si distingue come una piattaforma altamente versatile e favorevole agli sviluppatori che semplifica la complessità dello sviluppo di applicazioni cloud-native. Offrendo supporto per diversi linguaggi di programmazione, strumenti di sviluppo intuitivi e funzionalità di gestione automatizzata, permette agli sviluppatori di concentrarsi sull’innovazione piuttosto che su infrastruttura e operation. L’impegno del runtime verso scalabilità, sicurezza e alta disponibilità garantisce che le applicazioni non solo soddisfino le attuali esigenze di business, ma siano anche pronte per il futuro in un mondo sempre più digitale.
+
+Describing the Cloud Foundry Runtime Architecture
+
+Componenti chiave del runtime Cloud Foundry
+
+Il runtime Cloud Foundry fornisce una piattaforma solida che astrae molte complessità dell’infrastruttura, consentendo agli sviluppatori di applicazioni di concentrarsi sulla creazione e sul deployment di applicazioni cloud-native senza restare bloccati nei dettagli sottostanti. Questa panoramica copre solo i componenti più rilevanti per gli sviluppatori di applicazioni Cloud Foundry, aiutando a chiarire come ciascuna parte contribuisca a un ambiente favorevole agli sviluppatori. Per un approfondimento su tutti i componenti, la documentazione ufficiale di Cloud Foundry offre dettagli completi.
+Il Cloud Controller è l’endpoint API centrale che gli sviluppatori utilizzano per gestire le proprie applicazioni su Cloud Foundry. Supporta operazioni essenziali del ciclo di vita applicativo come deployment, scaling ed eliminazione delle applicazioni, configurazione delle route e binding dei servizi. Tutte le interazioni principali tra sviluppatori e piattaforma vengono gestite tramite il Cloud Controller, rendendolo il componente centrale per la gestione degli stati applicativi e dei metadati.
+Il Routing Layer indirizza le richieste in ingresso dei client verso le istanze applicative appropriate in esecuzione all’interno di Cloud Foundry. Garantisce una consegna affidabile delle richieste, load balancing e alta disponibilità distribuendo il traffico utente verso i servizi corretti e le corrette istanze applicative.
+Diego (Container Runtime) gestisce l’esecuzione delle applicazioni all’interno di container isolati. Si occupa di scheduling, gestione del ciclo di vita e allocazione delle risorse dei container, fornendo un ambiente container favorevole agli sviluppatori che soddisfa le esigenze della maggior parte delle applicazioni di business mantenendo al tempo stesso la semplicità.
+Per l’accesso sicuro, UAA (User Account and Authentication) gestisce l’autenticazione degli utenti in Cloud Foundry. Si occupa del login utente e della generazione dei token, garantendo un accesso sicuro alle applicazioni, lasciando però al Cloud Controller i compiti di autorizzazione specifici dell’applicazione.
+Infine, Loggregator fornisce logging in tempo reale per le applicazioni deployate, aggregando log e metriche per monitoring e troubleshooting. Gli sviluppatori possono accedere a questi log per monitorare le prestazioni applicative, diagnosticare problemi e ottenere insight sullo stato di salute e sull’utilizzo delle proprie applicazioni.
+Cloud Foundry può essere usato come servizio gestito all’interno di SAP BTP abilitando SAP BTP, runtime Cloud Foundry, nel proprio subaccount.
+Un subaccount BTP in una determinata regione Cloud Foundry fornirà una Cloud Foundry Organization nell’installazione Cloud Foundry di quella regione. Ogni subaccount quindi può avere solo una Cloud Foundry Organization per regione. Puoi separare ulteriormente la tua Cloud Foundry Organization creando degli Spaces all’interno della tua Cloud Foundry Organization.
+
+Organizations
+Guarda il seguente video per scoprire maggiori informazioni sull’organization in SAP BTP, runtime Cloud Foundry.
+Le organization di Cloud Foundry hanno quote di risorse, che vengono assegnate dagli entitlement del subaccount SAP BTP. Vedi la documentazione di Cloud Foundry per maggiori informazioni.
+A livello di organization, gli unici ruoli esistenti sono Org Manager, Org Auditor e Org User. Per usare uno space o ricevere un ruolo di space, è prima richiesto un ruolo a livello di organization. Vedi la documentazione di Cloud Foundry per maggiori dettagli.
+Spaces
+
+Uno space è un contenitore all’interno di un’organization in cui puoi effettuare il deployment di applicazioni, servizi e altre risorse. Fornisce un ambiente dedicato per sviluppare, testare ed eseguire applicazioni senza interferire con altri spaces. Ogni space può avere il proprio insieme di quote di risorse, come memoria, spazio disco e servizi.
+Le quote di space limitano l’utilizzo delle risorse in modo più granulare per singolo space. Tuttavia, se viene superata la quota dello space oppure quella dell’organization, la risorsa risulta esaurita e non può essere richiesta. Vedi la documentazione di Cloud Foundry per maggiori informazioni.
+Inoltre, assegni ruoli agli utenti a livello di space per controllare il loro accesso e i loro permessi all’interno di quello space. Questo è utile quando vuoi isolare spaces per progetti o team differenti.
+Specifiche SAP BTP
+
+SAP BTP fornisce un ambiente Cloud Foundry gestito che semplifica il deployment e la gestione delle applicazioni. Tuttavia, questo runtime presenta alcune specificità e limitazioni di cui dovresti essere consapevole quando utilizzi SAP BTP, runtime Cloud Foundry.
+Consulta la pagina di help del Cloud Foundry Environment per tutte le limitazioni e specificità attuali.
+Riepilogo
+
+L’architettura runtime di Cloud Foundry offre una base solida per lo sviluppo e il deployment di applicazioni cloud-native, in particolare all’interno dell’ambiente SAP BTP. Comprendendo i componenti, la struttura dell’organization e le funzionalità specifiche di SAP BTP, sviluppatori e amministratori possono sfruttare pienamente le capacità di Cloud Foundry per semplificare il ciclo di vita delle applicazioni cloud.
+Approfondimenti
+
+Documentazione Cloud Foundry
+SAP BTP, Cloud Foundry Runtime Help Portal
+
+Explaining the Key Concepts of SAP BTP, Cloud Foundry Runtime
+Applications
+
+Le applicazioni su Cloud Foundry sono il tuo codice e tutte le eventuali dipendenze raggruppate insieme per svolgere un compito specifico. Possono essere distribuite su Cloud Foundry utilizzando i buildpack.
+Per imparare come distribuire un’applicazione su SAP BTP, runtime Cloud Foundry, fai riferimento all’Unit "Managing Deployments in SAP BTP, Cloud Foundry Runtime" di questo Learning Journey.
+Tecnicamente, queste applicazioni vengono eseguite in container, che sono ambienti isolati che forniscono le risorse necessarie affinché l’applicazione possa funzionare. I container sono gestiti dal runtime Cloud Foundry e possono essere scalati verso l’alto o verso il basso in base ai requisiti di risorse dell’applicazione.
+Buildpacks
+
+I buildpack sono un componente chiave di Cloud Foundry. Sono responsabili di fornire il framework e il runtime per le applicazioni. Quando distribuisci un’applicazione, Cloud Foundry rileva automaticamente il buildpack corrispondente e utilizza poi il buildpack per compilare e pacchettizzare la tua applicazione in un’immagine container instanziabile (chiamata droplet). Questo processo si chiama application staging.
+Queste informazioni sono tratte dalla documentazione di Cloud Foundry.
+Esistono tre tipi di buildpack in Cloud Foundry:
+System Buildpacks: questi buildpack sono preinstallati nell’ambiente runtime Cloud Foundry e forniscono supporto per linguaggi di programmazione e framework comuni.
+Vengono mantenuti aggiornati e sono supportati da SAP. Tuttavia, offrono una sola versione. Se utilizzi un system buildpack, consumi automaticamente le nuove versioni al volo, a meno che tu non specifichi una versione particolare nell’URI del repository quando fai il push di un’applicazione su Cloud Foundry. Questi buildpack sono i cosiddetti offline buildpacks, cioè non richiedono necessariamente accesso a internet per funzionare.
+Consulta l’elenco dei system buildpacks per maggiori informazioni.
+External Buildpacks: questi buildpack offrono supporto per linguaggi e framework aggiuntivi non coperti dai system buildpacks. Consulta l’elenco degli external buildpacks per maggiori informazioni.
+L’organizzazione GitHub cloudfoundry-community non è ufficialmente affiliata a Cloud Foundry e non offre alcun supporto, responsabilità o garanzia di conformità. Questi external buildpacks provengono da un URL remoto e possono essere qualsiasi buildpack personalizzato. A differenza dei system buildpacks, che si aggiornano automaticamente all’ultima versione in momenti imprevedibili, gli external buildpacks consentono un corretto controllo delle versioni. Questo significa che puoi specificare versioni fisse, garantendo maggiore stabilità e controllo. Inoltre, gli external buildpacks offrono supporto anche per quelli usati come system buildpacks, ma con il vantaggio aggiuntivo di gestire tu stesso le versioni.
+Attenzione
+Per gli external buildpacks, è importante verificare cosa fanno, chi li fornisce e se sono affidabili.
+Questo è un punto di ingresso per spyware, malware e attacchi alla supply chain, ed è negligente prendere semplicemente un buildpack qualsiasi trovato su internet solo perché esiste!
+Custom Buildpacks: puoi creare i tuoi buildpack personalizzati in base ai tuoi requisiti specifici. Questi buildpack possono essere utilizzati per pacchettizzare applicazioni che non sono supportate dai system buildpacks o dagli external buildpacks già esistenti. Consulta la documentazione dei buildpack per maggiori informazioni sulla creazione di buildpack personalizzati.
+Services
+
+I servizi sono building block riutilizzabili che forniscono funzionalità specifiche alle tue applicazioni, migliorando l’efficienza dello sviluppo e la scalabilità. Questi servizi spaziano dai managed services (completamente mantenuti da SAP) agli user-provided services (forniti e gestiti da te). Incapsulano logica complessa, infrastruttura e accesso ai dati, consentendoti di concentrarti sulla logica principale della tua applicazione invece di reinventare tutto da zero.
+I servizi sono raggruppati in due tipi:
+Business services: questi servizi abilitano, facilitano o accelerano lo sviluppo di componenti di processi di business oppure forniscono funzionalità o contenuti specifici di settore all’interno di un’applicazione di business. Per esempio: SAP Document Management service.
+Technical services: questi servizi abilitano, facilitano o accelerano lo sviluppo di contenuti generali o indipendenti dal dominio all’interno di un’applicazione di business, indipendentemente dal processo di business o dal compito dell’applicazione. Per esempio: SAP Application Autoscaler oppure SAP Authorization and Trust Management Service, e così via.
+Una service instance è una singola istanziazione di un servizio in esecuzione su SAP BTP, creata utilizzando uno specifico service plan, che è una variante di configurazione di un servizio. Per utilizzare un servizio nella tua applicazione, devi creare una service instance e collegarla alla tua applicazione.
+Per un’applicazione già in esecuzione, è richiesto un restage se i binding cambiano, poiché le informazioni di binding vengono incorporate nel droplet durante il processo di staging. Un semplice restart non sarà sufficiente. Maggiori informazioni su restage e restart verranno discusse nella lesson "Mastering Cloud Foundry Application Lifecycle Events" dell’Unit "Optimizing and Managing Applications in SAP BTP, Cloud Foundry Runtime" in questo Learning Journey.
+Guarda il seguente video per scoprire i passaggi per utilizzare i servizi in Cloud Foundry.
+
+Service Marketplace
+
+Per visualizzare i servizi nel cockpit SAP BTP, vai nello space Cloud Foundry in cui vuoi utilizzare il servizio e scegli Services→Service Marketplace. Il Service Marketplace è accessibile anche a livello di subaccount. Tuttavia, vedrai servizi differenti.
+Il Service Marketplace fornisce una panoramica dettagliata di ciascun servizio insieme alle informazioni sugli eventuali service plan, oltre agli strumenti necessari per creare una service instance e collegarla a un’applicazione.
+Visualizzare e gestire servizi dal Service Marketplace: offre anche servizi che non sono specifici di un ambiente.
+Consumare servizi SAP BTP dall’ambiente Cloud Foundry: offre solo servizi che possono essere utilizzati in uno specifico ambiente.
+Service Binding
+
+I service binding sono un modo per collegare la tua applicazione a una service instance. Collegando un servizio alla tua applicazione, vengono fornite alla tua applicazione informazioni che le consentono di accedere alle funzionalità del servizio. Queste informazioni vengono fornite tramite variabili d’ambiente, che danno alla tua applicazione i dettagli di configurazione necessari per interagire con il servizio. Puoi collegare service instance alle applicazioni utilizzando sia il cockpit SAP BTP sia la Cloud Foundry Command Line Interface (CLI). Puoi anche collegare service instance dichiarandole come parte della tua multitarget application (MTA).
+Nota
+Le Multi-Target Applications (MTA) in Cloud Foundry consentono agli sviluppatori di distribuire più componenti, come web app, servizi e database, in un unico deployment. Raggruppando questi componenti in un solo pacchetto, le MTA consentono un deployment e una gestione più lineari attraverso ambienti differenti, garantendo al tempo stesso che le dipendenze siano gestite correttamente.
+Per maggiori informazioni sulle MTA, consulta la lesson "Designing and Running your Application in SAP BTP, Cloud Foundry Runtime" dell’Unit "Developing Applications in SAP BTP, Cloud Foundry Runtime".
+Quando distribuisci un’applicazione su SAP BTP che richiede un altro servizio, come per esempio il servizio xsuaa, assicurati che la service instance sia disponibile affinché il service binding possa avvenire.
+Puoi elencare tutti i binding di un determinato servizio, per esempio, nel cockpit SAP BTP. Per farlo, vai su Services→Instances and Subscriptions. Da qui, seleziona un’istanza e vedrai tutti i binding verso le applicazioni distribuite.
+Riepilogo
+In questa lesson hai scoperto i concetti chiave di SAP BTP, runtime Cloud Foundry, inclusi i buildpack per il supporto di framework e runtime, la distinzione tra applicazioni e servizi, l’uso delle variabili d’ambiente e la gestione dei container. Ora dovresti essere in grado di spiegare i diversi tipi di buildpack (system, community e custom), il processo di creazione e binding delle service instance, e i ruoli dei service binding e del Service Broker nella gestione e integrazione dei servizi all’interno di Cloud Foundry.
+
+Setting up SAP BTP, Cloud Foundry Runtime
+Ottenere il proprio global account SAP BTP
+
+Avere un global account SAP BTP è fondamentale per accedere e gestire SAP BTP, runtime Cloud Foundry, e gli altri servizi forniti da SAP BTP.
+Guarda il seguente video per scoprire i passaggi chiave per configurare il tuo account SAP BTP, runtime Cloud Foundry.
+
+
+Panoramica
+
+SAP BTP offre due principali tipi di global account: trial account ed enterprise account. Ognuno presenta diverse varianti, come pricing, disponibilità, limiti tecnici e altro.
+I trial account sono gratuiti, di breve durata e adatti a test individuali non commerciali. Questi account scadono dopo un determinato periodo e non supportano la migrazione dei dati verso un sistema produttivo.
+Gli enterprise account sono adatti a esigenze aziendali di lungo termine, fornendo accesso ad ambienti produttivi con piani sia gratuiti sia a pagamento, e includono supporto continuo per l’uso in produzione.
+I piani a pagamento sono disponibili in due modelli commerciali:
+Modello basato su subscription: fornisce risorse predeterminate a fronte di una tariffa mensile fissa, adatto a workload prevedibili. È possibile accedere a servizi aggiuntivi pagando un costo extra tramite modifiche contrattuali. Per maggiori informazioni, consulta: What Is the Subscription-Based Commercial Model?
+Modello basato su consumption: offre flessibilità con accesso a tutti i servizi idonei, con fatturazione basata sull’utilizzo delle risorse – ideale per operazioni scalabili. Per maggiori informazioni, consulta: What Is the Consumption-Based Commercial Model?
+Free plans: consentono di testare i servizi senza costi nel modello basato su consumption, con limiti tecnici. Una volta raggiunti i limiti tecnici di un servizio e se vuoi continuare a usarlo, devi passare a un service plan a pagamento. Per maggiori informazioni, consulta Using Free Service Plans.
+Per informazioni dettagliate sul pricing di SAP BTP, runtime Cloud Foundry, visita il Discovery Center del servizio. Nella pagina Pricing, usa il menu a tendina Commercial Model per esplorare le varie opzioni e ottenere dettagli completi, incluse caratteristiche tecniche, prezzi e disponibilità regionale.
+
+Registrazione e accesso
+
+Per ottenere un global account BTP, consulta la nostra pagina Try and Buy e scegli l’opzione più adatta a te.
+Una volta registrato, dovresti ricevere email di conferma da SAP BTP con le credenziali di accesso e i link per accedere al SAP BTP cockpit. Il cockpit è il luogo in cui puoi gestire i tuoi global account, subaccount, entitlement e membri. Consulta Navigate in the Cockpit per istruzioni dettagliate.
+Creazione dei subaccount
+
+Per sviluppare e distribuire applicazioni, utilizzare servizi e sottoscrivere business application fornite da SAP, devi creare un subaccount.
+Le istruzioni per creare un subaccount si trovano in questo documento.
+Per i trial account, un subaccount viene creato automaticamente.
+Abilitazione di Cloud Foundry
+
+Vai alla sezione Cloud Foundry Environment nel tuo subaccount e seleziona Enable Cloud Foundry
+
+Viene visualizzata una finestra di dialogo di configurazione. Qui puoi impostare parametri come i nomi dell’istanza e dell’organization, oltre ai service plan. Dopo la personalizzazione, scegli Create per attivare l’ambiente. Questo processo di solito si completa in pochi secondi.
+
+Dopo l’attivazione riuscita, lo stato dell’ambiente e i dettagli come l’endpoint API e il nome dell’organization verranno visualizzati nella sezione Cloud Foundry Environment.
+Per passaggi guidati, valuta l’utilizzo del SAP BTP Booster Prepare an Account for Development, che fornisce step interattivi per configurare un subaccount e abilitare Cloud Foundry.
+
+Provisioning e gestione del servizio SAP BTP, runtime Cloud Foundry
+
+Mentre il passaggio precedente stabilisce l’infrastruttura tecnica di base, questo passaggio si concentra sull’allocazione delle risorse computazionali necessarie (memoria runtime) all’interno dell’ambiente SAP BTP, runtime Cloud Foundry. Gli entitlement e le quote per SAP BTP, runtime Cloud Foundry, sono configurati direttamente a livello di subaccount. In particolare, alla Cloud Foundry organization all’interno del subaccount viene assegnato un resource quota plan che definisce le risorse computazionali disponibili, come memoria, spazio disco e service instances. Queste quote vengono poi riflesse nell’ambiente Cloud Foundry, garantendo che i subaccount abbiano la potenza di calcolo e la memoria necessarie per eseguire efficacemente le applicazioni. Gestendo gli entitlement in questo modo, gli amministratori possono controllare e distribuire le risorse tra più applicazioni all’interno dell’organization, garantendo un uso efficiente della capacità computazionale della piattaforma.
+Comprendere entitlement e quote
+
+Gli entitlement sono i diritti di provisioning e consumo di specifici servizi SAP BTP, come SAP BTP, runtime Cloud Foundry.
+Le quote sono i limiti numerici sul consumo di un service plan all’interno di un global account e dei relativi subaccount.
+Gli entitlement sono gestiti a livello di global account, dove i service plan e le relative quote consentite vengono distribuiti ai subaccount. Queste risorse vengono poi consumate dai subaccount. Quando i subaccount rilasciano quote inutilizzate, queste diventano nuovamente disponibili per essere riallocate a livello di global account. Per maggiori informazioni, consulta Managing Entitlements and Quotas using the Cockpit.
+Assegnazione delle risorse
+
+Per assegnare entitlement e quote per SAP BTP Cloud Foundry runtime al tuo subaccount, segui le istruzioni step-by-step riportate nella guida Initial Setup of SAP BTP, Cloud Foundry Runtime.
+Riepilogo
+
+In questa lesson hai scoperto i passaggi essenziali per configurare SAP BTP, runtime Cloud Foundry, utilizzando il SAP BTP cockpit. Ora dovresti essere in grado di spiegare il processo di creazione dell’account, la configurazione del subaccount, l’attivazione di Cloud Foundry e la gestione delle risorse tramite entitlement e quote.
+Tutorial
+
+Get an Account on SAP BTP Trial
+In questo tutorial, effettuerai la registrazione per un trial account su SAP BTP.
+Esegui i passaggi che trovi qui.
+Get an Account on SAP BTP to Try Out Free Tier Service Plan
+In questo tutorial, effettuerai la registrazione per un account produttivo su SAP Business Technology Platform e proverai i servizi SAP con free tier service plans.
+Esegui i passaggi che trovi qui.
+
+Interacting with the SAP BTP, Cloud Foundry Runtime via the CF CLI
+La Cloud Foundry Command Line Interface (CLI)
+
+La CF CLI ti consente di lavorare con il Cloud Foundry Runtime per distribuire e gestire le tue applicazioni. Per gestire il Cloud Foundry Runtime, puoi usare sia il cockpit SAP BTP sia la CF CLI. Molte azioni possono essere eseguite solo utilizzando la CF CLI, per esempio rinominare una Cloud Foundry org. La CF CLI è quindi uno strumento essenziale per gli sviluppatori SAP BTP, poiché è molto comoda per gestire le tue istanze Cloud Foundry, applicazioni e servizi. L’obiettivo di questa lesson non è fornirti una panoramica completa della CF CLI, ma darti un punto di partenza per iniziare a usarla. La documentazione ufficiale di Cloud Foundry fornisce una guida completa alla CF CLI, che puoi trovare qui.
+Per installare la CLI, puoi scaricare l’ultima release dalla pagina ufficiale delle release, oppure usare https://tools.hana.ondemand.com/#cloud.
+Per gestire SAP BTP, runtime Cloud Foundry, devi fornire alla CF CLI un endpoint API. L’endpoint API dipende dalla regione e dal data center che hai scelto per il tuo subaccount.
+Per esempio (regioni AWS):
+Per EU: https://api.cf.eu10.hana.ondemand.com
+Per US EAST: https://api.cf.us10.hana.ondemand.com
+Per US CENTRAL: https://api.cf.us20.hana.ondemand.com
+Nota
+Puoi trovare il tuo endpoint API specifico della tua Cloud Foundry organization nella pagina di panoramica del tuo subaccount SAP BTP. Fai sempre riferimento a quello, e non agli esempi precedenti mostrati qui.
+
+
+Comandi di esempio
+Ecco alcuni comandi di esempio per iniziare a usare la CF CLI:
+cf api <your-api-endpoint>
+cf login
+
+Il comando cf api imposta l’endpoint API per la CF CLI, mentre il comando cf login esegue l’accesso alla CF CLI usando le tue credenziali SAP BTP.
+Puoi anche effettuare l’accesso usando il single sign-on (SSO) eseguendo: cf login -sso.
+Questo comando aprirà una finestra del browser in cui potrai autenticarti con le tue credenziali SAP BTP e ottenere un token di accesso per la CF CLI.
+Per stampare il palette dei comandi disponibili, puoi usare: cf help -a.
+Se vuoi conoscere l’utilizzo di un comando specifico, per esempio rename-org per rinominare un’org, inserisci il seguente comando: cf help rename-org.
+Plugin della CF CLI
+
+La CF CLI può essere estesa tramite plugin. La pagina CF CLI: Plugins nella documentazione offre un elenco dei plugin SAP disponibili che sono stati implementati come plugin per estendere il client base della CF CLI.
+Puoi trovare esempi di un plugin CF CLI per eseguire operazioni su multitarget applications (MTA) in Cloud Foundry, come deployment, rimozione, visualizzazione e così via: MTA-Plug-in for Cloud Application Programming.
+Riepilogo
+
+Con la CF CLI puoi gestire la tua istanza Cloud Foundry, gestire il ciclo di vita delle tue applicazioni, sottoscrivere servizi e collegarli alle tue applicazioni, e molto altro. La CF CLI è uno strumento potente che ti consente di interagire con SAP BTP, runtime Cloud Foundry, in modo flessibile ed efficiente.
+Tutorial
+
+Install the Cloud Foundry Command Line Interface (CLI)
+Consulta il seguente tutorial: Install the Cloud Foundry Command Line Interface (CLI).
+Install the MultiApps Cloud Foundry CLI Plugin
+Consulta il seguente tutorial: Install the MultiApps Cloud Foundry CLI Plugin.
+
+Designing and Running your Application in SAP BTP, Cloud Foundry Runtime
+
+Introduzione
+
+La tua azienda ha deciso di modernizzare il proprio processo di sviluppo applicativo passando a soluzioni cloud-native. Come parte di questa iniziativa, ti è stato assegnato il compito di comprendere l’ecosistema di sviluppo all’interno della SAP Business Technology Platform (BTP), con un focus specifico sul runtime Cloud Foundry. Questa conoscenza ti permetterà di prendere decisioni informate sull’architettura delle applicazioni e sulle metodologie di sviluppo in un ambiente cloud-native.
+Panoramica
+
+Il runtime Cloud Foundry di SAP BTP offre una solida soluzione platform-as-a-service (PaaS) pensata per lo sviluppo e l’orchestrazione di applicazioni cloud-native. Sfruttando standard aperti, gli sviluppatori possono creare, distribuire e scalare applicazioni in modo efficiente in un ambiente polyglot.
+Panoramica delle opzioni di sviluppo
+
+Il runtime Cloud Foundry fornisce agli sviluppatori flessibilità nella scelta del proprio percorso di sviluppo. Che si utilizzi l’approccio raccomandato da SAP basato sul SAP Cloud Application Programming Model (CAP) oppure si opti per soluzioni personalizzate, gli sviluppatori possono scegliere tra una gamma di linguaggi di programmazione e strumenti di sviluppo.
+Scegli il tuo percorso
+
+Nella natura polyglot del runtime Cloud Foundry, gli sviluppatori non sono limitati a linguaggi di programmazione o strumenti specifici. Hanno la flessibilità di scegliere i propri strumenti preferiti per sviluppo e deployment. I tre linguaggi supportati da SAP sono Java, Node.js e Python. Tuttavia, sono disponibili buildpack per molti altri linguaggi di programmazione, inclusi Golang, ASP.NET, PHP e altri. Scegli i buildpack appropriati in base ai requisiti della tua applicazione.
+Trova ulteriori informazioni sui tre linguaggi supportati da SAP utilizzando i seguenti link:
+Sviluppare Java nel runtime Cloud Foundry
+Sviluppare Node.js nel runtime Cloud Foundry
+Sviluppare Python nel runtime Cloud Foundry
+Nota
+Java, Node.js e Python hanno supporto enterprise da parte di SAP. Tieni presente che eventuali problemi con buildpack non supportati devono essere risolti autonomamente. Devi inoltre assicurarti che sia il provider sia il buildpack siano affidabili.
+Il percorso raccomandato
+
+SAP raccomanda di seguire un approccio di sviluppo strutturato basato sul SAP Cloud Application Programming Model (CAP). Utilizzando Java e Node.js, gli sviluppatori possono beneficiare di un ampio supporto di tooling e di best practice pensate per lo sviluppo di applicazioni cloud-native. Tuttavia, l’ordine delle fasi di sviluppo è flessibile, consentendo l’adattamento a casi d’uso specifici.
+Sviluppo di applicazioni multitenant nel runtime Cloud Foundry
+
+Nel runtime Cloud Foundry di SAP BTP, puoi sviluppare ed eseguire applicazioni multitenant accessibili da più consumer tramite un URL dedicato.
+Qual è il modello di multitenancy raccomandato?
+
+La multitenancy consente ai provider di applicazioni di possedere, distribuire e gestire applicazioni tenant-aware per più consumer, riducendo i costi grazie alla condivisione delle risorse e all’aggiornamento delle applicazioni in un unico passaggio. In Cloud Foundry, il concetto di multitenancy favorito sfrutta il fatto che ogni consumer accede all’applicazione tramite un URL dedicato, garantendo separazione dei dati e sicurezza. Puoi trovare informazioni dettagliate su Multitenancy, Roles e su come funziona nella documentazione SAP qui.
+Linee guida di sviluppo
+
+Quando sviluppi applicazioni tenant-aware, segui queste linee guida:
+Evita dati condivisi in memoria (ad esempio, campi statici Java).
+Impedisci agli utenti di eseguire codice personalizzato o di accedere al file system.
+Implementa Subscription callbacks per l’onboarding dei tenant con il servizio SAP SaaS Provisioning (saas-registry).
+Procedura
+
+Puoi trovare procedure di implementazione dettagliate nella documentazione SAP qui.
+Informazioni correlate
+Applicazioni SaaS multitenant su SAP BTP usando CAP? Collaudate e affidabili!
+Sviluppare applicazioni multitenant nel runtime CF [SAP Help Portal]
+Applicazioni multitarget nel runtime Cloud Foundry
+
+Una multitarget application (MTA) è essenzialmente una singola applicazione composta da più parti. Queste parti sono create usando varie tecnologie e condividono lo stesso ciclo di vita.
+Gli sviluppatori MTA definiscono i risultati attesi usando il modello MTA. Questo modello è costituito da moduli MTA, risorse MTA e dalle interdipendenze tra essi. Successivamente, il servizio SAP Cloud Deployment lo valida, orchestra le azioni necessarie e automatizza il deployment dell’MTA. Il risultato è la creazione di applicazioni Cloud Foundry, servizi e la generazione di contenuti specifici SAP. Il runtime Cloud Foundry di SAP BTP è progettato specificamente per supportare il deployment di tali applicazioni. Per maggiori informazioni sul modello Multitarget Application, consulta i documenti ufficiali di specifica: The Multitarget Application Model v.2 e The Multitarget Application Model v.3.
+Nota
+Nota che MTA non è correlato a Cloud Foundry. È un concetto sconosciuto in Cloud Foundry ed è stato creato separatamente da SAP. Questo è il motivo per cui i clienti non trovano il comando "cf deploy" nella CF CLI. Per usare "cf deploy", devi installare un apposito plugin della CF CLI.
+Concetti chiave e terminologia
+
+Descrittore MTA (mta.yaml)
+Un file YAML che elenca tutti i componenti dell’MTA, come moduli, risorse, proprietà e le loro interdipendenze. Questo file è centrale per definire come l’MTA è strutturata e distribuita. Un esempio di descrittore MTA è fornito qui
+Modulo
+Ogni parte autonoma di un’MTA, come un modulo Java o HTML5, che rappresenta diversi tier o componenti dell’applicazione.
+Risorsa
+Servizi esterni o proprietà richiesti da un modulo a runtime, che non fanno parte del modulo stesso.
+Proprietà
+Coppie chiave-valore usate durante il deployment o a runtime per configurare moduli o risorse.
+Dipendenza
+Collegamenti tra moduli e risorse, fondamentali per risolvere le dipendenze a runtime e in fase di deployment.
+Diversi approcci per creare una multitarget application
+
+Puoi creare e distribuire una multitarget application nel runtime Cloud Foundry selezionando uno dei vari approcci descritti di seguito, ciascuno in grado di ottenere lo stesso risultato:
+Usando SAP Web IDE Full-Stack come descritto in Developing Multitarget Applications – sia il descrittore di sviluppo mta.yaml sia il descrittore di deployment mtad.yaml vengono creati automaticamente. Il file mta.yaml viene generato quando crei il progetto applicativo, e il file mtad.yaml viene creato quando esegui la build del progetto.
+Nota
+Potrebbe essere necessario modificare il descrittore di sviluppo.
+I descrittori di sviluppo vengono usati per generare i descrittori di deployment MTA, che definiscono i dati di deployment richiesti. Vale a dire: i dati del descrittore di sviluppo MTA specificano cosa vuoi costruire e come costruirlo, mentre i dati del descrittore di deployment specificano come e sotto quale forma effettuare il deployment.
+Usando SAP Business Application Studio – il flusso è simile a WebIDE ma lo sviluppo viene eseguito da SAP Business Application Studio, come descritto qui.
+Usando il Cloud MTA Build Tool. Successivamente, distribuisci l’MTA usando la Cloud Foundry Command Line Interface.
+Nota
+È richiesto un descrittore di sviluppo MTA mta.yaml. Devi crearlo manualmente.
+Manuale – Crea manualmente i file richiesti e distribuiscili usando la Cloud Foundry Command Line Interface.
+Nota
+Un descrittore di sviluppo MTA mta.yaml non è esplicitamente richiesto. In questo caso, viene invece mantenuto un descrittore di deployment.
+Crea i file richiesti usando un IDE di tua scelta.
+Per produrre i tuoi artifact personalizzati, usa una tecnologia di build di tua scelta.
+Mantieni il tuo documento descrittore di deployment (mtad.yaml).
+(Opzionale) Se vuoi avere un pacchetto archivio MTA, usa mbt assemble. In caso contrario, distribuisci direttamente il mtad.yaml effettuando il push dei file singolarmente.
+In caso contrario, distribuisci direttamente il mtad.yaml effettuando il push dei file singolarmente.
+Best practice per sviluppare applicazioni moderne per SAP BTP, runtime Cloud Foundry
+Evita di scrivere sul file system locale
+
+Cloud Foundry supporta solo applicazioni cloud native. I principi migliori per costruire applicazioni cloud native sono descritti nella metodologia 12 Factor App. Si incoraggiano gli sviluppatori a consultare questi principi come guida per sviluppare applicazioni robuste e scalabili nel runtime Cloud Foundry.
+Le app in esecuzione su Cloud Foundry devono evitare di scrivere file sul file system locale a causa della sua natura temporanea, non persistente e della mancanza di condivisione dei file tra istanze. Utilizza invece servizi di storage cloud come SAP HANA Cloud, o altri database relazionali, oppure soluzioni hyperscaler per l’archiviazione persistente dei dati.
+Nota
+Considera che tutti i principali browser si stanno allontanando dall’uso dei cookie e, di conseguenza, negli ultimi anni ne hanno limitato la funzionalità. Pertanto, potrebbe essere rischioso utilizzare qui i cookie.
+Cookie accessibili tra app
+
+In ambienti con domini condivisi, i cookie possono essere accessibili tra diverse app. Gli sviluppatori devono decidere se impostare i cookie al dominio più alto disponibile per garantire un comportamento coerente tra le applicazioni.
+Considerazioni sulle porte
+
+I client si connettono alle app Cloud Foundry tramite URL associati all’app. Le richieste HTTP sono consentite sulle porte 80 e 443, con supporto per connessioni WebSocket.
+Alta disponibilità
+
+Per evitare indisponibilità temporanee, devi eseguire più istanze dell’app. Cloud Foundry usa un processo chiamato evacuation per rilocalizzare le istanze delle app, cosa che avviene frequentemente ed è una comune operazione interna di sistema.
+Ricrea le istanze su un’altra virtual machine (VM) e poi arresta quelle vecchie. Le istanze singleton dell’app potrebbero essere temporaneamente indisponibili se la nuova istanza non diventa healthy entro il timeout di evacuation (il valore predefinito è 12 minuti). Inoltre, per un breve periodo, il tuo singleton potrebbe avere due istanze, il che può portare a problemi se non gestito correttamente.
+Per ridurre al minimo il downtime, è essenziale eseguire più istanze della tua app. Seleziona qui per trovare maggiori informazioni su: High availability at platform and application level e The application container life cycle on the Diego architecture.
+
+Ignora i file non necessari durante il push
+
+Per impostazione predefinita, tutti i file nella directory di progetto di un’app vengono caricati su Cloud Foundry durante il deployment. Escludi i file non necessari usando un file .cfignore per migliorare l’efficienza del deployment.
+Timeout delle applicazioni: considerazioni chiave
+
+In SAP BTP, Cloud Foundry, la tua app deve rispettare limiti di tempo rigorosi:
+Upload: deve completarsi entro 15 minuti.
+Staging: deve terminare entro 15 minuti.
+Start: l’app deve avviarsi entro 60 minuti (configurabile).
+Timeout critico di shutdown
+
+Quando un’app riceve un segnale di arresto (SIGTERM), ha 60 secondi per chiudersi correttamente prima di essere terminata forzatamente da SIGKILL. La mancata chiusura corretta può causare corruzione dei dati o altri problemi, soprattutto con la persistenza. È fondamentale assicurarsi che la tua app sia in grado di gestire questa situazione entro la finestra di 60 secondi.
+App Autoscaler
+
+Configura il servizio App Autoscaler del runtime Cloud Foundry di SAP BTP, che ti consente di aumentare o diminuire automaticamente il numero di istanze della tua applicazione in base alle policy che hai definito. Il servizio regolerà quindi automaticamente il numero di istanze dell’app in base al carico corrente, garantendo applicazioni più resilienti e scalabili.
+Cloud Logging e Application Logging
+
+Utilizza le funzionalità di logging di SAP BTP per una migliore osservabilità. Usa servizi di logging centralizzati come Cloud Logging e Application Logging per monitorare e analizzare le performance e il comportamento dell’app.
+Alert Notification Service
+
+Configura il servizio Alert Notification Service del runtime Cloud Foundry di SAP BTP per ricevere notifiche in tempo reale sugli eventi critici, migliorando la capacità di rispondere rapidamente ai problemi.
+Riepilogo
+
+In questa lezione hai esplorato gli aspetti chiave dello sviluppo di applicazioni nel runtime Cloud Foundry di SAP BTP. Hai appreso i percorsi di sviluppo flessibili, incluso l’uso del Cloud Application Programming Model (CAP) e le opzioni tra Java, Node.js e Python, supportati da SAP. La lezione ha inoltre approfondito lo sviluppo di applicazioni multitenant e il modello di multitarget application. Inoltre, ha discusso strategie di migrazione e best practice per lo sviluppo cloud-native. Questa conoscenza ti aiuterà a progettare e sviluppare in modo efficace applicazioni cloud-native.
+Ulteriori letture
+Documentazione del Cloud MTA Build Tool
+Migrazione dal runtime Neo alla Multi-Cloud Foundation per SAP BTP (Cloud Foundry e Kyma)
+
+Performing the Deployment Process in SAP BTP, Cloud Foundry Runtime
+
+Il processo di deployment in SAP BTP, Cloud Foundry Runtime
+Con la crescita della tua organizzazione e l’aumento della domanda per la sua applicazione di punta, la necessità di processi di deployment efficienti e fluidi diventa critica. Sfruttando SAP BTP, Cloud Foundry runtime, punti a utilizzare una varietà di strumenti e strategie di deployment per semplificare gli aggiornamenti e gestire le applicazioni in modo più efficace.
+Il processo di deployment
+SAP BTP, Cloud Foundry runtime incarna la semplicità nella sua filosofia di progettazione, semplificando il processo di deployment trasformando il tuo codice locale in applicazioni attive ospitate in container isolati. Questa automazione viene ottenuta tramite buildpack che configurano automaticamente il runtime e le dipendenze necessarie, riducendo i passaggi dal codice al deployment a un singolo comando: cf push. Questo non solo minimizza lo sforzo manuale, ma abbrevia rapidamente il ciclo di sviluppo, permettendoti di concentrarti maggiormente sullo sviluppo e meno sulla logistica operativa, facilitando il passaggio dallo sviluppo alla produzione.
+Panoramica del processo di deployment
+Utilizzando il noto comando cf push, puoi distribuire la tua applicazione con una configurazione minima. Questo include:
+Upload del sorgente: il codice sorgente e le configurazioni della tua applicazione vengono caricati su SAP BTP, Cloud Foundry runtime.
+Selezione del buildpack: SAP BTP, Cloud Foundry runtime seleziona (automaticamente o in base alla tua scelta) un buildpack adatto al tipo di applicazione (ad esempio Node.js, Python).
+Nota
+In alternativa, se la tua applicazione richiede personalizzazioni specifiche non supportate dai buildpack, puoi distribuirla utilizzando un’immagine Container. Maggiori dettagli sono spiegati più avanti in questa lezione.
+Staging: l’applicazione viene compilata o costruita. SAP BTP, Cloud Foundry runtime esegue il buildpack scelto, che elabora il codice sorgente dell’applicazione per creare un artefatto eseguibile noto come droplet, includendo il codice applicativo, il runtime, le librerie e qualsiasi altra dipendenza.
+Nota
+Qui, il Droplet, a differenza delle comuni immagini container, non include il sistema operativo di base.
+Startup: SAP BTP, Cloud Foundry runtime alloca risorse, ad esempio memoria e disco, e avvia l’applicazione combinando il droplet con un sistema operativo di base noto come stack, in un container.
+Gestione post-deployment
+Dopo il deployment, SAP BTP, Cloud Foundry runtime gestisce il funzionamento continuo dell’applicazione:
+Routing: viene assegnato automaticamente un URL in base al nome della tua applicazione e al dominio, con opzioni per specificare route personalizzate. Il router di Cloud Foundry indirizza in modo efficiente il traffico verso il tuo container.
+Lifecycle management: vengono eseguiti regolarmente controlli di integrità e l’applicazione viene riavviata automaticamente se va in crash o non risponde all’health check per qualsiasi motivo.
+Aggiornamenti del sistema operativo: le istanze dell’app vengono riavviate regolarmente con lo stesso droplet ma con uno stack aggiornato, garantendo che le applicazioni ricevano automaticamente gli aggiornamenti del sistema operativo senza ulteriori azioni. Questo vale solo per gli aggiornamenti del sistema operativo. Per ricevere aggiornamenti dei buildpack o delle librerie utilizzate, un’applicazione deve essere sottoposta a restaging, così da ricostruire il droplet e includere gli asset aggiornati forniti o installati dai buildpack.
+
+Opzioni di deployment in SAP BTP, Cloud Foundry Runtime
+In SAP, puoi utilizzare la Command Line Interface (CLI) fornita dalla community di Cloud Foundry oppure SAP BTP cockpit, la nostra interfaccia utente di amministrazione basata sul web, per distribuire un’applicazione.
+    1. Cloud Foundry CLI
+Panoramica
+La Cloud Foundry CLI è uno strumento molto popolare tra gli sviluppatori grazie alla sua semplicità, al controllo che offre e ai meccanismi di feedback diretto.
+Il comando cf push è il tuo punto di accesso per distribuire applicazioni. Hai due approcci principali:
+Push con impostazioni di default: lasci che SAP BTP, Cloud Foundry runtime gestisca automaticamente la configurazione.
+Push con impostazioni personalizzate: specifichi configurazioni come route, variabili d’ambiente, service binding e così via, tramite flag da riga di comando oppure mediante un file manifest.yml.
+Processo di deployment
+Step 1: accedi al tuo SAP BTP, Cloud Foundry Runtime
+Apri il terminale ed esegui l’accesso al tuo SAP BTP, Cloud Foundry runtime, utilizzando la CF CLI: cf login -a API_ENDPOINT
+Sostituisci API_ENDPOINT con l’endpoint API del tuo ambiente Cloud Foundry, che può essere trovato nel SAP BTP cockpit del tuo subaccount.
+
+Poi, inserisci le tue credenziali quando richiesto.
+Step 2: imposta l’Org e lo Space corretti
+Dopo aver effettuato l’accesso, configura l’organizzazione e lo space di destinazione: cf target -o YOUR_ORG -s YOUR_SPACE. Sostituisci YOUR_ORG e YOUR_SPACE con i nomi appropriati.
+Step 3: distribuisci l’applicazione
+Vai nella directory della tua applicazione che contiene il file manifest.yml (se sono richieste impostazioni personalizzate), quindi esegui: cf push
+In alternativa, puoi distribuire con impostazioni personalizzate usando flag da riga di comando quando ti trovi nella directory dell’applicazione. Per esempio, esegui il seguente comando per distribuire un’app chiamata myapp con due istanze, allocando 512 MB di memoria per ciascuna, e una route personalizzata myapp-custom-host.mydomain.com: cf push myapp -i 2 -m 512M -n myapp-custom-host -d mydomain.com
+Step 4: verifica il deployment
+Dopo il deployment, controlla lo stato della tua applicazione: cf app YOUR_APP_NAME. Sostituisci YOUR_APP_NAME con il nome della tua applicazione. Questo fornisce dettagli sulle istanze in esecuzione, URL, utilizzo di memoria e altro.
+Casi d’uso
+Ideale per sviluppo rapido, testing e automazione, in particolare per applicazioni semplici e lineari composte da un solo componente.
+Documentazione
+Pubblicazione della tua app con Cloud Foundry CLI (cf push)
+Deployment con app manifest
+Riferimento degli attributi dell’app manifest
+
+SAP BTP Cockpit
+Panoramica
+Il SAP BTP cockpit offre un’interfaccia grafica intuitiva per la gestione e il deployment delle applicazioni.
+Processo di deployment
+Step 1: accedi a SAP BTP Cockpit
+Accedi al tuo account SAP BTP e vai al subaccount Cloud Foundry in cui vuoi distribuire la tua applicazione.
+Step 2: carica la tua applicazione
+Vai alla pagina Applications nel SAP BTP cockpit.
+Seleziona Deploy Application.
+
+Viene visualizzato un wizard denominato Deploy Application, che ti invita a caricare il tuo codice sorgente.
+
+Scegli il percorso del file che contiene la tua applicazione. Seleziona il file che contiene la tua applicazione. Può trattarsi di un binario compilato come un file JAR o WAR oppure di un archivio del codice sorgente.
+(Opzionale) file manifest.yml: se vuoi utilizzare un file manifest.yml per specificare gli attributi dell’applicazione, seleziona il percorso di questo file.
+(Opzionale) Se non vuoi utilizzare un file manifest.yml, deseleziona la casella Use Manifest e inserisci manualmente i dettagli dell’applicazione, ad esempio nome applicazione, route e così via.
+Step 3: distribuisci l’applicazione
+Scegli Deploy per avviare il processo di deployment. A quel punto, la piattaforma gestirà la build e il deployment dell’applicazione nello space designato.
+Il SAP BTP cockpit mostrerà l’avanzamento e lo stato del deployment nell’elenco delle applicazioni. Una volta che l’applicazione si avvia senza problemi, il suo stato diventerà verde.
+
+Casi d’uso
+Adatto agli utenti che preferiscono un approccio visuale alla gestione delle applicazioni.
+Ottimale per deployment rapidi di applicazioni non complesse.
+Tutorial e documentazione
+Distribuire un’applicazione
+Tutorial: distribuire un’applicazione su SAP BTP, Cloud Foundry runtime
+Strategie avanzate di deployment in SAP BTP, Cloud Foundry Runtime
+Guarda il seguente video per scoprire le strategie avanzate di deployment.
+
+Multitarget Application (MTA)
+Panoramica
+Le MTA facilitano il deployment di applicazioni complesse che coinvolgono più componenti su varie tecnologie nel SAP BTP, Cloud Foundry runtime. Puoi scegliere tra diversi metodi in base al tuo ambiente di sviluppo e alle tue preferenze sugli strumenti.
+Opzioni di deployment MTA
+Prerequisito: accesso a un account SAP BTP con Cloud Foundry runtime abilitato.
+Tutti questi metodi hanno come obiettivo finale il packaging della tua MTA in un formato distribuibile (file .mtar) e la sua installazione su SAP BTP, Cloud Foundry runtime. Tutti richiedono il file descrittore (mta.yaml), che specifica tutti i dettagli necessari sui componenti dell’applicazione, sulle loro dipendenze e sui servizi richiesti.
+Deployment guidato con Business Application Studio (BAS) o SAP Web IDE Full-Stack: deployment automatizzato direttamente dall’ambiente di sviluppo. Per maggiori informazioni, consulta:
+Developing MTAs in BAS
+Developing MTAs in SAP Web IDE Full-Stack
+Deployment flessibile con Cloud MTA Build Tool (MBT): uno strumento da riga di comando che esegue build e deployment in base alla tua configurazione, facilmente integrabile in qualsiasi IDE o pipeline CI/CD. Consulta la seguente documentazione per ulteriore supporto:
+Developing MTAs with MBT
+Deployment personalizzato con configurazione manuale: lavoro diretto con la Cloud Foundry CLI e creazione manuale di tutti gli artifact necessari al deployment per ottenere la massima flessibilità e un controllo granulare sul processo di deployment. Ecco alcune documentazioni utili per guidarti in questa opzione:
+MTA Commands for the Cloud Foundry
+Scegliere il proprio percorso
+La scelta del giusto metodo di deployment dipende dalle tue circostanze specifiche:
+
+Casi d’uso
+Applicazioni enterprise su larga scala con più componenti integrati.
+Architetture a microservizi che richiedono un’interazione fluida.
+Tutorial e documentazione
+Multitarget Applications nell’ambiente Cloud Foundry
+Tutorial: deployment in SAP BTP, Cloud Foundry runtime usando MBT
+Tutorial: deployment della tua prima MTA usando il Multitarget CF CLI Plugin (configurazione manuale)
+Deployment di immagini Container
+Panoramica
+Le immagini container racchiudono l’intero ambiente di runtime della tua applicazione, incluso il sistema operativo, le librerie e le dipendenze. Il deployment di applicazioni tramite immagini Container nel Cloud Foundry runtime all’interno di SAP BTP offre un controllo granulare sull’ambiente di runtime rispetto ai buildpack, permettendoti di adattare le configurazioni ai requisiti specifici della tua applicazione. D’altra parte, questo approccio richiede che tu ti assuma la piena responsabilità della gestione dell’immagine Docker, ad esempio applicando patch di sicurezza, aggiornando le dipendenze e così via.
+Processo di deployment
+Prerequisito: accesso a un account SAP BTP con Cloud Foundry runtime abilitato.
+Usa il comando cf push con il parametro --docker-image per distribuire la tua applicazione basata su Docker. Per esempio:
+cf push --docker-image /:
+Sostituisci con il nome desiderato per l’applicazione, e /: con il percorso e il tag della tua immagine Docker nel registry.
+Casi d’uso
+Applicazioni che richiedono ambienti specifici non supportati dai buildpack standard.
+Documentazione
+Deploy Docker Images nell’ambiente Cloud Foundry
+Continuous Integration and Delivery
+Panoramica
+La continuous integration e la continuous delivery costituiscono una metodologia fondamentale per automatizzare i processi di sviluppo e deployment del software, garantendo una pipeline di rilascio sistematica e con errori ridotti al minimo.
+Continuous integration (CI): questa pratica prevede che gli sviluppatori integrino frequentemente le modifiche del proprio codice nel branch principale di un repository condiviso. Ogni integrazione attiva build e test automatici, aiutando a rilevare gli errori in anticipo e a mantenere alta la qualità del codice. Garantisce che il branch principale sia sempre in uno stato distribuibile.
+Continuous delivery (CD): estendendo la CI, la Continuous Delivery automatizza il processo di rilascio in modo che il software possa essere distribuito in qualsiasi momento premendo un pulsante. In genere prevede una fase di test automatizzati che verifica se le modifiche possono essere rilasciate in produzione, seguita da un processo di rilascio automatico o manuale.
+SAP fornisce due soluzioni principali per implementare CI/CD su SAP BTP, Cloud Foundry runtime:
+SAP Continuous Integration and Delivery (CI/CD): un servizio gestito che facilita una configurazione semplice e l’esecuzione di pipeline CI/CD predefinite, ideale per processi di deployment standard. Per maggiori informazioni, fai riferimento all’Help Portal di SAP Continuous Integration and Delivery.
+Project "Piper": un’iniziativa open source che offre pipeline Jenkins personalizzabili e immagini Docker, adatta a workflow complessi che richiedono configurazioni specifiche. Consulta la documentazione ufficiale di Project Piper per ulteriore supporto.
+Processo di deployment
+Prerequisito: accesso a un account SAP BTP con Cloud Foundry runtime abilitato.
+Step 1: integrazione del codice
+Gli sviluppatori inviano le modifiche a un sistema versionato come Git, che poi vengono integrate automaticamente nella linea principale tramite un server CI.
+Step 2: test automatizzati
+Ogni integrazione attiva una suite di test automatizzati che comprende test unitari, di integrazione e, talvolta, test di accettazione, per garantire funzionalità e prestazioni.
+Step 3: staging di preproduzione
+Le build che hanno avuto successo vengono distribuite in un ambiente di staging che replica la produzione, per testare il comportamento reale e le prestazioni sotto carico.
+Step 4: deployment in produzione
+Dopo il successo dei test in staging e l’approvazione finale, le modifiche vengono distribuite in produzione. Questo passaggio può essere automatizzato oppure richiedere un intervento manuale, a seconda delle policy di deployment dell’organizzazione.
+Casi d’uso
+Efficace per applicazioni enterprise su larga scala che richiedono architetture robuste con aggiornamenti frequenti e più sviluppatori.
+Utile in ambienti regolamentati dove sono richieste tracciabilità e audit trail delle modifiche.
+Tutorial
+Tutorial: configurare una pipeline CI/CD per SAP BTP, Cloud Foundry runtime
+Tutorial: configurare ed eseguire una pipeline predefinita SAP Continuous Integration and Delivery (CI/CD)
+Riepilogo
+Questa lezione ha fornito un’esplorazione completa del deployment delle applicazioni in SAP BTP Cloud Foundry runtime, evidenziando la versatilità della CF CLI e del SAP BTP cockpit. Ha approfondito strategie avanzate di deployment, incluse le multitarget applications, le pipeline di Continuous Integration/Continuous Delivery e le immagini Docker, che facilitano la gestione e il deployment di applicazioni complesse. Padroneggiando questi strumenti e queste tecniche, puoi ottimizzare i processi di deployment, assicurandoti di riuscire a stare al passo con le crescenti esigenze operative.
+
+Exploring Routing and Networking in SAP BTP, Cloud Foundry Runtime
+
+Instradamento e networking nel runtime Cloud Foundry
+La tua azienda sta passando a un’architettura a microservizi su SAP BTP, runtime Cloud Foundry. Come sviluppatore o amministratore di sistema, devi capire come Cloud Foundry gestisce l’instradamento e il networking delle applicazioni per garantire una comunicazione fluida tra microservizi e client esterni. Questa lezione ti guiderà attraverso i fondamenti dell’instradamento, delle route personalizzate e della comunicazione tra microservizi in SAP BTP, runtime Cloud Foundry.
+Fondamenti di routing in Cloud Foundry
+Il routing in Cloud Foundry è il processo di indirizzamento del traffico HTTP/S in ingresso verso la corretta istanza applicativa. Costituisce la base della comunicazione tra applicazioni e utenti, garantendo una distribuzione fluida di contenuti web e servizi.
+Route e mapping dei domini
+Le route in Cloud Foundry sono essenzialmente URL che permettono agli utenti finali di raggiungere le tue applicazioni. Mappano i nomi di dominio a specifiche applicazioni. Una route HTTP include un dominio, un nome host (o sottodominio) e un percorso opzionale.
+Esistono diversi modi per mappare le route alle tue applicazioni in Cloud Foundry:
+Puoi mappare una route a un’app con il comando cf push. A partire dalla cf CLI v7, il modo migliore per farlo è usare la proprietà routes nel manifest.
+Puoi usare il flag --random-route con cf push oppure usare random-route: true nel manifest per creare una route casuale per l’app.
+Puoi creare e mappare manualmente le route a un’applicazione esistente tramite i comandi create-route e map-route con la CF CLI, oppure nel cockpit BTP. Se la route non esiste, il comando map-route la creerà e la mapperà all’applicazione. Quando si mappa una route esistente a un’applicazione, route e applicazione devono trovarsi nello stesso CF Space.
+In SAP BTP è anche possibile mappare una singola route a più applicazioni, così come più route a una singola applicazione. Questa funzionalità può essere particolarmente utile in scenari in cui vuoi distribuire il traffico tra diverse istanze di un’applicazione oppure quando vuoi esporre funzionalità diverse di una singola applicazione sotto route differenti. Per ulteriori informazioni, vedi Configuring routes and domains.
+Bilanciamento del carico e distribuzione del traffico
+Per impostazione predefinita, il Routing Layer di SAP BTP Cloud Foundry usa un algoritmo round-robin per il bilanciamento del carico delle richieste tra le istanze applicative. Questo significa che ogni richiesta in ingresso viene inviata alla successiva istanza applicativa nell’elenco, tornando alla prima istanza dopo aver raggiunto l’ultima. Questo approccio distribuisce uniformemente il traffico tra più istanze, prevenendo il sovraccarico e massimizzando l’utilizzo delle risorse. Questo garantisce prestazioni applicative costantemente elevate e un’esperienza utente fluida ed efficiente. Per ulteriori informazioni, vedi anche Router balancing algorithm.
+Altri algoritmi di load balancing, come least-connections first, e altre funzionalità, sono configurabili per singola route tramite opzioni personalizzate per route che influenzano il comportamento del routing layer per una singola route.
+Cloud Foundry supporta anche la session affinity, nota anche come sticky sessions, che consente di indirizzare tutte le richieste di uno specifico client verso la stessa istanza applicativa. Questo è utile per le applicazioni che richiedono il mantenimento dello stato tra le richieste. Tuttavia, la session affinity viene in genere usata per applicazioni legacy e non rappresenta il pattern preferito per le moderne architetture applicative. Per ulteriori informazioni, consulta la documentazione su Session affinity.
+Domini personalizzati
+Puoi usare domini personalizzati in Cloud Foundry e assegnare route su questi domini alle tue applicazioni. Per ulteriori informazioni, consulta questo documento.
+Riepilogo
+Questa lezione ha esplorato l’instradamento e il networking in Cloud Foundry, un aspetto cruciale del deploy e della gestione delle applicazioni all’interno della piattaforma. Hai imparato il ruolo del Gorouter come punto di ingresso per il traffico esterno e come le route mappano i nomi di dominio a specifiche applicazioni. Hai approfondito il load balancing per distribuire in modo efficiente il traffico tra le istanze applicative. Hai poi imparato a creare e gestire route personalizzate, perfezionandole con nomi host e percorsi per adattare il flusso di traffico.
+Approfondimenti ulteriori
+Mappare route alle applicazioni
+HTTP routing
+Configurazione di route e domini
+Supporto per HTTP/2
+
+Deploying Your First Application
+Scenario aziendale
+In questo esercizio, distribuirai la tua prima applicazione cloud-native nel runtime SAP BTP, Cloud Foundry. Utilizzerai sia l’approccio di deployment nativo di Cloud Foundry sia l’approccio di deployment tramite applicazione multitarget (MTA).
+Opzioni dell’esercizio
+Puoi eseguire questo esercizio in due modi:
+Ambiente reale: usando le istruzioni fornite qui sotto, puoi eseguire i passaggi nell’account SAP BTP Free Tier.
+Simulazione della piattaforma: segui le istruzioni passo dopo passo all’interno della simulazione cliccando sul pulsante “Start Exercise” qui sotto.
+Nota
+È fortemente consigliato eseguire prima i passaggi nell’ambiente reale.
+Prerequisiti
+Hai accesso a un ambiente SAP BTP, Cloud Foundry e disponi delle autorizzazioni necessarie per distribuire applicazioni in uno spazio Cloud Foundry.
+Hai installato i seguenti strumenti:
+git CLI
+cds CLI
+Cloud Foundry CLI
+Cloud MTA Build Tool (MBT)
+ESERCIZIO
+
+Passaggi
+Clona e apri l’applicazione di esempio.
+Clona l’applicazione di esempio da GitHub.
+Esegui il merge di https://github.com/SAP-samples/cloud-foundry-runtime-learning-journey/pull/8.
+git clone https://github.com/SAP-samples/cloud-foundry-runtime-learning-journey
+Apri il progetto clonato nel tuo IDE preferito.
+Distribuisci l’applicazione usando il deployment nativo di Cloud Foundry.
+Compila il progetto.
+Questa applicazione di riferimento include già tutti i file necessari per il deployment. Tuttavia, devi prima compilare l’applicazione per l’ambiente di produzione:
+
+cds build –production
+Il parametro --production assicura che gli artifact relativi al deployment nel cloud vengano creati da cds build.
+Accedi alla tua istanza Cloud Foundry e seleziona un’organizzazione e uno space.
+Usa il seguente comando per accedere alla tua istanza Cloud Foundry:
+cf login
+Fornisci l’endpoint API, che puoi trovare nel cockpit SAP BTP, e le tue credenziali. Una volta autenticato, seleziona un’organizzazione e uno space scegliendo i rispettivi valori dall’elenco.
+In alternativa, puoi anche usare il seguente comando per selezionare un’organizzazione e uno space:
+cf target -o <organization> -s <space>
+Esegui il push dell’applicazione su Cloud Foundry.
+Usa il seguente comando per distribuire l’applicazione su Cloud Foundry.
+cf push
+Leggi di più sul deployment tramite cf-push nella documentazione ufficiale CAP.
+Accedi all’applicazione.
+Nel tuo Terminale vedrai l’URL dell’applicazione distribuita. Apri l’URL nel browser per accedere all’applicazione. In alternativa, puoi anche andare nella tua applicazione, ora distribuita all’interno del tuo Cloud Foundry space nel cockpit SAP BTP, e accedere all’applicazione da lì.
+Dopo aver provato l’applicazione, puoi eliminare l’applicazione e l’istanza di servizio xsuaa con i seguenti comandi (l’ordine fornito è importante):
+cf delete hello-cloud-foundry-srv
+cf delete-service hello-cloud-foundry-auth
+Distribuisci l’applicazione usando il deployment tramite multitarget application (MTA). MTA estende i workflow nativi vanilla di CF con un plugin; per maggiori informazioni, fai riferimento a questo link.
+Compila il progetto.
+Questa applicazione di riferimento include già tutti i file necessari per il deployment. Tuttavia, devi prima compilare l’applicazione per l’ambiente di produzione:
+mbt build -t gen --mtar mta.tar
+Questo creerà un file mta.tar nella cartella gen. Questo file contiene gli artifact di deployment per il deployment MTA.
+Installa il CF Multiapps Plugin.cf install-plugin multiapps
+Distribuisci l’applicazione.
+Usa il seguente comando per distribuire l’applicazione su Cloud Foundry:
+cf deploy gen/mta.tar
+Attendi fino al completamento del processo. Puoi controllare lo stato del deployment dell’applicazione distribuita nel terminale. Una volta terminato il deployment, dovresti vedere qualcosa di simile, con un URL che puoi inserire nel browser per visitare la tua applicazione:
+[…] Application "hello-cloud-foundry-srv" started and available at "[org]-[space]-hello-cloud-foundry-srv.landscape-domain.com" […]
+Dopo aver provato l’applicazione, puoi eliminarla, insieme all’istanza di servizio xsuaa, con il seguente comando: cf undeploy hello-cloud-foundry
+
+Discovering Observability and Monitoring in SAP BTP, Cloud Foundry Runtime
+
+Introduzione
+Man mano che l’applicazione di punta della tua azienda acquisisce popolarità e il traffico utenti aumenta rapidamente, iniziano a emergere problemi di performance ed errori imprevisti. Per mantenere un’esperienza utente fluida e garantire l’affidabilità del sistema, devi implementare strategie solide di observability e monitoring. In questa lezione scoprirai come utilizzare gli strumenti disponibili nel runtime SAP BTP, Cloud Foundry per ottenere informazioni approfondite sulle performance della tua applicazione e affrontare rapidamente eventuali problemi.
+Panoramica
+Observability e monitoring sono le tue finestre sul funzionamento interno del software e dei sistemi. L’observability ti consente di capire cosa sta accadendo all’interno delle tue applicazioni e della tua infrastruttura analizzando i dati che producono. Il monitoring, invece, sfrutta questi dati di observability per controllare attivamente lo stato del sistema e generare avvisi, assicurando che le performance restino ottimali e che i problemi vengano affrontati rapidamente.
+SAP BTP, runtime Cloud Foundry, fornisce i seguenti indicatori di observability:
+Gamma di indicatori
+
+
+Log
+I log in Cloud Foundry provengono da due fonti principali: le tue applicazioni e i componenti di sistema di Cloud Foundry.
+I log applicativi forniscono informazioni sulle operazioni e sui problemi all’interno delle tue applicazioni. Possono essere definiti dagli sviluppatori in termini di contenuto e formato. Per maggiori dettagli, vedi App logging in Cloud Foundry.
+I log di sistema offrono una visione di come la piattaforma gestisce e interagisce con le tue applicazioni. Sono generati dai componenti interni di Cloud Foundry, come il Cloud Controller, oppure quando una richiesta verso un’app arriva al router di Cloud Foundry, che registra la richiesta. Questi log non possono essere disabilitati.
+Puoi accedere ai log in tempo reale usando il comando cf logs nella Cloud Foundry CLI. Con questo comando puoi facilitare il troubleshooting e l’analisi in tempo reale in SAP BTP, Cloud Foundry.
+Per la conservazione a lungo termine dei dati e per analisi approfondite, diventa necessario inoltrare i log a sistemi esterni, come Splunk o Elasticsearch. Puoi configurare dei Syslog Drains per instradare selettivamente specifici tipi di log verso un server syslog per una memorizzazione centralizzata.
+Una volta che i log si trovano in un sistema di storage esterno, puoi utilizzare diversi strumenti di visualizzazione per creare dashboard dinamiche e utili. Per esempio, Kibana viene spesso utilizzato con Elasticsearch per esplorare i log in modo interattivo.
+Ottieni una panoramica dei log applicativi di Cloud Foundry
+In questo tutorial scoprirai i log applicativi e i vari metodi utilizzati per visualizzarli.
+Esegui i passaggi che trovi qui.
+Metriche
+Possiamo suddividere le metriche in Cloud Foundry in due categorie: metriche del container e metriche personalizzate, ciascuna pensata per esigenze di monitoraggio differenti:
+Le metriche del container mostrano come le tue applicazioni utilizzano le risorse assegnate ai loro container, inclusi utilizzo della CPU, consumo di memoria e spazio su disco. La relativa Diego Cell, che esegue la tua applicazione, raccoglie queste metriche circa ogni 15 secondi e le inoltra a Loggregator per l’aggregazione. Per impostazione predefinita, le metriche del container vengono memorizzate temporaneamente in Log Cache per un recupero rapido e sono accessibili tramite comandi della Cloud Foundry CLI, come cf logs . Per la memorizzazione a lungo termine e l’analisi storica, le metriche vengono di solito inoltrate a sistemi esterni come Prometheus. Puoi inoltrare le metriche con syslog-drains. Per usare Prometheus con uno syslog-drain, hai bisogno di un middleware che traduca da un server syslog a un endpoint PromQL, come Telegraf. Scopri di più in Container metrics.
+Le metriche personalizzate sono definite dall’utente e possono misurare tassi di transazione, conteggi di errori, metriche di coinvolgimento utente o qualsiasi altro dato rilevante per le performance della tua applicazione e per i tuoi obiettivi di business. Questo richiede spesso strumentazione nel codice, tramite librerie specifiche del linguaggio (per esempio expvar per Golang), sistemi di monitoraggio di terze parti (per esempio Prometheus) oppure la libreria Java di SAP. La maggior parte delle librerie di metriche consente di esporre le metriche tramite un endpoint HTTP. In alternativa, puoi eseguire un agent all’interno del container dell’applicazione. Questi metodi gestiscono la raccolta delle metriche in modo indipendente dalla logica applicativa, offrendo flessibilità nella raccolta e nell’esportazione di metriche personalizzate con modifiche minime al codice.
+Entrambi i tipi di metriche vengono solitamente memorizzati direttamente in strumenti di monitoraggio come Prometheus, consentendo analisi dettagliate, alert e integrazione con altri sistemi. Per la visualizzazione, Grafana è una scelta popolare nella community Cloud Foundry.
+Ottieni una panoramica delle metriche dei container applicativi di Cloud Foundry
+In questo tutorial otterrai una comprensione generale delle metriche dei container applicativi.
+Esegui i passaggi che trovi qui.
+Ottieni una panoramica delle metriche personalizzate
+In questo tutorial otterrai una panoramica delle metriche personalizzate e della strumentazione.
+Esegui i passaggi che trovi qui.
+Inoltrare log e metriche dei container
+In questo tutorial scoprirai come vengono inoltrati log e metriche dei container affinché l’utente possa utilizzarli.
+Esegui i passaggi che trovi qui.
+Eventi di audit
+In Cloud Foundry, gli eventi di audit forniscono informazioni sulle interazioni con le risorse documentando azioni come deployment di applicazioni, binding di servizi, gestione degli utenti e così via. A differenza degli eventi di sicurezza, che si concentrano su accesso e autorizzazioni, o degli usage events, che sono orientati alla fatturazione, gli eventi di audit offrono una vista più granulare delle attività che impattano le risorse, registrando dettagli come l’attore (l’entità che avvia l’azione), il target (la risorsa interessata) e un timestamp.
+Gli eventi di audit vengono generati dalle applicazioni e dai componenti di Cloud Foundry, quindi catturati da Loggregator e inviati in streaming a vari endpoint per l’accesso e l’analisi.
+Guarda il seguente video per scoprire come monitorare gli eventi per singole applicazioni o per interi space.
+
+Ricorda: poiché SAP BTP conserva gli eventi di Cloud Foundry per 14 giorni, dovresti inoltrare questi dati a una soluzione di storage esterna per la persistenza a lungo termine e analisi avanzate.
+Per comprendere meglio gli audit event, consulta la seguente documentazione: Panoramica degli audit event
+Ottieni una panoramica degli eventi e del SAP Alert Notification System
+
+In questo tutorial scoprirai gli eventi di Cloud Foundry e le opzioni per inviare avvisi con il SAP Alert Notification Service.
+Esegui i passaggi che trovi qui.
+Health Checks
+
+Gli health check sono test automatici che Cloud Foundry esegue sulle istanze in esecuzione della tua applicazione per determinarne lo stato, garantendo affidabilità e disponibilità. Cloud Foundry utilizza readiness check e liveness check, che svolgono funzioni distinte:
+I readiness check garantiscono che un'istanza applicativa sia pronta a gestire le richieste. Se un readiness check fallisce, l'istanza viene temporaneamente rimossa dal load balancer, impedendole di ricevere traffico finché non si stabilizza. Questo è essenziale durante aggiornamenti, operazioni di scaling o tempi di avvio lunghi per garantire deployment graduali.
+I liveness check verificano che un'istanza applicativa sia attiva e in esecuzione. Se un liveness check fallisce, l'istanza viene riavviata automaticamente. Questo meccanismo di autoripristino aiuta a mitigare in modo efficiente i guasti del sistema.
+Esistono tre tipi di health check:
+Port checks (predefiniti): verificano se è possibile stabilire una connessione TCP sulla porta dell'applicazione.
+Process checks: verificano se il processo principale dell'applicazione è in esecuzione. Sono utili per processi worker o applicazioni che non usano porte standard.
+HTTP checks (consigliati): eseguono una richiesta HTTP GET verso un endpoint specificato e verificano la presenza di un codice di stato 200. Forniscono un feedback più accurato per le applicazioni web.
+Il ciclo di vita degli health check può essere riassunto come segue:
+Deployment: le configurazioni degli health check sono definite nel file manifest dell'applicazione (manifest.yml) oppure tramite la Cloud Foundry CLI durante il deployment. Per i dettagli, consulta Configuring health checks.
+Initialization: Diego avvia e pianifica l'istanza applicativa insieme agli health check specificati.
+Startup: all'avvio, gli health check iniziano immediatamente ogni due secondi. Questo continua finché l'applicazione non supera i controlli oppure finché non viene raggiunto un timeout specificato (predefinito: 60 secondi, configurabile fino a 10 minuti su SAP BTP come indicato nella linea guida Deploying large applications.
+Ongoing monitoring: una volta che l'applicazione si avvia correttamente, vengono eseguiti regolarmente liveness check e readiness check per monitorarne continuamente lo stato.
+Failure handling: il fallimento di un liveness check comporta il riavvio dell'istanza dell'app. Il fallimento di un readiness check comporta la rimozione dell'istanza dal routing, anche se continua a essere in esecuzione per un possibile recupero. Quando gli health check falliscono, analizza i log della tua applicazione per individuare errori o avvisi. Se stai usando un endpoint HTTP personalizzato, assicurati che restituisca la risposta corretta. Inoltre, considera vincoli di risorse (memoria, CPU) e connettività di rete come possibili cause. Alla fine, se un'istanza fallisce ripetutamente gli health check, Cloud Foundry smetterà di tentare il riavvio e la contrassegnerà come crashed.
+Per saperne di più sugli health check, fai riferimento alla seguente documentazione: Health checks in Cloud Foundry
+Esegui un Application Health Check
+
+In questo tutorial scoprirai come funziona l'Application Health Check e come configurarlo per la tua applicazione.
+Esegui i passaggi che trovi qui.
+Semplificare osservabilità e monitoraggio con i servizi SAP BTP
+
+SAP ti permette di stabilire facilmente strategie complete di osservabilità e monitoraggio per le applicazioni in esecuzione su SAP BTP, Cloud Foundry runtime. Questo avviene tramite una suite di servizi robusti, tra cui SAP Cloud Logging, SAP Alert Notification e SAP Cloud Application Lifecycle Management (SAP Cloud ALM).
+SAP Cloud Logging: gestione centralizzata e analisi dei log
+
+SAP Cloud Logging migliora le capacità di osservabilità per le applicazioni su SAP BTP centralizzando la raccolta, l’archiviazione, la visualizzazione e l’analisi di log, metriche e trace. Questo servizio si integra perfettamente con SAP BTP, Cloud Foundry runtime, supportando diversi formati di dati e fonti per una raccolta e analisi complete. Ti consente di gestire la durata di conservazione dei dati di osservabilità con policy di retention flessibili. Puoi esplorare facilmente log, metriche e trace tramite un’interfaccia web intuitiva, sfruttando dashboard personalizzabili e viste predefinite per identificare rapidamente trend e anomalie. Inoltre, il servizio include funzionalità avanzate come alerting e anomaly detection per aiutarti ad affrontare proattivamente potenziali problemi.
+Per iniziare a usare SAP Cloud Logging, puoi creare un’istanza di servizio tramite Cloud Foundry CLI oppure SAP BTP cockpit, quindi scegliere il piano di servizio più adatto alle esigenze di business. Una volta che l’istanza di servizio è operativa, puoi iniziare a inviare i log e utilizzare gli strumenti forniti per analisi approfondite e visualizzazione. Istruzioni dettagliate sono disponibili nel nostro SAP Help Portal.
+SAP Alert Notification Service: alert e notifiche proattive
+
+Il SAP Alert Notification service migliora ulteriormente le tue capacità di monitoraggio fornendo una piattaforma centralizzata per alert e notifiche in tempo reale su cambiamenti operativi e stato di salute del sistema. Agisce come un potente proxy, raccogliendo e gestendo alert provenienti da varie applicazioni e servizi. Offre un catalogo completo e in continua crescita di alert su SAP BTP. Ti consente di personalizzare le sottoscrizioni a eventi o condizioni specifiche rilevanti per le tue esigenze di monitoraggio. Inoltre, supporta diversi canali di notifica, dalle email tradizionali fino a integrazioni moderne come Slack, consentendoti di raggiungere gli stakeholder in modo efficiente ed efficace.
+Per iniziare con SAP Alert Notification, crea un’istanza di servizio nel tuo subaccount SAP BTP tramite Cloud Foundry CLI, un descrittore di multitarget application oppure SAP BTP cockpit. Istruzioni complete di setup e indicazioni sulla personalizzazione di condizioni e azioni degli alert sono disponibili nel SAP Help Portal del servizio.
+SAP Cloud ALM: un hub centrale per l’Application Lifecycle Management
+
+SAP Cloud ALM è una soluzione cloud pensata per gestire l’intero ciclo di vita delle applicazioni SaaS fornite da SAP e delle applicazioni sviluppate dai clienti. Con osservabilità e monitoraggio integrati, SAP Cloud ALM offre insight sulle prestazioni della tua applicazione tramite metriche tecniche, monitoraggio degli eventi e analytics incorporati. Abilitando alert avanzati e azioni correttive automatiche, come il riavvio dei servizi, SAP Cloud ALM consente il rilevamento e la risoluzione proattiva dei problemi. Come interfaccia di gestione centralizzata, semplifica la gestione delle applicazioni SaaS e custom, integrandosi con i processi esistenti di IT service management.
+Puoi usare SAP Cloud ALM per monitorare le tue applicazioni custom integrandoti con la libreria OpenTelemetry, operazione che richiede modifiche minime al codice grazie alle opzioni di auto-instrumentation e configurazione. Una guida dettagliata è disponibile qui. Allo stesso tempo, puoi collegare facilmente i servizi SAP a SAP Cloud ALM tramite configurazioni predefinite e prestrumentate. Consulta il nostro SAP Help Portal per le informazioni più aggiornate.
+Disponibile senza costi aggiuntivi nell’ambito dell’Enterprise Level Support Contract, SAP Cloud ALM può essere attivato facilmente senza hardware aggiuntivo né configurazioni complesse. Istruzioni passo passo sono disponibili nelle seguenti SAP missions:
+Onboarding & first steps to SAP Cloud ALM
+Get started with SAP Cloud ALM for operations
+Riepilogo
+
+Questa lezione ti ha fornito le conoscenze necessarie per configurare e gestire osservabilità e monitoraggio nel SAP BTP, Cloud Foundry runtime. Comprendendo e applicando questi strumenti, puoi garantire che le tue applicazioni siano affidabili, performanti e sicure.
+Approfondimenti
+Mission: Implement observability in a full-stack CAP Application
+
+Implementing Scaling Capabilities in SAP BTP, Cloud Foundry Runtime
+Introduzione
+
+La tua azienda ha recentemente distribuito applicazioni sul runtime SAP BTP, Cloud Foundry e ha bisogno di comprendere le capacità di scaling per gestire in modo efficiente le fluttuazioni del traffico applicativo e della domanda.
+Scaling orizzontale e verticale
+
+Il runtime SAP BTP, Cloud Foundry offre potenti capacità di scaling, inclusi scaling orizzontale e verticale. La scelta tra scaling orizzontale e verticale dipende dai requisiti specifici della tua applicazione. Ecco alcuni dettagli chiave sulle capacità di scaling nel runtime SAP BTP, Cloud Foundry:
+Scaling orizzontale
+
+Conosciuto anche come scaling out, è il processo di aggiungere più istanze per supportare la tua applicazione e gestire un carico maggiore. Nel contesto di SAP BTP e Cloud Foundry, questo significa aumentare il numero di istanze applicative, assicurando che l’applicazione rimanga reattiva e performante anche quando il carico aumenta.
+In SAP BTP Cloud Foundry, puoi scalare facilmente le tue applicazioni orizzontalmente usando la command line interface (CLI) del runtime SAP BTP, Cloud Foundry, il SAP BTP Cockpit oppure il servizio Application Autoscaler. La piattaforma distribuirà automaticamente le istanze su diverse macchine virtuali e availability zone per garantire alta disponibilità e tolleranza ai guasti.
+Scaling verticale
+
+Conosciuto anche come scaling up, è il processo di aggiungere più risorse, come memoria, disco e CPU, alla tua applicazione per gestire un carico maggiore. Nel contesto di SAP BTP Cloud Foundry, questo significa aumentare la quota di memoria e disco per le istanze della tua applicazione. La quantità di CPU viene fornita automaticamente dalla piattaforma in modo tale che le applicazioni ottengano una quota CPU garantita di 1/4 di core per ogni GB di memoria istanza. La memoria massima per istanza applicativa è 16 GB, il che consente scaling verticale fino a 4 CPU. Per il limite di memoria più aggiornato, fai riferimento alla sezione Limits.
+In SAP BTP Cloud Foundry, puoi scalare in modo efficiente le tue applicazioni verticalmente usando la command line interface (CLI) del runtime SAP BTP, Cloud Foundry e il SAP BTP Cockpit. Puoi definire memoria e spazio disco per ogni istanza applicativa quando fai push o scaling della tua applicazione. Lo scaling verticale adatta automaticamente le risorse assegnate alla tua applicazione, migliorandone le prestazioni. Tuttavia, è importante notare che questo può comportare costi più elevati, poiché vengono utilizzate risorse aggiuntive.
+Nel contesto delle applicazioni multitenant, ogni tenant o consumer accede all’applicazione tramite un URL dedicato. L’ambiente applicativo li identifica tramite il loro tenant ID univoco, garantendo l’isolamento dei dati distinguendo le richieste provenienti da tenant consumer differenti in base al tenant ID.
+Le risorse per ciascun modulo, come memoria e quota disco, possono essere definite nel file mta.yaml. Quando distribuisci l’MTA, la piattaforma alloca automaticamente le risorse specificate a ciascuna istanza applicativa.
+Limiti
+
+Il runtime SAP BTP, Cloud Foundry impone determinati limiti sull’uso delle risorse e sullo scaling per garantire un’allocazione efficiente delle risorse e un utilizzo equo tra le applicazioni. Questi limiti possono essere personalizzati tramite l’uso di quote di organization e space, consentendo agli amministratori di definire allocazioni massime di risorse per memoria, CPU, spazio disco e numero di istanze per applicazione. Nell’ambiente runtime SAP BTP, Cloud Foundry, esistono determinati limiti quando si tratta di scalare applicazioni:
+Memoria: la memoria massima che puoi allocare a un’istanza applicativa è 16 GB.
+Quota disco: la quota disco massima che puoi allocare a un’istanza applicativa è 10 GB.
+Dimensione del pacchetto applicativo: la dimensione massima del pacchetto applicativo è 1.5 GB. Se la tua applicazione è più grande, il deployment fallisce.
+Dimensione archivio MTA: la dimensione massima di un archivio multitarget application (MTA) è limitata a 500 MB. Il deployment viene negato per archivi di dimensione superiore.
+Numero di istanze: il numero di istanze a cui puoi fare scale out dipende dalla quota assegnata alla tua organization e al tuo space nell’ambiente runtime SAP BTP, Cloud Foundry.
+Fai riferimento alla documentazione SAP BTP - Specific Configuration per le informazioni più aggiornate sulle configurazioni dei limiti per il runtime SAP BTP, Cloud Foundry.
+Questi limiti sono progettati per garantire un uso equo e mantenere le prestazioni e la stabilità della piattaforma. Se la tua applicazione richiede risorse aggiuntive, valuta l’ottimizzazione dell’applicazione oppure la distribuzione del carico di lavoro su più applicazioni o servizi.
+Autoscaling
+
+L’autoscaling è un aspetto essenziale dello sviluppo applicativo, soprattutto in un ambiente cloud. Il runtime SAP BTP, Cloud Foundry supporta l’autoscaling tramite il servizio Application Autoscaler, permettendo alle applicazioni di adattare dinamicamente il numero di istanze in esecuzione in base a criteri predefiniti come utilizzo CPU, utilizzo memoria o metriche personalizzate. Questo consente alle applicazioni di scalare automaticamente in ingresso o in uscita in risposta a condizioni di carico variabili, assicurando prestazioni ottimali e utilizzo efficiente delle risorse. Il servizio regola automaticamente il numero di istanze applicative in base alla policy da te definita, che può essere configurata usando schedule specifiche oppure metriche come utilizzo CPU, throughput HTTP o latenza HTTP. In questo modo, le applicazioni possono scalare dinamicamente in aumento o in riduzione, mantenendo prestazioni ed efficienza delle risorse in condizioni di carico variabili.
+Il servizio Application Autoscaler offre le seguenti funzionalità:
+Dynamic Scaling: adatta automaticamente il numero di istanze applicative in base a metriche in tempo reale sulle prestazioni dell’applicazione.
+Scheduled Scaling: adatta automaticamente il numero di istanze applicative in base a schedule predefinite. Questo è utile negli scenari in cui si verificano variazioni di carico prevedibili.
+RESTful APIs: fornisce API per gestire le policy di autoscaling e recuperare la cronologia dell’autoscaling.
+Autoscaling Dashboard: fornisce un’interfaccia utente per gestire le policy di autoscaling e visualizzare la cronologia dell’autoscaling.
+Per usare il servizio Application Autoscaler, devi associarlo alla tua applicazione e definire una policy di autoscaling. Le scaling policy con regole multiple vengono valutate dall’alto verso il basso. La prima regola che corrisponde determinerà l’esito della valutazione della policy.
+In generale, è accettabile che lo scaling si basi su una sola metrica, a seconda dell’hysteresis. Assicurati che le regole più critiche abbiano priorità nella parte alta della policy. Nota che questo approccio non supporta la combinazione di più metriche tramite operazioni logiche come AND o OR. Tieni presenti queste considerazioni quando configuri le scaling policy.
+Configurazione semplificata del servizio
+Crea un’istanza di servizio.
+Definisci la scaling policy.
+Associa l’app all’istanza di servizio usando la policy.
+
+Le custom metrics devono essere inviate se le metriche standard non sono sufficienti. Queste metriche devono essere inviate ogni 40 secondi per istanza applicativa per essere coerenti con le altre metriche. Nota che esiste un limite di 30 richieste al secondo verso la custom metrics API. Tutte le metriche, incluse quelle custom, vengono mediate nel tempo e tra le istanze applicative. Pertanto, è importante inviare periodicamente le misurazioni da ciascuna istanza applicativa.
+Load Balancing
+
+Il runtime SAP BTP, Cloud Foundry include funzionalità integrate di load balancing per distribuire uniformemente il traffico in ingresso tra tutte le istanze in esecuzione di un’applicazione. Questo aiuta a migliorare le prestazioni complessive, la disponibilità e l’affidabilità delle applicazioni utilizzando in modo efficace le risorse disponibili e gestendo i picchi di traffico.
+Se il load balancing automatico fornito dalla piattaforma non è sufficiente, SAP BTP Cloud Foundry offre anche diverse strategie per distribuire il carico. Queste strategie includono round-robin e least connection. Per impostazione predefinita, la piattaforma usa un approccio round-robin per distribuire uniformemente le richieste in ingresso tra tutte le istanze di un’applicazione. Tuttavia, se la tua applicazione ha requisiti o caratteristiche specifiche, puoi scegliere una diversa strategia di load balancing più adatta alle tue esigenze.
+Per esempio, la strategia least connection indirizza le richieste in ingresso verso l’istanza con il minor numero di connessioni attive, il che può essere vantaggioso per applicazioni con connessioni di lunga durata o carichi di lavoro non uniformi. L’algoritmo least-connection può produrre risultati migliori quando si utilizza il servizio Application Autoscaler. Questo algoritmo indirizza il traffico verso le nuove istanze create durante lo scaling out, poiché inizialmente non hanno connessioni attive. Al contrario, l’algoritmo round-robin distribuirebbe il traffico in modo più uniforme, ma potrebbe impiegare più tempo a bilanciare il carico, poiché le connessioni stabilite prima che le nuove istanze diventassero disponibili devono completarsi.
+Riepilogo
+
+Il runtime SAP BTP, Cloud Foundry offre potenti capacità di scaling, inclusi scaling orizzontale (aumento del numero di istanze) e scaling verticale (aumento di memoria e spazio disco). Esistono anche limiti sull’uso delle risorse, personalizzabili tramite quote di organization e space, e capacità di autoscaling per adattare dinamicamente il numero di istanze in esecuzione in base a criteri predefiniti. La piattaforma fornisce anche load balancing integrato per distribuire uniformemente il traffico in ingresso. Queste funzionalità sono essenziali per mantenere prestazioni ottimali, utilizzo efficiente delle risorse e disponibilità dell’applicazione.
+Approfondimenti
+Scalare un’app usando la Cloud Foundry CLI
+Configurazioni specifiche SAP BTP
+Gestione efficiente del workload su SAP Cloud Foundry usando Application Autoscaler
+Scala le tue applicazioni usando la funzionalità Custom Metrics di Application Autoscaler
+Supporto per algoritmi di Load Balancing in SAP BTP Cloud Foundry
+
+Using the Application Autoscaler to Manage Your Workload
+Scenario aziendale
+
+In questo esercizio, imparerai come scalare le applicazioni Cloud Foundry utilizzando il servizio SAP BTP Application Autoscaler.
+Immagina di essere uno sviluppatore di applicazioni che gestisce un'applicazione di shopping ospitata su SAP BTP Cloud Foundry. L'applicazione sta registrando un traffico in ingresso elevato, con conseguente aumento dell'utilizzo della CPU. Di conseguenza, il tempo di risposta dell'applicazione sta rallentando, causando problemi di prestazioni per i clienti.
+Questo scenario evidenzia la necessità di scalare l'applicazione a causa di pattern di elevato utilizzo della CPU. Il servizio Application Autoscaler in SAP BTP Cloud Foundry può aiutare scalando automaticamente le applicazioni Cloud Foundry in base a una policy di scalabilità definita. Supporta varie metriche di scalabilità, come l'utilizzo di CPU e memoria.
+Per questo esercizio, utilizzerai la metrica di utilizzo della CPU del servizio Application Autoscaler.
+Opzioni dell'esercizio
+
+Puoi eseguire questo esercizio in due modi:
+Live Environment - utilizzando le istruzioni fornite di seguito, puoi eseguire i passaggi nell'account SAP BTP Free Tier.
+Platform Simulation - segui le istruzioni passo passo all'interno della simulazione facendo clic sul pulsante "Start Exercise" qui sotto.
+Nota
+Si raccomanda vivamente di eseguire prima i passaggi nel live environment.
+Flusso delle attività
+
+In questo esercizio, eseguirai le seguenti attività:
+Preparare una policy di scalabilità con la metrica di utilizzo della CPU
+Distribuire un'applicazione di esempio su Cloud Foundry
+Creare un'istanza di servizio di Application Autoscaler
+Associare (bind) una policy di scalabilità all'applicazione
+Applicare carico all'applicazione
+Monitorare la scalabilità dell'applicazione tramite CF CLI
+Pulizia finale (Opzionale)
+Prerequisiti
+
+Hai creato un account Free Tier su SAP BTP. In caso contrario, segui questo tutorial.
+Cloud Foundry org e space devono essere disponibili nell'ambiente CF.
+Cloud Foundry CLI è installata localmente per interagire con l'ambiente CF. In caso contrario, segui questo tutorial.
+Scarica l'applicazione CAP di esempio dal repository GitHub.
+Come ottenere supporto
+
+Per ottenere supporto durante gli esercizi, aggiungi la tua domanda nel nostro SAP BTP Learning Group.
+Simulazione della piattaforma
+
+Come parte dell'esercizio, utilizzerai CF CLI in modo piuttosto esteso per eseguire l'autoscaling dell'applicazione. Usa il tuo ambiente CF, per esempio un account free tier, per eseguire l'esercizio. Tuttavia, nell'esercizio viene utilizzato il seguente ambiente CF:
+CF API Endpoint: https://api.cf.us10-001.hana.ondemand.com
+CF org: ccc5375etrial
+CF space: dev
+Nome applicazione: hello-cloud-foundry-srv
+Esercizio
+
+Task 1: Preparare una policy di scalabilità con la metrica di utilizzo della CPU
+
+Prepariamo una policy di scalabilità per l'applicazione. La policy di scalabilità definisce il numero minimo e massimo di istanze. Definisce inoltre le regole di scalabilità in base al tipo di metrica, alla soglia, all'operatore e all'adjustment.
+Passaggi
+Clona il repository da GitHub (se non l'hai ancora fatto).
+Inserisci:
+git clone https://github.com/SAP-samples/cloud-foundry-runtime-learning-journey.git
+Vai alla directory dell'applicazione di esempio:
+cd cloud-foundry-runtime-learning-journey
+Compila l'applicazione.
+Inserisci:
+npm install
+Inserisci:
+cds build --production
+Crea un file cpu_scaling_policy.json con il seguente contenuto:
+
+{
+  "instance_min_count": 1,
+  "instance_max_count": 2,
+  "scaling_rules": [
+    {
+    "metric_type": "cpuutil",
+    "breach_duration_secs": 120,
+    "threshold": 80,
+    "operator": ">",
+    "cool_down_secs": 300,
+    "adjustment": "+1"
+    },
+    {
+    "metric_type": "cpuutil",
+    "breach_duration_secs": 120,
+    "threshold": 80,
+    "operator": "<",
+    "cool_down_secs": 300,
+    "adjustment": "-1"
+    }
+  ]
+}
+
+Inserisci il codice mostrato sopra.
+Cerchiamo di capire la policy di scalabilità riportata sopra:
+Regola di scale out: se l'utilizzo della CPU è maggiore dell'80% per due minuti (120 secondi), allora viene aggiunta un'istanza all'applicazione, a condizione che non sia stato raggiunto il numero massimo di istanze.
+Regola di scale in: se l'utilizzo della CPU è inferiore all'80% per due minuti (120 secondi), allora viene rimossa un'istanza dall'applicazione, a condizione che non sia stato raggiunto il numero minimo di istanze.
+
+Task 2: Distribuire l'applicazione di esempio su Cloud Foundry
+Passaggi
+Accedi all'ambiente Cloud Foundry utilizzando la Cloud Foundry CLI.
+Inserisci:
+cf login --sso
+Imposta come target la org e lo space CF, dove <org> e <space> sono rispettivamente i nomi della org e dello space:
+cf target -o <org> -s <space>
+Esegui il push dell'applicazione su Cloud Foundry senza avviarla.
+Inserisci:
+cf push -f manifest.yml --no-start
+Info: hai utilizzato il file manifest CF (manifest.yml) per distribuire l'applicazione su BTP Cloud Foundry. Un altro approccio consiste nell'utilizzare una multitarget application (MTA). Consulta la documentazione per maggiori dettagli.
+Task 3: Creare un'istanza di servizio di Application Autoscaler
+Passaggi
+Crea un'istanza di servizio di Application Autoscaler con nome istanza di servizio my-autoscaler-service, piano di servizio standard e nome servizio autoscaler.
+Inserisci:
+cf create-service autoscaler standard my-autoscaler-service
+Task 4: Associare (bind) la policy di scalabilità all'applicazione
+Passaggi
+Associa l'autoscaler e la policy di scalabilità all'applicazione.
+Inserisci:
+cf bind-service hello-cloud-foundry-srv my-autoscaler-service -c cpu_scaling_policy.json
+Avvia l'applicazione.
+Inserisci:
+cf start hello-cloud-foundry-srv
+Verifica se l'applicazione è in stato di esecuzione.
+cf app hello-cloud-foundry-srv
+Output:
+# Output
+Showing health and status for app hello-cloud-foundry-srv in org ccc5375etrial / space name: hello-cloud-foundry-srv
+requested state: started
+isolation segment: trial
+routes: hello-cloud-foundry-srv.cfapps.us10-001.hana.ondemand.com
+last uploaded: Mon 02 Sep 12:20:35 CEST 2024
+stack: cflinuxfs4
+buildpacks:
+isolation segment: trial
+name version detect output buildpack name
+nodejs_buildpack 1.8.25 nodejs nodejs
+type: web
+sidecars:
+instances: 1/1
+memory usage: 256M
+  state   since           cpu       memory     disk     details
+#0 running 2024-09-03T11:26:37Z 1.1% 70M of 256M 184.8M of 1G
+
+Come mostrato nell'output, l'applicazione è in esecuzione con un'istanza all'indice zero.
+Accedi alla nostra applicazione distribuita.
+Recupera la route dell'applicazione dall'output del comando precedente. Per farlo, inserisci:
+cf app hello-cloud-foundry-srv | grep routes
+Nel nostro caso, la route dell'applicazione è: https://hello-cloud-foundry-srv.cfapps.us10-001.hana.ondemand.com. Se accedi all'URL, vedrai il messaggio di benvenuto dell'applicazione, che conferma che l'applicazione è in esecuzione.
+Task 5: Applicare carico all'applicazione
+
+Ora la tua applicazione è associata al servizio autoscaler con una policy di scalabilità.
+Applichiamo un po' di carico CPU all'applicazione per vedere la scalabilità in azione.
+Nota
+Nella pratica, una piattaforma Cloud Foundry calcola automaticamente le metriche standard, per esempio CPU, memoria, utilizzo del disco e così via. Queste metriche vengono poi lette dal servizio autoscaler per eseguire la scalabilità in base alla policy di scalabilità. Tuttavia, se esegui la scalabilità sulla base di metriche custom (metriche definite dall'utente), devi inviare tali metriche al servizio autoscaler.
+Fortunatamente, la tua applicazione di esempio offre un endpoint /useCPU per aumentare artificialmente l'utilizzo elevato della CPU sull'applicazione.
+Passaggi
+Apri un browser ed esegui una richiesta HTTP GET per applicare un carico CPU all'applicazione. Puoi anche usare qualsiasi strumento di tua scelta, per esempio Postman come client HTTP oppure curl per inviare una richiesta HTTP all'applicazione.
+Inserisci:
+https://hello-cloud-foundry-srv.cfapps.us10-001.hana.ondemand.com/odata/v4/catalog/useCPU(action='start',duration='4')
+L'output:
+{
+  "@odata.context": "$metadata#Edm.String",
+  "value": {
+  "status": "started",
+  "metric": "cpuutil",
+  "service": "Application Autoscaler"
+  }
+}
+
+Risultato
+
+Hai aumentato con successo l'utilizzo della CPU per 4 minuti. Dopo 4 minuti, la CPU torna a valori normali.
+Task 6: Monitorare la scalabilità dell'applicazione
+
+In questo task verificherai se l'applicazione viene scalata in base alla nostra policy di scalabilità (definita nel Task 1).
+Passaggi
+Controlla lo stato di scalabilità dell'applicazione.
+Usa il seguente comando:
+cf app hello-cloud-foundry-srv
+Puoi usare ripetutamente il comando sopra, per esempio watch cf app hello-cloud-foundry-srv. Dopo 2-3 minuti, osserverai che il numero di istanze aumenta.
+Output:
+# Output
+Showing health and status for app hello-cloud-foundry-srv in org ccc5375etrial / space 
+name: hello-cloud-foundry-srv
+requested state: started
+isolation segment: trial
+routes: hello-cloud-foundry-srv.cfapps.us10-001.hana.ondemand.com
+last uploaded: Tue 03 Sep 17:30:56 CEST 2024
+stack: cflinuxfs4
+buildpacks:
+isolation segment: trial
+name             version   detect output   buildpack name
+nodejs_buildpack 1.8.25    nodejs          nodejs
+type: web
+sidecars:
+instances: 2/2
+memory usage: 256M
+  state   since               cpu   memory       disk     details
+#0 running 2024-09-03T15:38:43Z 0.9% 69.4M of 256M 184.8M of 1G
+#1 running 2024-09-03T15:36:56Z 0.9% 71.1M of 256M 184.8M of 1G
+Come mostrato nell'output, l'applicazione è stata scalata verso l'esterno fino a due istanze in base alla policy di scalabilità (definita nel Task 1) dal servizio Application Autoscaler.
+Ora puoi rilassarti e sfruttare le prestazioni della tua applicazione utilizzando il servizio Application Autoscaler.
+Task 7: Pulizia finale (Opzionale)
+Passaggi
+Scollega il servizio autoscaler dall'applicazione.
+Inserisci:
+cf unbind-service hello-cloud-foundry-srv my-autoscaler-service
+Elimina l'istanza di servizio autoscaler.
+Inserisci:
+cf delete-service my-autoscaler-service -f
+Elimina l'applicazione.
+Inserisci:
+cf delete hello-cloud-foundry-srv -f
+Risultato
+
+Congratulazioni! Hai completato con successo l'esercizio. Hai imparato come scalare applicazioni Cloud Foundry utilizzando Application Autoscaler seguendo questi passaggi:
+Hai definito una policy di scalabilità basata sulla metrica di utilizzo della CPU.
+Hai distribuito un'applicazione di esempio su Cloud Foundry.
+Hai creato e associato all'applicazione l'istanza di servizio di Application Autoscaler.
+Hai applicato carico all'applicazione per aumentare l'utilizzo della CPU.
+Infine, hai monitorato la scalabilità dell'applicazione e ripulito le risorse.
+Approfondimenti / Link di riferimento
+Scopri di più sul servizio Application Autoscaler
+Informati sui parametri di configurazione della scaling policy
+Monitora la cronologia della scalabilità con la dashboard di Application Autoscaler
+Documentazione sul lavoro con policy di scalabilità dinamiche e pianificate
+Application Scalability with CPU Utilization Metrics – guida passo passo
+
+Handling Updates
+Introduzione
+
+La tua software company è impegnata a fornire ai clienti le funzionalità e i miglioramenti più recenti senza interrompere la loro esperienza. Il downtime imprevisto non è un'opzione. In questa lezione scoprirai come sfruttare le pratiche di zero downtime deployment (ZDD) per garantire che le tue applicazioni rimangano altamente disponibili e ricevano aggiornamenti senza interruzioni.
+Motivazione
+
+Nel panorama digitale odierno, rapido e competitivo, i tuoi clienti richiedono un accesso costante alle tue applicazioni, indipendentemente da aggiornamenti, upgrade o problemi imprevisti. Il downtime, sia pianificato sia non pianificato, può causare perdite finanziarie significative, danneggiare la reputazione del tuo brand e portare alla perdita di clienti preziosi. Per rimanere competitivi e fornire soluzioni innovative senza interruzioni, è fondamentale ridurre al minimo il downtime. Le strategie di zero downtime deployment (ZDD) sono essenziali per mitigare questi rischi e garantire un'esperienza utente fluida.
+Strategie di Zero Downtime Deployment
+
+cf push / cf deploy
+Questi sono i comandi principali usati per distribuire la maggior parte delle applicazioni nell'ambiente Cloud Foundry:
+cf push: carica il tuo codice e le dipendenze su Cloud Foundry, che poi identifica il buildpack necessario, compila il codice e crea un droplet (un pacchetto che contiene la tua applicazione).
+cf push my-app
+cf deploy: viene usato per distribuzioni più complesse ed è utilizzato solo insieme al comando di build mbt del tool MTA Build Tool (MBT) per gestire le multitarget applications (MTA). Non funziona con i manifest usati nei comandi cf push.
+mbt build
+cf deploy mta_archive.mtar
+Vantaggi: semplice ed efficiente per distribuzioni rapide di piccole applicazioni.
+Svantaggi: sebbene cf push e cf deploy siano entrambi adatti a distribuzioni semplici, cf push in particolare non dispone di capacità integrate di zero downtime, rendendolo inadatto agli ambienti di produzione che richiedono disponibilità continua.
+Rolling App Deployment
+
+Nelle rolling deployment, le istanze della vecchia versione vengono sostituite gradualmente con istanze della nuova versione. Questo garantisce che una qualche versione dell'applicazione sia sempre attiva.
+cf push APP-NAME --strategy rolling
+Vantaggi: downtime minimo. Possibilità di rollback in caso di problemi.
+Svantaggi: possibile latenza durante il passaggio tra versioni. I rollback possono richiedere tempo a causa delle applicazioni stateful e delle modifiche allo schema del database.
+Blue-Green Deployment
+
+Il blue-green deployment è una tecnica potente per ridurre al minimo il downtime e diminuire il rischio durante gli aggiornamenti applicativi. In questa sezione esplorerai gli elementi essenziali per implementare una strategia di blue-green deployment di multitarget applications utilizzando Cloud Foundry. Il processo è semplice. Ecco una panoramica semplificata:
+
+Ambiente Blue: questo è il tuo attuale ambiente di produzione live. È attivo e funzionante e gestisce tutto il traffico dei tuoi utenti.
+cf deploy <your-mta-archive-v1> --strategy blue-green
+Questo comando avvia un blue-green deployment per una nuova applicazione, iniziando senza alcuna MTA precedentemente distribuita. Avvia le applicazioni appname-idle, rendendole accessibili a URL specifici. Dopo aver confermato che queste istanze appname-idle sono in esecuzione correttamente, il comando le rinomina da appname-idle a appname, finalizzando il processo di deployment e rendendo live la nuova versione.
+Ambiente Green: questo è l'ambiente idle in cui distribuisci la nuova versione della tua applicazione. È identico all'ambiente Blue, ma non sta ancora gestendo traffico.
+cf deploy <your-mta-archive-v2> --strategy blue-green
+Questo comando avvia un blue-green deployment rinominando le applicazioni correnti nelle versioni "live" e avviando nuove versioni "idle". Le versioni idle delle app si avviano e diventano accessibili agli URL specificati. Il deployment passa poi a una fase di test in cui puoi testare la nuova versione prima di renderla definitiva. Hai la possibilità di continuare oppure annullare il deployment usando comandi specifici. Se vuoi saltare la fase di test, usa semplicemente l'opzione --skip-testing-phase.
+Testing: una volta che la nuova versione è distribuita nell'ambiente Green, puoi testarla a fondo senza influire sull'ambiente Blue live.
+Switch: quando sei sicuro che la nuova versione funzioni perfettamente, puoi commutare il router in modo che tutte le richieste in ingresso vadano ora all'ambiente Green. E il gioco è fatto: l'ambiente Green diventa il nuovo ambiente live. Anche il seguente comando con il corretto operation ID viene stampato eseguendo l'ultimo comando cf deploy.
+cf deploy -i <operation ID> -a resume
+Questo comando esegue le seguenti operazioni:
+Mappa le route produttive a web-idle e backend-idle.
+Elimina le route temporanee per web-idle e backend-idle.
+Riavvia web-idle e backend-idle con le configurazioni delle route produttive.
+Rinomina web-idle e backend-idle in web e backend.
+Elimina le applicazioni precedentemente produttive web-live e backend-live.
+
+Vantaggi: il comando --strategy blue-green semplifica i blue-green deployment automatizzando l'intero processo, inclusi test e pulizia finale, riducendo i passaggi manuali e gli errori. Migliora l'efficienza delle risorse e offre un meccanismo di rollback semplice, garantendo un'esperienza di deployment lineare e affidabile con downtime minimo.
+Svantaggi: la gestione delle sessioni utente e della coerenza dei dati durante lo switch può essere complessa, soprattutto nelle applicazioni stateful; inoltre aumenta il consumo di risorse a causa degli ambienti duplicati.
+Canary Deployment
+
+Il canary deployment è una strategia di deployment che prevede il rilascio graduale di una nuova versione di un'applicazione a un piccolo sottoinsieme di utenti o server in un ambiente di produzione, indirizzando inizialmente una piccola percentuale di traffico verso la versione aggiornata mentre la maggior parte del traffico continua a essere instradata verso la versione stabile.
+
+Vantaggi: test e validazione nel mondo reale prima del rollout completo, identificazione più semplice dei problemi in produzione e possibilità di tornare rapidamente alla versione stabile se necessario.
+Svantaggi: il rollback può essere complesso per le applicazioni stateful e per le modifiche allo schema del database, e richiede una pianificazione attenta per garantire forward compatibility ed effective observability.
+Distribuisci una nuova versione della tua app con il comando:
+cf push <app_name> --strategy canary
+Ora una istanza dell'app viene aggiornata con la nuova versione. Inoltre il traffico viene instradato verso questa istanza dell'app, ma viene instradato anche verso le istanze dell'app con la vecchia versione. Puoi essere instradato verso l'istanza dell'app distribuita in modalità canary con il campo HTTP Header: "X-Cf-Process-Instance":"<PROCESS_GUID>:<INDEX>"
+Dopo il test puoi aggiornare le istanze dell'app con la vecchia versione alla nuova versione con il comando:
+cf continue-deployment <app_name>
+Sfruttare Redis per la gestione delle sessioni utente in Approuter
+
+Quando un'applicazione attiva viene sostituita da una idle, i dati in memoria vengono persi, con la conseguenza che i dati di sessione degli utenti vengono azzerati. Per evitare questo, Approuter abilita la gestione esterna delle sessioni utilizzando Redis. Questo consente il recupero della sessione se l'istanza originale di Approuter va in crash, garantendo una gestione continua delle sessioni utente.
+Per passaggi di configurazione più dettagliati, fai riferimento alla documentazione ufficiale di SAP Approuter.
+Scegliere la giusta strategia ZDD
+
+La strategia ZDD ideale dipende da diversi fattori:
+Criticality dell'applicazione: le applicazioni mission-critical richiedono interruzioni minime, favorendo spesso i blue-green deployment. Le applicazioni non critiche possono tollerare maggiore flessibilità, consentendo aggiornamenti più rapidi con rolling o canary deployment.
+Vincoli di risorse: risorse limitate possono rendere meno praticabili i blue-green deployment, che richiedono molte risorse. In questi casi rolling o canary deployment sono spesso più convenienti dal punto di vista dei costi.
+Tolleranza al rischio: le organizzazioni avverse al rischio danno priorità alla sicurezza con i blue-green deployment. Le organizzazioni aperte a un certo livello di rischio possono sfruttare i canary deployment per test nel mondo reale e rilevamento precoce dei problemi.
+Complessità del deployment: deployment semplici con cf push o cf deploy possono essere rapidi ma causeranno downtime temporaneo. Considera questi comandi nel contesto della tua strategia ZDD più ampia.
+Riepilogo
+
+Lo zero downtime deployment (ZDD) è una pratica cruciale per lo sviluppo software moderno, perché riduce al minimo le interruzioni per gli utenti e garantisce accesso continuo alle applicazioni. In questa lezione hai scoperto varie strategie ZDD, incluse rolling updates, blue-green deployments, canary deployments e gestione delle sessioni utente con database Redis. Comprendendo queste strategie e considerando fattori come complessità dell'applicazione, tolleranza al rischio e risorse, puoi selezionare e implementare la strategia ZDD più efficace per le tue esigenze specifiche.
+Approfondimenti
+SAP Help – Blue-Green Deployment Strategy
+Cloud Foundry Documentation – Blue Green
+Cloud Foundry Documentation – Rolling-deploy
+GitHub SAP-Samples – Blue-Green Deployment Strategy
+SAP Approuter – Session-Handling
+
+Implementing Blue-Green Deployment with SAP BTP, Cloud Foundry Runtime for Zero Downtime Updates
+Scenario aziendale
+
+Iniziamo considerando il seguente scenario: sei responsabile della manutenzione dell’applicazione Book Shop costruita usando SAP CAP (Cloud Application Programming). Il tuo compito è implementare una strategia di deployment blue-green per garantire un downtime minimo quando introduci una modifica breaking, come l’aggiunta di un nuovo campo obbligatorio a un’entità. Questo esercizio ti guiderà attraverso i passaggi per distribuire le modifiche in modo sicuro ed efficace usando la strategia di blue-green deployment del SAP BTP, Cloud Foundry Runtime.
+Opzioni dell’esercizio
+
+Puoi svolgere questo esercizio in due modi:
+Live Environment: usando le istruzioni fornite di seguito, puoi eseguire i passaggi nell’account SAP BTP Free Tier.
+Platform Simulation – segui le istruzioni passo-passo all’interno della simulazione facendo clic sul pulsante “Start Exercise” qui sotto.
+Nota
+È fortemente raccomandato eseguire prima i passaggi nell’ambiente live.
+Flusso delle attività
+
+In questo esercizio, eseguirai le seguenti attività:
+Impostare i prerequisiti e l’ambiente.
+Eseguire il deployment blue-green iniziale dell’ambiente BLUE (Live).
+Eseguire il deployment blue-green dell’ambiente GREEN (Idle).
+Testare l’applicazione.
+Rendere l’ambiente GREEN quello produttivo.
+Pulire le risorse.
+Prerequisiti
+
+Hai una conoscenza di base del modello SAP Cloud Application Programming (CAP).
+Hai una subaccount SAP BTP con entitlement SAP BTP, Cloud Foundry Runtime (Free Tier o Paid). In caso contrario, segui questo tutorial.
+Hai installato i seguenti strumenti:
+Cloud Foundry CLI.
+Multiapps CF CLI plugin.
+Cloud MTA Build Tool.
+Come ottenere supporto
+
+Per ottenere supporto durante gli esercizi, aggiungi la tua domanda nel nostro SAP BTP Learning Group.
+Platform Simulation
+
+Questo esercizio usa una sample multitarget application (MTA) chiamata "bookshop" contenente un’applicazione con un’interfaccia REST.
+Esercizio
+Task 1: Impostare i prerequisiti e l’ambiente
+Passaggi
+Assicurati di avere tutti i prerequisiti installati e configurati.
+Esegui i passaggi richiesti.
+Clona l’applicazione SAP CAP Book Shop.
+Inserisci il seguente codice:
+git clone https://github.tools.sap/SAP-BTP-Courses/cf400_sample_app bookshop
+
+cd bookshop
+Installa le dipendenze.
+Inserisci il seguente codice:
+npm install
+Accedi a Cloud Foundry.
+Inserisci il seguente codice:
+
+cf api <API-ENDPOINT>
+cf login
+cf target -o <ORG> -s <SPACE>
+
+Puoi trovare l’endpoint API nella sezione Overview della tua subaccount nel SAP BTP cockpit.
+Task 2: Eseguire il deployment blue-green iniziale dell’ambiente Live
+Passaggi
+Builda l’applicazione per la produzione.
+Inserisci il seguente codice:
+cds build --production
+Il parametro --production garantisce che gli artifact relativi al deployment cloud vengano creati da cds build.
+Genera l’archivio MTA iniziale per l’applicazione.
+Inserisci il seguente codice:
+mbt build  -t gen --mtar hello-cloud-foundry-blue.mta
+
+INFO generating the MTA archive...
+INFO the MTA archive generated at: gen\hello-cloud-foundry-blue.mta
+Puoi trovare l’endpoint API nella sezione Overview della tua subaccount nel SAP BTP cockpit.
+Distribuisci l’ambiente iniziale (blue) usando il file .mta esistente.
+Inserisci il seguente codice:
+cf deploy  .\gen\hello-cloud-foundry-blue.mta -f --strategy blue-green
+...
+Operation ID: 1b313fd2-7a96-11ef-910c-eeee0a9ee328
+...
+No deployed MTA detected - this is initial deployment
+...
+Starting application "hello-cloud-foundry-srv-idle"...
+Application "hello-cloud-foundry-srv-idle" started and available at "<org>-<space>-hello-cloud-foundry-srv-idle.<domain>"
+...
+Renaming application "hello-cloud-foundry-srv-idle" to "hello-cloud-foundry-srv"...
+…
+Nota per gli utenti Mac: il comando fornito usa un formato di percorso file specifico di Windows (per esempio, .\mta_archives\hello-cloud-foundry-blue.mtar). Su Mac, dovrai modificare il formato del percorso in stile Unix sostituendo le backslash () con le slash (/). Per esempio, usa ./mta_archives/hello-cloud-foundry-blue.mtar al posto di quello precedente.
+Verifica se le app sono in esecuzione.
+Inserisci il seguente codice:
+cf apps
+
+Inserisci nel browser la route visualizzata per hello-cloud-foundry-srv per vedere la pagina iniziale CAP.
+
+Scegli $metadata per esplorare i campi dell’entità book.
+
+Task 3: Eseguire il deployment blue-green dell’ambiente Idle
+Passaggi
+Modifica la definizione dell’entità.
+Apri il file db/data-model.cds dove è definita l’entità Book. Potrebbe apparire più o meno così:
+namespace my.bookshop;
+
+entity Books {
+key ID : Integer;
+title  : String;
+stock  : Integer;
+}
+
+Aggiungi il nuovo campo publishedDate all’entità Books:
+namespace my.bookshop;
+
+entity Books {
+key ID : Integer;
+title  : String;
+stock  : Integer;
+publishedDate : Date; // New required field
+}
+Builda e distribuisci l’ambiente Green (nuova versione).
+Builda l’archivio della multitarget application.
+mbt build -t gen --mtar hello-cloud-foundry-green.mta
+Distribuisci l’ambiente Green (nuova versione).
+cf deploy  .\gen\hello-cloud-foundry-green.mta -f --strategy blue-green
+
+...
+Operation ID: 34099f67-7a9b-11ef-90ea-eeee0a9a9d78
+...
+Renaming application "hello-cloud-foundry-srv" to "hello-cloud-foundry-srv-live"...
+...
+Starting application "hello-cloud-foundry-srv-idle"...
+Application "hello-cloud-foundry-srv-idle" started and available at "<org>-<space>-hello-cloud-foundry-srv-idle.<domain>"
+...
+Process has entered testing phase. After testing your new deployment you can resume or abort the process.
+Use "cf deploy -i 34099f67-7a9b-11ef-90ea-eeee0a9a9d78 -a abort" to abort the process.
+Use "cf deploy -i 34099f67-7a9b-11ef-90ea-eeee0a9a9d78 -a resume" to resume the process.
+Hint: Use the "--skip-testing-phase" option of the deploy command to skip this phase.   Hint: Use the '--skip-testing-phase' option of the deploy command to skip this phase.
+…
+Task 4: Testare l’applicazione Green (Idle)
+Passaggi
+Testa l’applicazione Green (Idle).
+Verifica se le app sono in esecuzione:
+cf apps
+
+Assicurati che l’applicazione hello-cloud-foundry-srv-idle funzioni correttamente con il nuovo campo publishedDate.
+
+Task 5: Rendere l’ambiente GREEN quello produttivo
+In questo task, porterai l’ambiente GREEN a diventare il nuovo ambiente produttivo effettuando lo switch delle route e verificando il deployment.
+Passaggi
+Rendi l’ambiente GREEN quello produttivo.
+Ottieni l’Operation ID.
+cf mta-ops
+
+Rendi l’ambiente GREEN l’ambiente di produzione attivo. Usa il seguente codice:
+cf deploy -i 34099f67-7a9b-11ef-90ea-eeee0a9a9d78 -a resume
+
+Executing action "resume" on operation 34099f67-7a9b-11ef-90ea-eeee0a9a9d78...
+...
+Updating application "hello-cloud-foundry-srv-idle"...
+Stopping application "hello-cloud-foundry-srv-idle"...
+Starting application "hello-cloud-foundry-srv-idle"...
+Application "hello-cloud-foundry-srv-idle" started and available at "<org>-<space>-hello-cl2bbcd228.<domain>"
+Renaming application "hello-cloud-foundry-srv-idle" to "hello-cloud-foundry-srv"...
+Deleting routes for application "hello-cloud-foundry-srv-live"...
+Stopping application "hello-cloud-foundry-srv-live"...
+Deleting application "hello-cloud-foundry-srv-live"...
+Process finished.
+
+Esamina il risultato.
+Verifica che le vecchie applicazioni BLUE siano state eliminate e che le nuove applicazioni GREEN siano assegnate alle route produttive.
+cf apps
+
+Verifica che l’ambiente GREEN sia quello produttivo e che risponda sulle route produttive, inserisci nel browser la route visualizzata per hello-cloud-foundry-srv e controlla i campi dell’entità book.
+
+Task 6: Pulire le risorse
+Si raccomanda di fermare o fare l’undeploy dei tuoi MTA quando non sono più necessari. Per farlo, esegui il seguente comando.
+Passaggi
+Pulisci le risorse
+Usa il seguente codice:
+cf undeploy hello-cloud-foundry --delete-services --delete-service-keys -f
+Risultato
+
+In questo esercizio, hai implementato con successo una strategia di blue-green deployment usando Cloud Foundry per garantire aggiornamenti senza downtime per l’applicazione Book Shop. Hai iniziato impostando l’ambiente, distribuendo l’ambiente blue iniziale e verificandone il corretto funzionamento. Successivamente, hai aggiornato la definizione dell’entità nell’ambiente idle (green), distribuito la nuova versione e testato che le modifiche fossero state applicate correttamente. Infine, hai reso l’ambiente green il nuovo ambiente produttivo, garantendo una transizione fluida senza interrompere il servizio. Hai concluso pulendo le risorse per mantenere ordinato il workspace.
+Ulteriori letture / Link di riferimento
+
+SAP Help – Strategia di Blue-Green Deployment
+Github – Strategia di Blue-Green Deployment
+
+
+Mastering Cloud Foundry Application Lifecycle Events
+Introduzione agli eventi del ciclo di vita
+Per ottenere un’introduzione all’argomento, guarda il seguente video:
+
+Nella seguente sezione di questa lezione, scoprirai maggiori dettagli su ciascun evento.
+Restart
+
+Il riavvio è un’operazione a impatto relativamente basso progettata per aggiornare lo stato operativo dell’applicazione o per recuperarla da problemi minori, senza modificare il codice o la configurazione sottostanti
+Comandi di Restart
+
+Riavvia tutte le istanze
+cf restart <app_name>
+Questo comando fermerà tutte le istanze dell’applicazione e le avvierà di nuovo.
+Riavvia un’istanza specifica
+cf restart-app-instance <app_name> <instance_index>
+Questo comando agisce solo sull’istanza applicativa specificata, rendendolo ideale per troubleshooting o correzioni minori senza influire sulla disponibilità complessiva dell’applicazione.
+Restage
+
+Il restage è necessario quando cambiamenti ambientali possono alterare il comportamento runtime dell’applicazione, anche se il codice dell’applicazione rimane invariato. Viene usato quando cambiano le dipendenze di runtime (per esempio, il binding di un nuovo servizio, la modifica di variabili d’ambiente e così via), oppure quando buildpack o stack vengono aggiornati.
+Comando di Restage
+
+cf restage
+Questo comando integra configurazioni o dipendenze aggiornate con il codice corrente, ricompilando di fatto l’applicazione per riflettere i cambiamenti nel nuovo droplet. Garantisce che la funzionalità e le prestazioni dell’applicazione siano allineate con le impostazioni ambientali più recenti e con le configurazioni dei servizi.
+Repush
+
+Il repush è essenziale quando il codice dell’applicazione viene modificato, rendendo necessario un redeployment completo. È utile per implementare nuove funzionalità, correggere bug o apportare altri aggiornamenti significativi all’applicazione.
+Comando di Repush
+
+cf push or cf deploy
+Questo comando riavvia il processo di deployment, creando un nuovo droplet e avviando nuovamente l’applicazione. Garantisce che tutte le istanze dell’applicazione stiano eseguendo la versione più recente del codice.
+Crash
+
+Cloud Foundry tenta automaticamente di riavviare un’istanza andata in crash fino a 200 volte, con un tempo di attesa crescente tra un tentativo e l’altro. Questo processo aiuta a minimizzare l’impatto di problemi transitori, lasciando al tempo stesso il tempo necessario affinché problemi più persistenti vengano risolti.
+Evacuation
+
+In determinate circostanze, come aggiornamenti della piattaforma o sostituzioni di VM, le istanze applicative possono essere spostate su VM differenti in un processo chiamato evacuation. Cloud Foundry gestisce questo processo, creando istanze duplicate sulla nuova VM e assicurandosi che siano pienamente operative prima di dismettere le vecchie istanze. Dovresti progettare la tua applicazione in modo che le evacuation non abbiano effetti sugli utenti (12 factor apps).
+Shutdown
+
+Un’istanza applicativa può essere arrestata manualmente (usando comandi come cf stop) oppure automaticamente a causa di eventi di sistema o health check falliti. SAP BTP, Cloud Foundry runtime imposta un grace period di 10 secondi affinché l’applicazione termini in modo graceful prima di essere fermata forzatamente.
+Summary
+
+Questa lezione esplora gli eventi essenziali del ciclo di vita in SAP BTP, Cloud Foundry runtime che influiscono sugli stati dell’applicazione, incluse operazioni di manutenzione come restart, restage e repush, così come eventi gestiti dal sistema come la gestione dei crash, l’evacuation e lo shutdown. Comprendere e gestire questi eventi del ciclo di vita è fondamentale per mantenere applicazioni robuste, efficienti e scalabili su SAP BTP, Cloud Foundry runtime
+Ulteriori letture
+
+Fasi del ciclo di vita dell’applicazione
+Avvio, riavvio e restage delle tue app
+Il ciclo di vita del container applicativo sull’architettura Diego
+Tutorial
+
+Usa il ciclo di vita dell’applicazione Cloud Foundry per applicazioni Buildpack
+Esegui il seguente tutorial: Comprendere il ciclo di vita dell’applicazione Cloud Foundry per applicazioni Buildpack
+Usa il ciclo di vita dell’applicazione Cloud Foundry per applicazioni Docker
+Esegui il seguente tutorial: Comprendere il ciclo di vita dell’applicazione Cloud Foundry per applicazioni Docker
+
+Expanding Your Horizons in SAP BTP, Cloud Foundry Runtime
+
+Espandere gli Orizzonti
+
+Mentre concludiamo il nostro percorso di apprendimento completo sullo sviluppo, deployment e gestione di applicazioni nel SAP BTP, Cloud Foundry runtime, è fondamentale guardare avanti. Questa lezione finale introduce argomenti aggiuntivi che ti aiuteranno a sviluppare ulteriormente le tue competenze e la tua esperienza nella gestione di applicazioni enterprise. Questi argomenti non solo ti forniranno una prospettiva più ampia, ma ti guideranno anche su dove concentrare i tuoi prossimi sforzi di apprendimento.
+Sviluppo dell’interfaccia utente
+
+Creare un’interfaccia utente (UI) intuitiva e coinvolgente è fondamentale per offrire un’esperienza utente positiva. Ecco alcune raccomandazioni UI per sviluppare applicazioni su SAP BTP, Cloud Foundry runtime:
+SAP Fiori: Usa le SAP Fiori Design Guidelines per garantire un’esperienza utente coerente, scalabile e solida in tutte le tue applicazioni. I principi di design di SAP Fiori aiutano a mantenere un design uniforme tra le tecnologie, concentrandosi sui task dell’utente e sull’integrazione fluida.
+Framework UI: Sfrutta framework potenti come SAPUI5 e HTML5 per creare applicazioni moderne, responsive e multipiattaforma.
+SAPUI5: Un solido framework JavaScript per costruire applicazioni web di livello enterprise. Scopri di più in Developing with SAPUI5.
+HTML5: Semplifica l’esecuzione di applicazioni HTML5 eliminando la necessità di una tua infrastruttura. Esplora Developing HTML5 Applications in Cloud Foundry per maggiori dettagli.
+Dimensionamento dell’applicazione
+
+Dimensionare correttamente le tue applicazioni per l’ambiente SAP BTP, Cloud Foundry è fondamentale per garantire un utilizzo efficiente delle risorse e prestazioni ottimali. Comprendere i requisiti di memoria e calcolo in base al carico atteso e alle interazioni degli utenti aiuta a pianificare e scalare efficacemente le risorse. Per linee guida dettagliate sul sizing e strumenti di stima delle risorse, fai riferimento alla Sizing Guide.
+Garantire la sicurezza
+
+La sicurezza è un pilastro nella gestione di applicazioni enterprise nel SAP BTP, Cloud Foundry runtime. Coinvolge varie misure per proteggere sia gli utenti della piattaforma (amministratori, sviluppatori e operatori) sia gli utenti business (gli utenti finali delle applicazioni).
+Autenticazione e autorizzazione
+
+L’autenticazione in SAP BTP, Cloud Foundry runtime è la prima linea di difesa, garantendo che gli utenti siano chi dichiarano di essere prima di concedere l’accesso ad applicazioni e servizi. Questo processo è facilitato principalmente tramite:
+Integrazione con Identity Provider
+
+Utilizzando servizi come SAP ID o sistemi esterni di identity management, Cloud Foundry supporta capacità di Single Sign-On (SSO), consentendo agli utenti di autenticarsi una sola volta e accedere senza interruzioni a più servizi.
+Autenticazione multifattore (MFA)
+Per una sicurezza rafforzata, l’MFA richiede agli utenti di fornire metodi di verifica aggiuntivi, come un codice inviato a un dispositivo mobile, garantendo che l’accesso sia protetto da utilizzi non autorizzati.
+L’autorizzazione determina quali azioni un utente è autorizzato a eseguire dopo che la sua identità è stata verificata. In SAP BTP, Cloud Foundry runtime, questo è gestito tramite Role-Based Access Control (RBAC), dove agli utenti vengono assegnati ruoli specifici che determinano i loro livelli di accesso. Questi ruoli possono spaziare da ampi permessi amministrativi a accessi specifici a particolari servizi o dati. I ruoli sono raggruppati in collection che possono essere assegnate a vari livelli, come global account, subaccount o direttamente all’interno delle applicazioni, per semplificare la gestione degli accessi.
+Il SAP Authorization and Trust Management Service (XSUAA) svolge un ruolo chiave in questo ecosistema gestendo il flusso di autenticazione e autorizzazione tra utenti, identity provider e applicazioni. Estende le capacità dello User Account and Authentication (UAA) open-source di Cloud Foundry aggiungendo funzionalità specifiche SAP come la multitenancy e API di gestione avanzate. XSUAA utilizza token OAuth e JWT per proteggere la comunicazione tra servizi, migliorando così la sicurezza senza la necessità di memorizzare direttamente le credenziali degli utenti.
+Per maggiori informazioni, consulta:
+Adding Authentication and Authorization
+User Management in the Cloud Foundry Environment
+Misure di sicurezza aggiuntive
+
+SAP BTP, Cloud Foundry runtime utilizza una suite completa di servizi SAP per fornire una sicurezza robusta alle tue applicazioni e ai tuoi dati. Questo include cifratura dei dati, audit logging, memorizzazione delle credenziali, scansione malware e altro ancora. Per ulteriori dettagli, consulta:
+SAP BTP Security Recommendations
+Data Protection and Privacy
+Costruire resilienza
+
+Garantire che le tue applicazioni siano resilienti ai guasti e possano riprendersi rapidamente dalle interruzioni è un aspetto chiave della gestione di applicazioni enterprise nel cloud. Combinando strategie di High Availability (HA) e Disaster Recovery (DR), puoi costruire un ambiente cloud robusto che mantenga la continuità del servizio in condizioni avverse.
+High Availability: Implementare HA significa predisporre le tue applicazioni affinché continuino a funzionare anche quando alcuni componenti falliscono. Questo può essere ottenuto tramite tecniche come load balancing, meccanismi di failover e deployment su più availability zone.
+Disaster Recovery: Le strategie di DR garantiscono che la tua applicazione possa riprendersi da guasti catastrofici con perdita minima di dati e downtime ridotto. Questo comporta tipicamente backup regolari, replica dei dati e la presenza di un piano di recovery ben documentato.
+Per maggiori informazioni, consulta:
+High Availability at Platform and Application Level
+High Availability in Cloud Foundry
+Best Practices for Resilient Applications
+Developing Resilient Applications in Cloud Foundry
+Sfruttare l’AI
+
+Integrare l’AI nelle tue applicazioni SAP BTP, Cloud Foundry runtime può rivoluzionare il modo in cui offri valore agli utenti. Incorporando funzionalità guidate dall’AI come predictive analytics, automazione intelligente e raccomandazioni personalizzate, puoi costruire applicazioni più intelligenti che migliorano i risultati di business.
+Per maggiori informazioni, consulta:
+What Is SAP AI Core?
+Generative AI Hub in SAP AI Core
+Predictive AI
+Summary
+
+Questa lezione segna il culmine del nostro percorso di apprendimento ma anche l’inizio della tua crescita continua nel cloud computing all’interno di SAP BTP, Cloud Foundry runtime. Hai coperto argomenti essenziali tra cui lo sviluppo di interfacce utente, il dimensionamento delle applicazioni, la sicurezza, la resilienza e l’uso dell’AI. Queste aree rappresentano percorsi critici per approfondire la tua expertise e migliorare le tue capacità nell’ecosistema Cloud Foundry. Continua a esplorare, imparare e crescere mentre fai avanzare la tua carriera e il tuo contributo nella tecnologia cloud.
+Mission
+
+Sviluppare un’applicazione CAP-based
+Le mission includono best practice e guida step-by-step per implementare use case, con un supporto consolidato da parte di mission expert e della SAP Community. Dai un’occhiata alla seguente SAP Mission per migliorare ulteriormente le tue competenze nello sviluppo di applicazioni Cloud Foundry su SAP BTP: Sviluppare un’applicazione CAP-based (multitenant) utilizzando GenAI e Retrieval Augmented Generation (RAG)
+
+
