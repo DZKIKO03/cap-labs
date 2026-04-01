@@ -1,0 +1,1689 @@
+Explaining Developer Efficiency Through High Productivity Tools
+Scenario di utilizzo
+
+Con l’aumento della domanda di nuove soluzioni di business e la necessità di spostarsi verso il cloud, le aziende devono supportare i professionisti per sfruttare al meglio le loro competenze e il loro tempo, al fine di stare al passo con le richieste più rilevanti. In questa lezione, apprenderai di più sul ruolo degli sviluppatori nell’aiutare le aziende a superare le sfide e gli ostacoli nel raggiungimento della trasformazione digitale, nonché su come strumenti ad alta produttività consentano ai team di lavorare in modo più efficiente e concentrarsi sui progetti più complessi.
+Sfide e trend di mercato
+
+Le richieste di business per nuove applicazioni ed estensioni stanno aumentando vertiginosamente. Le aziende devono trasformare i loro processi e flussi di lavoro aziendali inefficienti e manuali in moderne applicazioni business basate su cloud. Naturalmente, tali progetti richiedono tempo, sono costosi e richiedono risorse significative di sviluppatori. Tuttavia, non ci sono abbastanza risorse per soddisfare tutte le richieste e i requisiti: gli sviluppatori enterprise sono professionisti altamente qualificati ma scarsi. Quelli disponibili vedono le loro prestazioni influenzate dalla gestione del debito tecnico, da un eccesso di strumenti diversi e da stack tecnologici frammentati.
+La scarsità di professionisti IT qualificati è una delle principali sfide che le aziende stanno affrontando a livello globale, e ciò influisce direttamente non solo sulla capacità dell’azienda di innovare e sviluppare nuovi prodotti, ma anche sulle sue iniziative di trasformazione cloud. Inoltre, si prevede che il mercato del lavoro per gli sviluppatori professionisti diventerà ancora più competitivo nei prossimi anni (Bhagat Nainani: Accelerate Cloud Transformation Initiatives with Low-Code Development, agosto 2022).
+Ma come possono le aziende aiutare i loro team di sviluppo esistenti ad aumentare la produttività? Come ha affermato Arnal Dayaratna, research director, Software Development presso IDC: "Le esigenze degli sviluppatori e delle aziende di migliorare la produttività degli sviluppatori hanno portato alla proliferazione di strumenti che facilitano un’elevata produttività nello sviluppo software" (IDC TechScape: Worldwide High-Productivity Developer Technologies, doc # #US45161219, giugno 2019).
+Questi strumenti ad alta produttività coprono un’ampia varietà di tecnologie come i cosiddetti strumenti di sviluppo low-code e no-code. Lo sviluppo no-code sostituisce lo sviluppo tradizionale basato su codice con uno sviluppo visuale, principalmente adatto a persone non tecniche. Lo sviluppo low-code consente agli sviluppatori di combinare lo sviluppo tradizionale con uno sviluppo guidato da modelli e/o visuale. Pertanto, è adatto sia a sviluppatori part-time sia a sviluppatori professionisti. Gli strumenti di sviluppo ad alta produttività aiutano a ridurre la scrittura di codice intensiva in termini di tempo, anche per applicazioni complesse, e consentono ai team di sviluppo di riutilizzare invece di ricostruire, aumentando la velocità di immissione sul mercato e creando efficienze di costo. In una recente ricerca di IDC, la maggior parte degli intervistati IT ha registrato un guadagno medio del 25% in termini di velocità utilizzando i cosiddetti strumenti low-code rispetto allo sviluppo con codice personalizzato (IDC White Paper, sponsorizzato da SAP, Scaling Low Code Success, doc ##US49536322, agosto 2022). I risultati hanno evidenziato benefici finanziari, miglioramento della produttività degli sviluppatori, riduzione dei costi e la capacità di fornire più applicazioni con lo stesso numero di sviluppatori come principali risultati dell’utilizzo di strumenti ad alta produttività come quelli low-code (IDC White Paper, sponsorizzato da SAP, Scaling Low Code Success, doc # #US49536322, agosto 2022).
+E, quando è stato chiesto quali fossero i principali motivi per adottare lo sviluppo senza codice, gli sviluppatori full-time hanno indicato il miglioramento della retention del personale, l’accelerazione dello sviluppo, direttive e requisiti organizzativi, carenza di personale e un’esperienza di sviluppo semplificata (IDC Infographic, sponsorizzato da SAP, The Low-Code Development Imperative, doc # #US48361121, novembre 2021) (confronta la figura successiva).
+
+Fonte della figura: (Infografica IDC, sponsorizzata da SAP, The Low-Code Development Imperative, doc # #US48361121, novembre 2021)
+Approfondimenti sulla spiegazione dell’efficienza degli sviluppatori tramite strumenti ad alta produttività
+Leggi di più su Presenting Developer Efficiency Through High Productivity Tools qui:
+Bhagat Nainani: Accelerate Cloud Transformation Initiatives with Low-Code Development, agosto 2022
+
+Introducing SAP Business Application Studio
+Scenario di business
+
+La tua azienda prevede di sviluppare applicazioni di estensione sulla SAP Business Technology Platform (SAP BTP). I tuoi sviluppatori software utilizzano dispositivi e sistemi operativi diversi, ma necessitano di un ambiente di sviluppo comune per il loro lavoro che funzioni indipendentemente dalla configurazione tecnica del loro sistema. L’ambiente di sviluppo deve fornire tutti gli strumenti per lo sviluppo cloud moderno, in particolare gli strumenti specifici richiesti per lo sviluppo di applicazioni business nell’ecosistema SAP.
+Introduzione a SAP Business Application Studio
+SAP Business Application Studio è un ambiente di sviluppo progettato per ottimizzare la creazione di applicazioni business e l’estensione delle soluzioni SAP. Offre un insieme di strumenti ad alta produttività che armonizzano e semplificano l’esperienza degli sviluppatori, migliorando la produttività nello sviluppo di applicazioni business. SAP Business Application Studio è un servizio della SAP Business Technology Platform (SAP BTP), che offre un ambiente di sviluppo moderno facilmente accessibile tramite browser internet, fornendo un’esperienza di sviluppo simile a quella desktop.
+SAP Business Application Studio è uno dei servizi essenziali preconfigurati inclusi in SAP Build Code. Fornendo un ambiente chiavi in mano per diverse funzioni come coding, testing, integrazioni e gestione del ciclo di vita delle applicazioni, SAP Build Code combina intelligenza artificiale generativa con capacità di runtime e design time, integrazioni integrate con soluzioni enterprise, DevOps e gestione del ciclo di vita applicativo. SAP Business Application Studio è l’ambiente di sviluppo integrato all’interno di SAP Build Code.
+Per una panoramica completa di SAP Build Code, consigliamo il nostro Learning Journey: Creating Applications and Extensions using SAP Build Code.
+Per quanto riguarda le sottoscrizioni del servizio SAP Business Application Studio, sono disponibili due piani di servizio: "Free" per il Free Tier e "Standard Edition". Per informazioni su tutti i modelli commerciali disponibili, visita il SAP Discovery Center. Inoltre, puoi verificare la disponibilità di SAP Business Application Studio per il tuo provider hyperscaler e la tua regione.
+
+Se conosci già Microsoft Visual Studio Code e accedi a SAP Business Application Studio per la prima volta, potresti notare molte somiglianze. Questo perché SAP Business Application Studio si basa sulla versione open-source di Visual Studio Code ("Code - OSS").
+L’ambiente di sviluppo ti offre tutti gli strumenti necessari per lo sviluppo delle tue applicazioni business, inclusi una command line ed editor ottimizzati per diversi casi d’uso.
+Al centro di SAP Business Application Studio ci sono i dev space. I dev space sono ambienti isolati nel cloud che contengono strumenti configurati su misura e runtime preinstallati per specifici scenari di business, come SAP Fiori, estensioni SAP S/4HANA, applicazioni workflow, applicazioni mobile e altro ancora. Tecnicamente, un dev space è implementato come un Pod Kubernetes, con più container che forniscono strumenti ed estensioni. Consulta questo blog post per ulteriori informazioni tecniche sui dev space.
+
+Tipi di Dev Space
+
+Quando crei un nuovo dev space, scegli un ambiente di sviluppo preconfigurato in base al tipo di applicazione che desideri costruire.
+Sono disponibili i seguenti tipi di dev space:
+SAP Fiori
+Consente di sviluppare applicazioni SAP Fiori basate su diversi ambienti, inclusi Cloud Foundry, ABAP Cloud e SAP S/4HANA.
+Full Stack Application Using Productivity Tools
+Permette di sviluppare, testare, buildare e distribuire facilmente applicazioni utilizzando strumenti ad alta produttività.
+Full Stack Cloud Application
+Consente di costruire servizi business, applicazioni business ed estendere SAP S/4HANA, ad esempio utilizzando il SAP Cloud Application Programming Model (CAP), SAP Fiori e Java o Node.js.
+SAP HANA Native Application
+Permette di costruire e distribuire applicazioni native SAP HANA o modelli analitici.
+SAP Mobile Application
+Il SAP Mobile Development Kit (MDK) consente di personalizzare, distribuire e gestire le tue applicazioni iOS e Android personalizzate nel cloud.
+Basic
+Contiene l’estensione degli strumenti base SAP.
+
+Ogni tipo di dev space include un insieme di estensioni integrate necessarie per il rispettivo scenario applicativo. È possibile selezionare estensioni aggiuntive per arricchire il proprio ambiente tramite il marketplace integrato. Grazie alla sua natura open source e alla forte somiglianza con Microsoft Visual Studio Code, SAP Business Application Studio consente anche di integrare estensioni compatibili con Visual Studio Code provenienti dall’Open VSX Registry. È possibile creare più dev space per utente, a seconda del piano di sottoscrizione scelto.
+Vantaggi di SAP Business Application Studio
+
+SAP Business Application Studio offre i seguenti vantaggi:
+Fornisce un ambiente gestito, preconfigurato e ospitato, ottimizzato per lo sviluppo di applicazioni SAP.
+Può essere amministrato centralmente con strumenti, repository, accesso ai sistemi e policy aziendali.
+Offre un insieme di strumenti di produttività progettati specificamente per lo sviluppo di applicazioni SAP.
+Fornisce linee guida che aiutano gli sviluppatori ad acquisire rapidamente competenze sulle tecnologie SAP.
+Consente di sviluppare applicazioni basate su tecnologie SAP opinionated (SAP UI5, SAP HANA, SAP Mobile Development Kit (MDK), SAP Cloud Application Programming Model (CAP), SAP Fiori Elements) e sulle best practice di sviluppo.
+Offre un’esperienza di sviluppo coerente tra le diverse tecnologie SAP.
+Semplifica la complessità tecnica descrivendo i componenti logici dell’applicazione (database, servizi, componenti UI) anziché file e cartelle.
+Si integra con le soluzioni, i sistemi e i servizi SAP esistenti.
+Fornisce accesso semplice a estensioni compatibili con Visual Studio Code tramite l’Open VSX Registry open source.
+Supporto completo ai prodotti enterprise SAP.
+Riepilogo
+
+Ora puoi spiegare le principali funzionalità di SAP Business Application Studio e i suoi vantaggi di base rispetto ad ambienti di sviluppo offline simili come Microsoft Visual Studio Code. Inoltre, sai cos’è un dev space e quali benefici apporta nello sviluppo di applicazioni nell’ecosistema SAP.
+Approfondimenti su SAP Business Application Studio
+Leggi di più su Introducing SAP Business Application Studio qui: SAP Business Application Studio Community Page
+Per una panoramica completa di SAP Build Code, consigliamo il Learning Journey: Creating Applications and Extensions using SAP Build Code.
+
+Setting Up Your Account for Full-Stack Application Development using Productivity Tools in SAP Business Application Studio
+Scenario di business
+
+In questa lezione, imparerai i passaggi di onboarding amministrativo per configurare un account, con gli strumenti e i servizi necessari per iniziare a sviluppare applicazioni sulla SAP Business Technology Platform.
+Prerequisiti
+
+È necessario disporre di un global account abilitato – vedi Getting a Global Account
+Nota
+A seconda che tu stia utilizzando un Trial Account, Free-Tier o un Enterprise Account, le opzioni disponibili potrebbero differire. Se utilizzi un Enterprise Account avrai accesso a tutte le opzioni. Se utilizzi un Trial o Free-Tier Account, alcune opzioni non saranno disponibili.
+Il global account dispone di entitlements per:
+SAP Business Application Studio
+SAP Build Work Zone (edizione standard O avanzata)*
+SAP HANA Cloud
+(Opzionale) SAP Mobile Services
+Cloud Foundry runtime
+Nota
+*Se hai già sottoscritto SAP Build Work Zone, advanced edition, non è necessario sottoscrivere la standard edition. L’advanced edition è un superset della standard edition.
+È necessario avere il ruolo di Global Account Administrator per poter creare un nuovo subaccount.
+
+Aggiunta degli Entitlements a un Subaccount su SAP BTP
+
+L’accesso a SAP Business Application Studio su SAP BTP può essere ottenuto tramite sottoscrizione manuale oppure utilizzando un subscription booster. I booster forniscono una serie di passaggi guidati e interattivi che consentono di selezionare, configurare e utilizzare i servizi su SAP BTP per raggiungere uno specifico obiettivo tecnico. Per maggiori informazioni sui booster SAP BTP, vedi Boosters.
+Il booster Getting Started with SAP Business Application Studio configura il tuo subaccount con gli entitlements e le sottoscrizioni di base per aiutarti a sviluppare e visualizzare in anteprima le tue applicazioni all’interno di SAP Business Application Studio.
+Questi includono:
+
+Inoltre, il booster assegna anche le role collection necessarie all’utente, che includono:
+Business_Application_Studio_Administrator
+Business_Application_Studio_Developer
+Nota
+Assicurati che gli entitlements sopra indicati (incluse le sottoscrizioni) e le role collection siano assegnati al tuo subaccount, eseguendo il booster oppure assegnandoli manualmente.
+Se stai utilizzando un trial account su SAP BTP e non puoi utilizzare il booster, segui i passaggi descritti qui per configurare il tuo trial account, impostare gli entitlements e creare un dev space. In questo caso, salta il task 1.
+Tuttavia, non sarai in grado di effettuare il deploy delle applicazioni né creare applicazioni mobile native. Per abilitare il deploy, sarà necessario aggiungere ulteriori entitlements e sottoscrizioni al tuo subaccount:
+SAP HANA Cloud: HANA Cloud è la soluzione database cloud-native di SAP per memorizzare i dati delle tue applicazioni.
+SAP HANA Schemas e HDI Containers: gli schemi HANA e i container HDI (HANA Deployment Infrastructure) gestiscono il deployment degli aspetti runtime del database della tua applicazione e il raggruppamento logico della sua struttura dati.
+Cloud Foundry runtime: fornisce la memoria runtime necessaria affinché i servizi distribuiti su SAP Business Technology Platform possano funzionare e scambiare informazioni.
+Inoltre, a seconda del mezzo scelto per il deployment, puoi aggiungere i seguenti servizi:
+SAP Build Work Zone (per deployment web): SAP Build Work Zone ti aiuta a creare un sito personalizzato basato sui ruoli per semplificare l’accesso alle applicazioni business, sia cloud che on-premise. Include applicazioni SAP, applicazioni personalizzate, applicazioni di terze parti ed estensioni.
+SAP Mobile Services (per deployment mobile): SAP Mobile Services fornisce strumenti e funzionalità per lo sviluppo, la configurazione e la gestione semplificata delle applicazioni mobile. Ti aiuta a costruire e scalare le soluzioni mobile offrendo un’esperienza di livello consumer agli utenti.
+Puoi anche aggiungere altri entitlements e sottoscrizioni in base ai tuoi obiettivi di business. Per maggiori dettagli, vedi Deploying Applications.
+Una volta completato con successo il booster, ottieni accesso a diverse funzionalità di sviluppo ad alta produttività in un ambiente cloud. Per test e valutazione (gratuita) e per l’utilizzo di SAP Business Application Studio, puoi usare i piani free-tier o i trial account. Per maggiori informazioni sul piano free-tier di SAP Business Application Studio, vedi Application Plans.
+Per maggiori informazioni sul Trial Account, vedi Working with a Trial Account.
+
+Scenario di Business
+
+Nei prossimi tre esercizi, configureremo un account con gli strumenti e i servizi necessari per iniziare a sviluppare applicazioni sulla SAP Business Technology Platform. Eseguiremo tutte le attività amministrative necessarie per creare e configurare un subaccount e abilitare vari servizi. Nota che utilizzeremo un unico subaccount sia per lo sviluppo (design time) sia per il deployment (runtime). Negli scenari reali, gli ambienti di design-time e runtime sono generalmente gestiti separatamente per ridurre i costi operativi.
+In questo esercizio, eseguirai le seguenti attività:
+    • Creare un nuovo subaccount per lo sviluppo applicativo utilizzando un booster.
+    • Aggiungere ulteriori entitlements al tuo account per SAP Build Work Zone, SAP HANA Cloud, SAP Mobile Services e Cloud Foundry runtime.
+    • Aggiungere subscription o istanze per SAP Build Work Zone, SAP HANA Cloud, SAP Mobile Services e Cloud Foundry runtime.
+    • Assegnare le role collection necessarie al tuo utente.
+Nota
+In questo esercizio creeremo un nuovo subaccount. È anche possibile applicare i passaggi di configurazione richiesti a un subaccount esistente. Tuttavia, per mantenere tutto pulito e separato da altre attività, raccomandiamo di creare un subaccount separato per questo learning journey.
+Prerequisiti
+
+I dettagli sui prerequisiti per configurare un account su SAP Business Application Studio per lo sviluppo applicativo sono trattati in questa lezione.
+Nota
+A seconda che tu stia utilizzando un Trial Account, Free-Tier o Enterprise Account, le opzioni disponibili possono differire. Se utilizzi un Enterprise Account, avrai accesso a tutte le opzioni. Se utilizzi un Trial o Free-Tier Account, noterai che alcune opzioni non sono disponibili.
+Contesto
+
+Come discusso in precedenza in questa lezione, utilizzerai un booster per configurare un nuovo subaccount per sviluppare applicazioni su SAP Business Application Studio. Tuttavia, l’ambiente configurato consentirà solo di progettare e visualizzare in anteprima le applicazioni. Dovrai sottoscrivere ulteriori entitlements e servizi per poter effettuare il deployment della tua applicazione.
+Nota
+Nota che alcuni dei servizi a cui questo learning journey fa riferimento possono comportare costi.
+Se sei preoccupato per eventuali addebiti, puoi scegliere di saltare gli esercizi corrispondenti.
+Nota
+Se stai utilizzando un Trial Account, il booster descritto nel task 1 non sarà disponibile poiché SAP Business Application Studio è già disponibile di default. In questo caso, continua con il task 2.
+Nota
+In questo esercizio, si raccomanda di salvare il lavoro più frequentemente rispetto a quanto richiesto nei sotto-passaggi.
+Iniziamo.
+Task 1: Eseguire il Booster "Get Started with SAP Business Application Studio"
+Steps
+Utilizza un booster dal cockpit del tuo global account.
+Dal pannello di navigazione del tuo SAP BTP cockpit, seleziona Boosters.
+
+
+Cerca studio per trovare il booster chiamato Get started with SAP Business Application Studio, e aprilo.
+
+La pagina di overview del booster fornisce ulteriori informazioni sul booster, e il diagramma della soluzione mostra i servizi (potenziali) coinvolti.
+
+Seleziona Start per avviare il booster. Nel primo passaggio, il booster verificherà che i prerequisiti necessari per eseguirlo siano soddisfatti. Una volta completato questo passaggio e in assenza di problemi, seleziona Next.
+
+Ora puoi scegliere di creare un nuovo subaccount (consigliato per questo esercizio), oppure selezionare un subaccount esistente su cui applicare il booster. Seleziona Next.
+
+Come Provider scegli Microsoft Azure e come Region scegli US West (WA).
+Ora puoi configurare il nome del tuo subaccount, la regione, il cloud provider e così via. A seconda degli entitlements, le opzioni disponibili per cloud provider e regioni possono variare, poiché non tutti i servizi sono disponibili in ogni data center. Il servizio SAP Continuous Integration and Delivery è opzionale, ma si consiglia di mantenerlo, poiché verrà utilizzato come parte di questo Learning Journey.
+
+Seleziona Next.
+In questo passaggio, puoi aggiungere membri del team al tuo subaccount. Gli Administrators possono gestire l’account e i servizi. I Developers hanno opzioni più limitate, ma possono comunque sviluppare applicazioni. Per impostazione predefinita, farai parte degli administrators. Seleziona Next.
+
+Nell’ultimo passaggio prima dell’esecuzione, puoi rivedere le impostazioni di configurazione. Seleziona Finish per eseguire il booster.
+
+Viene visualizzata una finestra pop-up che mostra l’avanzamento del booster. Come noterai, alcuni passaggi possono essere eseguiti in parallelo.
+
+Una volta che il booster è stato completato con successo, seleziona Navigate to Subaccount.
+
+
+Task 2: Aggiungere ulteriori entitlements al tuo subaccount per poter effettuare il deployment delle applicazioni
+
+Nota
+In questo task aggiungerai diversi servizi al tuo subaccount. Se scegli di utilizzare servizi free-tier, tieni presente che ciascun servizio implementa le proprie limitazioni (ad esempio per quanto riguarda il numero di istanze disponibili per account).
+Se stai utilizzando un trial account, potresti trovare che alcuni entitlements siano già stati aggiunti di default.
+Steps
+
+Aggiungi entitlements al subaccount.
+Dal pannello di navigazione a sinistra, seleziona Entitlements. La vista elenco mostra tutti gli entitlements attualmente assegnati al tuo subaccount. Alcuni vengono aggiunti automaticamente quando il subaccount viene creato. Altri sono stati aggiunti dal booster.
+Seleziona Configure Entitlements.
+
+Seleziona Add Service Plans.
+
+Aggiungi l’entitlement SAP Build Work Zone.
+Cerca zone e seleziona l’entitlement SAP Build Work Zone, standard edition.
+Seleziona il piano richiesto.
+
+
+Aggiungi gli entitlements SAP HANA Cloud.
+Cerca hana e seleziona l’entitlement SAP HANA Cloud.
+
+Seleziona il piano richiesto.
+
+Seleziona l’entitlement SAP HANA Schemas & HDI Containers.
+Seleziona il piano hdi-shared.
+Aggiungi l’entitlement Mobile Services.
+Cerca mobile e seleziona l’entitlement Mobile Services.
+Seleziona il piano richiesto.
+
+Aggiungi l’entitlement Cloud Foundry Runtime/Environment.
+Cerca run e seleziona l’entitlement Cloud Foundry Runtime/Environment.
+Seleziona il piano richiesto.
+
+
+
+Salva tutti i service plan aggiunti.
+Nella finestra pop-up seleziona Add 5 Service Plans.
+Seleziona Save.
+
+
+Attendi che le modifiche vengano salvate e applicate al subaccount prima di continuare l’esercizio.
+
+Risultato
+
+Hai ora configurato il tuo account per lo sviluppo di applicazioni full-stack e sei pronto per i prossimi esercizi.
+Hai utilizzato un booster per entitlements e subscription dei servizi, oltre ad aver aggiunto ulteriori entitlements che non erano inclusi nel booster. Sei pronto per proseguire.
+
+Scenario di Business
+
+In questo esercizio, effettuerai la sottoscrizione ai servizi nel Service Marketplace e configurerai il tuo account per lo sviluppo applicativo in SAP Business Application Studio.
+In questo esercizio, eseguirai il seguente task: sottoscrivere servizi nel Service Marketplace.
+Prerequisiti
+
+L’esercizio Set up Your Account for Full-Stack Application Development Using Productivity Tools in SAP Business Application Studio è stato completato con successo.
+Nota
+A seconda che tu stia utilizzando un trial account, free-tier o servizi a pagamento, le opzioni disponibili possono variare. Questo documento mira a coprire tutte le opzioni disponibili.
+Nota
+Nota che alcuni dei servizi a cui questo learning journey fa riferimento possono comportare costi.
+Se sei preoccupato per eventuali addebiti, puoi scegliere di saltare gli esercizi corrispondenti.
+Nota
+In questo esercizio, si raccomanda di salvare il lavoro più frequentemente rispetto a quanto richiesto nei sotto-passaggi.
+Task 1: Sottoscrivere servizi nel Service Marketplace
+
+Steps
+Sottoscrivi SAP Build Work Zone.
+Nel pannello di navigazione della pagina del subaccount nel SAP BTP Cockpit, seleziona Service Marketplace.
+Cerca zone e seleziona il riquadro SAP Build Work Zone, standard edition.
+
+Nella sezione dei dettagli del servizio, puoi trovare ulteriori informazioni sul servizio e link aggiuntivi. Tieni presente che per il piano gratuito ci sono delle restrizioni. Per il trial devi utilizzare il piano standard (subscription). Seleziona Create.
+
+Seleziona il servizio e il piano (usa quelli predefiniti) e scegli Create.
+
+Mentre la sottoscrizione è in corso, puoi verificarne lo stato nella lista Instances and Subscriptions selezionando il pulsante View Subscription. In alternativa, scegli Close per chiudere questa finestra di dialogo e passare al passaggio successivo mentre la sottoscrizione continua in background.
+
+Nota
+Nel caso in cui venga visualizzato un messaggio di errore durante la sottoscrizione a SAP Build Work Zone, assicurati di avere un tenant SAP Cloud Identity Services disponibile e configurato correttamente nel tuo subaccount SAP BTP. Qui puoi trovare una descrizione su come configurare SAP Build Work Zone con il tenant SAP Cloud Identity Services in un account Trial: Set Up SAP Build Work Zone, standard edition Using a Trial Account.
+
+Sottoscrivi SAP HANA Cloud.
+Nella sezione Service Details, scegli Create.
+A seconda del tipo di account, devi selezionare il piano tools/tools (Application).
+Scegli Create.
+
+Nota
+Se non hai eseguito il booster Get Started with SAP Business Application Studio, devi anche aggiungere manualmente i seguenti servizi selezionandoli dal Service Marketplace:
+Continuous Integration & Delivery
+SAP Business Application Studio
+Verifica le Role Collections assegnate al tuo utente.
+Nel SAP BTP cockpit del subaccount, scegli Users nel pannello di navigazione.
+Seleziona il tuo utente.
+
+
+Nella sezione Details, puoi vedere quali Role Collections sono già assegnate al tuo utente. Queste Role Collections contengono ruoli specifici e sono state assegnate tramite il booster, la creazione del subaccount o la sottoscrizione a servizi specifici. Seleziona Assign Role Collection.
+
+Nella finestra di dialogo, seleziona le Role Collections e scegli Assign Role Collection.
+Launchpad_Admin
+SAP HANA Cloud Administrator
+CICD Service Administrator
+
+Nota
+Se non hai eseguito il booster Get Started with SAP Business Application Studio, devi anche aggiungere manualmente i seguenti ruoli:
+Business_Application_Studio_Administrator
+Business_Application_Studio_Developer
+Risultato
+
+Quando hai raggiunto questo punto, hai sottoscritto con successo i servizi nel Service Marketplace.
+Approfondimenti sulla configurazione di un account
+
+Il seguente elenco fornisce ulteriori informazioni sulla configurazione di un account:
+Developing Business Applications Using Productivity Tools
+Managing Entitlements and Quotas Using the Cockpit
+SAP BTP Account Model
+
+Getting Started with SAP Business Application Studio Development Environment
+Scenario di utilizzo
+
+La tua azienda sta pianificando di sviluppare un insieme di applicazioni basate su cloud. Per lo sviluppo dell’applicazione, utilizzerai SAP Business Application Studio come ambiente di sviluppo.
+Dev Spaces in SAP Business Application Studio
+
+SAP Business Application Studio è un ambiente di sviluppo basato su cloud che introduce alcuni nuovi concetti, ridefinendo allo stesso tempo concetti già esistenti in altri ambienti di sviluppo cloud. Questa lezione ha lo scopo di approfondire il concetto di Development Space (dev space).
+I dev space sono l’essenza di SAP Business Application Studio. Sono ambienti di sviluppo completi, dotati dei runtime e degli strumenti necessari per specifici scenari di sviluppo. Ogni dev space è ottimizzato per uno specifico scenario di sviluppo. Ciò significa che viene fornito con un insieme predefinito di strumenti che riteniamo necessari per tale scenario.
+Un dev space può essere creato facilmente nel dev space manager. Quando il tuo dev space è stato creato, il tuo ambiente è pronto e operativo e puoi iniziare lo sviluppo. Non è necessario installare strumenti aggiuntivi o effettuare configurazioni complesse: tutto ciò di cui hai bisogno è già preinstallato e preconfigurato.
+SAP Business Application Studio supporta diversi scenari di sviluppo SAP, come applicazioni cloud, sviluppo UI SAP Fiori e SAP HANA native.
+I diversi strumenti e runtime sono disponibili come estensioni. Ogni estensione può includere uno o più strumenti e/o runtime. Il contenuto di ciascuna estensione è descritto nella relativa descrizione dell’estensione.
+
+
+Creazione e apertura dei Dev Space
+Quando crei un nuovo dev space, ti viene chiesto di selezionare tra vari scenari di sviluppo (ad esempio, tipi di dev space). Per ogni scenario, è presente un elenco predefinito di estensioni che vengono installate automaticamente. Oltre alle estensioni predefinite che puoi vedere sulla sinistra, puoi facoltativamente aggiungere ulteriori estensioni dall’elenco Additional Extensions sulla destra. Sebbene tu possa aggiungere un numero illimitato di estensioni al tuo dev space, devi tenere presente che più ne aggiungi, più tempo sarà necessario per il caricamento del dev space. Pertanto, aggiungi solo le estensioni di cui hai realmente bisogno.
+
+Una volta scelto Create Dev Space, SAP Business Application Studio avvierà per te una (sorta di) macchina virtuale privata e installerà al suo interno tutte le estensioni selezionate. In sintesi, sotto il cofano viene utilizzata la tecnologia Kubernetes per il provisioning e la gestione dei container, al fine di creare un dev space isolato. Quando lo stato del dev space diventa RUNNING, puoi iniziare lo sviluppo.
+Ogni volta che crei un nuovo dev space, viene installata la versione più recente delle estensioni selezionate. Le estensioni nei dev space esistenti vengono aggiornate automaticamente ogni volta che il dev space viene riavviato, garantendo così l’utilizzo delle versioni più aggiornate degli strumenti.
+I dev space sono completamente isolati tra loro: non è possibile accedere al file system e ai processi di un dev space da un altro, anche se entrambi appartengono allo stesso utente. Questo livello di isolamento, insieme all’approccio basato su container, consente di offrire l’accesso al terminale e la possibilità di eseguire quasi qualsiasi comando come se stessi lavorando sul tuo laptop.
+A differenza del tuo laptop, i dev space sono anche “disponibili a essere ricreati”. Se, per qualsiasi motivo, il tuo dev space si compromette, puoi sempre crearne uno nuovo e spostare facilmente i tuoi progetti scaricandoli dal precedente e caricandoli nel nuovo. Mantenere i tuoi progetti sempre sincronizzati con i relativi repository Git renderà ancora più semplice il passaggio tra dev space.
+Per risparmiare risorse, i dev space vengono arrestati dopo 3 ore di inattività (1 ora negli account Trial e free-tier). Non preoccuparti: il tuo dev space, inclusi tutti i file contenuti, verrà ripristinato quando lo riavvierai. Tuttavia, processi come applicazioni o job che erano in esecuzione durante lo sviluppo dovranno essere riavviati manualmente.
+I dev space vengono mantenuti finché la tua sottoscrizione a SAP Business Application Studio è attiva e, naturalmente, finché non vengono eliminati esplicitamente.
+Puoi creare fino a 10 dev space e averne 2 in esecuzione contemporaneamente. Negli account Trial e free-tier, esiste una limitazione a un massimo di due dev space totali e uno solo in esecuzione alla volta.
+
+Scenario di business
+
+In questo esercizio, completeremo la configurazione degli account con gli strumenti e i servizi necessari per iniziare a sviluppare applicazioni su SAP Business Technology Platform. Tieni presente che utilizzeremo un unico subaccount sia per lo sviluppo (design time) sia per il deployment (runtime). In scenari reali, gli ambienti di design-time e runtime sono generalmente gestiti separatamente per ridurre i costi operativi.
+In questo esercizio, eseguirai le seguenti attività:
+Aprire SAP Business Application Studio.
+Creare un nuovo Dev Space.
+Creare un database SAP HANA per la tua applicazione.
+Nota
+In questo esercizio creeremo un nuovo subaccount. È anche possibile applicare i passaggi di configurazione richiesti a un subaccount esistente. Tuttavia, per mantenere tutto pulito e separato da altre attività, si consiglia di creare un subaccount dedicato per questo learning journey.
+Prerequisiti
+
+I dettagli sui prerequisiti per configurare un account su SAP Business Application Studio per lo sviluppo di applicazioni sono trattati in questa lezione.
+Nota
+A seconda che tu stia utilizzando un Trial Account, Free-Tier o Enterprise Account, le opzioni disponibili potrebbero differire. Se utilizzi un Enterprise Account avrai accesso a tutte le opzioni. Se utilizzi un Trial o Free-Tier Account, noterai che alcune opzioni non sono disponibili.
+Contesto
+
+Come discusso in precedenza in questa lezione, utilizzerai un booster per configurare un nuovo subaccount per lo sviluppo di applicazioni su SAP Business Application Studio. Tuttavia, l’ambiente di setup ti consentirà solo di progettare e visualizzare in anteprima le applicazioni. Per poter eseguire il deployment della tua applicazione, dovrai sottoscrivere ulteriori entitlements e servizi.
+Nota
+Tieni presente che alcuni dei servizi a cui questo learning journey fa riferimento possono comportare costi.
+Se sei preoccupato per i costi, puoi scegliere di saltare i relativi esercizi.
+Nota
+Se stai utilizzando un Trial Account, il booster descritto nel task 1 non sarà disponibile poiché SAP Business Application Studio è già disponibile di default. In questo caso, continua con il task 2.
+Nota
+In questo esercizio si consiglia di salvare il lavoro più frequentemente rispetto a quanto richiesto nei sotto-passaggi.
+Iniziamo.
+
+Task 1: Aprire SAP Business Application Studio dal nuovo subaccount
+
+Passaggi
+Trova e apri l’URL di SAP Business Application Studio.
+Ora ti trovi nella pagina di panoramica del subaccount appena creato. Nota lo space (di default Dev) che è stato creato per te. Dal pannello di navigazione a sinistra, seleziona Instances and Subscriptions.
+
+Nella lista Subscriptions, vedrai un link a SAP Business Application Studio. Selezionando questo link verrai portato al punto di accesso di SAP Business Application Studio.
+
+Dalla home page, puoi creare un ambiente di sviluppo basato su cloud (chiamato dev space) e iniziare a sviluppare applicazioni. La home page si apre solo se non hai ancora creato alcun dev space. Se esistono già dei dev space, verrà aperto il dev space manager, dove puoi creare nuovi dev space o accedere a quelli esistenti. I dettagli verranno trattati nella lezione successiva. Come già menzionato, a questo punto la configurazione dell’ambiente consente di sviluppare e visualizzare in anteprima le applicazioni, ma non sarà ancora possibile eseguirne il deployment. Procedi con i passaggi successivi per aggiungere ulteriori entitlements e sottoscrizioni necessari per il deployment.
+
+Task 2: Creare un nuovo Dev Space in SAP Business Application Studio
+Passaggi
+Crea un nuovo dev space.
+Utilizza i seguenti dati:
+
+Dalla home page di SAP Business Application Studio o dal Dev Space Manager, seleziona Create Dev Space.
+
+Inserisci un nome per il dev space (ad esempio, RisksManagmentDevSpace).
+Seleziona il tipo Full Stack Application Using Productivity Tools.
+Scegli Create Dev Space.
+
+Attendi che lo stato del dev space diventi Running.
+
+Apri il dev space selezionando il link con il nome del dev space.
+Attendi che SAP Business Application Studio completi l’avvio.
+Vedrai una notifica in basso a destra con il testo “We have finished installing all tools and templates for you, enjoy your work!”.
+Nota
+Per impostazione predefinita, SAP Business Application Studio si apre con un tema scuro. Per una migliore leggibilità, in questo Learning Journey utilizziamo un tema chiaro. Puoi modificare il tema selezionando il pulsante Manage in basso a destra dello schermo. Successivamente scegli Themes e Color Theme. Si aprirà un elenco da cui potrai selezionare il tema che preferisci utilizzare.
+
+Task 3: Creare un database SAP HANA per la tua applicazione
+Passaggi
+Accedi al tuo account Cloud Foundry.
+Apri SAP Business Application Studio.
+Trova l’icona Hamburger nel menu sul lato sinistro dello schermo. Seleziona View e poi seleziona Command Palette.
+
+Seleziona CF: Login to Cloud Foundry.
+
+Fornisci l’endpoint API del tuo account.
+Questo si trova nella pagina di panoramica del tuo subaccount BTP.
+
+Seleziona il metodo di autenticazione come SSO Passcode.
+Scegli il link open a new browser page per generare il tuo SSO passcode.
+Accedi con il provider di identità appropriato e copia il Temporary Authentication Code.
+Inserisci il Temporary Authentication Code come SSO Passcode.
+Scegli Sign in.
+
+Seleziona l’organizzazione e lo space.
+Scegli Apply.
+
+Crea un database SAP HANA per la tua applicazione.
+Trova l’icona Hamburger nel menu sul lato sinistro dello schermo. Seleziona Terminal e poi seleziona New Terminal.
+Si aprirà la finestra del Terminale.
+
+Incolla il seguente script nel terminale.
+Per trial:
+cf create-service hana-cloud-trial hana learningdb -c '{ "data": {"memory": 16, "systempassword": "<your_password>"}}'
+Nota
+Sostituisci <your_password> con una password a tua scelta.
+Per free-tier:
+cf create-service hana-cloud hana-free learningdb -c '{ "data": {"memory": 32, "systempassword": ""}}'
+Premi Enter.
+Questo esegue lo script.
+Naviga nel tuo subaccount SAP BTP e seleziona Services, poi Instances and Subscriptions. Da qui puoi monitorare lo stato di avanzamento della creazione del database HANA.
+
+Nota
+Per gli utenti con account trial:
+Una volta che il database è stato creato, vai nella sezione Subscriptions e seleziona SAP HANA Cloud. Qui potrai visualizzare anche il database HANA che hai creato.
+
+Seleziona More e scegli Manage Configuration.
+
+Vai alla scheda Connections e seleziona Allow all IP addresses. Scegli Review and Save.
+
+Nella finestra di dialogo di conferma, scegli Save Changes with Restart.
+
+
+
+
+
+
+
+
+
+
+
+
+Ora, affinché le modifiche abbiano effetto, seleziona More per il tuo database HANA e scegli Stop.
+
+Una volta che lo stato del database mostra Stopped, seleziona More e scegli Start.
+
+Attendi che lo stato cambi in Running prima di procedere.
+Dopo 2 ore di inattività su un account trial, il database SAP HANA verrà disattivato. In questo caso, deve essere riavviato prima che l’applicazione possa essere eseguita. Per farlo, ripeti i passaggi i (1) e vi (6).
+
+Verifica che tutte le istanze siano state sottoscritte.
+Assumendo che l’istanza del database SAP HANA Cloud sia stata configurata correttamente, nella panoramica delle sottoscrizioni dovresti ora avere:
+Continuous Integration & Delivery
+SAP Business Application Studio
+SAP Build Work Zone
+SAP HANA Cloud
+Nella panoramica delle istanze dovresti ora avere le istanze dei seguenti servizi:
+Continuous Integration & Delivery (non disponibile nel trial)
+SAP HANA Cloud Database
+
+
+SAP Build Lobby
+
+La SAP Build Lobby è una pagina centrale per creare, accedere e gestire i tuoi progetti SAP Build. Indipendentemente dal fatto che si tratti di progetti SAP Build Apps, SAP Build Process Automation o SAP Build Work Zone. Inoltre, è possibile creare un’applicazione full-stack utilizzando il toolkit di produttività di SAP Business Application Studio.
+Le seguenti funzionalità sono disponibili nella SAP Build Lobby:
+Quick Start
+per creare un nuovo progetto di esempio.
+Create
+per creare un nuovo progetto.
+Deploy
+per distribuire il tuo progetto in un ambiente runtime.
+Share
+per collaborare con altri sviluppatori.
+
+Riepilogo
+In sintesi, il dev space è un concetto chiave al centro di SAP Business Application Studio. Introduce una nuova esperienza di sviluppo con una nuova gamma di funzionalità. Nuovi scenari di sviluppo arriveranno a breve, così come funzionalità avanzate per la gestione dei dev space. Come punto di accesso aggiuntivo, la SAP Build Lobby ti consente di gestire i tuoi progetti, crearne di nuovi e accedere direttamente a quelli esistenti.
+
+
+Taking a Tour of SAP Business Application Studio
+Scenario di utilizzo
+
+La tua azienda sta pianificando di sviluppare un insieme di applicazioni basate sul cloud. Per sviluppare l'applicazione, utilizzerai SAP Business Application Studio come tuo ambiente di sviluppo.
+Toolkit ad alta produttivita offerto da SAP Business Application Studio
+
+SAP Business Application Studio supporta clienti e partner nello sviluppo e nell'estensione di soluzioni SAP, integrando in modo fluido servizi, tecnologie e soluzioni SAP.
+Il toolkit ad alta produttivita di SAP Business Application Studio offre le seguenti capacita:
+SAP Business Application Studio e un potente IDE, che fornisce piena flessibilita agli sviluppatori con diversi strumenti e configurazioni, consentendo agli sviluppatori di adattarlo al meglio alle proprie esigenze.
+Con il toolkit ad alta produttivita, SAP Business Application Studio offre strumenti visuali per l'intero sviluppo applicativo end-to-end (senza attivita di coding obbligatoria, ma offrendo sempre l'opzione di passare al codice). Con questo, gli sviluppatori possono ora creare un'applicazione aziendale SAP cloud pronta per l'uso, includendo:
+Modelli di dati e servizi.
+Interfacce utente SAP Fiori per desktop e multicanale.
+Per offrire un'esperienza di sviluppo end-to-end ad alta produttivita, i seguenti strumenti mirano a fornire un'esperienza di sviluppo intuitiva:
+
+Lo Storyboard
+
+Lo Storyboard è il punto in cui puoi creare, visualizzare e modificare i diversi componenti. Fornisce una panoramica grafica dei componenti della tua applicazione (modelli di dati, servizi e front-end UI), così come delle connessioni tra di essi.
+Questa funzionalità ti consente di comprendere rapidamente la struttura e i componenti della tua applicazione, e di modificare i diversi componenti navigando verso l’editor di dominio del componente (ad esempio, data modeler, editor UI).
+Puoi spostarti, ingrandire e ridurre, ed espandere e comprimere singoli oggetti, oppure tutti gli oggetti contemporaneamente.
+
+La Panoramica del Progetto
+
+La Panoramica del Progetto mostra i diversi componenti del tuo progetto in una vista logica, che semplifica l’esplorazione dei contenuti della tua applicazione.
+Sul lato sinistro dello schermo, puoi trovare l’icona della Panoramica del Progetto nella barra delle attività.
+
+La Panoramica del Progetto contiene le seguenti sezioni:
+Sezione Progetto: qui puoi selezionare il progetto che vuoi visualizzare nell’albero.
+Modelli di Dati: qui trovi il namespace e, sotto di esso, le entità del modello di dati.
+Servizi: qui trovi le entità di servizio utilizzate nel tuo progetto.
+Interfacce Utente: qui trovi le applicazioni SAP Fiori o mobile utilizzate nel tuo progetto.
+Risorse Esterne: qui trovi i servizi esterni utilizzati nel tuo progetto.
+
+
+Editor Grafico per Modelli di Dati e Servizi
+
+Il modellatore grafico CDS (Core Data Services) ti consente di creare, visualizzare e modificare i dati e i servizi della tua applicazione in un’esperienza utente intuitiva.
+Il modellatore grafico ti aiuta a comprendere facilmente le diverse strutture dati e i servizi dell’applicazione, incluse le entità, le proprietà, le relazioni e le annotazioni.
+
+Centro Servizi
+
+Il Centro Servizi fornisce un punto di accesso centrale per esplorare i servizi business SAP provenienti da vari fornitori di servizi. Puoi utilizzare i servizi come origini dati nella tua applicazione e puoi avviare lo sviluppo dell’applicazione dal Centro Servizi. Per esplorare i servizi, scegli l’icona del Centro Servizi dal menu laterale sinistro, oppure seleziona View → OpenView e inserisci Service Center nel campo di input. Si apre il Centro Servizi e vengono visualizzati vari fornitori di servizi, inclusi il SAP System Service Provider, il SAP Business Accelerator Hub Service Provider e il SAP Business Hub Enterprise Service Provider. All’interno di ciascuno di questi fornitori, puoi esplorare i diversi servizi disponibili e scegliere un servizio specifico per visualizzarne i dettagli specifici (entità, proprietà, dati live).
+Puoi nascondere o visualizzare ciascun fornitore di servizi nell’esplora file. Fai clic con il tasto destro su Service Center e seleziona o deseleziona il fornitore di servizi.
+
+Anteprima e Deployment Comodi della Tua Applicazione
+Durante lo sviluppo della tua applicazione, puoi facilmente eseguirla in test scegliendo il pulsante Run and Debug. Questo pulsante si trova nella parte superiore destra dello schermo. In alternativa, puoi usare il pannello Run Configurations.
+
+Una volta che lo sviluppo è pronto, distribuisci la tua applicazione tramite il Task Explorer oppure dal project explorer nel menu contestuale di un progetto.
+
+Strumenti Professionali per Sviluppatori Offerti da SAP Business Application Studio
+Iniziamo con le funzionalità di base dell’IDE. SAP Business Application Studio utilizza la piattaforma open source Visual Studio Code Web per sviluppare il proprio Cloud IDE multilinguaggio che viene eseguito nel browser. In questa parte della lezione, esamineremo i principali strumenti offerti da SAP Business Application Studio per gli sviluppatori professionali, che ti consentono di avere la massima flessibilità nella scelta degli strumenti giusti necessari per completare le tue attività di sviluppo.
+
+Terminale
+
+Aprendo il terminale integrato puoi accedere al sistema sottostante. Puoi creare più terminali aperti in posizioni diverse e navigare facilmente tra di essi. Il terminale è uno strumento comodo perché non hai bisogno di cambiare finestra o modificare lo stato di un terminale esistente per eseguire rapidamente un’attività da riga di comando.
+Dal terminale puoi usare quasi ogni strumento, inclusa l’esecuzione di maven o l’utilizzo di npm. Puoi creare nuovi progetti o moduli, compilare applicazioni e distribuire applicazioni. Per lo sviluppo di applicazioni SAP cloud, puoi digitare il comando CDS help per esplorare alcune opzioni.
+
+Palette dei Comandi
+
+La Palette dei Comandi è una finestra interattiva che fornisce accesso a tutte le funzionalità di SAP Business Application Studio. Questo accesso include anche le scorciatoie da tastiera per le operazioni più comuni.
+Queste scorciatoie da tastiera ti consentono di:
+Aprire file.
+Eseguire comandi dell’editor.
+Connetterti all’ambiente Cloud Foundry.
+Avviare gli strumenti ad alta produttività di SAP Business Application Studio.
+Per aprire uno strumento come la home page dell’applicazione, digita > home e scegli il comando Open Home. Per aprire un file in un editor, inserisci semplicemente il nome del file richiesto. Puoi accedere direttamente alla palette dei comandi dalla barra del menu superiore.
+
+Esplora File
+
+L'Esplora File viene utilizzato per esplorare, aprire e gestire i file e le cartelle del tuo progetto. Puoi creare, eliminare e rinominare file e cartelle, spostare file e cartelle con il drag and drop e usare il menu contestuale per esplorare tutte le opzioni.
+SAP Business Application Studio funziona molto bene con altri strumenti che potresti usare. Per esempio, se vuoi eseguire uno strumento da riga di comando nel contesto della cartella che hai attualmente aperta in SAP Business Application Studio, fai clic con il tasto destro sulla cartella e scegli Open in the code editor oppure il terminale.
+Puoi selezionare più file nell'Esplora File, aprire questi file negli editor oppure scegliere Compare With Each Other dal menu contestuale per confrontare rapidamente (diff) due file.
+Ricerca
+SAP Business Application Studio fornisce ampie funzionalità di ricerca e sostituzione all'interno del tuo workspace utilizzando la vista Search oppure dalla casella di input di ricerca (Ctrl+F). Supportiamo espressioni regolari, corrispondenze, termini da includere ed escludere, condizioni di raggruppamento, intervalli e altro ancora. I risultati della ricerca sono raggruppati nei file che contengono il termine cercato, con un'indicazione delle occorrenze in ciascun file e della loro posizione. Espandi un file per vedere un'anteprima di tutte le occorrenze all'interno di quel file. Scegli una delle occorrenze per visualizzarla nell'editor.
+
+Git
+
+SAP Business Application Studio ti consente di connetterti e interagire con il sistema di controllo Git, permettendoti di connetterti e interagire con repository Git remoti.
+SAP Business Application Studio fornisce un’interfaccia utente grafica per eseguire comandi Git e gestire il controllo del codice sorgente e il versioning. Puoi anche eseguire manualmente altri comandi Git dal terminale.
+
+Debug
+
+La vista Debug in SAP Business Application Studio ti consente di vedere le variabili del tuo progetto, gestire i watch, visualizzare gli elementi nella vista Call stack e gestire i breakpoint. Puoi usare la toolbar di Debug per controllare il flusso di debug, ad esempio Continue/Pause, Step Over, Step Into o Step Out, Restart e Stop.
+La barra di stato del debug ti aiuta a cambiare la launch configuration attiva e ad avviare il debug senza dover aprire la vista Debug, e puoi usare il pannello Debug Console per visualizzare i log durante una sessione di debug.
+
+Struttura
+La vista Struttura visualizza una struttura ad albero, con simboli, del file che è attualmente attivo nell’area dell’editor. Mostra gli elementi, le classi, i campi e i metodi. Include anche una casella di input che trova o filtra i simboli mentre digiti. Il contenuto della vista Struttura è specifico dell’editor.
+
+Vista Problemi
+La vista Problemi mostra un elenco dei problemi presenti nel tuo progetto. Quando fai doppio clic sull’icona di un problema, l’editor della risorsa associata si apre automaticamente ed evidenzia la riga che contiene il problema. Per impostazione predefinita, la vista Problemi ordina i problemi in base alla gravità.
+
+
+Completamento del Codice
+
+In SAP Business Application Studio troverai il supporto out-of-the-box per il completamento del codice, il content assist e i suggerimenti di codice per UI5, CDS, JavaScript, TypeScript, JSON, HTML, CSS e altro ancora, a seconda del dev space che hai creato. Ti basta digitare un carattere e, se il language service conosce completamenti possibili, comparirà un suggerimento. Se continui a digitare caratteri, l’elenco dei membri (variabili, metodi e così via) viene filtrato per includere solo i membri che contengono i caratteri digitati.
+Puoi anche vedere le informazioni rapide per ciascun metodo scegliendo Space oppure selezionando l’icona delle informazioni.
+
+Layout Dinamico
+Puoi aprire diversi editor e posizionarli nell’area dell’editor per una modifica affiancata. Per aprire più di un editor, trascina la scheda dell’editor nella posizione preferita nell’area dell’editor. Trascina il bordo dell’editor per ridimensionarlo.
+
+Impostazioni Utente e Workspace
+
+SAP Business Application Studio fornisce due diversi ambiti di impostazione: le impostazioni utente, che si applicano globalmente a qualsiasi istanza tu apra, e le impostazioni del workspace, che si applicano quando il workspace è aperto. Le impostazioni del workspace sono specifiche di un progetto e possono essere condivise tra sviluppatori.
+Puoi cercare e individuare le impostazioni usando la barra di ricerca, personalizzare il tuo editor per linguaggio, specificare un eseguibile che SAP Business Application Studio eseguirà per svolgere determinate operazioni, visualizzare i valori predefiniti nell’editor delle impostazioni e altro ancora.
+Per aprire le Impostazioni Utente, scegli l’icona dell’ingranaggio in basso a sinistra nel pannello laterale.
+
+Funzionalità Aggiuntive che Migliorano l’Esperienza dello Sviluppatore
+
+Come parte dell’offerta SAP Build Code, SAP Business Application Studio è combinato con i servizi e gli SDK più essenziali su SAP BTP per migliorare ulteriormente l’esperienza dello sviluppatore. Gli sviluppatori possono sfruttare Joule Copilot, uno strumento sofisticato che fornisce assistenza intelligente e automatizzata alla scrittura del codice, migliorando significativamente il processo di sviluppo. Inoltre, sono disponibili guide integrate passo dopo passo, progettate per supportare casi d’uso di sviluppo selezionati che semplificano la complessità delle attività. Per esplorare questi strumenti innovativi e potenziare ulteriormente il tuo processo di sviluppo, ti invitiamo a intraprendere il SAP Build Code Learning Journey: Creating Applications and Extensions using SAP Build Code.
+Riepilogo
+Per riassumere, abbiamo esaminato l’insieme degli strumenti di sviluppo offerti da SAP Business Application Studio. Questi strumenti mirano ad aiutarti a completare le tue attività di sviluppo, iniziando dagli strumenti ad alta produttività (come lo Storyboard e il modellatore grafico CDS) e proseguendo con gli strumenti professionali per sviluppatori (come il terminale e l’esplora file).
+
+
+Introducing the Use Case and Architecture of the Application
+Caso d’uso e architettura dell’applicazione
+
+Iniziamo considerando il seguente scenario:
+Sei un dipendente di un’azienda che produce componenti interni per automobili. L’azienda esporta merci in paesi esteri. Lungo questa catena di fornitura, i rischi quotidiani ed eccezionali possono influenzare in modo significativo il business dell’export. Questi rischi devono quindi essere identificati e monitorati continuamente. Per questo motivo, l’azienda decide di gestire i rischi in una nuova applicazione.
+La tua azienda gestisce tutti i processi di business tramite un sistema SAP S/4HANA Cloud. Le estensioni personalizzate all’interno del sistema stesso, le cosiddette “in-app extensions”, soddisfano i requisiti individuali solo fino a un certo punto. Per l’applicazione di risk management richiesta, l’azienda decide di implementare una “side-by-side extension” perché offre maggiore flessibilità rispetto alle “in-app extensions”.
+Le “side-by-side extensions” vengono sviluppate utilizzando diversi tipi di strumenti e servizi di sviluppo sulla SAP Business Technology Platform (in breve, SAP BTP).
+La nuova applicazione di risk management deve essere sviluppata utilizzando SAP Business Application Studio (BAS) su SAP BTP. Sono disponibili diverse opzioni e ambienti runtime:
+SAP BTP, ABAP Environment
+SAP BTP, Cloud Foundry runtime
+SAP BTP, Kyma runtime
+Prima di scegliere un runtime, è essenziale familiarizzare con il livello di conoscenza presente nel proprio reparto di sviluppo. Se gli sviluppatori hanno solo conoscenze ABAP, la scelta di un’estensione scritta in ABAP, che alla fine viene eseguita sull’ABAP environment nel cloud, è ovvia.
+Per continuare con lo scenario sopra menzionato, il tuo team di sviluppo è composto principalmente da sviluppatori con conoscenze di Node.js. Pertanto, l’azienda ha deciso di sviluppare un’estensione con il Cloud Application Programming Model (CAP) basato su Node.js di SAP (https://cap.cloud.sap/docs/node.js/). Il deployment avviene su SAP BTP, Cloud Foundry Environment.
+Come parte del tuo team di sviluppo, svilupperai un’applicazione CAP per il risk management.
+
+Panoramica dello stack tecnologico e dell’applicazione finale
+Ecco un riepilogo di come si presenta lo stack per l’applicazione di risk management:
+Front-End
+SAP Fiori Elements viene utilizzato per l’interfaccia utente.
+Back-End
+SAP Cloud Application Programming Model (CAP) viene utilizzato per modellare le entità del database, implementare la logica di business e definire il servizio OData.
+API
+API REST OData. L’endpoint OData viene generato dall’applicazione CAP.
+Database
+SAP HANA Cloud su SAP BTP.
+Questo è l’aspetto del punto di ingresso dell’applicazione finale:
+
+Se scegli una singola voce nell’elenco, verrai reindirizzato alla pagina di dettaglio:
+
+Considerando lo scenario precedente, il tuo utente finale dovrebbe essere in grado di creare, modificare ed eliminare i rischi dalla pagina elenco. Ogni rischio ha le proprietà di impatto e priorità in base al potenziale danno di ciascun rischio.
+Nota
+Non possiamo fornire un sistema SAP S/4HANA Cloud completo per questo corso. Per questo motivo, abbiamo deciso di utilizzare la SAP Business Accelerator Hub SAP S/4HANA Sandbox, che fornisce la stessa API Open Data Protocol (OData) per i business partner di un vero sistema SAP S/4HANA Cloud.
+Risoluzione dei problemi
+Nel caso in cui dovessi riscontrare problemi durante il corso, ti suggeriamo di rileggere attentamente i corrispondenti passaggi dell’esercizio. Se questo ancora non aiuta, pubblica una domanda nel nostro SAP BTP Learning Community Group.
+Cosa c’è dopo?
+Le lezioni seguenti ti guideranno attraverso un processo di sviluppo end-to-end, dallo sviluppo fino al deployment automatizzato.
+
+Creating a New Project
+Scenario aziendale
+La tua azienda sta pianificando di sviluppare un insieme di applicazioni cloud-based basate sul SAP Cloud Application Programming Model (CAP). Queste applicazioni verranno distribuite su SAP Business Technology Platform (BTP) come applicazioni di estensione per i sistemi core back-end SAP.
+In questo esercizio, eseguirai il seguente compito: creare un nuovo progetto di sviluppo.
+Ora puoi iniziare lo sviluppo della tua applicazione. Per prima cosa creerai un nuovo progetto per la tua nuova applicazione. I progetti possono essere creati direttamente da SAP Business Application Studio oppure, facoltativamente, da SAP Build Lobby. In questo esercizio, creerai il nuovo progetto direttamente da SAP Business Application Studio.
+Nota
+Tieni presente che alcuni dei servizi a cui questo learning journey rimanda possono comportare costi.
+Se sei preoccupato per eventuali addebiti, puoi scegliere di saltare i corrispondenti esercizi.
+Task 1: Creare un nuovo progetto
+Passaggi
+Creare un nuovo progetto.
+Utilizzare i seguenti dati:
+
+
+
+
+
+
+
+Apri la panoramica del progetto.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dalla panoramica del progetto, seleziona il pulsante Create Project.
+
+Seleziona Full-Stack with Productivity Tools.
+
+Inserisci un Project Name e premi Invio.
+
+Attendi il completamento del processo di creazione del progetto (una volta completato il ricaricamento dell’IDE).
+Il tuo progetto è ora stato creato ed è pronto per iniziare la tua prossima attività di sviluppo.
+
+
+Creating a Data Model
+Scenario aziendale
+La tua azienda sta pianificando di sviluppare un insieme di applicazioni cloud-based basate sul SAP Cloud Application Programming Model (CAP), e queste applicazioni verranno distribuite su SAP Business Technology Platform (BTP) come applicazioni di estensione per i sistemi core back-end SAP.
+In questo esercizio, eseguirai i seguenti compiti:
+Creare un modello dati.
+Aggiungere proprietà al modello dati.
+Creare un’associazione.
+Ora puoi iniziare lo sviluppo della tua applicazione. Per prima cosa modellerai la tua applicazione e definirai la tabella del database e la relazione tra le entità.
+Nota
+Tieni presente che alcuni dei servizi a cui questo learning journey rimanda possono comportare costi.
+Se sei preoccupato per eventuali addebiti, puoi scegliere di saltare i corrispondenti esercizi.
+
+Task 1: Creare modelli dati
+Passaggi
+Creare i due modelli dati richiesti, “Risks” e “Mitigations”, per contenere i dati in questa applicazione.
+Apri SAP Business Application Studio.
+Seleziona Project Overview dal menu a sinistra per aprire lo Storyboard.
+
+
+Seleziona la voce Storyboard dalla Project Overview aprendo Project Actions.
+
+Sotto lo Storyboard, cerca il riquadro Data Models e seleziona il pulsante +.
+
+Assicurati che sia selezionato il Namespace corretto e fai clic su Create.
+
+Configura l’entità Risks.
+Utilizza le seguenti proprietà:
+
+La nuova entità viene mostrata nella scheda schema.cds.
+Modifica il nome nell’intestazione dell’entità in Risks.
+Scegli l’icona Show Details per poter aggiungere proprietà.
+
+Si apre un nuovo menu sul lato destro dello schermo.
+Scegli l’icona + nella tabella delle proprietà. Inserisci le proprietà della tabella precedente.
+
+Crea l’entità chiamata Mitigations.
+Utilizza le seguenti proprietà:
+
+Torna alla scheda schema.cds. Scegli il pulsante Add Entity nel menu in alto per aggiungere un’altra entità.
+
+Trascina la nuova entità in un punto qualsiasi dello schermo.
+Seleziona l’intestazione dell’entità e inserisci come nome dell’entità Mitigations.
+Scegli l’icona + nel menu Properties per aggiungere le proprietà dalla tabella precedente.
+
+Se il menu non è visibile, seleziona l’intestazione dell’entità e scegli l’icona Show Details.
+Ora puoi vedere due proprietà nello schema.cds.
+Descrivi l’interconnessione tra queste entità definendo una relazione tra risks e mitigations.
+Utilizza i seguenti dati:
+
+Trova la voce di Mitigations e seleziona l’intestazione della tabella.
+Scegli l’icona Add Relationship nel menu a destra.
+
+
+
+Collega la linea all’entità Risks selezionando l’entità Risks e configura la relazione nella schermata pop-up.
+Inserisci i dati della tabella precedente e scegli Create.
+
+Scegli Save.
+
+Defining Services
+Scenario aziendale
+
+La tua azienda sta pianificando di sviluppare un insieme di applicazioni cloud-based basate sul SAP Cloud Application Programming Model (CAP). Queste applicazioni verranno distribuite sulla SAP Business Technology Platform (BTP) come applicazioni di estensione per i sistemi core back end SAP.
+In questo esercizio, eseguirai il seguente compito: creare entità di servizio.
+Ora creerai entità di servizio per Risks e Mitigations, per definire quali parti dei modelli di dati che hai creato vengono esposte all'applicazione.
+Nota
+Tieni presente che alcuni dei servizi ai quali questo learning journey rimanda possono comportare costi.
+Se sei preoccupato per eventuali addebiti, puoi scegliere di saltare gli esercizi corrispondenti.
+Task 1: Creare servizi
+Passaggi
+
+Crea un nuovo servizio.
+Torna allo Storyboard.
+Sotto lo Storyboard, cerca il riquadro Services e seleziona il pulsante +.
+
+Assicurati che RiskManagementService sia aggiunto come Service e fai clic su Create.
+
+Scegli la voce corrispondente al namespace che hai creato in precedenza, ad esempio RiskManagementService. Dal menu che si apre, seleziona Add Service Entity.
+
+Si apre la schermata service.cds
+Assicurati che Enable Draft editing sia selezionato. Seleziona RiskManagement.Risks come tipo per questa projection e salva le modifiche.
+
+Verifica che una nuova entità venga visualizzata nella scheda service.cds.
+
+Verifica che il servizio sia impostato per la modifica draft.
+Un draft è una versione temporanea di un'entità aziendale che non è ancora stata salvata esplicitamente come versione attiva. I draft vengono utilizzati:
+Per mantenere le modifiche non salvate se un'attività di modifica viene interrotta, consentendo agli utenti di riprendere la modifica in un secondo momento.
+Per prevenire la perdita di dati se un'applicazione termina in modo imprevisto.
+Come meccanismo di blocco per impedire a più utenti di modificare lo stesso oggetto nello stesso momento, e per rendere gli utenti consapevoli quando ci sono modifiche non salvate da parte di un altro utente.
+Seleziona l'entità Risks nella scheda service.cds.
+Scegli l'intestazione dell'entità. Scegli Show Details.
+Questo consente di aggiungervi proprietà.
+
+Viene visualizzato un menu sul lato destro dello schermo.
+Scegli la scheda Settings. Verifica che la casella Draft Editing sia selezionata.
+
+Configura una nuova entità.
+Nella scheda service.cds, scegli Add Projection.
+
+Rilascia la nuova entità in un punto qualsiasi della scheda service.cds.
+La sezione Projection si apre sulla destra.
+Assicurati che Enable Draft editing sia selezionato. Seleziona RiskManagement.Mitigations come tipo per questa projection e salva le modifiche.
+
+Verifica che una nuova entità venga visualizzata nella scheda service.cds.
+
+Verifica che il servizio sia impostato per la modifica draft.
+Nella scheda service.cds, seleziona l'entità Mitigations facendo doppio clic sul suo nome.
+Nota che le proprietà di Mitigations vengono visualizzate nel menu sul lato destro.
+Se non vedi il menu dei dettagli sulla destra, scegli l'intestazione dell'entità e seleziona l'icona Show Details.
+
+Trova la scheda Settings nel menu sul lato destro. Verifica che la casella Draft Editing sia selezionata.
+
+
+Consuming an External Service From SAP S/4HANA
+Scenario aziendale
+
+In questa lezione, espanderai la tua applicazione con un'API, che consente di ottenere dati dal tuo sistema back-end SAP S/4HANA. Questo permette all'applicazione di utilizzare dati direttamente dal sistema back-end.
+In questo esercizio, eseguirai i seguenti compiti:
+Prendere familiarità con il Service Center in SAP Business Application Studio.
+Aggiungere l'API Business Partner all'applicazione.
+Aggiungere l'entità Business Partner al servizio applicativo.
+Configurare una destination SAP Business Accelerator Hub.
+Prerequisiti
+
+Hai completato con successo l'esercizio Define Services.
+Nota
+Tieni presente che alcuni dei servizi ai quali questo learning journey rimanda possono comportare costi.
+Se sei preoccupato per eventuali addebiti, puoi scegliere di saltare gli esercizi corrispondenti.
+Task 1: Prendere familiarità con il Service Center in SAP Business Application Studio
+
+Passaggi
+Prendi familiarità con il Service Center.
+Vai alla scheda Storyboard di SAP Business Application Studio.
+Trova il riquadro External Resources e seleziona l'icona + per aggiungere un nuovo modello di dati esterno.
+
+Il Service Center si apre in una nuova scheda.
+Sul lato sinistro della finestra, seleziona Service.
+Scegli SAP Business Accelerator Hub come Provider, scegli SAP S/4HANA Cloud Public Edition come Product e SAP S/4HANA Cloud Public Edition come Package.
+
+Nota
+Nel caso in cui venga visualizzata una finestra di login, inserisci lo stesso utente che utilizzi per accedere a SAP Business Accelerator Hub.
+
+Nota
+Nel caso in cui il pannello laterale del Service Center non si apra, seleziona l'icona Service Center dal menu sul lato sinistro di SAP Business Application Studio.
+
+Si apre un elenco che mostra i servizi disponibili.
+Inserisci Business Partner (A2X) nel campo di ricerca e seleziona il servizio corrispondente.
+
+Verifica di poter ottenere qui tutte le informazioni sulla Business Partner API selezionata, ad esempio:
+Le entità di servizio e le proprietà.
+La versione del protocollo OData.
+I dati live del servizio provenienti dal sistema SAP (nel nostro caso dal sandbox dell'API Hub).
+
+Task 2: Aggiungere la Business Partner API all'applicazione
+
+Passaggi
+Aggiungi un modello di dati.
+Scegli il pulsante Add to Project al centro dello schermo.
+
+Questo importa le informazioni del servizio nella tua applicazione cloud. Quindi, tornerai allo Storyboard.
+Scegli la voce corrispondente al namespace che hai creato in precedenza, ad esempio RiskManagementService. Dal menu che si apre seleziona Add Service Entity.
+
+Nella schermata service.cds, come Projection Type seleziona BusinessPartnerA2X.A_BusinessPartner.
+Assicurati che Enable Draft editing NON sia selezionato.
+Nella scheda Projection, nel menu visualizzato, deseleziona tutte le proprietà (use all properties), quindi seleziona le seguenti:
+BusinessPartner
+Customer
+Supplier
+BusinessPartnerCategory
+BusinessPartnerFullName
+BusinessPartnerIsBlocked
+Salva le modifiche.
+
+Task 3: Aggiungere l'entità Business Partner al servizio della tua applicazione
+
+Passaggi
+Aggiungi una relazione.
+Usa i seguenti dati:
+
+Torna alla scheda Storyboard e individua il riquadro Data Models.
+Scegli la voce Risk Management all'interno del riquadro Data Models, quindi seleziona Open in Graphical Modeler.
+
+Trova la voce Risks nel Graphical Modeler. Scegli l'intestazione della tabella.
+Scegli l'icona Add a relationship nel menu sulla destra.
+
+Rilascia la linea dall'entità Risks in un punto qualsiasi dello schermo e configura la relazione nel menu sul lato destro dello schermo.
+Inserisci i dati della tabella precedente e scegli Create.
+
+Task 4: Configurare una destination SAP Business Accelerator Hub
+
+Passaggi
+Aggiungi una destination nel SAP BTP Cockpit.
+Prima di utilizzare i dati della Business Partner API in SAP Business Application Studio, devi prima configurare una destination per SAP Business Accelerator Hub.
+Usa i seguenti dati:
+
+Torna al tuo subaccount nel SAP BTP Cockpit. (Per ulteriori informazioni vedi: SAP BTP Cockpit)
+Vai su Connectivity → Destinations.
+Seleziona Create Destination.
+
+Inserisci i valori della tabella precedente.
+Aggiungi proprietà.
+Usa i seguenti dati:
+
+Scegli il pulsante New Property sul lato destro.
+Ad eccezione della voce URL.headers.ApiKey, inserisci i valori della tabella precedente.
+Per la proprietà URL.headers.ApiKey, devi inserire la tua API key univoca di SAP Business Accelerator Hub. La otterrai nei sottopassi successivi.
+Nel browser, apri una nuova scheda.
+In questa nuova scheda, accedi a SAP Business Accelerator Hub.
+Sotto il tuo nome nell'angolo in alto a destra, troverai un link alle impostazioni.
+
+In Impostazioni API, scegli il pulsante Mostra chiave API. Copia la chiave.
+
+Torna all’altra scheda del browser.
+Incolla la chiave API nel campo corrispondente.
+Assicurati che l’opzione Usa il truststore JDK predefinito sia selezionata.
+
+Salva le tue impostazioni.
+Risultato
+Hai integrato un’API di servizio esterno da un sistema SAP S/4HANA nella tua applicazione.
+
+
+Adding Sample Data
+Scenario aziendale
+
+La tua azienda sta pianificando di sviluppare un insieme di applicazioni cloud basate sul SAP Cloud Application Programming Model (CAP). Queste applicazioni verranno distribuite su SAP Business Technology Platform (BTP) come applicazioni di estensione per i sistemi back-end SAP Core.
+In questo esercizio, eseguirai il seguente compito: aggiungere dati di esempio alle entità.
+Una volta completata la struttura della tua applicazione, puoi aggiungere dati di esempio all’applicazione. Puoi usare l’editor visuale dei dati oppure inserire i dati usando un file CSV.
+Nota
+Tieni presente che alcuni dei servizi a cui questo learning journey rimanda possono comportare costi.
+Se sei preoccupato per eventuali addebiti, puoi scegliere di saltare i relativi esercizi.
+Attività 1: Aggiungere dati di esempio in modi diversi
+Passaggi
+Aggiungi una nuova entità dati e crea dati per l’entità A_BusinessPartner.
+Nello Storyboard, seleziona Open Editor e scegli Sample Data dal menu a discesa.
+
+Nel campo Search, inserisci Business.
+
+Dall’elenco delle entità, seleziona A_BusinessPartner.
+Imposta Mock Data su off. Nel campo Number of rows, inserisci 3. Scegli Add.
+
+Nella riga 1, aggiungi i seguenti dati:
+
+Nella riga 2, aggiungi i seguenti dati:
+
+Nella riga 3, aggiungi i seguenti dati:
+
+Per le entità Mitigations e Risks è possibile importare dati di esempio predefiniti.
+Crea un file CSV.
+Incolla i seguenti dati per Mitigations:
+ID;createdAt;createdBy;description;owner;timeline	
+20466921-7d57-4e76-b14c-e53fd97dcb11;2021-04-27;max.mustermann@muster.com;SLA violation: authorize account manager to offer service credits for recent delivery issues;suitable BuPa;Q4 2022	
+20466921-7d57-4e76-b14c-e53fd97dcb12;2021-04-27;max.mustermann@muster.com;SLA violation: review third party contractors to ease service delivery challenges;suitable BuPa;Q4 2022	
+20466921-7d57-4e76-b14c-e53fd97dcb13;2021-04-27;max.mustermann@muster.com;Embargo violation: investigate source of shipment request	 revoke authorization;SFSF Employee with link possible?;29.03.2023
+20466921-7d57-4e76-b14c-e53fd97dcb14;2021-04-27;max.mustermann@muster.com;Embargo violation: review shipment proceedure and stop delivery until further notice;SFSF Employee with link possible?;01.03.2023
+
+Salva il file CSV.
+Il nome del file CSV deve contenere il nome del progetto che hai creato nell’esercizio Create a New Project e il nome dell’entità che hai creato per le mitigations nell’esercizio Create and Configure a Data Model. (Se usi la denominazione proposta in questo learning journey, devi rinominare il file CSV in RiskManagement-Mitigations.csv.)
+Torna alla scheda Storyboard dell’applicazione.
+Trova il riquadro Data Models.
+Seleziona la voce Mitigations. Scegli Add Sample Data.
+
+
+Scegli il pulsante Import.
+
+Seleziona il tuo file CSV.
+Nota
+I dati di esempio verranno salvati automaticamente per l’entità selezionata.
+Crea un nuovo file CSV.
+Incolla nel file CSV i seguenti dati per Risks:
+ID;miti_id;title;prio;descr;impact;criticality;supplier_businesspartner
+20466922-7d57-4e76-b14c-e53fd97dcb11;20466921-7d57-4e76-b14c-e53fd97dcb11;CFR non-compliance;1;Recent restructuring might violate CFR code 71;10000;2;3270
+20466922-7d57-4e76-b14c-e53fd97dcb12;20466921-7d57-4e76-b14c-e53fd97dcb12;SLA violation with possible termination cause;2;Repeated SLA violation on service delivery for two successive quarters;90000;3;2803
+20466922-7d57-4e76-b14c-e53fd97dcb13;20466921-7d57-4e76-b14c-e53fd97dcb13;Shipment violating export control;1;Violation of export and trade control with unauthorized downloads;200000;2;3510
+Salva il file CSV come RiskManagement-Risks.csv.
+Il nome del file CSV deve contenere il nome del progetto che hai creato nell’esercizio Create a New Project e il nome dell’entità che hai creato per le mitigations nell’esercizio Create and Configure a Data Model. (Se usi la denominazione proposta in questo learning journey, devi rinominare il file CSV in RiskManagement-Risks.csv.
+Ripeti i passaggi da 3 a 7 (da c a g) con Risks.
+
+
+Building the User Interface with SAP Fiori Tools
+
+Scenario aziendale
+
+Dopo aver definito il servizio e il modello dati come base della tua applicazione, aggiungeremo all’applicazione un’interfaccia utente responsive basata su SAP Fiori elements, utilizzando SAP Fiori tools.
+In questo esercizio, eseguirai i seguenti compiti:
+Creare un’interfaccia utente che mostri un elenco di Risks e i relativi dettagli.
+Aggiungere ulteriore contenuto alla pagina List Report dell’interfaccia utente dell’applicazione Risks.
+Aggiungere ulteriore contenuto alla pagina di dettaglio Object Page dell’interfaccia utente dell’applicazione Risks.
+Prerequisiti
+
+Hai completato con successo gli esercizi precedenti. Hai creato il modello dati e il servizio per risks e hai importato il servizio esterno business partner.
+Nota
+Tieni presente che alcuni dei servizi a cui questo learning journey rimanda possono comportare costi.
+Attività 1: Creare un’interfaccia utente
+Passaggi
+
+Crea un’interfaccia utente.
+Usa i seguenti dati:
+
+Vai alla scheda Storyboard di SAP Business Application Studio.
+Trova il riquadro UI Applications (vedi: User Interface) e scegli l’icona + per aggiungere una nuova interfaccia utente.
+
+Apparirà una schermata in cui puoi aggiungere il Nome visualizzato: Risks e inserire una Descrizione a tua scelta.
+
+Assicurati di selezionare RiskManagementService come DataSource.
+Scegli Next.
+Seleziona UI Application Type come Template-Based, Responsive Application per creare una UI basata su SAP Fiori elements. Scegli Next.
+
+Scegli UI Application Template come List Report Page. Scegli Next.
+
+Sotto Data Objects, seleziona risks come Main Entity, per mostrare l’entità risks nella UI. Scegli Finish.
+
+Attendi finché la Page Map dell’interfaccia utente, che mostra due pagine, non viene aperta sul lato destro dello schermo.
+
+Attività 2: Aggiornare il List Report
+Passaggi
+Aggiorna il list report.
+Usa i seguenti dati:
+
+Trova la voce List Report nella Page Map e scegli l’icona Edit per modificarla.
+
+Nel Page Editor, espandi la sezione Columns, scegli l’icona + e seleziona Add Basic Columns dal menu a discesa.
+
+Nel pop-up, scegli supplier_BusinessPartner per Columns. Scegli Add.
+
+Attività 3: Aggiornare l’Object Page
+Passaggi
+Aggiorna l’object page.
+Usa i seguenti dati:
+
+Scegli la freccia per tornare indietro e trova la voce Object Page nella Page Map. Scegli l’icona Edit per modificarla.
+
+Nella voce Sections, apri General Information → Form → Fields.
+Scegli l’icona + per aggiungere nuovi campi alla UI. Nel menu a discesa, seleziona Add basic fields.
+
+Consulta la tabella precedente per aggiungere dal menu a discesa i seguenti campi:
+miti_ID
+BusinessPartnerFullName
+BusinessPartnerIsBlocked
+Scegli Add.
+
+Scegli supplier_BusinessPartner dall’elenco Fields nel pannello di struttura a sinistra.
+Trova la voce Display Type nel pannello delle proprietà a destra e scegli Value Help dal menu a discesa.
+
+Scegli il collegamento Edit properties for Value Help sotto la casella dell’elenco a discesa Display Type.
+
+Nella schermata Value Help, verifica se i seguenti attributi sono disponibili come Result List Properties.
+BusinessPartnerFullName
+BusinessPartnerIsBlocked
+
+Puoi decidere di eliminare le altre proprietà del value help. In tal caso, usa l’icona del cestino.
+Link di riferimento: creazione di un’interfaccia utente responsive dell’applicazione
+Per ulteriori informazioni sulla creazione di un’interfaccia utente responsive dell’applicazione, vedi qui: Create a template-based responsive user interface
+
+
+Previewing Your Application
+Scenario aziendale
+
+Siamo nel processo di sviluppo di un'applicazione cloud basata su varie tecnologie SAP. Le tecnologie utilizzate partono dai servizi database, utilizziamo interfacce utente, incluso il SAP Cloud Application Programming Model (CAP), SAP Fiori, SAP Mobile Development (MDK) e altre. Più il sistema diventa complesso, più urgente diventa la necessità di visualizzarlo in anteprima e testarlo. Effettuare un deployment completo potrebbe essere una scelta, ma può richiedere molto tempo e molti prerequisiti. Per questo motivo, è richiesto un approccio rapido, efficiente e convincente per eseguire l’anteprima.
+In questo esercizio, eseguirai i seguenti task:
+Per visualizzare in anteprima la tua applicazione, familiarizza con il punto di accesso centrale e con le scelte disponibili.
+Scegli di visualizzare in anteprima con la configurazione predefinita per verificare il comportamento della tua app durante il runtime con dati di esempio per i servizi esterni.
+Crea una nuova configurazione, che abiliti i dati live per i servizi esterni, e scegli di visualizzare in anteprima questa nuova configurazione per sperimentare le sorgenti dati ibride della tua app, senza distribuire la tua app sul cloud.
+Prerequisiti
+
+Hai completato con successo l’esercizio: Crea un’interfaccia utente applicativa responsive.
+L’esercizio Aggiungere dati di esempio è opzionale ma consigliato, poiché è un prerequisito se vuoi osservare le differenze tra la sorgente dati di esempio e la sorgente dati reale.
+Nota
+Nota che alcuni dei servizi a cui questo learning journey rimanda possono comportare dei costi.
+Task 1: Verificare il pulsante Run and Debug
+
+Passi
+Verifica il pulsante Run and Debug.
+Seleziona il pulsante Run and Debug dall’angolo in alto a destra della scheda Storyboard. Qui trovi un gruppo di pulsanti, incluso il pulsante Run and Debug.
+
+Nel menu di anteprima, scegli l’opzione Run RiskManagement-1, che è stata creata nel corso del progetto.
+In questa configurazione, per impostazione predefinita, tutte le sorgenti dati saranno simulate localmente con dati di esempio.
+
+Nella parte inferiore apparirà un terminale, con un output dinamico, che indica i dettagli di esecuzione del task.
+
+
+Successivamente, la console di debug verrà portata in primo piano con lo stato di esecuzione progressivo; nel frattempo, al centro della parte superiore di SAP Business Application Studio apparirà un menu con vari pulsanti, incluso un pulsante per interrompere l’anteprima.
+
+Una volta che il processo in background termina, la console visualizzerà il collegamento di destinazione per visualizzare in anteprima l’app, come mostrato nel rettangolo verde.
+Spostando il cursore del mouse sopra il collegamento, vedrai il suggerimento di aprire il link con Ctrl + Click oppure Cmd + Click, a seconda del tuo sistema operativo.
+
+La stessa pagina verrà aperta automaticamente, se non bloccata dal tuo browser. Se la pagina non si apre, controlla il blocco dei pop-up del tuo browser.
+Task 2: Eseguire una prima anteprima
+Passi
+Verifica i pulsanti delle entità di servizio.
+Nella pagina di anteprima appena aperta, scegli i pulsanti delle entità di servizio sul lato destro.
+Per esempio, scegliendo l’icona di sintassi nel rettangolo arancione a destra dell’entità di servizio risks, puoi visualizzare in anteprima i dati relativi ai rischi sotto forma di contenuto dati grezzo.
+
+
+Il risultato verrà popolato con i dati di esempio che hai creato negli esercizi precedenti.
+Per l’entità A_BusinessPartner è lo stesso.
+Verifica il riquadro della Web Application.
+In questa pagina di anteprima, scegli il riquadro della Web Application sul lato sinistro. (Come mostrato nei rettangoli arancioni)
+
+Il risultato verrà popolato con i dati di esempio che hai creato negli esercizi precedenti.
+Una volta completato, puoi interrompere l’attuale sessione di anteprima scegliendo il pulsante Stop.
+
+Task 3: Verificare con l’opzione dei dati live
+Passi
+Crea una configurazione Run.
+Usa i seguenti dati:
+
+
+Nel menu sul lato sinistro di SAP Business Application Studio, seleziona Run Configurations.
+
+Seleziona l’icona + nella parte superiore destra del menu Run Configurations per creare una nuova configurazione.
+
+Dal menu What would you like to run?, seleziona la voce corrispondente al tuo progetto (come mostrato nella schermata seguente).
+
+Puoi modificare il nome della configurazione secondo le tue preferenze. Qui, prevediamo di eseguire l’anteprima con dati live, quindi possiamo chiamarla Run RiskManagement with Live Data.
+
+Si apre una nuova schermata in cui puoi definire la configurazione di esecuzione.
+Aggiungi i dati come descritto nella tabella precedente.
+Nella sezione oData, Live Data deve essere selezionato come Data Type. Automaticamente, verrà mostrato un nuovo campo per configurare la Destination del servizio BusinessPartnerA2X. Verifica che il suo contenuto sia stato precompilato con l’opzione apihub_sandbox e che il Path per la destination del servizio BusinessPartnerA2X sia s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER. Lascia tutte le altre configurazioni ai valori predefiniti.
+
+Ora viene creata una nuova configurazione chiamata Run RiskManagement with Live Data, e adotterà i dati live per il servizio esterno "BusinessPartnerA2X" in base alla configurazione.
+
+
+Per eseguirla, scegli il triangolo verde a destra del nome della tua nuova configurazione, che ora viene visualizzata nel menu Run Configurations sul lato sinistro.
+Nel menu Preview, scegli l’opzione Run RiskManagement with Live Data.
+Verifica il riquadro della Web Application.
+Analogamente all’anteprima precedente, la procedura inizia con un terminale nella parte inferiore, poi con una console di debug, e infine termina con la pagina di anteprima.
+
+In questa pagina di anteprima, scegli il riquadro della Web Application sul lato sinistro per operare nell’app SAP Fiori Elements, creata in precedenza.
+Scegli Go per eseguire il filtro e mostrare l’elenco degli elementi.
+
+Ora, le voci di Risks verranno recuperate in base ai nostri dati. Scegli create per creare una nuova voce.
+
+Viene visualizzato un modulo di questa voce. Dobbiamo inserire i dati nel modulo secondo necessità.
+
+Scegli il pulsante icona a destra del campo supplier_BusinessPartner.
+
+Verranno mostrati i dati live di A_BusinessPartner. Questi vengono recuperati dalla sorgente dati live dietro la destination, che abbiamo configurato prima di questo ciclo di anteprima. Possiamo selezionare qualsiasi riga della voce.
+
+La voce reale proveniente dai dati live verrà compilata. Scegli il pulsante Create in basso.
+
+La nuova voce di Risks è stata creata.
+
+Torna alla vista elenco. Ora possiamo vedere la nostra nuova voce creata con l’associazione a un’altra voce proveniente dalla sorgente dati reale.
+
+Link di riferimento: Anteprima delle applicazioni
+Per approfondire l’anteprima delle applicazioni, vedi: Testing Applications
+
+Creating User Roles
+Scenario aziendale
+
+La tua azienda sta pianificando di sviluppare un insieme di applicazioni cloud basate sul SAP Cloud Application Programming Model (CAP), e queste applicazioni verranno distribuite sulla SAP Business Technology Platform (SAP BTP) come applicazioni di estensione per i sistemi di back end SAP Core.
+In questo esercizio, eseguirai il seguente task: creare ruoli utente per proteggere le tue entità di servizio.
+Ora puoi creare ruoli per definire diverse autorizzazioni per la tua applicazione. Per esempio, potresti voler garantire che alcune persone possano visualizzare i dati ma non siano in grado di modificarli.
+Nota
+Nota che alcuni dei servizi a cui questo learning journey rimanda possono comportare dei costi.
+Task 1: Creare e configurare i ruoli utente
+
+Passi
+Assegna nuovi ruoli al RiskManagementService.
+Se non ci sei già, torna alla scheda Storyboard dell’applicazione.
+Esistono due modi per aprire l’editor delle autorizzazioni:
+Scegli il menu a discesa Open Editor nella parte in alto a sinistra dello storyboard e seleziona User Roles.
+
+Seleziona l’icona del ruolo (piccola icona di una persona) accanto a RiskManagementService nel riquadro Services.
+
+In entrambi i casi, si apre l’Authorization Editor.
+Nell’Authorization Editor, assicurati che RiskManagementService sia aperto.
+Scegli l’icona della persona sulla destra e seleziona New Role per aggiungere un nuovo ruolo.
+
+Inserisci il nome del ruolo, per esempio, RiskViewer.
+Scegli Save.
+
+Scegli di nuovo l’icona della persona sulla destra e seleziona New Role per aggiungere un nuovo ruolo.
+Inserisci il nome del ruolo, per esempio, RiskManager.
+Scegli Save.
+
+Concedi autorizzazioni sulle entità di servizio per Risks e Mitigations.
+Seleziona l’entità Risks dall’albero sul lato sinistro.
+
+Scegli l’icona della persona sulla destra e seleziona il ruolo RiskManager che hai creato prima.
+
+Assicurati che i privilegi siano selezionati come All.
+Scegli di nuovo l’icona della persona sulla destra e seleziona il ruolo RiskViewer che hai creato prima.
+Assicurati che i privilegi siano selezionati come Read.
+
+Seleziona l’entità Mitigations dall’albero sul lato sinistro.
+
+Scegli l’icona della persona sulla destra e seleziona il ruolo RiskManager che hai creato prima.
+
+Assicurati che i privilegi siano selezionati come All.
+Scegli di nuovo l’icona della persona sulla destra e seleziona il ruolo RiskViewer che hai creato prima.
+Assicurati che i privilegi siano selezionati come Read.
+
+
+Sharing the Project via Git
+Scenario aziendale
+
+Siamo nel processo di sviluppo di un’applicazione cloud basata su varie tecnologie SAP. Queste tecnologie includono servizi database, interfacce utente, inclusi SAP Cloud Application Programming Model (CAP), SAP Fiori, SAP Mobile Development Kit (MDK) e altre. Man mano che il progetto diventa più complesso, più sviluppatori devono collaborare e contribuire al progetto. Pertanto, è necessario trovare un modo efficiente per condividere il progetto. In questo caso, utilizzerai un repository Git remoto per ottenere questo risultato.
+In questo esercizio, eseguirai le seguenti attività:
+Abilitare la condivisione del progetto sul tuo progetto effettuando il push verso un repository Git remoto.
+Condividere il tuo progetto con altri utenti in modo che possano accedere al tuo progetto tramite condivisione URL.
+Prerequisiti
+
+Hai completato con successo almeno fino all’esercizio: Add sample data.
+Hai configurato un account Git nel tuo provider Git.
+Hai configurato un repository Git remoto vuoto.
+Hai l’autorizzazione per aggiungere nuovi collaboratori al tuo repository Git.
+Nota
+Tieni presente che alcuni dei servizi a cui questo learning journey rimanda possono comportare costi.
+Task 1: Condividi il tuo progetto
+
+Passaggi
+Condividi il tuo progetto con gli utenti che desideri.
+Seleziona Simplifed Git dal menu a sinistra per aprire il menu Simplifed Git.
+
+
+Scegli il pulsante Add Remote Repository nella parte superiore del menu Simplified Git.
+
+Inserisci l’URL di un repository Git remoto vuoto e scegli Enter per confermare l’input:
+
+Inserisci le tue credenziali Git, nome utente Git:
+
+Inserisci le tue credenziali Git, password Git, e continua.
+
+
+Nota
+A seconda del provider del servizio Git, potrebbe essere necessario usare un token invece di una password.
+Scegli se salvare le tue credenziali Git per usi futuri.
+
+Il tuo progetto viene inviato al repository Git remoto che hai fornito.
+Controlla il messaggio di notifica, che viene visualizzato nell’angolo in basso a destra: Branch ‘main’ published.
+
+Nota
+Per iniziare a collaborare sul progetto condiviso con altri utenti, devi condividere con i tuoi collaboratori l’URL del Git remoto. Per consentire ad altri utenti di clonare e inviare modifiche al tuo repository Git remoto, devi anche assicurarti di concedere loro l’accesso nelle impostazioni del tuo provider Git. I tuoi collaboratori potranno quindi clonare il progetto nel loro workspace.
+Nota
+Nella vista Simplified Git, puoi vedere un elenco di tutte le modifiche nella sezione Pending Changes. Per aggiungere le tue modifiche al repository Git remoto, esegui i seguenti passaggi:
+Nella sezione Pending Changes, puoi vedere tutte le modifiche che hai apportato nel tuo progetto e che non sono ancora state sottoposte a commit e sincronizzate con il repository Git remoto collegato. Seleziona i file con modifiche che vuoi includere nel commit usando le caselle di controllo accanto a ciascun file.
+Inserisci un messaggio che descriva le tue modifiche e scegli Commit & Sync. Questo effettuerà il commit e il push delle tue modifiche al repository Git remoto collegato.
+Pull ti consente di aggiornare il tuo codice locale con le modifiche dei tuoi collaboratori.
+
+Link di riferimento: Condivisione di un progetto
+
+Trovi maggiori informazioni sulla condivisione di un progetto qui: Using the Simplified Git View
+
+Deploying to the Cloud Foundry Environment
+
+Scenario aziendale
+
+In questo esercizio, distribuirai l’applicazione nell’ambiente Cloud Foundry.
+In questo esercizio, eseguirai le seguenti attività:
+Distribuire l’applicazione su Cloud Foundry.
+Assegnare raccolte di ruoli.
+Nota
+Tieni presente che alcuni dei servizi a cui questo learning journey rimanda possono comportare costi.
+Nota
+Nel caso in cui tu abbia configurato un’istanza SAP HANA Cloud Database basata sul piano gratuito o su un account trial, verifica che l’istanza sia in esecuzione. Puoi farlo aprendo SAP HANA Cloud Central e controllando lo stato del database. Il servizio del piano gratuito viene arrestato automaticamente dopo 2 ore di inattività. Il deployment non riuscirà se il database non è in esecuzione.
+Task 1: Distribuire l’applicazione su Cloud Foundry
+
+Passaggi
+Accedi al tuo account Cloud Foundry.
+Nel caso in cui tu non abbia effettuato l’accesso a Cloud Foundry, segui la descrizione su come accedere al tuo account Cloud Foundry dal Task 4: Create an SAP HANA Database for your application nell’esercizio Create a New Development Project.
+Distribuisci l’applicazione su Cloud Foundry.
+Apri il Project Overview.
+Trova i tre puntini nel Project Overview, a destra del nome del tuo progetto.
+
+Per aprire un nuovo menu, seleziona i tre puntini.
+Seleziona Deploy Project.
+
+Verifica che la tua applicazione venga distribuita.
+Questo può richiedere alcuni minuti.
+Task 2: Assegna la raccolta di ruoli
+
+Prima di poter utilizzare l’applicazione, devi assegnare a te stesso i ruoli che hai creato nella sezione precedente. Questo deve essere fatto per consentirti di modificare e visualizzare i dati dell’applicazione.
+Passaggi
+Assegna la raccolta di ruoli.
+Torna al SAP BTP Cockpit. (Per ulteriori informazioni vedi: SAP BTP Cockpit).
+Vai su Security → Users.
+Seleziona il tuo nome utente e scegli i tre puntini.
+Nel menu a discesa, scegli Assign Role Collections.
+
+Nel pop-up, trova le raccolte di ruoli che contengono il nome del progetto che hai creato nell’esercizio "Create a New Project" e il nome dei due ruoli che hai creato nell’esercizio "Create User Roles".
+Per esempio: RiskManagement-RiskManager-dev e RiskManagement-RiskViewer-dev.
+Scegli Assign Role Collection.
+
+Task 3: Apri l’app distribuita
+
+Passaggi
+Ora puoi aprire l’app distribuita.
+Torna al SAP BTP Cockpit. (Per ulteriori informazioni vedi: SAP BTP Cockpit).
+Vai su HTML5 Applications.
+
+Seleziona RiskManagementLaunchpad.
+Link di riferimento: Distribuzione di un’applicazione
+Trovi maggiori informazioni sul deployment di un’applicazione su Cloud Foundry qui: Deploying Your Applications
+
+Managing the Application's Lifecycle with CI/CD Service
+Scenario aziendale
+
+Siamo nel processo di sviluppo di un'applicazione cloud basata su varie tecnologie SAP. Queste sono: servizi database, interfacce utente, incluso SAP Cloud Application Programming Model (CAP), SAP Fiori, SAP Mobile Development Kit (MDK) e altre. Man mano che il progetto diventa più complesso, più sviluppatori devono collaborare e contribuire al progetto. Pertanto, è necessario un modo efficiente per abilitare l'integrazione e la distribuzione continue sul progetto per garantire la qualità. Uno sviluppo fluido può essere ottenuto con un repository automatizzato di build e test. In questo caso, viene utilizzato il servizio SAP Continuous Integration and Delivery per ottenere questo risultato.
+In questo esercizio, esegui le seguenti attività:
+Crea un job CI/CD sul tuo progetto.
+Configura il tuo job CI/CD per eseguire la build e distribuire la tua applicazione in un ambiente di test Cloud Foundry.
+Attivazione di una build CI/CD automatizzata inviando una modifica al tuo repository Git remoto.
+Prerequisiti
+
+Devi prima sottoscrivere il servizio SAP Continuous Integration and Delivery e assegnare i ruoli e le autorizzazioni richiesti. Vedi Initial Setup
+Hai completato con successo gli esercizi fino a Create User Roles.
+Hai condiviso il tuo progetto in un repository Git remoto.
+Nota
+Tieni presente che alcuni dei servizi a cui questo learning journey rimanda possono comportare costi.
+Task 1: Abilitare Continuous Integration and Delivery (CI/CD)
+
+Passaggi
+Abilita Continuous Integration and Delivery (CI/CD).
+Scegli il pulsante CI/CD dal pannello di sinistra.
+
+Se non riesci a vedere l’icona CI/CD, puoi aprire il menu → View → CI/CD.
+
+Controlla il tuo progetto nel pannello CI/CD. Non dovrebbe ancora avere alcun job. Scegli il pulsante Create Job.
+
+Viene visualizzata la pagina Guided Development. Scorri verso il basso per vedere l’argomento: Create a CI/CD Job, ed espandi Job Configuration.
+
+Scegli il pulsante Configure Job e si apre una nuova procedura guidata Job Configuration che ti consente di creare e configurare un nuovo job.
+Nel passaggio Job Name, inserisci un nome univoco per il job.
+Dall’elenco a discesa Pipeline, seleziona SAP Cloud Application Programming Model.
+
+Scegli Next.
+Nel passaggio Git Credentials, aggiungi un repository e le credenziali.
+Memorizzerai il tuo repository Git remoto nel servizio SAP Continuous Integration and Delivery, in modo che possa recuperare il tuo progetto tramite Git per eseguire la build e il deployment.
+Usa i seguenti dati:
+
+Non dovresti ancora avere alcun Git Repository corrispondente disponibile per la selezione, quindi seleziona -- Add a Repository -- dall’elenco a discesa Git Repositories. Dovrebbero comparire due nuovi campi: Repository Name e Git Credentials.
+Assegna al repository un nome univoco nel campo Repository Name. Questo è il nome per identificare il tuo repository memorizzato nel servizio SAP Continuous Integration and Delivery.
+Non dovresti ancora avere credenziali Git utilizzabili, quindi seleziona -- Add Credentials -- dall’elenco a discesa.
+Assegna alla credenziale un nome univoco che verrà memorizzato nel servizio SAP Continuous Integration and Delivery, per esempio: user-abc-github.
+Puoi anche inserire una descrizione per descrivere meglio la credenziale, per esempio le credenziali Github.com dell’utente Abc.
+Inserisci il nome utente e la password / token. Questi due campi vengono memorizzati in modo sicuro nel servizio SAP Continuous Integration and Delivery e saranno usati dal servizio per accedere al tuo repository Git e recuperare il progetto.
+
+Scegli Next per continuare con il passaggio successivo.
+Nel passaggio Acceptance, esegui i passaggi per creare ulteriori credenziali.
+Questo passaggio ti consente di specificare l’ambiente Cloud Foundry in cui desideri che questo progetto venga distribuito per i test di accettazione.
+Seleziona Yes nel pulsante di opzione.
+Inserisci API Endpoint, Org Name, Space e Cloud Foundry Credentials (potrebbe essere necessario specificarle).
+Per trovare le informazioni richieste, torna al tuo subaccount e scorri verso il basso fino a Cloud Foundry Environment.
+
+Non dovresti ancora avere alcuna credenziale Cloud Foundry, quindi seleziona -- Add Credentials -- dall’elenco a discesa.
+Assegna alla credenziale un nome univoco che verrà memorizzato nel servizio SAP Continuous Integration and Delivery, per esempio: user-abc-cf.
+Puoi anche inserire una descrizione per descrivere meglio la credenziale, per esempio le credenziali Cloud Foundry dell’utente Abc.
+Inserisci il nome utente e la password/token. Questi due campi verranno memorizzati in modo sicuro nel servizio SAP Continuous Integration and Delivery e saranno usati dal servizio per distribuire la tua applicazione nella destinazione Cloud Foundry che hai specificato.
+
+Scegli Next per continuare con il passaggio successivo.
+Nel passaggio Release, non c’è nulla da fare.
+Questo passaggio ti consente di configurare il deployment su Cloud Foundry e/o sul Cloud Transport Management Service.
+In questo esercizio, non configureremo questo job né per il rilascio su Cloud Foundry né per il caricamento sul Cloud Transport Management Service, quindi possiamo lasciarli su No e scegliere Finish per completare la creazione del job.
+Una volta completata la creazione del job, dovresti vedere le seguenti notifiche:
+
+Dovresti vedere che ora un job è visibile nel pannello CI/CD. Ma al momento non avrà ancora alcuna cronologia di esecuzione del job.
+
+La scheda Webhook Data dovrebbe essersi aperta automaticamente al completamento della creazione del job CI/CD. In caso contrario, puoi seguire in alternativa uno dei seguenti sotto-passaggi.
+Scegli il pulsante Overflow accanto al nome del job per aprire un menu contestuale.
+Scegli la voce di menu View Webhook.
+Si apre una scheda Webhook Data con i dettagli richiesti per aggiungere i dati del webhook.
+
+Esegui le impostazioni in GitHub.
+Vai al tuo repository Git e scegli Settings → (Code and Automation) Hooks → Add webhook.
+
+Nel campo Payload URL, incolla il Payload URL dalla scheda Webhook Data.
+Imposta il Content type su application/json.
+Nella scheda Webhook Data, seleziona Create a new secret.
+Seleziona Yes quando viene richiesta la conferma.
+Nel campo Secret, incolla il Secret dalla scheda Webhook Data.
+Seleziona Add webhook.
+Invia le modifiche al repository Git remoto.
+Ora, in base alla notifica che abbiamo visto prima, dobbiamo inviare qualsiasi modifica al repository Git remoto prima di attivare una build.
+In SAP Business Application Studio, apri lo storyboard.
+Per la voce del modello dati Risks, seleziona Edit Sample Data.
+
+Nel Sample Data Editor, modifica il campo Prio nella prima riga da 1 a 2.
+
+Dalla barra delle attività, vai a Simplified Git.
+Inserisci un messaggio e seleziona Commit & Sync.
+Dalla barra delle attività, torna a CI/CD.
+Troverai che viene attivata una build e che vengono generate le seguenti notifiche:
+
+Nota
+Nel caso in cui la build non venga attivata automaticamente, procedi come segue:
+Scegli il pulsante Overflow accanto al nome del job per aprire il menu contestuale.
+Scegli Trigger a build.
+Nella finestra di conferma, puoi scegliere se desideri che in futuro le build vengano attivate automaticamente o manualmente quando esegui il commit delle modifiche nel tuo repository Git.
+
+Vedrai che lo stato del job cambia da No build history a Build 1 con StatusRunning:
+
+A seconda delle dimensioni del tuo progetto e della configurazione del job, la build richiederà probabilmente almeno 5 minuti o più. Una volta completata la build, riceverai una notifica come la seguente:
+
+Lo stato del tuo job nel pannello CI/CD verrà aggiornato, per esempio:
+
+Link di riferimento: Services for Continuous Integration and Delivery (CI/CD)
+Trovi maggiori informazioni sull’integrazione e distribuzione continue qui: Continuous Integration and Delivery
+
+
+Adding a Mobile UI Application to Your Project
+
+Scenario aziendale
+
+Prima di continuare il nostro sviluppo, vogliamo preservare il punto di partenza del nostro sviluppo successivo, che è lo stato finale della Unit 2: Sviluppare un'applicazione di Risk Management per estendere SAP S/4HANA. Useremo i branch per avviare lo sviluppo dei singoli casi d'uso in questa Unit 3. Iniziamo!
+Nota
+Se è passato un po' di tempo da quando hai completato la Unit Sviluppare un'applicazione di Risk Management per estendere SAP S/4HANA e se non hai più il tuo dev space disponibile, puoi clonare il tuo progetto dal tuo repository Git nel tuo nuovo dev space se hai ancora il progetto nel tuo repository Git. Attenzione: se cloni il tuo progetto dal tuo repository Git, potrebbe accadere che siano state introdotte modifiche lato prodotto dal momento in cui hai creato originariamente il tuo progetto. In questi casi, potresti riscontrare difficoltà nel riutilizzare il tuo vecchio progetto e, pertanto, consigliamo di rifare la unit Accelerating Development With SAP Business Application Studio e la unit Developing a Risk Management Application to Extend SAP S/4HANA.
+Task 1: Esegui i prerequisiti
+
+Passaggi
+Se non l'hai già fatto, configura il tuo ambiente di sviluppo.
+Segui i passaggi forniti nella Unit Accelerating Development With SAP Business Application Studio, esercizio: Set Up Your Account for Full-Stack Application Development per configurare il tuo ambiente di sviluppo.
+Crea un clone del progetto.
+In SAP Business Application Studio, seleziona Simplified Git.
+Se hai già disponibile nel tuo dev space il progetto che hai creato nella unit Developing a Risk Management Application to Extend SAP S/4HANA, puoi saltare il primo passaggio per creare un clone del progetto in GitHub e continuare con il secondo passaggio.
+Nel riquadro Simplified Git, seleziona Clone Repository.
+Ti verrà richiesto di inserire l'URL del tuo repository.
+
+Seleziona la cartella in cui vuoi clonare il progetto. Per esempio: /home/user/projects.
+Scegli OK.
+
+Inserisci le tue credenziali Git, nome utente e token/password.
+Seleziona Open per aprire il repository clonato.
+Attendi che il workspace venga aperto.
+
+Ora hai un dev space con tutti i tuoi progressi fino alla Unit Developing a Risk Management Application to Extend SAP S/4HANA.
+Esegui il deploy dell'applicazione.
+Apri il Project Overview.
+Scegli i tre puntini accanto al nome del tuo progetto per aprire il menu contestuale.
+Scegli Deploy Project.
+Verifica che la tua applicazione venga deployata.
+Questo può richiedere alcuni minuti.
+Verifica che le role collection siano associate alla tua applicazione.
+Non dimenticare di assegnare le role collection associate alle tue applicazioni: RiskManagement-RiskManager-dev e RiskManagement-RiskViewer-dev.
+Task 2: Crea un branch
+
+Passaggi
+Crea il branch in cui svilupperemo l'applicazione mobile.
+Ora iniziamo a creare un branch per procedere con le attività di questa unit.
+Nel riquadro Simplified Git, scegli il branch (main) e seleziona Add New Branch.
+
+Inserisci il nome per il nuovo branch. Per esempio: MobileApp.
+
+Seleziona il branch che deve essere basato su main. Non selezionare origin/main, perché Git non consente di creare un branch su un repository remoto.
+
+Nel riquadro Simplified Git dovresti ora vedere il branch che hai creato localmente.
+Per pubblicare questo branch nel tuo repository, seleziona il pulsante Publish Branch.
+
+
+Quando richiesto, inserisci il tuo nome utente Git e il token.
+Nei passaggi successivi creerai l'applicazione mobile. Quando eseguirai il commit delle modifiche nel tuo repository Git, queste saranno nel nuovo branch.
+Task 3: Crea un'interfaccia utente per applicazione mobile
+
+In questo task creeremo un'interfaccia utente (UI) aggiuntiva per l'applicazione che abbiamo creato nella Unit Developing a Risk Management Application to Extend SAP S/4HANA. Useremo gli stessi data service che abbiamo già creato e deployato. La UI sarà sotto forma di un'applicazione mobile multipiattaforma per le piattaforme iOS e Android, utilizzando controlli UI nativi.
+Passaggi
+Crea un'interfaccia utente per applicazione mobile.
+Vai al riquadro UI Applications dello Storyboard e scegli l'icona + per aggiungere una nuova interfaccia utente.
+Puoi creare più UI sopra i data service definiti nell'applicazione.
+
+Viene visualizzata una nuova pagina.
+Modifica il campo Display name in: RisksMobile. Inserisci una descrizione a tua scelta.
+Seleziona il campo Data source e scegli RiskManagementService dall'elenco a discesa. Questa è la stessa origine dati che abbiamo utilizzato per l'applicazione UI creata nella Unit Developing a Risk Management Application to Extend SAP S/4HANA. Scegli Next.
+
+
+Come UI Application Type scegli Mobile-Centric, Freestyle Application.
+Questa opzione ti consente di creare applicazioni mobili native sia per sistemi Android sia iOS con più funzionalità specifiche del dispositivo.
+Scegli Next.
+
+Come UI Application Template scegli CRUD.
+CRUD sta per Create, Read, Update e Delete. Il template CRUD ti consente di modificare i dati nelle pagine della tua applicazione.
+Scegli Next.
+
+Come Data Objects scegli Mitigations e Risks.
+I data object definiscono i tipi (entità) di dati da visualizzare nella tua applicazione mobile.
+Scegli Next.
+
+Come List Picker scegli BusinessPartnerFullName dall'elenco a discesa.
+Questo determina la proprietà che viene visualizzata nella tua applicazione mobile come opzione di selezione per i data object che hai selezionato nel passaggio precedente (Risks e Mitigations).
+Scegli Finish.
+
+Attendi finché la Page Map dell'applicazione UI mobile si apre sullo schermo.
+Questa mappa rappresenta la struttura complessiva dell'applicazione UI mobile sviluppata utilizzando SAP Mobile Development Kit (MDK). Si tratta di una piattaforma di sviluppo applicativo basata su metadati che consente lo sviluppo di applicazioni multicanale, eseguibili in modo nativo su dispositivi mobili e come applicazioni web nel browser. Per maggiori informazioni sulle applicazioni MDK, vedi Mobile Development Kit.
+
+Vai all'entità Main nella page map e scegli l'icona (Configure Page) per configurare la pagina.
+
+Nel Page Editor puoi vedere i data object che hai selezionato per l'applicazione UI mobile, Risks e Mitigations.
+Nella scheda Properties, rinomina il campo Caption da Main a Risk Management.
+Allo stesso modo, modifica il campo Name in RiskManagement.
+La tua applicazione UI mobile ora ha un titolo dell'app.
+
+Task 4: Anteprima della tua applicazione
+La funzione Preview ti consente di valutare rapidamente la tua applicazione mentre è in esecuzione nel workspace. Per iterazioni di sviluppo rapide, è consigliato usare la funzione Preview, perché non richiede il deployment.
+Passaggi
+Esegui l'anteprima della tua applicazione.
+Vai alla activity bar e scegli l'icona (Run Configurations).
+Scegli l'icona + per creare una nuova run configuration per visualizzare in anteprima la tua applicazione UI mobile.
+Dall'elenco a discesa, scegli Risk Management (PT).
+
+Nella pagina Create Run Configuration, poiché stiamo per visualizzare in anteprima la nostra applicazione mobile UI, rinomina la configurazione di esecuzione in Run RiskManagement-Mobile.
+Lascia invariate le opzioni rimanenti e scegli Create.
+Abbiamo una nuova configurazione di esecuzione per visualizzare in anteprima la nostra applicazione mobile UI.
+
+Scegli l’icona Run Module per Run RiskManagement-Mobile per eseguire la configurazione di esecuzione.
+
+Come descritto nell’unità Developing a Risk Management Application to Extend SAP S/4HANA, la procedura inizia con un terminale nella parte inferiore dello spazio di lavoro, poi con una console di debug e infine termina con la pagina di anteprima in una nuova scheda.
+Nella nuova scheda, scegli il riquadro RisksMobile per visualizzare in anteprima l’applicazione mobile UI.
+
+Ora puoi vedere le schede Risks e Mitigations visualizzate nell’app mobile, proprio come abbiamo visto nel Page Editor.
+Scegli la scheda Risks per osservare l’elenco delle voci relative ai Risks.
+
+Modifichiamo una voce per verificare la funzionalità CRUD dell’app. Scegli una voce per visualizzarne i dettagli e scegli Edit.
+
+Si apre un modulo pop-up con i vari campi della voce Risks disponibili per la modifica.
+Apporta le modifiche alla voce secondo la tua scelta e scegli Save.
+
+Torna alla vista elenco e ora puoi vedere la voce aggiornata.
+Nota
+Poiché l’anteprima utilizza dati simulati memorizzati localmente, le modifiche apportate alle voci verranno mantenute solo per la sessione di anteprima corrente. All’avvio di una nuova sessione di anteprima, i dati nel database (locale) verranno reimpostati.
+
+Chiudi la pagina di anteprima e scegli l’icona (Stop) di nuovo nell’area di lavoro di SAP Business Application Studio per arrestare l’operazione di anteprima.
+
+Task 5: Distribuire la tua applicazione su Mobile Services
+Una volta che sei soddisfatto della funzionalità dell’app, puoi provarla su un dispositivo mobile. Per eseguire l’applicazione sul tuo dispositivo mobile, raggruppa tutti i metadati applicativi rilevanti in un pacchetto e distribuiscilo nell’istanza di Mobile Services disponibile nel tuo sottoaccount SAP BTP. Mobile Services agisce come proxy tra il tuo dispositivo mobile e la sorgente dati distribuita.
+Nota
+La sorgente dati deve essere distribuita nel cloud; un servizio dati in esecuzione locale (all’interno dello spazio di lavoro) non può essere consumato da un’applicazione in esecuzione su un dispositivo mobile.
+Se vengono applicati aggiornamenti al modello dati o al servizio, assicurati di ridistribuire il servizio. In caso contrario, la tua applicazione potrebbe non essere sincronizzata con la sorgente dati.
+Passaggi
+Distribuisci la tua applicazione su mobile services.
+Vai alla barra delle attività e scegli l’icona Project Overview per aprire il Project Overview.
+Espandi User Interface.
+Scegli i tre puntini (...) accanto a RisksMobile per aprire il menu contestuale e seleziona Deploy to Mobile Services.
+Questa operazione potrebbe richiedere alcuni minuti.
+
+SAP Mobile Services è un’offerta basata su cloud che comprende vari strumenti di sviluppo, incluso MDK, per fornire servizi riutilizzabili ai progetti di sviluppo di applicazioni mobili. Questi servizi aiutano gli sviluppatori a concentrarsi sulla realizzazione dei requisiti di business, invece di costruire ripetutamente funzionalità infrastrutturali per ogni progetto mobile. Per maggiori informazioni, consulta la documentazione di SAP Mobile Services.
+
+Nota
+Devi aver effettuato l’accesso a Cloud Foundry per distribuire la tua applicazione. Se non hai effettuato l’accesso a Cloud Foundry, scegli Login nel pop-up di notifica che appare durante la distribuzione della tua app e poi distribuisci di nuovo.
+
+Torna al Project Overview ed espandi RisksMobile.
+Seleziona Map per aprire la pagina MDK Application Editor della tua applicazione mobile UI, dove puoi modificare le proprietà e le impostazioni associate alla tua applicazione.
+Scegli Application QR Code.
+Ora puoi vedere il codice QR che ti aiuterà a eseguire l’onboarding della tua applicazione mobile UI.
+
+Task 6: Verificare la tua applicazione mobile su un dispositivo mobile
+Una volta che la tua applicazione è stata distribuita su Mobile Services, l’applicazione è configurata per consumare il servizio dati che è stato distribuito nel cloud. Tutto questo viene gestito lato server. Tuttavia, hai ancora bisogno di un’app client mobile da eseguire sul tuo dispositivo. Un’app client mobile generica è disponibile sia sull’Apple App Store sia sul Google Play Store. Dopo aver installato SAP Mobile Services Client sul tuo dispositivo, questa deve essere configurata per interfacciarsi con la tua istanza di Mobile Service. Questo avviene tramite un URL pubblicato come codice QR. Il processo di configurazione dell’app client mobile è chiamato anche “client onboarding”.
+Passaggi
+Verifica la tua applicazione mobile su un dispositivo mobile.
+Prendi il tuo dispositivo mobile, Android o iOS, e apri il tuo App Store/Play Store.
+Cerca l’app SAP Mobile Services Client, scaricala e installala sul tuo dispositivo mobile.
+Nota
+Nel caso in cui riscontrassi problemi con l’app mobile services, si consiglia di reinstallarla.
+
+Apri l’app e seleziona Scan.
+
+Con il tuo telefono cellulare, scansiona il codice QR nel MDK Application Editor in SAP Business Application Studio per eseguire l’onboarding della tua applicazione mobile UI sul tuo dispositivo mobile.
+Seleziona Continue.
+Accedi all’app utilizzando le tue credenziali SAP.
+
+Scegli un passcode di almeno otto caratteri che possa essere usato per sbloccare la tua app. Questo passcode fa parte della policy di sicurezza aziendale.
+
+Seleziona Next e reinserisci il passcode.
+Seleziona Done.
+
+Ora vedrai un pop-up che ti informa che è disponibile una nuova versione per la tua app. In questo caso, l’app a cui si fa riferimento è l’applicazione che hai distribuito su Mobile Services, non l’app client stessa.
+Seleziona l’opzione richiesta per aggiornare alla nuova versione.
+
+Congratulazioni! Ora puoi vedere la tua applicazione mobile UI scaricata sul tuo dispositivo mobile.
+Scegli la scheda Risks per osservare l’elenco delle voci relative ai Risks.
+
+Puoi vedere che le voci vengono presentate utilizzando dati live, a differenza dell’anteprima dell’applicazione mobile UI che hai visto in precedenza. Questo perché non puoi usare con Mobile Services i servizi dati in esecuzione all’interno dello spazio di lavoro.
+Scegli una voce per visualizzarne i dettagli e scegli Edit.
+
+Aggiorna la pagina Risks Detail.
+Usa i seguenti dati:
+
+Nella pagina Update Risks Detail, apporta le modifiche alla voce secondo la tua scelta e scegli Save.
+
+Torna alla vista elenco e ora puoi vedere la voce aggiornata.
+
+Torna al tuo workspace di SAP Business Application Studio.
+Seleziona la voce View Last Deployed dal Project Overview aprendo Project Actions.
+Questo ci porta all’applicazione che abbiamo distribuito per ultima sul server web.
+
+Nota
+Lo screenshot precedente mostra una voce Home. Può accadere che Home non venga visualizzato nel tuo landscape.
+Seleziona il riquadro Risks.
+
+Scegli Go.
+Ora puoi vedere la voce Deployment failure che hai modificato nella tua app mobile.
+
+Crea una nuova voce risk.
+Usa i seguenti dati:
+
+Scegli Create.
+
+Usa un miti ID.
+Non abbiamo un miti_ID per la nostra voce, che ci aiuterebbe ad associare la mitigation appropriata al risk indicato. A scopo dimostrativo, copiamone semplicemente uno da un’altra voce Risk.
+Torna alla vista elenco.
+Scegli Keep draft e seleziona OK per salvare una bozza della tua voce.
+
+Nota
+Devi eseguire questo passaggio solo se non hai scelto Create nel passaggio 3.
+Apri un’altra voce risk con un miti_ID valido e copialo.
+Torna alla tua voce risk in bozza e incolla il miti_ID nel campo pertinente.
+Scegli Create.
+
+Torna alla tua app mobile sul dispositivo mobile.
+Scegli la scheda Mitigation.
+Cerca e seleziona la voce mitigation in base al miti_id che hai copiato per aprire la pagina dei dettagli.
+
+Scorri verso il basso fino alla sezione risk.
+Ora puoi vedere il risk File corruption associato a questa voce mitigation.
+Hai ora verificato la funzionalità CRUD dell’app mobile e la sua interoperabilità in tempo reale con l’applicazione web. I tuoi dati sono salvati nel database HANA Cloud.
+
+Enabling Multitenancy for the Previously Created Application
+
+
+Multitenancy per le applicazioni
+Il Productivity Toolkit di SAP Business Application Studio fornisce un’architettura multi-tenant che consente al provider di servizi (host) di servire più tenant tramite singoli cluster di istanze di microservizi. Questo garantisce un rigoroso isolamento dei dati dei tenant e del relativo accesso. In un’architettura multi-tenant, i tenant sono clienti che utilizzano l’applicazione soluzione.
+Le applicazioni in modalità multi-tenant attendono che i tenant si sottoscrivano, consentendo al provider di servizi di gestire le risorse in modo più efficiente. Inoltre, il provider di servizi può aggiornare e mantenere facilmente l’applicazione per tutti i tenant, riducendo il tempo e i costi associati alla gestione di più istanze. Abilitare il multitenancy offre vantaggi significativi sia per il provider di servizi sia per i tenant, inclusi costi ridotti, maggiore scalabilità e sicurezza migliorata.
+
+Ulteriori letture
+Abilitare il multitenancy per CAP.
+Abilitare servizi esterni in un’applicazione multi-tenant.
+Abilitare il multitenancy nella tua applicazione
+Scenario aziendale
+In questo esercizio, abiliterai il multitenancy nella tua applicazione.
+Prerequisiti
+Crea un nuovo branch per ogni esercizio dell’unità 3. Se non hai già creato un nuovo branch per l’esercizio successivo, segui le istruzioni fornite nello step 2 del task 1 dell’esercizio Aggiungere un’applicazione Mobile UI al tuo progetto.
+Se hai già distribuito la tua applicazione, annulla manualmente il deployment dell’applicazione prima di abilitare il multitenancy.
+Gli utenti possono usare la seguente riga di comando per annullare il deployment dell’applicazione multitarget (MTA): RiskManagement).
+Per farlo, apri un nuovo terminale e copia e incolla la seguente riga di comando:
+cf undeploy RiskManagement --delete-services --delete-service-keys -f
+
+Passaggi
+Abilita il multitenancy nella tua applicazione. Gli utenti possono farlo da due posizioni: Panoramica del progetto oppure Guide Center.
+Dalla Panoramica del progetto, seleziona Azioni progetto (…) per aprire il menu contestuale.
+Scegli Abilita multitenancy.
+
+Dal Guide Center, scegli Abilitare il multitenancy nella tua applicazione; nella sezione Abilitare il multitenancy, scegli Abilitare il multitenancy.
+
+I sotto-step a, b e c ti porteranno a questa pagina.
+Scegli Abilita multitenancy.
+
+Scegli Abilita.
+
+SAP Business Application Studio mostrerà un messaggio come quello sotto in basso a destra:
+
+Abilitare servizi esterni in un’applicazione multi-tenant. Per impostazione predefinita, le applicazioni multi-tenant non espongono una destinazione o altri servizi ai sottoscrittori. Tuttavia, puoi seguire i passaggi forniti di seguito per aggiungere i servizi di destinazione alle dipendenze del SAP BTP SaaS Provisioning Service, così da consentire ai sottoscrittori di utilizzarli.
+Apri un terminale in SAP Business Application Studio.
+
+Esegui il comando indicato nella cartella mtx/sidecar:
+npm install @sap/xsenv
+Apri l’Explorer e vai alla cartella mtx/sidecar. Apri il file server.js.
+Se l’Explorer non è visibile, puoi aprirlo seguendo i passaggi mostrati nell’istantanea seguente:
+
+Aggiungi il seguente codice a server.js:
+const xsenv = require('@sap/xsenv');
+cds.on('served', async () => {
+  const { 'cds.xt.SaasProvisioningService':provisioning } = cds.services
+    await provisioning.prepend(() => {
+      provisioning.on('dependencies', async (req, next) => {
+        await next()
+        const services = xsenv.getServices({
+          dest: { label: 'destination' }
+        })
+        let dependencies = [
+          {
+            xsappname: services.dest.xsappname
+          }
+        ]
+        return dependencies
+      })
+    })
+})
+Il file server.js apparirà come mostrato qui:
+
+Gli utenti possono anche trovare i passaggi descritti sopra nel Guide Center di SAP Business Application Studio, nella sezione Abilitare il multitenancy nella tua applicazione.
+
+Esegui il deployment su Cloud Foundry.
+Questo passaggio è descritto nell’unità Sviluppare un’applicazione di Risk Management per estendere SAP S/4HANA. Puoi eseguire questo passaggio nello stesso modo di prima.
+Se hai già eseguito il deployment in precedenza nello stesso account SAP Business Application Studio e se hai già effettuato l’accesso a Cloud Foundry, puoi anche aprire la Panoramica del progetto e poi scegliere il pulsante azione a destra del nome del progetto. Quindi scegli Esegui deployment del progetto. Il deployment si avvia e l’avanzamento può essere monitorato nel terminale.
+Sottoscrivi la tua applicazione multi-tenant.
+Vai al tuo subaccount SAP BTP e, dal pannello di navigazione, scegli Istanze e sottoscrizioni.
+Nella barra di ricerca, cerca l’istanza destination della tua applicazione multi-tenant (-destination) e sceglila per aprire il pannello dei dettagli.
+
+Scegli Gestisci istanza.
+
+
+Dal pannello di navigazione, scegli Destinations.
+Puoi vedere la destination configurata per la tua applicazione multi-tenant. Scegli Modifica. Nei campi Utente e Password, inserisci il nome utente e la password di un utente tecnico.
+
+
+Nota
+Un utente tecnico si riferisce a un utente con le autorizzazioni pertinenti per l’account Cloud Foundry del provider.
+Svuota il campo Client Secret.
+Scegli Salva.
+Sottoscrivi l’applicazione multi-tenant.
+Vai a Service Marketplace.
+Individua l’applicazione multi-tenant distribuita.
+Scegli Crea.
+
+Lascia il valore predefinito nello step successivo.
+Scegli Crea.
+
+Apri l’applicazione.
+Vai al tuo subaccount SAP BTP e, dal pannello di navigazione, scegli Istanze e sottoscrizioni.
+Nella barra di ricerca, cerca l’applicazione e sceglila per aprire il pannello dei dettagli.
+Scegli Vai all’applicazione.
+
+Risultato:
+
+Testa l’applicazione.
+Scegli il riquadro Risk nella home page dell’applicazione.
+Scegli il pulsante Go e controlla i dati correnti.
+Scegli Create per andare alla pagina di creazione.
+
+Inserisci i dati nella pagina di creazione.
+Scegli il pulsante Action in supplier_BusinessPartner per aggiungere un business partner dal servizio esterno.
+Seleziona un valore dal popup.
+Scegli Create nella pagina di creazione.
+
+Risultato:
+
+I nuovi dati sono stati creati.
+
+Torna alla home page di Risks.
+
+Controlla i dati.
+
