@@ -1,0 +1,2641 @@
+Explaining the Basic Concepts of Kubernetes
+Scenario di utilizzo: Concetti di base di Kubernetes
+Video
+Una azienda gestisce una varietà di applicazioni sui propri sistemi autogestiti. Il problema che ha è che sta eseguendo un enorme carico di lavoro di applicazioni senza utilizzare in modo efficiente le proprie risorse. Sta cercando una soluzione per gestire le applicazioni e le risorse in modo più efficiente su una piattaforma scalabile e affidabile.
+L'azienda sta considerando l'offerta Kubernetes gestita da SAP, SAP BTP, Kyma runtime, come soluzione al proprio problema. Può seguire questo learning journey per approfondire la soluzione e le sue funzionalità. Se il team sceglie di adottare Kyma, può anche consigliarlo per l'onboarding dei nuovi sviluppatori che si uniscono ai team.
+Che cos'è Kubernetes?
+
+Prima di esplorare Kyma, vediamo Kubernetes, la tecnologia sottostante su cui Kyma è costruito. In sostanza, Kyma è una raccolta di estensioni per Kubernetes.
+"Kubernetes, noto anche come K8s, è un sistema open-source per automatizzare il deployment, il ridimensionamento e la gestione di applicazioni containerizzate" (Kubernetes.io). Kubernetes è altamente portabile e può essere eseguito quasi ovunque, sia in un cloud pubblico, in un cloud privato o on-premise. Tutti i principali provider cloud offrono Kubernetes come servizio gestito (Kubernetes as a Service, o KaaS). SAP BTP, Kyma runtime è uno di questi servizi Kubernetes gestiti.
+Kubernetes è stato inizialmente sviluppato da Google nel 2014 per gestire il proprio enorme carico di lavoro di container in produzione e si basa su molti anni di esperienza nella gestione interna di workload di produzione. Due anni dopo, è stato donato alla Cloud Native Computing Foundation (CNCF). La Cloud Native Computing Foundation è un'organizzazione neutrale rispetto ai vendor, fondata nel 2015 per promuovere lo sviluppo delle tecnologie cloud-native. Questo consorzio e i suoi membri (per esempio SAP, Google, IBM, Red Hat, Docker, Microsoft e altri) lavorano tutti insieme per definire il futuro delle tecnologie cloud-native come Kubernetes.
+
+Sfide che Kubernetes affronta
+Una delle sfide critiche che Kubernetes affronta è la gestione efficiente dei carichi di lavoro applicativi.
+Molte organizzazioni hanno tipicamente una vasta gamma di applicazioni in esecuzione sui propri server di produzione, sia bare metal sia macchine virtuali. Queste applicazioni sono spesso strettamente accoppiate all'infrastruttura sottostante e non sono portabili tra ambienti diversi (per esempio, un'installazione software su un server Linux configurato in modo specifico). Questo rende difficile spostare le applicazioni da un ambiente a un altro, per esempio da un ambiente di test a un ambiente di produzione oppure da un server guasto a uno funzionante.
+Utilizzando i container per distribuire e gestire le applicazioni, puoi amministrarle in modo più portabile ed efficiente. I container impacchettano le applicazioni con tutte le loro dipendenze come un'unità portabile ed eseguibile (container image). L'applicazione può essere distribuita ed eseguita in quasi qualsiasi ambiente in cui sia installato un container runtime o engine.
+Inoltre, dal punto di vista economico, la maggior parte dei server è spesso sovradimensionata. Di conseguenza, le aziende pagano un prezzo fisso per capacità allocate in modo permanente (per esempio potenza di calcolo, capacità di storage) che non vengono sfruttate completamente. Questo viene comunemente definito anche come costi di inattività o costi di capacità inutilizzata ed è particolarmente vero per i server che eseguono workload che non lavorano sempre a piena capacità (per esempio durante la notte o nei fine settimana).
+Soprattutto, se vuoi gestire contemporaneamente in produzione centinaia o addirittura migliaia di container, hai sicuramente bisogno di un modo per amministrarli in modo efficiente.
+Tuttavia, gestire in modo efficiente i workload distribuiti su più host nel tuo panorama IT può essere difficile e complesso.
+Ed è qui che entra in gioco Kubernetes. Kubernetes può gestire e orchestrare i workload in modo efficiente pianificandoli automaticamente sull'host corretto, scalandoli quando necessario e distribuendo nuove versioni delle applicazioni.
+Per esempio, in base all'elevata domanda corrente, Kubernetes può scalare automaticamente le applicazioni in orizzontale (cioè aggiungendo più istanze) e bilanciare il traffico in ingresso tra tali istanze. Kubernetes può anche spostare automaticamente le applicazioni da un host a un altro se l'host corrente diventa non disponibile oppure se l'host è sovradimensionato. Kubernetes gioca a Tetris® con i container per assicurarsi che le applicazioni siano sempre in esecuzione e che lo siano nel modo più efficiente possibile.
+Per questi motivi, Kubernetes è noto anche come orchestratore di container.
+Funzionalità di Kubernetes
+Kubernetes dispone di diverse funzionalità che consentono di gestire applicazioni containerizzate in modo scalabile e affidabile. Tra le funzionalità più importanti ci sono le seguenti:
+Service discovery e load balancing
+I container possono essere esposti usando il loro nome DNS oppure il loro indirizzo IP. Adottando un approccio di load balancing, Kubernetes può distribuire il traffico di rete per stabilizzare il deployment quando il traffico verso i container è troppo elevato.
+Storage orchestration
+Lo storage può essere integrato automaticamente con Kubernetes utilizzando un sistema di storage a tua scelta, come storage on-premise, provider di cloud pubblico oppure un sistema di storage di rete.
+Rollout e rollback automatizzati
+Kubernetes consente di aggiornare i container usando rolling update. Kubernetes avvia nuovi container e poi termina quelli vecchi. Questa funzionalità garantisce anche zero downtime durante il deployment. Se qualcosa va storto durante il processo di rollout, Kubernetes esegue automaticamente il rollback della modifica.
+Immutabilità e self-healing
+Tutto in Kubernetes è definito in modo dichiarativo. Si specifica lo stato desiderato di un'applicazione o dell'infrastruttura, e Kubernetes fa sempre in modo che lo stato corrente corrisponda a quello desiderato. Quando un container va in crash, Kubernetes lo riavvia automaticamente. Quando un intero nodo va giù, Kubernetes sposta i container su un nodo sano e arresta i container che non rispondono ai controlli di salute personalizzati.
+Gestione di segreti e configurazione
+Puoi usare Kubernetes per archiviare e gestire informazioni riservate, come password, token e chiavi SSH. Puoi distribuire e aggiornare i Secret insieme alle configurazioni dell'applicazione senza ricostruire le container image né esporre informazioni sensibili nelle applicazioni.
+Nota
+Nota che non dovresti archiviare le tue chiavi segrete nel sistema di version control o nel codice sorgente. In alternativa ai Kubernetes Secrets, potresti anche usare le destinazioni SAP BTP o il credential store.
+Estendibilità ed ecosistema
+L'API di Kubernetes include un insieme standard di implementazioni e oggetti. Kubernetes spesso definisce l'API ma non l'implementazione concreta. Questo ti consente di usare e sostituire diverse implementazioni della stessa API. Per esempio, puoi usare diversi sistemi di storage per i volumi persistenti. Puoi anche usare diversi container runtime, come Docker, rkt e Rocket. Nel tempo, l'ecosistema Kubernetes è cresciuto fino a raggiungere una dimensione tale da permetterti di trovare una soluzione per quasi ogni problema. Per esempio, esistono soluzioni per logging, monitoring, service mesh, ingress e molto altro. Alcuni di questi temi verranno trattati più avanti in questo corso.
+Per ottenere un elenco completo di tutte le funzionalità di Kubernetes, consulta la documentazione di Kubernetes.
+Riepilogo
+
+In questa lezione hai scoperto che cos'è Kubernetes, quali sfide risolve e come le risolve. Inoltre, ora puoi descrivere alcune delle principali funzionalità di Kubernetes.
+Approfondimenti sui concetti di base di Kubernetes
+
+Per ulteriori approfondimenti, consulta i seguenti siti:
+Kubernetes
+Cloud Native Computing Foundation (CNCF)
+Membri CNCF
+
+Describing Kubernetes Cluster Architecture
+Scenario di utilizzo
+Kubernetes è un insieme di componenti che lavorano insieme per fornire una piattaforma completa per il deployment, il ridimensionamento e la gestione di applicazioni containerizzate. In questo modulo imparerai quali sono i componenti principali di un sistema Kubernetes e come lavorano insieme per fornire un sistema completo per il deployment, il ridimensionamento e la gestione di applicazioni containerizzate.
+Che cos'è un cluster Kubernetes?
+
+Quando effettui il provisioning di Kubernetes, ottieni qualcosa chiamato cluster.
+Un cluster è un insieme di macchine, chiamate nodi, che possono essere macchine fisiche o virtuali, e che eseguono realmente le tue applicazioni containerizzate. Ogni cluster Kubernetes ha un nodo master, chiamato anche control plane, e uno o più worker node. Il nodo master (Control Plane) è responsabile della gestione del cluster, mentre i worker node (Nodes) sono responsabili dell'esecuzione delle applicazioni.
+Kubernetes, come orchestratore di container, viene spesso paragonato metaforicamente a un'orchestra, in cui il nodo master è il direttore e i worker node sono i musicisti. Il direttore dice ai musicisti cosa suonare, e i musicisti suonano la musica. I direttori non suonano strumenti. Allo stesso modo, il nodo master non esegue direttamente i container. Si limita a gestire i worker node. Il compito principale del control plane è pianificare i container sui worker node, memorizzare e gestire i dati del cluster e fornire l'API del cluster per il controllo remoto del cluster.
+Componenti di un sistema Kubernetes
+Fai clic su ciascun componente per scoprire maggiori dettagli.
+
+Nota
+Il componente kube-apiserver è l'interfaccia principale del sistema Kubernetes. Espone l'API Kubernetes come API RESTful a cui i client, come kubectl, possono accedere per controllare il cluster.
+Riepilogo
+
+Hai acquisito una comprensione approfondita dei componenti principali di un cluster Kubernetes e di come lavorano insieme per fornire un sistema distribuito olistico, affidabile e scalabile.
+Approfondimenti sui componenti principali di un sistema Kubernetes
+Trovi maggiori informazioni qui: Documentazione Kubernetes.
+
+Mastering Kubernetes Objects
+Introduzione
+Hai già appreso i componenti principali di un cluster Kubernetes. In questa lezione imparerai gli oggetti Kubernetes e come lavorano insieme.
+Che cosa sono gli oggetti Kubernetes?
+
+Gli oggetti Kubernetes sono entità che vengono persistite all'interno del cluster Kubernetes. Più precisamente, vengono persistite all'interno del key-value store etcd. Gli oggetti Kubernetes possono rappresentare una vasta gamma di risorse diverse, come Pod, Service, Deployment e altro.
+Questi oggetti sono definiti usando il formato YAML o JSON e possono essere gestiti tramite l'API RESTful di Kubernetes, esposta dal componente kube-apiserver del control plane di Kubernetes. Questo significa che puoi creare, aggiornare, eliminare e interrogare gli oggetti usando l'API.
+Ecco un esempio di richiesta per recuperare informazioni su un oggetto Pod:
+GET https://<kubernetes-cluster>.com/api/v1/namespaces/<namespace>/pods/<pod-name>
+Ogni oggetto Kubernetes è definito in un file di configurazione in formato YAML o JSON. Il file di configurazione contiene la specifica dell'oggetto in modo dichiarativo. Questo consente di definire lo stato desiderato dell'oggetto. Kubernetes controlla poi continuamente se lo stato effettivo dell'oggetto corrisponde allo stato desiderato. In caso contrario, Kubernetes cerca di fare in modo che lo stato effettivo corrisponda a quello desiderato. Questo è chiamato reconciliation loop.
+Un semplice oggetto Pod di Kubernetes è dichiarato come segue:
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+    containers:
+    - name: my-container
+image: nginx:1.21.3
+Analizziamo le diverse parti dell'oggetto Pod:
+Il campo apiVersion specifica la versione dell'API Kubernetes utilizzata per definire l'oggetto. Ogni oggetto può avere versioni API diverse.
+Il campo kind specifica il tipo di oggetto Kubernetes.
+Il campo metadata contiene i metadati dell'oggetto.
+Il campo spec contiene la specifica dell'oggetto. Il campo spec è diverso per ogni tipo di oggetto. Per esempio, il campo spec di un oggetto Pod contiene la specifica dei container che fanno parte del Pod.
+Questi sono i campi obbligatori di un oggetto Kubernetes. Tuttavia, puoi anche aggiungere campi aggiuntivi all'oggetto.
+L'oggetto descritto sopra crea un Pod con il nome my-pod che contiene un singolo container con il nome my-container. Il container utilizza l'immagine nginx nella versione 1.21.3.
+
+Tipi di diversi oggetti Kubernetes
+Esistono alcuni oggetti fondamentali che puoi trovare in quasi ogni cluster Kubernetes. Ecco una panoramica degli oggetti Kubernetes più importanti:
+Pod
+Come introdotto in precedenza, i Pod sono le più piccole unità distribuibili in Kubernetes e rappresentano un sottile wrapper attorno a uno o più container. I Pod vengono sempre schedulati sui nodi. I Pod possono essere creati, aggiornati ed eliminati tramite l'API Kubernetes.
+Eseguire più container in un singolo Pod è un anti-pattern. Il motivo principale è che rende più difficili il ridimensionamento e l'aggiornamento dei container. È anche più difficile gestire i container, poiché sono strettamente accoppiati. Un esempio potrebbe essere un Pod che esegue due container, come un web server e un database. Se vuoi scalare il web server, devi scalare anche il database, anche se questo non è necessario.
+Tuttavia, esistono alcuni scenari comuni in cui ha senso eseguire più container in un singolo Pod. Per esempio, se vuoi eseguire un container sidecar che fornisce funzionalità aggiuntive al container principale, come logging, monitoring oppure proxy del traffico. Più avanti analizzeremo in maggiore dettaglio le sidecar injection quando parleremo di service mesh con Istio.
+
+Service
+I Service raggruppano un insieme di Pod e forniscono un punto di accesso stabile per raggiungerli. Il Service nel diagramma seguente offre anche capacità di load balancing distribuendo il traffico su più Pod. I Pod vengono raggruppati utilizzando label e selector, che vedremo più avanti.
+
+Questo è particolarmente utile quando un'applicazione viene scalata per essere eseguita su più Pod in un cluster, poiché il Service può raggrupparli in modo efficace e fornire un punto di accesso stabile per raggiungerli.
+Suggerimento
+Un Service Kubernetes espone i Pod dell'applicazione come servizio di rete con un nome DNS e un IP coerenti all'interno di un cluster Kubernetes. Per esporre su Internet il Service interno di Kubernetes, devi creare la custom resource APIRule. Questo approccio è simile alla creazione di route nel runtime Cloud Foundry. Imparerai di più sull'esposizione dei Service nell'unità Discovering Services in Kubernetes.
+ReplicaSet
+Un ReplicaSet è un insieme di Pod di un tipo specifico che sono in esecuzione nel cluster in un determinato momento. Il ReplicaSet garantisce che il numero desiderato di Pod sia sempre in esecuzione. Se un Pod viene eliminato, il ReplicaSet crea un nuovo Pod per sostituirlo. Questa verifica viene eseguita all'interno del reconciliation loop, che confronta lo stato desiderato (il numero di Pod) con lo stato effettivo (il numero di Pod in esecuzione). I ReplicaSet sono un buon modo per garantire l'alta disponibilità delle applicazioni e sfruttare le capacità di self-healing di Kubernetes.
+Nota
+È anche importante sapere che il ReplicaSet non possiede i Pod. Al contrario, è responsabile di assicurarsi che il numero desiderato di Pod sia in esecuzione. Se elimini un Pod, il ReplicaSet ne crea uno nuovo per sostituirlo. Puoi anche eliminare il ReplicaSet senza eliminare i Pod.
+
+Deployment
+I Deployment sono un'astrazione di alto livello sopra i ReplicaSet. Puoi usare i Deployment per definire in modo dichiarativo lo stato desiderato della tua applicazione. Questo include il numero di repliche, le immagini dei container e ulteriore configurazione. I Deployment gestiscono i ReplicaSet e i ReplicaSet gestiscono i Pod.
+Con i Deployment puoi distribuire nuove versioni della tua applicazione. Questo rollout viene eseguito in modo altamente controllato. Il Deployment crea un nuovo ReplicaSet accanto a quello vecchio. Successivamente, avvia il nuovo ReplicaSet e lo scala fino al numero desiderato di repliche. Una volta che il nuovo ReplicaSet è attivo e funzionante, inizia a ridurre il vecchio ReplicaSet. Questo garantisce che ci sia sempre almeno un ReplicaSet in esecuzione. Questo è chiamato rolling update ed è una funzionalità potente dei Deployment, poiché rappresenta un modo sicuro per distribuire nuove versioni delle tue applicazioni senza downtime (Zero Downtime Deployment).
+
+
+Suggerimento
+Per applicare un Deployment in Kyma, si usa il comando kubectl apply -f deployment.yaml. Questo comando è simile al comando cf push nel runtime Cloud Foundry. Tuttavia, in Kubernetes, il Deployment deve includere informazioni sull'artefatto (Docker image). La creazione e la memorizzazione degli artefatti non sono richieste nel runtime Cloud Foundry.
+Nota
+Esistono molti altri oggetti Kubernetes, alcuni dei quali verranno trattati più avanti in questo corso. Kubernetes è infatti anche estendibile. Puoi definire i tuoi oggetti personalizzati ed estendere l'API Kubernetes usando le Custom Resource Definition (CRD).
+Per saperne di più sugli altri oggetti o sulle CRD, consulta la documentazione ufficiale di Kubernetes.
+
+Organizzazione degli oggetti Kubernetes nei namespace
+In un cluster Kubernetes, ogni oggetto deve avere un nome univoco all'interno del proprio namespace. In altre parole, non puoi avere due Pod con lo stesso nome all'interno di un singolo namespace, ma puoi avere Pod con lo stesso nome se si trovano in namespace diversi. I namespace sono un modo per raggruppare gli oggetti Kubernetes e fornire una separazione logica degli oggetti. Questa separazione consente di eseguire in parallelo due versioni diverse della tua applicazione oppure permette a team diversi di lavorare all'interno dello stesso cluster senza interferire tra loro. Puoi anche limitare l'accesso a determinati namespace per fornire solo un sottoinsieme del cluster a specifici utenti.
+In un cluster Kubernetes esiste un namespace predefinito chiamato default. Questo namespace viene usato se non specifichi un namespace nella definizione dell'oggetto o nella richiesta API. Puoi anche creare i tuoi namespace.
+Identificazione degli oggetti Kubernetes con label e selector
+Ogni oggetto Kubernetes può essere etichettato con coppie chiave-valore. Le label vengono usate per identificare gli oggetti. Per esempio, puoi etichettare tutti i Pod di una determinata applicazione con la label app: my-app.
+Questo è un esempio di come i Service raggruppano i Pod. I Service usano label selector per identificare i Pod che devono far parte del Service. Un label selector è una query usata per selezionare oggetti in base alle loro label. Per esempio, il label selector app: my-app seleziona tutti i Pod con la label app: my-app.
+Puoi definire le label nella sezione metadata della definizione dell'oggetto:
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+  labels:
+    app: my-app
+spec:
+    containers:
+    - name: my-container
+image: nginx
+
+Annotazioni
+Le annotazioni sono simili alle label, ma, a differenza delle label, non vengono usate per identificare, filtrare o selezionare oggetti. Le annotazioni arricchiscono l'oggetto con metadati semantici. Tipicamente, strumenti diversi utilizzano le annotazioni per memorizzare dettagli aggiuntivi sull'oggetto.
+Riepilogo
+
+Ora puoi distinguere i diversi oggetti Kubernetes e il loro scopo. Sai anche come sono correlati tra loro e come possono essere etichettati e raggruppati nei namespace.
+Approfondimenti sugli oggetti Kubernetes
+
+Trovi ulteriori informazioni qui:
+Documentazione Kubernetes
+Oggetti Kubernetes
+Namespace Kubernetes
+Label e selector di Kubernetes
+
+Interacting with the Kubernetes API Using Kubectl
+Scenario di utilizzo
+
+Avendo appena scoperto quali tipi di oggetti puoi creare in Kubernetes, vediamo come interagire con l'API di Kubernetes per creare, aggiornare ed eliminare questi oggetti. Per questo, utilizzerai lo strumento da riga di comando kubectl, che è il modo principale per interagire con l'API di Kubernetes.
+Che cos'è Kubectl?
+
+Per interagire con l'API di Kubernetes, hai bisogno di un client. L'API di Kubernetes è una REST API, il che significa che puoi interagire con essa usando qualsiasi client HTTP. Poiché, in genere, devi anche gestire autenticazione e autorizzazione, è molto più semplice usare un client dedicato come kubectl.
+
+Installazione di Kubectl
+
+L'interfaccia a riga di comando (CLI) kubectl deve essere installata sulla tua macchina locale. Puoi installarla seguendo le istruzioni nella documentazione ufficiale di Kubernetes. Scorri fino alla sezione di approfondimento per il link alla documentazione ufficiale di Kubernetes.
+Configurazione di Kubectl
+
+Per configurare kubectl affinché punti a uno specifico cluster Kubernetes, hai bisogno di un file kubeconfig. Questo file include informazioni importanti sul tuo cluster, come l'URL dell'API server, il metodo di autenticazione e la certificate authority. Il file kubeconfig è solitamente memorizzato nella home directory del tuo account utente.
+Per Kyma, oltre a kubectl, è richiesto anche il plugin kubelogin. Leggi di più qui.
+Per esempio, su Linux, il file kubeconfig si trova in ~/.kube/config, mentre su Windows puoi trovarlo in %USERPROFILE%.kube\config.
+Approfondimenti sull'interazione con l'API di Kubernetes tramite Kubectl
+
+Trovi ulteriori informazioni sull'interazione con l'API di Kubernetes tramite kubectl qui:
+Documentazione Kubernetes
+Installare kubectl
+kubectl Cheat Sheet
+
+Describing Kyma in Relation to Kubernetes
+Che cos'è Kyma?
+
+Il progetto Kyma è stato avviato nel 2017 ed è ancora in fase di sviluppo attivo. È ospitato su GitHub ed è distribuito con licenza Apache 2.0. SAP è il principale contributore.
+Kyma combina la potenza di Kubernetes con strumenti di altissimo livello e progetti open-source. Queste funzionalità sono fornite tramite building block chiamati moduli Kyma. Da un insieme di moduli, puoi scegliere quali vuoi aggiungere al tuo cluster. Selezionando quelli adatti alle tue esigenze, crei una configurazione personalizzata che ti consente di sviluppare, eseguire e gestire applicazioni cloud-native sicure e scalabili.
+Un aspetto importante di Kyma è che si basa sul pattern Kubernetes Operator. Quando aggiungi un modulo Kyma, le sue API vengono registrate in Kubernetes come CustomResourceDefinitions (CRD). Le CRD fungono da base per le custom resources (CR), che puoi creare per definire e gestire i tuoi oggetti personalizzati. Questo ti consente di usare strumenti nativi di Kubernetes come kubectl per gestire le risorse Kyma. Inoltre, ogni modulo Kyma include un operator che gestisce l'amministrazione e la riconciliazione del modulo in base alle informazioni fornite nella CR del modulo.
+Nota
+Puoi installare i moduli open-source di Kyma in qualsiasi cluster Kubernetes seguendo le istruzioni presenti nei repository dei moduli di kyma-project. Tuttavia, Kyma è disponibile anche come servizio gestito sulla SAP Business Technology Platform (SAP BTP). Il servizio gestito si chiama SAP BTP, Kyma runtime. Per maggiori informazioni, vedi Kyma Environment.
+Vedi la panoramica dei moduli Kyma:
+Infatti, Kyma dispone anche di una propria interfaccia a riga di comando (CLI) chiamata Kyma CLI. Tuttavia, Kyma CLI non viene utilizzata in questo learning journey.
+
+
+
+Funzionalità aggiuntive fornite da Kyma
+
+Diamo ora uno sguardo più da vicino ai moduli che puoi aggiungere alla tua istanza di Kyma runtime:
+Istio
+Il modulo Istio è responsabile dell'installazione di Istio, una service mesh che fornisce un modo uniforme per gestire, collegare e proteggere i microservizi. Una service mesh è una rete di microservizi che possono comunicare tra loro. È anche responsabile della sicurezza della comunicazione tra i microservizi, come i tuoi Pod o le tue Function. Può inoltre fornire funzionalità aggiuntive come traffic management, circuit breaking e load balancing. Kyma utilizza la service mesh open-source Istio. Questa include anche metriche pronte all'uso, che possono essere utilizzate per raccogliere varie informazioni sui tuoi servizi.
+API Gateway
+Il modulo API Gateway fornisce un punto di ingresso unico per tutta la comunicazione esterna dal tuo cluster Kubernetes. È anche responsabile della sicurezza della comunicazione.
+SAP BTP Operator
+Il modulo SAP BTP Operator ti consente di connettere i servizi SAP BTP al tuo cluster Kubernetes e di gestirli utilizzando strumenti nativi di Kubernetes.
+Application Connector
+Il modulo Application Connector semplifica e protegge la connessione tra soluzioni esterne e Kyma. Non importa se vuoi integrare un sistema on-premise o cloud, il processo di integrazione non cambia, consentendoti di evitare qualsiasi problema relativo alla configurazione o alla rete. Il modulo memorizza e gestisce i metadati delle API esterne, offre capacità di monitoraggio e tracing e fornisce la gestione dei certificati per il flusso Eventing.
+Cloud Manager
+Il modulo Cloud Manager gestisce l'accesso alle risorse e ai prodotti scelti dei cloud provider. Una volta aggiunto Cloud Manager al tuo cluster Kyma, il modulo rende disponibili in modo sicuro le risorse offerte. Cloud Manager è strettamente legato al cloud provider su cui è distribuito il tuo cluster Kyma. Offre funzionalità come Network File System (NFS) server, Virtual Private Cloud (VPC) peering o Redis.
+Keda
+Il modulo Keda ti consente di installare e gestire facilmente nel tuo cluster Kubernetes il Kubernetes-based Event Driven Autoscaler (KEDA). KEDA è un autoscaler che ti permette di scalare facilmente i tuoi workload Kubernetes in base ai trigger che scegli. Con KEDA, hai accesso a una varietà di scaler che ti aiutano a gestire in modo efficiente i tuoi deployment.
+Eventing
+Il modulo Eventing consente agli utenti di concentrarsi sui propri workflow di business e di attivarli tramite eventi, semplificando il processo di pubblicazione e sottoscrizione degli eventi. Con Eventing, gli utenti possono implementare flussi asincroni all'interno di Kyma senza implementare o integrare alcun backend o protocollo aggiuntivo.
+NATS
+Il modulo NATS gestisce il deployment di NATS JetStream, un sistema di persistenza distribuito che migliora la funzionalità e la qualità del servizio NATS. Il modulo assicura che il cluster NATS si trovi nello stato desiderato osservandone lo stato ed eseguendo la riconciliazione. Kyma Eventing può utilizzare NATS come backend per gestire gli eventi e consegnarli ai subscriber.
+Serverless
+Il modulo Serverless di Kyma fornisce un insieme di strumenti per sviluppare, eseguire e scalare Function serverless. Serverless o serverless computing non significa che non ci sia alcun server. Significa invece che il server viene astratto dallo sviluppatore. Lo sviluppatore può concentrarsi sul codice e sulla logica di business.
+Telemetry
+Come aspetto chiave dell'architettura orientata ai servizi, potresti voler monitorare il comportamento di un sistema raccogliendo e analizzando metriche, log e trace. Questi dati vengono utilizzati per identificare e diagnosticare i problemi nel sistema. Il modulo Telemetry fornisce un insieme di strumenti per raccogliere, arricchire e analizzare questi dati. Questi strumenti si basano su progetti open-source come OpenTelemetry e Fluent Bit.
+Confronto tra Kyma open-source e SAP BTP, Kyma Runtime
+
+Il progetto "Kyma" è la base di SAP BTP, Kyma runtime, che fa parte di SAP Business Technology Platform (BTP). Invece di configurare da solo i moduli open-source di Kyma sul tuo cluster Kubernetes, puoi utilizzare la versione gestita fornita da SAP BTP. Il progetto open-source ti offre maggiore flessibilità per personalizzare il tuo Kyma runtime con meno limitazioni, ma significa anche che sei completamente responsabile dell'installazione e della gestione del tuo cluster. Con SAP BTP, Kyma runtime, non devi preoccuparti dell'installazione e della manutenzione, quindi puoi concentrarti completamente sullo sviluppo e sull'esecuzione delle tue applicazioni. Inoltre, ottieni anche service level agreements (SLA) per il Kubernetes gestito e per l'ambiente Kyma gestito, oltre a una dashboard Kyma ospitata centralmente.
+Riepilogo
+
+Dopo questa breve lezione introduttiva, puoi descrivere brevemente il progetto "Kyma" e i moduli che offre. Puoi anche confrontare il progetto open-source e il servizio gestito SAP BTP, Kyma runtime.
+Approfondimenti
+
+Progetto open-source "Kyma"
+SAP BTP, Kyma Runtime
+
+Exploring the Benefits of the SAP BTP, Kyma runtime
+Cluster Kubernetes vanilla rispetto a SAP BTP, Kyma Runtime
+
+Installare, aggiornare e mantenere un cluster Kubernetes è un compito complesso. Se la tua azienda non è un cloud provider, devi assumere un team di esperti per gestire il tuo cluster Kubernetes. Questo non è solo costoso, ma richiede anche molto tempo. Devi inoltre investire molto tempo e denaro per mantenere aggiornato il tuo cluster Kubernetes, cosa particolarmente vera se vuoi utilizzare le funzionalità più recenti di Kubernetes e del suo ecosistema.
+Per esternalizzare queste attività, si dovrebbe considerare un servizio Kubernetes gestito (Kubernetes as a Service). Con un'offerta Kubernetes gestita, puoi concentrarti completamente sul tuo business e sulle tue applicazioni, astrando la complessità della gestione del tuo cluster Kubernetes e della relativa infrastruttura cloud sottostante.
+SAP Business Technology Platform (SAP BTP) offre un servizio Kubernetes gestito chiamato SAP BTP, Kyma runtime. A differenza di un cluster Kubernetes vanilla, SAP BTP, Kyma runtime include funzionalità aggiuntive fornite dai moduli Kyma. Queste capacità sono già state trattate nella lezione precedente.
+In genere, gli utenti Kubernetes dovrebbero decidere tra diverse soluzioni per il proprio ambiente (per esempio, se vogliono usare la service mesh Istio o Linkerd). Anche il processo decisionale è complesso e richiede tempo, così come l'integrazione, la manutenzione e l'aggiornamento di queste soluzioni. Quando usi Kyma runtime, gli strumenti più importanti sono già integrati out-of-the-box tramite i moduli Kyma. Questo ti fa risparmiare molto tempo e denaro. Inoltre, SAP BTP, Kyma runtime fa un ulteriore passo avanti occupandosi della manutenzione e degli aggiornamenti dei moduli Kyma e del cluster sottostante.
+
+Provisioning e gestione di SAP BTP, Kyma Runtime
+
+Quando crei un Kyma runtime nel tuo subaccount SAP BTP, il cluster Kubernetes sottostante viene provisionato automaticamente. In realtà, SAP non ospita direttamente il cluster Kubernetes, ma utilizza risorse di calcolo (come macchine virtuali), networking e altri componenti infrastrutturali degli hyperscaler.
+SAP provisiona il cluster Kubernetes tramite un altro progetto open-source chiamato Gardener, mantenuto da SAP.
+Gardener è un gestore di cluster Kubernetes che fornisce cluster completamente gestiti su larga scala ovunque tu voglia. Supporta tutti i principali cloud provider, come AWS, Azure, GCP, Alibaba e altri. Gardener stesso è una soluzione Kubernetes ufficialmente certificata.
+Dal punto di vista tecnico, Gardener è un extension API server che include un bundle di custom controller e nuove custom resource come garden cluster, seed cluster, shoot cluster e altre.
+Il garden cluster è il cluster centrale che gestisce tutti gli altri cluster. Il seed cluster effettua il provisioning dello shoot cluster. Inoltre, il seed cluster riconcilia lo stato del tuo shoot cluster, esegue gli aggiornamenti e assicura che sia sempre in uno stato sano e operativo.
+Lo shoot cluster è l'effettivo cluster Kubernetes che viene provisionato per l'installazione di Kyma runtime.
+
+
+
+Se vuoi saperne di più su SAP Gardener, leggi la documentazione di Gardener.
+Vantaggi principali di SAP BTP, Kyma Runtime
+
+In conclusione, SAP Business Technology Platform (BTP), Kyma runtime offre i seguenti vantaggi:
+Un cluster Kubernetes completamente gestito su un hyperscaler di tua scelta.
+Le funzionalità più recenti di Kubernetes e del suo ecosistema.
+Moduli Kyma che puoi aggiungere al tuo Kyma runtime (SAP BTP Operator, Istio, API Gateway, Serverless, Telemetry, Application Connector e altri)
+Integrazione con altri servizi e prodotti SAP (per esempio, servizi SAP BTP, SAP S/4HANA, SAP SuccessFactors, ecc.)
+Eliminazione dell'overhead operativo (zero sforzo di gestione e manutenzione dell'infrastruttura).
+Riepilogo
+
+In questa lezione, hai scoperto i vantaggi di SAP BTP, Kyma runtime rispetto a un cluster Kubernetes vanilla. Ora puoi descrivere come SAP effettua il provisioning e gestisce il Kyma runtime gestito.
+Approfondimenti sui vantaggi di SAP BTP, Kyma Runtime
+
+Trovi maggiori informazioni qui:
+SAP BTP, Kyma runtime
+Documentazione di Gardener
+
+Deploying a Kubernetes Cluster with Kyma on SAP BTP
+Scenario di utilizzo
+
+Vuoi iniziare a usare SAP BTP, Kyma runtime. Per farlo, devi abilitare il servizio SAP BTP, Kyma runtime nel tuo subaccount SAP BTP.
+Flusso del task
+
+In questo esercizio, eseguirai i seguenti passaggi:
+Abilitare Kyma runtime nel tuo subaccount SAP BTP.
+Verificare che Kyma runtime sia abilitato.
+Prerequisiti
+
+Hai un subaccount SAP BTP con un entitlement per Kyma runtime (Free Tier o Paid).
+Se non hai un subaccount SAP BTP, puoi usare l’account SAP BTP Free Tier. Per le istruzioni, vedi Get an Account on SAP BTP to Try Out Free Tier Service Plans.
+Suggerimento
+Puoi saltare la parte relativa alla creazione dell’ambiente Cloud Foundry.
+Task 1: Abilitare Kyma Runtime nel tuo subaccount
+
+Passaggi
+Vai nel tuo subaccount SAP BTP.
+Seleziona Enable Kyma.
+Nota
+Questo pulsante appare qui solo se hai un entitlement per Kyma runtime. Se non hai l’entitlement, vedi Manage Entitlements Using the Cockpit.
+Nella finestra pop-up, modifica i dettagli del cluster se necessario e seleziona Create.
+Puoi sederti e rilassarti per circa 30 minuti mentre il cluster viene creato.
+Verifica che Kyma runtime sia abilitato.
+
+Quando Kyma runtime è abilitato, puoi vedere i dettagli del tuo cluster nel Kyma Environment. La sezione contiene anche un link alla dashboard di Kyma.
+Nota
+Puoi selezionare il link KubeconfigURL per scaricare il file kubeconfig.
+Risultato
+Hai distribuito con successo un cluster Kubernetes con Kyma runtime nel tuo subaccount SAP BTP.
+
+Setting and Configuring Kubectl for Kyma
+Scenario di utilizzo
+
+Hai creato con successo un'istanza di Kyma runtime. Ora vuoi interagire con essa e imparare a usare l'interfaccia a riga di comando kubectl (CLI) per gestire le tue risorse. Ma prima, devi sapere come configurare la CLI kubectl per connetterti alla tua istanza di Kyma runtime, soprattutto perché Kyma runtime richiede un plugin speciale di kubectl per il processo di autenticazione.
+Flusso del task
+
+In questo esercizio, eseguirai i seguenti passaggi:
+Installare la CLI kubectl.
+Installare il plugin kubelogin.
+Configurare la CLI kubectl per connetterti alla tua istanza di Kyma runtime.
+Interagire con la tua istanza di Kyma runtime usando kubectl.
+Task 1: Installare la CLI Kubectl
+
+Prerequisiti
+Hai creato con successo un'istanza di Kyma runtime nel sottoaccount SAP BTP.
+Passaggi
+Installare la CLI Kubectl.
+Segui la documentazione ufficiale per installare la CLI kubectl.
+Per verificare che la CLI kubectl sia installata correttamente, esegui il seguente comando nel tuo terminale o nella riga di comando:
+kubectl version –client
+Se l'installazione è andata a buon fine, vedrai come output le versioni del client e di Kustomize.
+Installare il plugin Kubelogin.
+Kyma runtime richiede un plugin speciale chiamato kubelogin affinché la CLI kubectl possa connettersi alla tua istanza di Kyma runtime.
+Segui la documentazione ufficiale per installare il plugin kubelogin.
+Per verificare che il plugin kubelogin sia installato correttamente, esegui il seguente comando nel tuo terminale o nella riga di comando:
+kubectl version –client
+Se l'installazione è andata a buon fine, vedrai come output le versioni del client e del plugin kubelogin.
+Task 2: Connettersi alla tua istanza di Kyma Runtime.
+
+Come già accennato, kubectl si basa sul file kubeconfig, che si trova tipicamente nella directory ~/.kube (macOS/Linux) oppure %USERPROFILE%.kube (Windows).
+Passaggi
+Vai alla pagina panoramica del tuo sottoaccount SAP BTP.
+Seleziona il link KubeconfigURL per scaricare il file kubeconfig.yaml della tua istanza di Kyma runtime.
+
+Nel terminale, esporta il percorso del tuo file kubeconfig come variabile di ambiente.
+Per macOS/Linux:
+export KUBECONFIG={KUBECONFIG_FILE_PATH}
+Per Windows:
+$ENV:KUBECONFIG="{KUBECONFIG_FILE_PATH}"
+Nota
+Il file kubeconfig contiene le credenziali per accedere alla tua istanza di Kyma runtime. Per questo motivo, è importante conservarlo in modo sicuro.
+Per verificare che il file kubeconfig sia configurato correttamente, esegui il seguente comando nel tuo terminale o nella riga di comando:
+kubectl cluster-info
+Se l'operazione ha avuto successo, vedrai il seguente output:
+
+
+
+
+Task 3: Accedere alle risorse nel tuo runtime Kyma
+Ora è il momento di usare alcuni comandi kubectl per interagire con la tua istanza di runtime Kyma. Ricorda che tutto ciò che è definito in Kubernetes può essere accessibile utilizzando la RESTful Kubernetes API.
+Ogni comando kubectl deve specificare il namespace e il tipo di oggetto. Se non viene specificato alcun namespace, kubectl assume il namespace predefinito. Il tipo di oggetto è il nome del tipo di risorsa, come Pods o Deployments. Il nome dell'oggetto è il nome della risorsa, come my-pod o my-deployment.
+La sintassi di kubectl è la seguente:
+kubectl [command] [TYPE] [NAME] [flags]
+Passaggi
+Elencare gli oggetti.
+Per elencare gli oggetti, puoi usare il comando get. Il comando get elenca una o più risorse.
+Per elencare tutti i Pods in tutti i namespace, usa il seguente comando:
+
+kubectl get all –all-namespaces
+Per elencare tutti i Pods in un namespace specifico, puoi usare il seguente comando:
+kubectl get pods --namespace my-namespace
+Suggerimento
+Il flag --namespace è facoltativo. Se non specifichi un namespace, viene usato il namespace predefinito. Tuttavia, puoi anche specificare il namespace nel file kubeconfig o creare contesti diversi per namespace diversi, tra i quali puoi poi passare oppure impostare il tuo namespace personalizzato come predefinito. Leggi di più sui contesti nella documentazione ufficiale di Kubernetes.
+Prova alcuni altri esempi del comando get, che elenca le risorse di un tipo specificato nel namespace predefinito:
+kubectl get pods
+kubectl get services
+kubectl get replicasets
+kubectl get deployments
+kubectl get nodes
+Creare oggetti.
+Crea un nuovo namespace:
+kubectl create namespace my-namespace
+Crea un Pod nel namespace che hai appena creato:
+cat <<EOF | kubectl -n my-namespace apply -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+    containers:
+    - name: my-container
+        image: nginx:1.21.3
+EOF
+Il comando create può anche creare un oggetto Kubernetes da un file YAML o JSON. Per esempio, puoi definire un Pod in un file YAML e crearlo usando questo comando:
+kubectl create -f my-pod.yaml
+Il flag -f è l'abbreviazione di --filename. Specifica il percorso del file YAML o JSON che contiene la definizione dell'oggetto.
+Il terzo approccio consiste nel creare oggetti da un URL. Per esempio, puoi usare questo comando:
+kubectl create -f https://raw.githubusercontent.com/SAP-samples/kyma-runtime-learning-journey/main/unit_1/my-pod.yaml
+Nota
+Se esegui il comando create due volte con la stessa definizione di oggetto, viene restituito un errore. Per evitarlo, usa invece il comando apply.
+Aggiornare oggetti.
+Per aggiornare gli oggetti, puoi usare il comando apply. Il comando apply aggiorna un oggetto Kubernetes da un file YAML o JSON. Per esempio, per aggiornare un Pod, puoi usare il seguente comando:
+kubectl apply -f my-pod.yaml
+Durante un'operazione di apply, il server API di Kubernetes confronta la definizione dell'oggetto nel file YAML o JSON con lo stato corrente dell'oggetto nel cluster. Se ci sono differenze, l'oggetto viene aggiornato.
+Descrivere gli oggetti.
+Per descrivere gli oggetti, puoi usare il comando describe, che visualizza informazioni dettagliate su un oggetto Kubernetes.
+Per esempio, per descrivere un Pod, puoi usare il seguente comando:
+kubectl describe pod my-pod
+Puoi anche esportare l'output del comando describe in un file YAML o JSON. Per esempio, per esportare l'output del comando describe in un file YAML, puoi usare il seguente comando:
+kubectl describe pod my-pod -o yaml > my-pod.yaml
+Etichettare gli oggetti.
+Per etichettare gli oggetti, puoi usare il comando label. Il comando label aggiunge o aggiorna le etichette su un oggetto Kubernetes. Per esempio, per aggiungere un'etichetta a un Pod, puoi usare il seguente comando:
+kubectl label pod my-pod my-label=my-value
+Eliminare oggetti.
+Per eliminare gli oggetti, puoi usare il comando delete. Per esempio, per eliminare un Pod, esegui:
+kubectl delete pod my-pod
+Per eliminare il namespace che hai creato, esegui:
+kubectl delete namespace my-namespace
+Ottenere i dettagli del cluster.
+Per recuperare le informazioni del cluster, usa il comando cluster-info. Visualizza informazioni sul cluster.
+kubectl cluster-info
+Per recuperare le informazioni sull'utilizzo delle risorse per Nodes e Pods, usa il comando top.
+kubectl top nodes
+kubectl top pods
+Per ottenere un elenco completo di tutti i comandi disponibili, puoi usare il comando help.
+kubectl help
+Risultato
+Hai installato correttamente la CLI kubectl e l'hai configurata per connettersi alla tua istanza di runtime Kyma. Puoi usare i comandi kubectl di base per interagire con essa.
+
+Accessing Your Kyma Runtime Instance Using Kyma Dashboard
+Scenario di utilizzo
+
+Stai pianificando di usare SAP BTP, Kyma runtime, e hai sentito parlare della possibilità di usare Kyma dashboard per interagire con il cluster Kubernetes sottostante. Ora vuoi esplorare Kyma dashboard e imparare a usarlo.
+Flusso delle attività
+
+Accedere a Kyma dashboard.
+Visualizzare le risorse Kyma della tua istanza di runtime Kyma.
+Creare un nuovo namespace e un Pod.
+Prerequisiti
+Hai creato correttamente un'istanza di runtime Kyma nel subaccount SAP BTP.
+Contenuto
+Kyma dashboard è un'interfaccia grafica utente (GUI) basata sul web che ti permette di interagire con il tuo cluster. Poiché fa parte del progetto open-source "Kyma", può anche essere usato in modo standalone, senza essere provisionato da SAP.
+Tuttavia, SAP fornisce una versione centralmente ospitata di Kyma dashboard per i clienti SAP BTP, Kyma runtime, accessibile tramite il cockpit SAP BTP oppure dashboard.kyma.cloud.sap.
+Task 1: Accedere a Kyma dashboard usando il link
+Segui questi passaggi per accedere rapidamente a Kyma dashboard:
+Passaggi
+Vai al tuo subaccount SAP BTP.
+Nella sezione Kyma Environment, seleziona il link dell'URL della console.
+
+Task 2: Accedere a Kyma dashboard caricando il file kubeconfig
+In alternativa, puoi accedere alla dashboard fornendo il file kubeconfig. Questo metodo richiede più tempo ma ti consente di personalizzare le impostazioni di archiviazione e privacy secondo le tue preferenze
+Passaggi
+Vai al tuo subaccount SAP BTP.
+Scarica il file kubeconfig dalla sezione Kyma Environment.
+Vai su https://dashboard.kyma.cloud.sap/clusters.
+Seleziona Connect Cluster.
+Trascina il file kubeconfig nell'editor.
+Seleziona Next step e modifica la configurazione della dashboard se necessario.
+Quando raggiungi il passaggio finale, seleziona Connect Cluster.
+Task 3: Visualizzare le risorse Kyma
+Kyma runtime, come Kubernetes, usa i namespace per isolare gruppi di risorse all'interno di un cluster. Per esempio, quando abiliti Kyma runtime, le risorse dei moduli vengono distribuite nel namespace kyma-system, le risorse Istio nel namespace istio-system, e il namespace kube-system contiene varie risorse e componenti di sistema necessari per il corretto funzionamento del cluster Kubernetes. Visualizza le risorse già create:
+Passaggi
+Vai su Namespaces e seleziona il namespace kyma-system.
+
+
+Questa pagina ti mostra lo stato degli oggetti che sono distribuiti nel namespace kyma-system. Fornisce direttamente una panoramica dello stato generale di salute dei tuoi oggetti, così come del consumo delle risorse (CPU, Memoria, Rete). Kyma dashboard contiene una pagina di panoramica per ciascuno dei tuoi namespace.
+Nella sezione Workloads, puoi vedere diversi oggetti raggruppati per categorie. Puoi scegliere la rispettiva categoria per vedere gli oggetti disponibili di un certo tipo. Per visualizzare tutti i Pods creati nel namespace kyma-system, seleziona Pods.
+
+Usa l'interruttore per selezionare All Namespaces invece del namespace specifico.
+
+Ora puoi vedere tutti i Pods creati in tutti i namespace della tua istanza di runtime Kyma.
+Task 4: Creare un nuovo namespace e un Pod
+Passaggi
+Dalla pagina Cluster Details, vai su Namespaces.
+Seleziona Create.
+Fornisci il nome del tuo namespace e seleziona Create.
+Vai su Workloads→Pods e seleziona Create.
+Incolla la seguente configurazione nell'editor:
+apiVersion: v1
+    kind: Pod
+    metadata:
+    name: my-pod
+    spec:
+        containers:
+        - name: my-container
+image: nginx:1.21.3
+
+Seleziona Create.
+Nota
+Sentiti libero di fare prove e creare diversi tipi di risorse nel namespace che hai appena creato. Tutti gli oggetti nella tua istanza di runtime Kyma possono essere configurati usando il rispettivo manifest nel formato YAML.
+Alcuni oggetti hanno anche un editor grafico, che ti consente di creare e modificare oggetti senza dover scrivere manualmente il manifest YAML.
+Se non sei sicuro di come creare oggetti diversi, non preoccuparti! Tratteremo questi argomenti nelle prossime lezioni.
+Per eliminare il namespace, seleziona Delete dalla sua pagina di panoramica.
+Risultato
+In questo esercizio, hai imparato come accedere a Kyma dashboard e usare la sua navigazione. Ora puoi usarlo per interagire con il tuo cluster Kubernetes. Hai anche scoperto come lavorare con i namespace e come gestire le risorse.
+
+
+Adding Kyma Modules
+Scenario di utilizzo
+I moduli Kyma sono stati introdotti nella lezione Kyma Overview. Ora che hai esplorato le funzionalità di base di Kyma dashboard, puoi imparare come usarlo per aggiungere o eliminare i moduli.
+Flusso delle attività
+Aggiungere un modulo Kyma alla tua istanza di runtime Kyma.
+Eliminare un modulo Kyma dalla tua istanza di runtime Kyma.
+Prerequisiti
+Hai creato un'istanza di runtime Kyma nel subaccount SAP BTP.
+Task 1: Aggiungere moduli Kyma al tuo cluster
+Passaggi
+Vai su Kyma dashboard.
+Scegli Modify Modules.
+
+Seleziona Add.
+
+Seleziona i moduli che vuoi aggiungere. Per completare questo learning journey, ti serviranno i seguenti moduli: Istio, API Gateway, SAP BTP Operator, Serverless, Application Connector, Telemetry ed Eventing.
+
+Nota
+Se un modulo è necessario per completare un determinato esercizio, viene elencato nei relativi prerequisiti. Puoi aggiungere tutti i moduli subito in una volta sola, oppure farlo gradualmente man mano che avanzi nel learning journey.
+Seleziona Add.
+Risultato
+Hai aggiunto moduli Kyma alla tua istanza di runtime Kyma. Quando aggiorni la pagina, puoi vedere che i moduli aggiunti sono inclusi nella sezione View. Se vuoi eliminare un determinato modulo, scegli l'icona del cestino accanto ad esso.
+
+Discovering Kubernetes Workloads
+Scenario di utilizzo
+Sei uno sviluppatore che vuole distribuire un'applicazione su Kubernetes. Vuoi comprendere i concetti dei workload di Kubernetes e imparare quale tipo di workload è il piu adatto per la tua applicazione.
+VIDEO
+Che cos'è un workload di Kubernetes?
+In Kubernetes, un workload è un'applicazione containerizzata gestita e orchestrata da Kubernetes. Quindi, come sviluppatore, decidi quale tipo di workload è il piu adatto per la tua applicazione.
+Workload stateless rispetto a workload stateful
+Prima di considerare i diversi tipi di workload, devi prima comprendere la differenza tra workload stateless e workload stateful:
+video
+La decisione se distribuire un'applicazione stateful o stateless è importante e deve essere valutata con attenzione. Se scegli il tipo di workload sbagliato, potresti incontrare problemi in seguito.
+Tipi di workload di Kubernetes
+Kubernetes mette a disposizione diversi tipi di workload. Ogni tipo di workload ha i propri vantaggi e svantaggi. Il tipo di workload che scegli dipende dalla tua applicazione e dai tuoi requisiti.
+Perché dovresti usare i workload invece di creare e gestire direttamente i Pod? La risposta è semplice: i workload sono oggetti di livello superiore che astraggono i Pod sottostanti. Quando usi i workload, non devi gestire i Pod direttamente. Invece, puoi gestire il workload, e Kubernetes si occupa di gestire i Pod.
+Fai clic sui pulsanti qui sotto per scoprire i dettagli sui principali tipi di workload e sul loro scopo. Tutti sono disponibili in SAP BTP, Kyma runtime.
+
+Tipo di workload aggiuntivo in SAP BTP, Kyma Runtime
+In SAP BTP, Kyma runtime, puoi aggiungere il modulo Serverless al tuo cluster Kyma. Il modulo offre un runtime serverless per creare, eseguire e gestire applicazioni serverless, come le Functions.
+In questo contesto, serverless significa che puoi semplicemente distribuire il tuo codice senza doverti preoccupare dell'infrastruttura sottostante. Un vantaggio dell'uso del serverless è che riduce in modo significativo lo sforzo di implementazione e operativo. Questo ti consente di concentrarti esclusivamente sul tuo codice.
+Definizione di Function
+
+
+Riepilogo
+I workload astraggono i Pod sottostanti. Sono oggetti di livello superiore che ti consentono di gestire la tua applicazione in modo piu comodo. Kubernetes mette a disposizione diversi tipi di workload adatti a casi d'uso differenti. Il tipo di workload che scegli dipende dalla tua applicazione e dai tuoi requisiti.
+Ulteriori letture sui concetti dei workload di Kubernetes
+Kubernetes Workloads
+Serverless
+
+Working with Serverless Functions
+
+Che cosa sono le Serverless Functions?
+Una Function è un tipo di workload fornito da Kyma. "Serverless" implica che non sia coinvolto alcun server o infrastruttura. Ma non è così. Significa semplicemente che un terzo gestisce il server, e tu non devi preoccupartene. Puoi concentrarti sul codice della tua Function.
+Dal punto di vista tecnico, le Functions in Kyma si basano su piu risorse Kubernetes, come Deployments e Services.
+Quindi, con le Serverless Functions in Kyma, puoi eseguire frammenti di codice senza fornire e mantenere l'immagine container o l'infrastruttura. Come i Deployments basati su container, anche le Functions possono essere scalate, esposte e sottoscritte agli eventi.
+Pro e contro delle Serverless Functions
+Pro
+Le Serverless Functions sono utili quando vuoi ridurre lo sforzo di implementazione e operativo della tua applicazione. Ti occupi solo del codice e delle dipendenze della tua Function. Kyma gestisce tutto il resto. Questo garantisce distribuzioni rapide del tuo codice.
+Gli sviluppatori possono distribuire Serverless Functions leggere senza dover configurare applicazioni complete, il che consente una prototipazione rapida. Le Functions supportano un'integrazione fluida con i servizi SAP BTP tramite service bindings, rendendo facile consumare funzionalita come SAP HANA, Event Mesh o Object Store. Questo accelera l'innovazione permettendo ai team di sperimentare e iterare piu velocemente all'interno dell'ecosistema SAP BTP.
+Le Serverless Functions supportano anche il modello di programmazione asincrono e offrono un accoppiamento debole tra produttori e consumatori di eventi.
+Contro
+Tuttavia, le Serverless Functions sono limitate agli ambienti runtime supportati da Kyma. Con container gestiti autonomamente, puoi usare qualsiasi linguaggio e ambiente desideri.
+Le Functions sono anche specifiche del fornitore. In altre parole, devi sviluppare le tue Functions specificamente per un determinato provider. Di conseguenza, le Functions sono meno portabili rispetto ai container.
+Invocazione delle Serverless Functions
+La tabella seguente mostra due diversi modi per invocare una Function:
+Invocazione di una Function
+
+
+
+L'immagine seguente illustra come un Event invoca una Function:
+
+Creazione di Serverless Functions
+Puoi creare una Function dichiarando un manifest Function in un file YAML oppure usando l'editor visuale della dashboard di Kyma. L'editor visuale genera per te il manifest della Function.
+Descrizione di un manifest Function
+Con Kyma, puoi creare Functions in Node.js e Python. Kyma estende Kubernetes con una risorsa personalizzata (CR) per questo tipo di workload.
+Guarda un manifest Function (versione v1alhpa2) in YAML per un semplice esempio hello-kyma-function:
+apiVersion: serverless.kyma-project.io/v1alpha2
+kind: Function
+metadata:
+  name: hello-kyma-function
+  labels:
+    app: hello-kyma-function
+spec:
+  runtime: nodejs22
+  source:
+    inline:
+      dependencies: |
+        {
+          "name": "hello-kyma-function",
+          "version": "1.0.0",
+          "dependencies": {}
+         }
+      source: |-
+       module.exports = {
+           main: async function (event, context) {
+             const message = `Hello ` + process.env.NAME
+                + ` from the Kyma Function ${context["function-name"]}`
+                + ` running on ${context.runtime}!`;
+             console.log(message);
+             return message;
+         } 
+        } 
+  env:
+    - name: NAME
+value: "Kyma"
+
+Nota
+Nel manifest della Function, ${context["function-name"]} è una variabile di runtime che viene iniettata da Kyma. Contiene il nome della Function. Questo è un esempio del vendor lock-in che abbiamo menzionato in precedenza. L'uso di componenti di questo tipo rende il tuo codice meno portabile.
+La tabella seguente mostra i diversi campi del manifest:
+Campi del manifest della Function
+
+
+
+Analizziamo nel dettaglio la parte spec del manifest:
+Spec della Function CR
+
+Ci sono molti altri campi che puoi usare per configurare la tua Function. Per ottenere l'elenco completo dei campi, consulta la documentazione della Function CR.
+Riepilogo
+Le Serverless Functions sono una buona scelta se vuoi eseguire meno codice, per esempio per elaborare dati o rispondere agli eventi. Puoi prototipare rapidamente nuove idee distribuendo Functions leggere e integrandole con i servizi SAP BTP. Le Functions supportano anche l'architettura event-driven e garantiscono distribuzioni rapide del tuo codice. Tuttavia, devi considerare che le Functions sono specifiche del fornitore e che sei limitato agli ambienti runtime supportati da Kyma.
+Ulteriori letture sulle Serverless Functions
+Kyma Serverless Components
+The Function CR
+
+Creating and Testing Serverless Functions
+Scenario di utilizzo
+Sei uno sviluppatore che deve creare un'API per ricevere ed elaborare dati. Hai sentito parlare dell'approccio che utilizza le Serverless Functions per implementare una API di questo tipo, quindi vuoi imparare a creare una Serverless Function e come utilizzarla.
+Flusso del task
+In questo esercizio, eseguirai i seguenti passaggi:
+Creare una Serverless Function usando kubectl.
+Creare una Serverless Function usando la dashboard di Kyma.
+Esporre e testare la Function tramite HTTP.
+Prerequisiti
+Hai creato un'istanza SAP BTP, Kyma runtime nel subaccount SAP BTP. Vedi Distribuire un cluster Kubernetes con Kyma su SAP BTP.
+Hai configurato kubectl per interagire con la tua istanza SAP BTP, Kyma runtime, e hai accesso alla dashboard di Kyma. Vedi Impostare e configurare kubectl per Kyma e Accedere alla tua istanza Kyma runtime usando la dashboard di Kyma.
+Hai aggiunto il modulo Serverless. Vedi Aggiungere moduli Kyma.
+Task 1: Creare e testare una Serverless Function
+Passaggi
+Creare una Serverless Function usando kubectl.
+Apri il terminale ed elenca tutte le Serverless Functions correnti nel tuo namespace predefinito:
+kubectl get functions
+Se il tuo namespace non ha Functions, ottieni un elenco vuoto.
+Abilita l'iniezione del proxy sidecar Istio nel namespace predefinito.
+kubectl label namespace default istio-injection=enabled –overwrite
+Se crei una Function in un namespace con l'iniezione del sidecar Istio abilitata, un proxy sidecar Istio viene automaticamente iniettato nel Pod della Function durante la sua creazione. Questo rende la Function parte della service mesh di Istio. Per esporre un workload usando una risorsa personalizzata APIRule, cosa che farai nel passaggio 3, è necessario includere il workload nella service mesh di Istio.
+Per creare una Serverless Function, esegui il seguente comando:
+kubectl apply -n default -f https://raw.githubusercontent.com/sap-samples/kyma-runtime-learning-journey/main/unit_3/functions/hello-world-function.yaml
+Se l'operazione ha esito positivo, ottieni l'output: function.serverless.kyma-project.io/hello-world-function created.
+Elenca di nuovo tutte le Function nel namespace predefinito:
+kubectl get functions
+La Function hello-world-function è presente nell'elenco.
+Creare una Serverless Function usando la dashboard di Kyma.
+Apri la dashboard di Kyma, vai su Namespaces e scegli default.
+Vai su Workloads → Functions e scegli Create.
+Inserisci le seguenti informazioni:
+Name: hello-kyma-function
+Language: JavaScript
+
+Puoi anche passare alla scheda YAML per vedere, copiare o modificare il manifest YAML della Function.
+Scegli il pulsante Create.
+Risultato
+La tua function è ora in fase di creazione. Dopo alcuni secondi, avra lo stato Running.
+Esporre e testare la Function tramite HTTP.
+Nota
+Esporre la Function tramite HTTP ti consente di testarla in un browser. Scoprirai di piu sull'esposizione piu avanti nel corso.
+Vai alla sezione Kyma Environment nella panoramica del tuo subaccount per controllare il dominio predefinito del tuo cluster Kyma.
+Copia il valore di APIServerURL dopo https://api. Per esempio, per l'URL https://api.xxx123.kyma.ondemand.com, copia xxx123.kyma.ondemand.com.
+Vai su Discovery and Network→API Rules e scegli Create.
+Inserisci le seguenti informazioni e scegli il pulsante Create:
+Name: hello-kyma-function-api
+Service Name: hello-kyma-function
+Port: 80
+Host: hello-kyma-function-api.
+Sostituisci con il nome di dominio copiato.
+Access Strategy: No Auth
+Creando questa APIRule CR, esponi la tua function come endpoint HTTP. Sono consentite solo richieste GET.
+Incolla l'URL hello-kyma-function-api. nel tuo browser.
+Risultato
+Ottieni il seguente messaggio:
+Hello world from the Kyma Function hello-kyma-function running on nodejs20!
+Risultato
+Bravo, hai creato e testato con successo una Serverless Function!
+
+Discovering Deployments
+Panoramica
+Abbiamo già introdotto i Deployment come astrazioni di livello superiore dei ReplicaSet. Puoi usare i Deployment per definire in modo dichiarativo lo stato desiderato della tua applicazione. Questo include il numero di repliche, le immagini dei container e ulteriore configurazione. I Deployment gestiscono i ReplicaSet, e i ReplicaSet gestiscono i Pod.
+
+Vantaggi dei Deployment
+Considera il seguente scenario: hai creato manualmente un Pod per un’applicazione con versione 1.0.0. Dopo un po’ di tempo, vuoi aggiornare l’applicazione alla versione 1.0.1. Per farlo, devi creare un nuovo Pod basato sulla nuova immagine, aggiornare il Service affinché punti al nuovo Pod ed eliminare il vecchio Pod. Si tratta di molto lavoro manuale, soggetto a errori.
+È qui che entrano in gioco i Deployment per automatizzare questo processo. Puoi usare i Deployment per definire in modo dichiarativo il nuovo stato desiderato della tua applicazione e distribuire la nuova versione in modo affidabile, senza causare alcun downtime dell’applicazione attualmente in esecuzione.
+Fai clic sui pulsanti qui sotto per scoprire i principali vantaggi dei Deployment.
+
+Il manifest del Deployment
+Poiché un Deployment gestisce il ReplicaSet, che a sua volta gestisce i Pod, il manifest del Deployment è molto simile al manifest del ReplicaSet. Tuttavia, il manifest del Deployment utilizza campi e oggetti specifici del Deployment, ad esempio l’oggetto strategy.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: hello-kyma
+spec:
+   replicas: 3
+   selector:
+     matchLabels:
+       app: hello-kyma
+   template: # Pod template
+     metadata:
+       labels:
+         app: hello-kyma
+     spec:
+       containers:
+         - name: hello-kyma
+           image: ghcr.io/sap-samples/kyma-runtime-learning-journey/hello-kyma:1.0.0
+           ports:
+- containerPort: 8080
+
+Questo esempio mostra un manifest di Deployment con il nome hello-kyma.
+Il Deployment ha tre repliche e il template del Pod usa l’etichetta app: hello-kyma. Il template del Pod ha un container con il nome hello-kyma e l’immagine hello-kyma:1.0.0 prelevata dal GitHub Container Registry (ghcr.io). Il container espone la porta: 8080.
+Diamo ora un’occhiata in dettaglio alla sezione spec del manifest del Deployment:.
+La sezione spec del Deployment in dettaglio
+
+
+Se vuoi prelevare l’immagine da un registry privato, puoi farlo fornendo le credenziali nel campo spec.template.spec del manifest del Deployment:
+...
+spec:
+...
+  template:
+  ... 
+    spec:
+      imagePullSecrets:
+        - name: myregistrykey
+      containers:
+        - name: hello-kyma
+          image: ghcr.io/sap-samples/kyma-runtime-learning-journey/hello-kyma:1.0.0
+          ports:
+- containerPort: 8080
+
+Per quanto riguarda l’oggetto containers del template del Pod, si raccomandano i seguenti attributi:
+Attributi raccomandati nell’oggetto containers
+
+ImagePullPolicy è impostato su IfNotPresent per impostazione predefinita. Questo significa che l’immagine viene prelevata solo se non è presente localmente sul nodo del cluster. Se vuoi prelevare sempre l’immagine, puoi impostare ImagePullPolicy su Always.
+Nota
+Se specifichi un’immagine con il tag latest e tu o il sistema create un nuovo Pod, Kubernetes scarica sempre la versione latest più recente. Questo può portare a comportamenti imprevisti, poiché altri Pod possono continuare a usare la vecchia immagine. Per questo motivo, si raccomanda di usare una versione specifica dell’immagine, ad esempio hello-kyma:1.0.0.
+Guarda un esempio di manifest di Deployment:
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-kyma
+  labels:
+    app.kubernetes.io/name: hello-kyma
+spec:
+   replicas: 3
+   selector:
+     matchLabels:
+       app: hello-kyma
+   template:
+     metadata:
+       labels:
+         app: hello-kyma
+     spec:
+        imagePullSecrets: [ ]
+        containers:
+         - name: hello-kyma
+           image: 'ghcr.io/sap-samples/kyma-runtime-learning-journey/hello-kyma:1.0.0'
+           resources:
+            requests:
+              memory: 64Mi # 64MiB (2^26 bytes)
+              cpu: 50m # 50 millicores (1/20th of a core), 500m = 0.5 cores
+            limits:
+              memory: 128Mi
+              cpu: 100m # 100 millicores (1/10th of a core), 1000m = 1 core
+           ports:
+- containerPort: 8080
+
+Per tutti gli altri campi, vedi la documentazione Kubernetes sui Deployment.
+Strategie di Deployment avanzate
+Kubernetes supporta le seguenti due strategie di deployment:
+Strategie di Deployment supportate
+
+Puoi specificare la strategia di deployment nel manifest del Deployment:
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: hello-kyma
+spec:
+   replicas: 3
+   selector:
+     matchLabels:
+       app: hello-kyma
+   template:
+     metadata:
+       labels:
+         app: hello-kyma
+     spec: 
+        containers:
+         - name: hello-kyma
+           image: ghcr.io/sap-samples/kyma-runtime-learning-journey/hello-kyma:1.0.0
+           ports:
+           - containerPort: 8080 
+     strategy:
+       type: RollingUpdate
+       rollingUpdate:
+          maxSurge: 25%
+maxUnavailable: 25%
+
+Per il campo strategy.type, puoi specificare RollingUpdate oppure Recreate. Poiché RollingUpdate è la strategia predefinita e raccomandata, è il focus di questa lezione.
+Come già accennato, la strategia RollingUpdate non elimina i vecchi Pod prima di creare quelli nuovi. Invece, esegue l’aggiornamento in modo graduale. Puoi definire esattamente la percentuale di Pod che può essere aggiornata nello stesso momento. Per farlo, usa i campi maxSurge e maxUnavailable:
+Il campo maxSurge definisce il numero massimo di Pod che possono essere creati oltre il numero desiderato di Pod.
+Il campo maxUnavailable definisce il numero massimo di Pod che possono essere non disponibili durante l’aggiornamento.
+I valori predefiniti per entrambi i campi sono 25%. In questo modo, i vecchi Pod continuano a ricevere traffico, mentre stai già creando e servendo i nuovi Pod.
+Nota
+Servire contemporaneamente due versioni di un’applicazione, dietro lo stesso service, comporta anche alcune sfide. Ad esempio, devi assicurarti che la nuova versione dell’applicazione sia compatibile con quella vecchia. Questo requisito è noto come compatibilità API. È fortemente raccomandato avere un concetto di versioning per le tue API, in modo che siano compatibili sia in avanti sia all’indietro.
+Cronologia del Deployment
+Ogni Deployment contiene anche un’intera cronologia dei deployment. Questo ti consente di eseguire un rollback a una versione precedente della tua applicazione se qualcosa va storto.
+Puoi usare kubectl per controllare la cronologia dei deployment di un Deployment:
+kubectl rollout history deployment hello-kyma
+Per eseguire il rollback a una versione precedente della tua applicazione, puoi usare il comando kubectl rollout undo:
+kubectl rollout undo deployment hello-kyma
+Scalare i Deployment
+Puoi scalare il tuo Deployment semplicemente aggiornando il campo replicas nel manifest del Deployment. Allo stesso modo, puoi anche usare kubectl per scalare il tuo Deployment:
+kubectl scale deployment hello-kyma –replicas=5
+L’esecuzione del comando aggiorna il ReplicaSet sottostante e crea due nuovi Pod. Puoi verificarlo usando:
+kubectl get deployments hello-kyma
+L’output appare così:
+
+Summary
+
+I Deployment in Kubernetes sono astrazioni di alto livello di Pods e ReplicaSets, che ti permettono di definire in modo dichiarativo lo stato desiderato della tua applicazione. I Deployment automatizzano processi come aggiornamenti e rollback, riducendo il lavoro manuale e i potenziali errori. Supportano due principali strategie di deployment: Rolling Update per aggiornamenti senza downtime e Recreate per aggiornamenti che tollerano il downtime. Inoltre, i Deployment mantengono una cronologia delle modifiche, consentendoti di eseguire facilmente il rollback a una versione precedente se necessario, e possono essere scalati senza problemi regolando il numero di repliche.
+Further Reading about Kubernetes Deployment
+Deployment Kubernetes
+
+
+Creating and Managing a Deployment
+Usage Scenario
+
+Vuoi distribuire l’applicazione che hai sviluppato in un cluster Kubernetes. Per farlo, definisci un manifesto Deployment e applicalo al cluster.
+Task Flow
+
+In questo esercizio, eseguirai le seguenti attività:
+Crea un Deployment usando la dashboard di Kyma.
+Aggiorna e applica il manifesto Deployment.
+Scala il Deployment.
+Esegui il rollback del Deployment.
+Prerequisites
+
+Prima di iniziare, assicurati che i seguenti prerequisiti siano soddisfatti:
+Hai creato un’istanza SAP BTP, Kyma runtime nel subaccount SAP BTP. Vedi Deploying a Kubernetes Cluster with Kyma on SAP BTP.
+Hai configurato kubectl per interagire con la tua istanza SAP BTP, Kyma runtime, e hai accesso alla dashboard di Kyma. Vedi Setting and Configuring Kubectl for Kyma and Accessing Your Kyma Runtime Instance Using Kyma Dashboard.
+Task 1: Create a Deployment Using Kyma Dashboard
+
+Steps
+Nella dashboard di Kyma, vai al namespace default.
+Nella sezione Edit, abilita l’iniezione del proxy sidecar Isito se non lo hai già fatto nell’esercizio precedente.
+Vai su Workloads → Deployments e scegli il pulsante Create.
+
+Specifica il nome del Deployment e l’immagine del container. Usa i seguenti dati:
+
+
+
+
+Attiva l’interruttore per abilitare l’iniezione del proxy sidecar Istio per il Deployment.
+Per rivedere il manifesto del Deployment, scegli la scheda YAML.
+
+Scegli il pulsante Create.
+Vieni reindirizzato automaticamente alla vista dei dettagli del Deployment. Questa vista include i dettagli del Deployment creato e del Pod associato.
+Visualizza i dettagli del Deployment creato. Scorri verso il basso fino alla sezione Resource Graph per osservare il Deployment creato e il ReplicaSet e il Pod gestiti.
+
+Task 2: Aggiornare e applicare il manifesto del Deployment usando kubectl
+
+Steps
+Per elencare tutti i tuoi Deployment nel namespace default, esegui il seguente comando kubectl:
+kubectl get deployments
+Il Deployment che hai creato viene visualizzato nell’output.
+
+Per ottenere il manifesto del Deployment in formato YAML, esegui il seguente comando:
+kubectl get deployment hello-kyma -o yaml >> hello-kyma-deployment.yaml
+Note
+In questo task, usi kubectl per scaricare il manifesto del Deployment e modificarlo localmente. Anche se puoi usare la dashboard di Kyma per modificare il manifesto del Deployment, è fortemente consigliato applicare le modifiche da un file persistente e mettere tutti i manifesti sotto controllo di versione. Questo non è possibile con la dashboard di Kyma.
+Vai nella tua directory di lavoro e apri il file hello-kyma-deployoment.yaml.
+
+Per aggiornare il Deployment in modo da usare una nuova versione dell’applicazione, modifica l’immagine del container corrente con la nuova versione e imposta il change-cause per documentare la modifica.
+Aggiungi la seguente immagine nel campo template.spec.containers.image: ghcr.io/sap-samples/kyma-runtime-learning-journey/hello-kyma:1.1.0
+Aggiungi la seguente annotazione nella sezione spec.template.metadata:
+annotations:
+kubernetes.io/change-cause: Upgrade to new release v1.1.0
+
+Salva il file.
+Applica il manifesto del Deployment aggiornato.
+kubectl apply -f hello-kyma-deployment.yaml
+Per verificare l’aggiornamento nella cronologia del rollout, esegui i seguenti comandi:
+kubectl rollout history deployment hello-kyma
+
+Puoi anche verificare che il Deployment sia aggiornato nella sezione Workloads → Deployments della dashboard di Kyma.
+Task 3: Scalare il Deployment
+
+Steps
+Per scalare il Deployment a tre repliche, esegui:
+kubectl scale deployment hello-kyma –replicas=3
+Kubernetes crea due Pod aggiuntivi, così ora ci sono tre Pod in esecuzione.
+Per verificare che il Deployment sia stato scalato correttamente, esegui:
+
+kubectl get deployment hello-kyma
+
+Se ha successo, ottieni il seguente output in risposta:
+NAME         READY   UP-TO-DATE   AVAILABLE   AGE
+hello-kyma   3/3     3            3           6m10s
+
+Per verificarlo nella dashboard di Kyma, vai su Workloads → Deployments e seleziona il Deployment hello-kyma. Scorri verso il basso fino all’elenco dei Pod. L’elenco contiene tre Pod.
+Task 4: Eseguire un rollback del Deployment
+
+Immagina di aver distribuito una nuova versione dell’applicazione, ma che non funzioni come previsto. Ora puoi eseguire il rollback del Deployment alla versione precedente.
+Steps
+Per elencare la cronologia del rollout, esegui:
+kubectl rollout history deployment hello-kyma
+Ottieni due versioni del Deployment.
+
+Esegui il rollback del Deployment specificando il numero di revisione.
+kubectl rollout undo deployment hello-kyma –to-revision=1
+Se ha successo, vedi il seguente output: deployment.apps/hello-kyma rolled back
+Elenca di nuovo la cronologia del rollout per verificare il rollback.
+kubectl rollout history deployment hello-kyma
+Vedi se il rollback è andato a buon fine. Inoltre, l’ordine delle revisioni è cambiato ed è incrementato di uno.
+
+Result
+Congratulazioni! Hai completato l’esercizio. Ora sai creare, aggiornare, scalare ed eseguire il rollback di un Deployment.
+
+Discovering the Helm Package Manager for Deployments
+
+Che cos'è Helm?
+
+Con la crescita della tua applicazione basata su microservizi, devi creare, aggiornare e mantenere un'enorme varietà di oggetti Kubernetes necessari per eseguire la tua applicazione. La tua nuova applicazione ha bisogno di un oggetto Deployment e di Services per bilanciare il traffico. Fortunatamente, puoi raggruppare tutti i manifest collegati alla tua applicazione in un'unica unità e distribuirli, aggiornarli ed eliminarli tutti in una sola volta.
+Helm è un package manager per Kubernetes. È anche un progetto open-source che fa parte della Cloud Native Computing Foundation (CNCF). Helm è uno strumento che semplifica l'installazione e la gestione delle applicazioni Kubernetes.
+Hai già imparato che i Deployment consentono di distribuire la tua applicazione e di gestirne il ciclo di vita del rilascio. Con Helm, puoi raggruppare tutti gli oggetti Kubernetes necessari per eseguire la tua applicazione in un'unica unità, come Deployment, Services e così via. Questi pacchetti sono chiamati Helm charts. Puoi quindi distribuire, aggiornare ed eliminare tutte queste risorse in una sola volta.
+Molti Helm charts sono già disponibili nell'Helm Hub. Puoi anche creare Helm charts e pubblicarli nell'Helm Hub. Oppure puoi usare i tuoi Helm charts solo nel tuo ambiente.
+Componenti di Helm
+
+Fai clic sui pulsanti qui sotto per scoprire maggiori dettagli su ciascun componente.
+
+Per lavorare con Helm, devi installare la Helm CLI sulla tua macchina. Segui le istruzioni nella documentazione di Helm.
+Helm Charts
+
+Gli Helm chart sono pacchetti di risorse Kubernetes preconfigurate. Un chart contiene tutte le definizioni delle risorse (manifest) necessarie per eseguire un'applicazione. Ogni Helm Chart è corredato da un layout di progetto e da una struttura di file standard.
+Fai clic su ciascun componente blu di un tipico Helm Chart per scoprirne di più:
+
+Helm CLI
+
+Con la Helm CLI, puoi installare e gestire Helm chart.
+La Helm CLI ha tre sottocomandi principali:
+helm install - usa questo comando per installare un chart.
+helm upgrade - usa questo comando per aggiornare una release esistente a una nuova versione di un chart.
+helm delete - usa questo comando per eliminare una release.
+Helm in Kyma
+
+Il progetto "Kyma" usa Helm. Con Helm, puoi creare e installare chart in un cluster Kyma, come in qualsiasi altro ambiente Kubernetes.
+Template in Helm
+
+A differenza del manifest di deployment che hai usato nella lezione precedente, gli Helm chart usano template. Questi template sono gli stessi manifest. L'unica differenza è che i template non sono statici. Possono essere parametrizzati. Questo significa che puoi usare variabili nei template. Queste variabili possono essere definite nel file values.yaml. L'uso delle variabili rende possibile riutilizzare gli stessi template per scenari diversi, come sviluppo, test e produzione, oppure modificare la configurazione dell'applicazione senza dover cambiare il template stesso.
+Per vedere una guida completa su come usare Helm ed esplorare tutte le sue funzionalità, vai alla documentazione di Helm.
+Esempio di Helm chart
+
+Diamo un'occhiata a un esempio di Helm chart. Vogliamo usare Helm per creare l'applicazione hello-kyma che abbiamo creato nella lezione precedente. Puoi anche accedere al chart nel tuo repository GitHub.
+Puoi creare un Helm chart per la tua applicazione eseguendo il seguente comando:helm create hello-kyma-chart
+Questo comando crea una directory chiamata hello-kyma-chart con file di esempio come punto di partenza per il tuo chart. Tuttavia, un chart essenziale per la nostra applicazione sarebbe così:
+
+
+Il file Chart.yaml contiene informazioni sul chart, come il nome, la versione, la descrizione, ecc.
+apiVersion: v2
+name: hello-kyma-chart
+description: A Helm chart for the Hello Kyma example application
+
+# A chart can be either an 'application' or a 'library' chart.
+type: application
+
+# This is the chart version.
+version: 0.1.0
+
+# This is the version number of the application being deployed.
+AppVersion: "1.0.0"
+
+Il file values.yaml contiene i valori di configurazione predefiniti per il chart. Questi valori possono essere usati nei template.
+replicaCount: 1
+
+image:
+tag: "1.0.0"
+
+Il file templates/deployment.yaml contiene la definizione del deployment Kubernetes.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: hello-kyma
+          image: ghcr.io/sap-samples/kyma-runtime-learning-journey/hello-kyma:{{ .Chart.AppVersion }}
+          ports:
+- containerPort: 8080
+
+Potresti eseguire un dry run di questo chart prima di inviarlo al cluster eseguendo il seguente comando all'interno della cartella del chart Helm. Questo ti permetterebbe di vedere l'output del chart senza inviarlo realmente al cluster.
+helm template hello-kyma .
+Se esegui questo comando, noterai che il nome hello-kyma verrà usato per le variabili {{ .Release.Name }}.
+Riepilogo
+
+In questa lezione hai imparato che cos'è Helm e come usarlo per creare chart personalizzati. Hai anche imparato la struttura di un Helm chart e come usare i template negli Helm chart.
+Approfondimenti su Helm Package Manager per i deployment
+Documentazione di Helm
+Helm Values
+Helm Chart Template Guide
+
+
+Using Helm to Package and Deploy your Application
+Scenario di utilizzo
+
+Hai già usato diversi manifest per distribuire manualmente la tua applicazione con tutti i corrispondenti oggetti Kubernetes in un cluster Kubernetes. Ora vuoi usare Helm per pacchettizzare il tuo manifest di Deployment e distribuirlo nel tuo cluster.
+Flusso del task
+In questo esercizio, creerai, personalizzerai e distribuirai un Helm chart per un Deployment.
+
+Prerequisiti
+
+Prima di iniziare, assicurati che siano soddisfatti i seguenti prerequisiti:
+Hai creato un'istanza SAP BTP, Kyma runtime nel subaccount SAP BTP. Vedi Deploying a Kubernetes Cluster with Kyma on SAP BTP.
+Hai configurato kubectl per interagire con la tua istanza SAP BTP, Kyma runtime, e hai accesso a Kyma dashboard. Vedi Setting and Configuring Kubectl for Kyma and Accessing Your Kyma Runtime Instance Using Kyma Dashboard.
+Hai installato la Helm CLI sulla tua macchina locale. Vedi Installing Helm
+Una volta che hai installato la Helm CLI, puoi usare il comando helm create. Il comando crea alcuni file di esempio per aiutarti a iniziare. Tuttavia, questo esercizio mostra come creare manualmente da zero un Helm chart.
+Task 1: Creare, personalizzare e distribuire un Helm chart per un Deployment
+
+Passi
+Crea una nuova directory per il tuo Helm chart. Chiamala hello-kyma-chart ed entra al suo interno.
+Crea un nuovo file chiamato Chart.yaml e specifica le informazioni sul chart, come il nome, la versione, la descrizione e così via. Aggiungi il seguente contenuto al file:
+apiVersion: v2
+name: hello-kyma-chart
+description: A Helm chart for the Hello Kyma example application
+type: application
+version: 0.1.0
+
+Crea un nuovo file chiamato values.yaml e specifica i valori di configurazione predefiniti come replicaCount e image.tag. Aggiungi il seguente contenuto al file:
+
+replicaCount: 1
+image:
+tag: "1.0.0"
+
+Nella directory hello-kyma-chart, crea una nuova directory chiamata templates ed entra al suo interno.
+In questa directory, puoi aggiungere tutti i template per il tuo Helm chart. Per ora, aggiungeremo solo un template per il Deployment.
+Crea un nuovo file chiamato deployment.yaml e specifica la definizione del Deployment Kubernetes usando i tuoi valori di configurazione. Aggiungi il seguente contenuto al file:
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }} 
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata: 
+      labels: 
+        app: {{ .Release.Name }}
+    spec:
+      containers: 
+        - name: hello-kyma
+          image: ghcr.io/sap-samples/kyma-runtime-learning-journey/hello-kyma:{{ .Values.image.tag }}
+          ports:
+            - containerPort: 8080 
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+maxUnavailable: 25%
+
+Suggerimento
+Il manifest del Deployment contiene i segnaposto {{ .Release.Name }} e {{ .Values.replicaCount }} per utilizzare i valori di configurazione che hai specificato nel file values.yaml. Il segnaposto {{ .Release.Name }} viene sostituito con il nome della release Helm. Il segnaposto {{ .Chart.AppVersion }} viene sostituito con la versione dell'applicazione che hai specificato nel file Chart.yaml.
+Per eseguire un dry-run del tuo Helm chart e verificare se è valido, esegui il seguente comando all'interno della directory hello-kyma-chart:
+helm template hello-kyma .
+Ora dovresti vedere un output renderizzato del tuo Helm chart.
+Installa l'Helm chart nel tuo cluster.
+Esegui il seguente comando all'interno della directory hello-kyma-chart:
+helm install hello-kyma-helm .
+Ottieni un output simile a questo esempio:
+NAME: hello-kyma-helm
+LAST DEPLOYED: Fri Sep 12 14:25:42 2025
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+
+Per vedere il Deployment nel tuo cluster, esegui il seguente comando:
+kubectl get deployments
+Ottieni il seguente output in risposta:
+NAME     READY   UP-TO-DATE   AVAILABLE   AGE
+hello-kyma-helm     1/1     1           1           2m
+
+Aggiorna il file values.yaml e modifica replicaCount impostandolo a 2.
+Aggiorna l'Helm chart nel tuo cluster.
+Esegui il seguente comando all'interno della directory hello-kyma-chart:
+helm upgrade hello-kyma-helm .
+Ora dovresti vedere il seguente output:
+Release "hello-kyma-helm" has been upgraded. Happy Helming!
+NAME: hello-kyma-helm
+LAST DEPLOYED: Fri Sep 12 14:27:05 2025
+NAMESPACE: default
+STATUS: deployed
+REVISION: 2
+TEST SUITE: None
+
+Elenca i Deployment usando kubectl:
+kubectl get deployments
+Se l'operazione ha successo, l'elenco include il Deployment hello-kyma-helm.
+NAME   READY   UP-TO-DATE   AVAILABLE   AGE
+hello-kyma-helm   2/2     2           2            4m
+
+Visualizza la release Helm in Kyma dashboard.
+Apri Kyma dashboard nel tuo browser.
+Nel namespace default, vai su Apps → Helm Releases e seleziona la release hello-kyma-helm.
+
+Si apre la seguente vista:
+
+Risultato
+Hai creato con successo un Helm chart per il tuo Deployment e lo hai distribuito nel tuo cluster. Quando in seguito scoprirai altri oggetti Kubernetes in questo corso, potrai, per esempio, estendere il tuo Helm chart con altri manifest per Services, Ingresses e altro ancora.
+
+Discovering DaemonSets in Kubernetes
+Scenario di utilizzo
+
+Quando usi i Deployment, devi eseguire esplicitamente un workload su ogni nodo del tuo cluster. Un collega più esperto ti ha detto che dovresti usare invece un DaemonSet. Vuoi sapere che cos'è un DaemonSet e come funziona.
+Che cosa sono i DaemonSet in Kubernetes?
+
+Con i ReplicaSet, puoi specificare quante repliche di un determinato Pod devono essere in esecuzione nel tuo cluster. Tuttavia, non puoi determinare su quali nodi i Pod vengano eseguiti. Kubernetes, come orchestratore di container, decide su quali nodi i Pod devono essere schedulati in base alle risorse disponibili sui nodi. Tuttavia, in alcuni casi, deve esserci una sola copia del Pod in esecuzione su un determinato insieme di nodi del tuo cluster.
+Un DaemonSet è un workload Kubernetes particolare che garantisce che un determinato Pod venga eseguito su un sottoinsieme di nodi nel tuo cluster Kubernetes. In genere, i DaemonSet sono utili per servizi come agenti di logging, agenti di monitoraggio o altri servizi che devono essere eseguiti come singola copia su un sottoinsieme di nodi del tuo cluster.
+
+I workload definiti come DaemonSet non vengono schedulati dal scheduler predefinito kube-scheduler. Invece, il controller DaemonSet crea per impostazione predefinita un Pod su ogni nodo. Un sottoinsieme di nodi può essere selezionato specificando un node selector. Il controller DaemonSet crea quindi un Pod su ogni nodo che corrisponde al node selector specificato.
+Il controller assicura che il Pod sia in esecuzione sul nodo specificato. Se il nodo viene eliminato, il controller crea un nuovo Pod sul nuovo nodo. Come il kube-scheduler, anche il controller DaemonSet esegue il reconciliation loop per garantire che lo stato desiderato sia sempre rispettato e ripianifica il Pod se necessario.
+
+Il manifest del DaemonSet
+
+Guarda un semplice manifest DaemonSet che dichiara l'agente di logging fluentd:
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fluentd-daemon
+spec:
+  selector:
+    matchLabels:
+      app: fluentd-daemon
+template:
+   metadata:
+     labels:
+       app: fluentd-daemon
+   spec:
+      containers:
+      - name: fluentd-daemon
+        image: fluent/fluentd
+…
+
+In questo esempio non è specificato alcun node selector esplicito. Di conseguenza, il controller DaemonSet pianifica un Pod su tutti i nodi worker.
+Aggiungendo un node selector, definisci un selettore di label assegnate ai nodi. Il controller DaemonSet crea quindi un Pod su ciascun nodo le cui label corrispondono al selettore specificato.
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fluentd-daemon
+spec:
+  selector:
+    matchLabels:
+      app: fluentd-daemon
+  template:
+    metadata:
+      labels:
+        app: fluentd-daemon
+    spec:
+      nodeSelector:
+        run-fluentd: "true"
+      containers:
+      - name: fluentd-daemon
+        image: fluent/fluentd
+…
+
+I nodi etichettati tramite kubectl label nodes run-fluentd=true vengono selezionati dal node selector, e il controller DaemonSet pianifica un Pod su ciascuno di questi nodi.
+Riepilogo
+
+In questa lezione hai imparato le differenze tra ReplicaSet e DaemonSet. Hai anche imparato che, aggiungendo un node selector al manifest del DaemonSet, fai in modo che un determinato Pod venga eseguito su un sottoinsieme di nodi del tuo cluster.
+Approfondimenti sui DaemonSet in Kubernetes
+DaemonSet
+
+Discovering Jobs in Kubernetes
+Scenario d'uso
+
+Hai già distribuito diversi tipi di workload nel tuo cluster Kubernetes. Tuttavia, per alcuni casi d'uso, non hai bisogno di un workload che sia sempre in esecuzione. Invece, vuoi eseguire un workload una sola volta e poi terminarlo oppure pianificarne l'esecuzione periodica. Per imparare come farlo, esplora le funzionalità dei Job in Kubernetes.
+Tipi di Job
+
+I Job vengono utilizzati per eseguire un workload una sola volta. Per esempio, puoi usare un Job per eseguire una migrazione del database o per svolgere un'elaborazione batch. Rispetto agli altri workload in Kubernetes, i Job non sono pensati per essere eseguiti a lungo. Al contrario, sono pensati per essere eseguiti fino al completamento e poi terminare. Tuttavia, se un Job fallisce, viene riavviato finché non ha successo.
+Fai clic sui pulsanti qui sotto per scoprire di più su ciascun tipo di Job.
+
+Job One-Shot / Non Paralleli
+Osserva un semplice manifest Job per dichiarare un Job eseguito una sola volta:
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: my-job
+spec:
+  backoffLimit: 4
+  template:
+     spec:
+       containers:
+       - name: my-job
+         image: busybox:1.35.0
+         command: ['sh', '-c', 'echo Hello Kubernetes! && sleep 10 && echo Job done!']
+restartPolicy: OnFailure
+
+Il manifest sopra definisce un Job che esegue un singolo Pod con un container basato sull'immagine busybox. Il container esegue il comando echo Hello Kubernetes! && sleep 10 && echo Job done!. La restartPolicy è impostata su OnFailure, il che significa che il Job viene riavviato se fallisce. In alternativa, puoi impostare la restartPolicy su Never, il che significa che il Job non viene riavviato se fallisce. Il backoffLimit è impostato su 4, il che significa che il Job viene riavviato al massimo quattro volte. Se il Job fallisce 4 volte, viene contrassegnato come non riuscito.
+Job Paralleli
+
+Quando definisci un Job parallelo, puoi specificare il numero totale di Pod paralleli che devono essere creati (.spec.parallelism) e il numero massimo di Pod paralleli che devono essere eseguiti simultaneamente (.spec.completions). Il seguente manifest definisce un Job parallelo che crea in totale sei Pod ed esegue tre Pod in parallelo:
+apiVersion: batch/v1
+kind: Job
+metadata:
+   name: my-parallel-job
+spec:
+   parallelism: 3
+   completions: 6
+   backoffLimit: 4
+   template:
+     metadata:
+       labels:
+         sidecar.istio.io/inject: "false"
+     spec:
+       containers:
+       - name: my-parallel-job
+         image: busybox:1.35.0
+         command: ['sh', '-c', 'echo Hello Kubernetes! && sleep 10 && echo Job done!']
+restartPolicy: Never
+
+Kubernetes attende anche che tutti e tre i Pod siano stati completati con successo prima di avviare i tre Pod successivi.
+Puoi osservarlo anche nella dashboard di Kyma. Nel namespace di tua scelta, vai su Workloads > Jobs, scegli Create e incolla il manifest del Job riportato sopra. Puoi vedere che inizialmente sono in esecuzione solo tre Pod. Una volta che questi Pod passano allo stato Completed, vengono creati altri tre Pod. Quando anche questi Pod aggiuntivi completano i loro task, tutti e sei i Pod risultano nello stato Completed.
+
+
+
+Pianificare i Job con i CronJob
+
+Per pianificare l'esecuzione periodica di un workload, puoi usare un CronJob. Un CronJob è simile a un Job, ma è pianificato per essere eseguito regolarmente a un orario fisso, in una data specifica oppure a intervalli di tempo specifici. Il seguente manifest definisce un CronJob che viene eseguito ogni notte alle 2:00:
+
+
+apiVersion: batch/v1beta1
+ kind: CronJob
+ metadata:
+   name: my-cronjob
+ spec:
+   schedule: "0 2 * * *"
+   jobTemplate:
+     spec:
+       template:
+         spec:
+           containers:
+           - name: my-cronjob
+           image: busybox:1.35.0 # busybox is a small image that contains a few useful utilities
+           command: ['sh', '-c', 'echo Hello Kubernetes! && sleep 10 && echo Job done!']
+         restartPolicy: OnFailure
+backoffLimit: 4
+
+Il campo schedule definisce la pianificazione nel formato Cron. Nell'esempio sopra, il CronJob è pianificato per essere eseguito ogni notte alle 2:00. Il campo jobTemplate definisce il template del Job utilizzato per il CronJob. Il CronJob crea un Job basato su questo template e poi ne pianifica l'esecuzione periodica.
+Riepilogo
+
+In Kubernetes, puoi usare i Job per eseguire workload che non sono a lunga esecuzione, ma che invece vengono eseguiti fino al completamento e poi terminano. I Job possono essere non paralleli, cioè eseguono un singolo Pod, oppure paralleli, in cui più Pod vengono eseguiti contemporaneamente. Inoltre, i CronJob consentono di pianificare l'esecuzione periodica dei Job a orari, date o intervalli fissi.
+Approfondimenti sui Job in Kubernetes
+Kubernetes Jobs
+Kubernetes CronJobs
+Formato Cron
+
+
+Working with Horizontal Pod Autoscalers (HPA)
+Scenario d'uso
+
+Hai distribuito dei workload nel tuo cluster Kubernetes. Finora hai configurato solo un numero fisso di repliche simultanee per ciascun workload. Tuttavia, vuoi poter scalare automaticamente i tuoi workload in base al carico corrente. Per questo, vuoi esplorare le funzionalità degli Horizontal Pod Autoscaler (HPA) in Kubernetes.
+Che cosa sono gli HorizontalPodAutoscaler?
+
+Con i Deployment, puoi definire un numero fisso di repliche per il ReplicaSet gestito. Questo numero potrebbe essere troppo basso o troppo alto rispetto al carico corrente. Per esempio, se hai un Deployment con tre repliche e il carico attuale è molto elevato, dovresti scalare il Deployment a cinque o più repliche. Se il carico è basso, dovresti ridurre il Deployment a due repliche. È qui che entrano in gioco gli HPA. Con gli HPA, puoi definire il numero minimo e massimo di repliche per un Deployment. L'HPA quindi scala automaticamente il Deployment verso l'alto o verso il basso in base al carico corrente.
+Puoi configurare questo ridimensionamento automatico in base a una metrica, come l'utilizzo di CPU o memoria. L'HPA controlla il valore corrente della metrica e lo confronta con un valore obiettivo. Se il valore corrente è superiore al valore obiettivo, l'HPA scala verso l'alto il Deployment. Per esempio, puoi impostare un utilizzo target della CPU di un Pod al 50%. Se l'utilizzo corrente della CPU di un Pod è superiore al 50%, l'HPA scala verso l'alto il Deployment. Se l'utilizzo della CPU è inferiore al 50%, l'HPA scala verso il basso il Deployment. Leggi di più sulle metriche in Container resource metrics.
+Un HPA è chiamato esplicitamente horizontal perché scala orizzontalmente il numero di Pod. Questo significa che l'HPA aggiunge o rimuove Pod per aumentarne o diminuirne il numero. Questo è in contrasto con il ridimensionamento verticale, in cui vengono aumentate o diminuite le risorse di un Pod. Per esempio, puoi aumentare CPU e memoria di un Pod incrementando la sezione resources della definizione del Pod.
+Definire un HorizontalPodAutoscaler
+Per definire un HPA, crei un file YAML. Il seguente file YAML definisce un HPA che scala il Deployment chiamato hello-kyma:
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+   name: hello-kyma-hpa
+spec:
+   minReplicas: 3
+   maxReplicas: 5
+   scaleTargetRef:
+     apiVersion: apps/v1
+     kind: Deployment
+     name: hello-kyma
+   metrics:
+   - type: Resource
+     resource:
+       name: cpu
+       target:
+          type: Utilization
+averageUtilization: 50
+
+I campi minReplicas e maxReplicas definiscono il numero minimo e massimo di repliche per il Deployment. Il campo scaleTargetRef definisce il Deployment che viene scalato. Il campo metrics definisce la metrica utilizzata per il ridimensionamento. In questo caso, la metrica è l'utilizzo della CPU. Il campo target definisce il valore obiettivo per la metrica. In questo caso, il valore obiettivo è un utilizzo della CPU del 50%.
+Distribuire un HorizontalPodAutoscaler
+
+Per distribuire un HorizontalPodAutoscaler, puoi usare il comando kubectl apply:
+
+kubectl apply -f hpa.yaml
+
+Per creare un HorizontalPodAutoscaler per un Deployment o un ReplicaSet esistente, usi il comando kubectl autoscale:
+kubectl autoscale deployment hello-kyma --cpu-percent=50 --min=3 –max=5
+
+Puoi anche creare HorizontalPodAutoscaler usando la dashboard di Kyma. Per farlo, vai alla voce di menu Discovery and Network e seleziona Horizontal Pod Autoscalers. Scegli il pulsante Create e compila il modulo.
+
+Riepilogo
+
+L'Horizontal Pod Autoscaling regola dinamicamente il numero di pod in un deployment in base a metriche come l'utilizzo della CPU o della memoria. Con l'HPA, puoi impostare un numero minimo e massimo di repliche e Kubernetes scala automaticamente il Deployment verso l'alto o verso il basso in base al carico corrente.
+Approfondimenti sull'Horizontal Pod Autoscaling
+
+Horizontal Pod Autoscaler
+
+Discovering Services in Kubernetes
+Service in Kubernetes
+Video
+I servizi sono un concetto essenziale in Kubernetes. Quando crei un Deployment, il Deployment gestisce un ReplicaSet e il ReplicaSet gestisce i Pod sottostanti.
+Tuttavia, i Pod sono effimeri e possono essere terminati e sostituiti in qualsiasi momento. A differenza dei Pod gestiti dagli StatefulSet, i Pod gestiti dai Deployment non hanno un nome stabile: come parte del loro nome viene assegnato un suffisso hash casuale. Quindi, quando un Pod viene terminato e sostituito con uno nuovo, il nome del nuovo Pod è diverso da quello del vecchio Pod, così come il suo indirizzo IP.
+Per accedere alla tua applicazione, hai bisogno di un endpoint stabile per i Pod sottostanti. È qui che entrano in gioco i Services.
+
+I Services raggruppano i Pod e forniscono un endpoint stabile per accedere ai Pod. Un selettore di etichette raggruppa i Pod definiti nel manifest del Service.
+
+Definizione di un Service
+Un semplice manifest di un Service è simile a questo:
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-kyma-svc
+spec:
+  selector:
+    app: 'hello-kyma'
+  ports:
+    - protocol: 'TCP'
+      port: 80
+targetPort: 8080
+
+Questo esempio di manifest di Service definisce un Service chiamato hello-kyma-svc che raggruppa i Pod con l’etichetta app: hello-kyma-svc. Il Service espone la porta 80 e inoltra tutto il traffico verso la porta 8080 dei Pod.
+
+Accesso a un Service
+Un Service fornisce un insieme di Pod come servizio di rete e gli altri Pod nel cluster possono accedervi. Scoprirai come accedere a un Service dall’esterno del cluster nella lezione Using the API Gateway Module to Expose Services.
+All’interno del cluster, puoi raggiungere un Service semplicemente fornendo il suo nome come nome DNS. Il seguente pattern costruisce il nome DNS:
+..svc.cluster.local.
+Quindi, se hai un Service chiamato hello-kyma-svc nel namespace default, puoi accedervi utilizzando il nome DNS hello-kyma-svc.default.svc.cluster.local.
+All’interno dello stesso namespace, puoi accedere al Service utilizzando il nome breve hello-kyma-svc. Puoi anche accedere al Service utilizzando il termine breve hello-kyma-svc.default da altri namespace nel cluster.
+Verificare quando i Pod sono completamente pronti
+Per alcune applicazioni, è essenziale sapere se l’applicazione è pronta ad accettare traffico oppure se è ancora in fase di avvio. Per esempio, se hai un’applicazione web, devi assicurarti che l’applicazione sia completamente avviata prima di inviarle traffico.
+Kubernetes fornisce due meccanismi per controllare lo stato di salute di un’applicazione prima di inviarle traffico. Questi meccanismi sono chiamati readiness probe e liveness probe.
+Con le readiness probe, puoi verificare se l’applicazione è pronta ad accettare traffico. Se la readiness probe fallisce, il Pod non riceve alcun traffico dal Service. Il Service invia traffico solo ai Pod pronti.
+L’esempio seguente mostra un manifest di Deployment che definisce una readiness probe:
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-kyma
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-kyma
+  template:
+    metadata:
+      labels:
+        app: hello-kyma
+    spec:
+      containers:
+      - name: hello-kyma
+        image: ghcr.io/sap-samples/kyma-runtime-learning-journey/hello-kyma:1.0.0
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          periodSeconds: 5 
+          failureThreshold: 3
+successThreshold: 1
+
+La readiness probe è definita nella sezione readinessProbe. La readiness probe è una richiesta HTTP GET verso il percorso /ready sulla porta 8080. La readiness probe viene eseguita ogni 5 secondi. Se la readiness probe fallisce tre volte di seguito, il Pod viene considerato non pronto. Se la readiness probe ha successo una volta di seguito, il Pod viene considerato pronto. Per saperne di più, vedi Define readiness probes.
+
+Gestione dei Services nel Kyma Dashboard
+Il Kyma Dashboard offre un modo semplice per gestire i Services. Puoi usarlo per creare, modificare ed eliminare Services. Inoltre, nel Kyma Dashboard, puoi creare APIRules per esporre il Service verso il mondo esterno oppure sottoscrivere un evento utilizzando una Subscription.
+
+Ulteriore utilizzo dei Services
+I Services non vengono usati solo per raggruppare i Pod e fornire un endpoint stabile per accedere ai Pod. I Services possono essere usati anche per esporre i Pod verso il mondo esterno. In Kyma, esistono diversi modi per esporre un Service verso il mondo esterno. Scoprirai questi concetti nella prossima lezione.
+Riepilogo
+I Services in Kubernetes forniscono un endpoint stabile per accedere ai Pod gestiti dai Deployment. I Services raggruppano i Pod utilizzando un selettore di etichette definito in un manifest di Service, garantendo un indirizzo coerente anche quando i Pod vengono terminati e sostituiti. Espongono porte specifiche e inoltrano il traffico ai Pod sottostanti, rendendo un’applicazione accessibile all’interno del cluster. Inoltre, le readiness probe in Kubernetes garantiscono che solo i Pod completamente pronti ricevano traffico.
+Approfondimenti
+Kubernetes Services.
+
+
+Creating Services in Kubernetes
+Scenario di utilizzo
+Hai già distribuito la tua applicazione in un cluster Kubernetes utilizzando un Deployment. Prima di esporla verso il mondo esterno, devi definire un endpoint interno stabile per il Deployment. Questo viene fatto creando un Service.
+Flusso del task
+In questo esercizio creerai un Service per il Deployment in tre passaggi:
+Crea un manifest di Service e applicalo al cluster.
+Verifica se il Service è stato creato correttamente usando kubectl.
+Verifica se il Service è stato creato correttamente usando il Kyma Dashboard.
+Prerequisiti
+Prima di iniziare, assicurati che siano soddisfatti i seguenti prerequisiti:
+Hai creato un’istanza SAP BTP, Kyma runtime nel subaccount SAP BTP. Vedi Deploying a Kubernetes Cluster with Kyma on SAP BTP.
+Hai configurato kubectl per interagire con la tua istanza SAP BTP, Kyma runtime e hai accesso al Kyma Dashboard. Vedi Setting and Configuring Kubectl for Kyma and Accessing Your Kyma Runtime Instance Using Kyma Dashboard.
+Hai creato correttamente il Deployment hello-kyma nell’esercizio Creating and Managing a Deployment.
+Task 1: creare un manifest di Service e applicarlo al cluster
+Passaggi
+Crea un manifest di Service e applicalo al cluster.
+Crea un file chiamato hello-kyma-svc.yaml con il seguente contenuto:
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-kyma-svc
+spec:
+  selector:
+    app: 'hello-kyma'
+  ports:
+    - protocol: 'TCP'
+      port: 80
+targetPort: 8080
+
+Applica il manifest del Service al cluster.
+
+kubectl apply -f hello-kyma-svc.yaml
+Verifica il Service creato con kubectl.
+Usa kubectl per elencare i tuoi Services.
+
+kubectl get svc
+Nota
+svc è la forma abbreviata di Service. La maggior parte delle risorse Kubernetes ha una forma abbreviata. Puoi usare la forma abbreviata nella maggior parte dei comandi kubectl.
+Verifica il Service creato nel Kyma Dashboard.
+Apri il Kyma Dashboard e vai alla vista Services.
+
+Il Service hello-kyma-svc appare nell’elenco. Selezionalo per vedere i dettagli.
+
+Il prossimo esercizio mostra come esporre un Service verso il mondo esterno.
+Risultato
+Hai creato correttamente un Service per il Deployment.
+
+Using the API Gateway Module to Expose Services
+Il modulo API Gateway
+Il progetto "Kyma" estende la piattaforma Kubernetes con moduli che ti permettono di esporre i tuoi Services e le tue Functions al di fuori del cluster. Puoi usare il modulo API Gateway per rendere i tuoi Kubernetes Services accessibili dall’esterno del cluster Kyma.
+Istio e API Gateway sono moduli predefiniti di Kyma, il che significa che vengono aggiunti al tuo runtime Kyma quando lo esegui il provisioning. Se vuoi creare Functions ed esporle utilizzando API Gateway, devi aggiungere anche il modulo Serverless. Per attivare i Services esposti con eventi, aggiungi il modulo Eventing. Per monitorare i workload esposti, aggiungi il modulo Telemetry e utilizza le funzionalità di osservabilità che fornisce.
+Funzionalità del modulo API Gateway
+
+L’API Gateway si basa sul progetto open source Istio, che viene installato dal modulo Istio. La prossima unità fornisce maggiori informazioni su Istio.
+Il modulo API Gateway installa un Istio Ingress Gateway configurato in modo personalizzato chiamato kyma-gateway nel namespace kyma-system. Il kyma-gateway è il punto centrale di contatto per tutto il traffico esterno che entra nel cluster Kyma. Utilizza l’Envoy Proxy come proxy di servizio basato su applicazione per gestire il traffico e inoltrarlo al Service corretto.
+Il modulo usa anche le funzionalità di Istio per autorizzare le richieste HTTP in ingresso. Fornisce una risorsa personalizzata APIRule che puoi usare per esporre in modo sicuro i tuoi workload. Con un’APIRule, puoi:
+Raggruppare più workload ed esporli sotto un unico host.
+Usare un nome host breve per semplificare la migrazione delle risorse verso un nuovo cluster.
+Configurare la strategia di accesso noAuth, che offre una configurazione semplice per consentire l’accesso a specifici metodi HTTP.
+Proteggere i tuoi workload configurando le strategie di accesso jwt o extAuth. La strategia di accesso jwt ti consente di usare la configurazione JWT di Istio per proteggere i Services esposti e interagire con essi usando JSON Web Tokens. La strategia di accesso extAuth ti consente di implementare logiche personalizzate di autenticazione e autorizzazione.
+
+Che cos’è la risorsa personalizzata APIRule
+Per esporre un Service utilizzando il modulo API Gateway, devi creare una risorsa personalizzata Kubernetes (CR) chiamata APIRule (apirules.gateway.kyma-project.io). Creando un’APIRule per un Service, l’API Gateway Controller crea per te un Istio VirtualService dietro il kyma-gateway. Quindi, con la CR APIRule, hai un’astrazione di livello superiore che ti consente di pubblicare Services in modo rapido e sicuro.
+Per definire un’APIRule, devi creare una CR del tipo apirules.gateway.kyma-project.io. Un semplice manifest di APIRule è simile a questo:
+apiVersion: gateway.kyma-project.io/v2
+kind: APIRule
+metadata:
+  name: my-api-rule
+spec:
+  hosts:
+    - my-api-rule.xxxxx.kyma.ondemand.com
+  service:
+    name: hello-kyma-svc
+    port: 80
+  gateway: kyma-system/kyma-gateway
+  rules:
+    - path: /*
+      methods: ["GET"]
+noAuth: true
+
+Osserviamo più da vicino la sezione spec della CR APIRule:
+gateway: l’Istio Ingress Gateway per esporre il Service. Per scopi di sviluppo, puoi usare un dominio Kyma e il Gateway predefinito kyma-system/kyma-gateway. Nell’ambiente di produzione, usa il tuo dominio personalizzato per configurare un TLS Gateway.
+hosts: specifica l’host o il sottodominio dell’host in cui il Service deve essere esposto. Puoi esporre più Services dietro lo stesso host tramite gli Istio VirtualServices.
+service: specifica il Kubernetes Service da esporre. Il name è il nome del Kubernetes Service che vuoi esporre. Il port è la porta del Kubernetes Service che vuoi esporre.
+rules: specifica l’array delle regole di accesso. Per ogni regola, il campo path specifica il percorso della richiesta che deve corrispondere, e l’array methods specifica i metodi HTTP. APIRule ti consente di definire la configurazione di sicurezza di un endpoint esposto usando il concetto di strategie di accesso. Le strategie di accesso supportate sono noAuth, jwt ed extAuth. Impostare noAuth su true disabilita l’autorizzazione. Il campo jwt specifica la strategia di accesso JWT di Istio, mentre il campo extAuth specifica la strategia di autorizzazione esterna di Istio.
+Per maggiori informazioni, vedi APIRule Custom Resource.
+Risorsa personalizzata APIRule nel Kyma Dashboard
+Il Kyma Dashboard fornisce un modo semplice per creare APIRules per esporre il tuo workload. La creazione delle APIRules è integrata nella vista delle Functions e dei Services. Tuttavia, puoi anche andare nella vista APIRules e creare una nuova APIRule.
+
+Puoi definire la specifica dell’APIRule in un file YAML oppure usare la vista basata su moduli nel Kyma Dashboard.
+
+Riepilogo
+Il modulo API Gateway consente l’esposizione di Services e Functions al di fuori del cluster runtime Kyma. Il modulo si basa sul progetto open source Istio e include un Istio Ingress Gateway configurato in modo personalizzato chiamato kyma-gateway, che gestisce il traffico esterno in ingresso nel cluster Kyma. Per esporre un Service usando il modulo API Gateway, crei una CR APIRule, che consente di raggruppare e proteggere i workload, per esempio usando token JWT o autenticazione personalizzata.
+Approfondimenti
+API Gateway
+APIRules
+Istio
+
+Exposing a Service in Kyma with APIRules
+Scenario di utilizzo
+Hai già distribuito la tua applicazione in un cluster Kubernetes e creato un Service per essa. Per esporre questo Service verso il mondo esterno, devi creare un’APIRule.
+Flusso del task
+In questo esercizio eseguirai i seguenti task:
+Esporre un Service con un’APIRule.
+Testare il Service esposto.
+Prerequisiti
+Prima di iniziare, assicurati che siano soddisfatti i seguenti prerequisiti:
+Hai creato un’istanza SAP BTP, Kyma runtime nel subaccount SAP BTP. Vedi Deploying a Kubernetes Cluster with Kyma on SAP BTP.
+Hai configurato kubectl per interagire con la tua istanza SAP BTP, Kyma runtime e hai accesso al Kyma Dashboard. Vedi Setting and Configuring Kubectl for Kyma and Accessing Your Kyma Runtime Instance Using Kyma Dashboard.
+Hai creato correttamente il Deployment hello-kyma nell’esercizio Creating and Managing a Deployment.
+Hai creato correttamente il Service hello-kyma-svc nell’esercizio Creating a Service for a Deployment.
+Task 1: esporre un Service con una risorsa personalizzata APIRule
+Passaggi
+Crea un file chiamato hello-kyma-api-rule.yaml con il seguente contenuto:
+apiVersion: gateway.kyma-project.io/v2
+kind: APIRule
+metadata:
+  name: hello-kyma
+spec:
+  hosts:
+    - hello-kyma.<hostname> # replace <hostname> with your Kyma hostname
+  service:
+    name: hello-kyma-svc
+    port: 80
+  gateway: kyma-system/kyma-gateway
+  rules:
+    - path: /*
+      methods: ["GET"]
+noAuth: true
+
+Recupera il nome host dal tuo SAP BTP, Kyma runtime e adatta l’host nel manifest dell’APIRule.
+
+kubectl get gateway kyma-gateway -n kyma-system -o=jsonpath='{.spec.servers[0].hosts[0]}'
+
+Nota
+Tieni presente che questo comando restituisce il nome host wildcard.
+Applica il manifest dell’APIRule al cluster.
+kubectl apply -f hello-kyma-api-rule.yaml
+
+Accedi all’applicazione nel tuo browser.
+Apri un browser web.
+Vai all’URL http://hello-kyma. (sostituisci con il tuo hostname Kyma).
+Dovresti vedere un messaggio di saluto dall’applicazione hello-kyma.
+Task 2: visualizzare le APIRules nel Kyma Dashboard
+Passaggi
+Vai alla sezione APIRules del Kyma Dashboard.
+Apri il Kyma Dashboard nel tuo browser web. Puoi trovare il link nella sezione Kyma Environment del tuo subaccount.
+Seleziona API Rules e scegli l’APIRule hello-kyma.
+Verifica i dettagli, copia il link dell’host e incolla il link nel tuo browser.
+
+Se l’operazione ha successo, il browser visualizza il messaggio di saluto della tua applicazione hello-kyma.
+Risultato
+Hai esposto correttamente il tuo service con un’APIRule.
+
+Discovering the Service Mesh
+Service Mesh: Scenario di utilizzo
+Video
+La tua applicazione è basata su diversi microservizi. Questi microservizi comunicano tra loro all’interno del cluster. Vuoi proteggere la comunicazione tra i microservizi. Hai sentito che una service mesh è utile per questo compito.
+Che cos’è una Service Mesh?
+
+Le applicazioni cloud-native sono tipicamente suddivise in diversi microservizi distribuiti, che possono comunicare tra loro. Una service mesh è un livello infrastrutturale che gestisce la comunicazione tra i servizi ed è disaccoppiato dal livello applicativo. Data l’indipendenza del livello applicativo, le applicazioni non devono implementare funzionalità standard come il service discovery o la sicurezza. Con una service mesh, questi compiti possono essere spostati fuori dai servizi e nel livello della service mesh. In questo modo, il networking viene disaccoppiato dalla logica applicativa. Questo è importante anche perché team diversi possono scrivere microservizi in linguaggi diversi. Fare affidamento su ogni team affinché implementi funzionalità standard come il service discovery o la sicurezza non è fattibile.
+Man mano che la tua soluzione cresce, aumenta il numero di microservizi. Questo comporta una maggiore complessità nella comunicazione tra i servizi. Requisiti come sicurezza, bilanciamento del carico e service discovery diventano sempre più importanti. Una service mesh può aiutarti a risolvere questi problemi. Può proteggere la comunicazione tra i microservizi e fornire funzionalità aggiuntive come load balancing, service discovery o tracing.
+
+Vantaggi di una Service Mesh
+
+Una service mesh può offrire diversi vantaggi per la tua soluzione. Possono essere raggruppati nelle seguenti categorie:
+Sicurezza: una service mesh può fornire funzionalità di sicurezza come comunicazione sicura tra servizi con mutual TLS (mTLS), autenticazione delle richieste e altro ancora.
+Osservabilità: una service mesh può fornire funzionalità come tracing, logging e metriche. Queste funzionalità possono aiutarti a comprendere il comportamento della tua soluzione.
+Gestione del traffico: la gestione del traffico ti permette di controllare il flusso di traffico tra i servizi.
+Resilienza: una service mesh può fornire funzionalità come circuit breaking, timeout e retry. Queste funzionalità possono aiutarti a migliorare la resilienza della tua soluzione. Per esempio, puoi definire quante volte un proxy Envoy deve ritentare una connessione o una richiesta se il primo tentativo fallisce.
+Vediamo più da vicino questi vantaggi:
+Sicurezza
+L’uso di una service mesh nel tuo cluster consente di proteggere la comunicazione tra i microservizi out of the box senza dover implementare funzionalità di sicurezza come mutual TLS (mTLS) o crittografia. La service mesh si occupa di questo. Come ulteriore vantaggio di sicurezza, un sidecar proxy offre la possibilità di autenticare le richieste per il tuo servizio.
+Osservabilità
+Tutte le richieste ai servizi passano attraverso il livello della service mesh. La service mesh può raccogliere tutte le richieste e fornire funzionalità aggiuntive come tracing, logging e metriche. Questo può aiutarti a comprendere il comportamento della tua soluzione e come vengono elaborate le richieste.
+Gestione del traffico
+Con la gestione del traffico, puoi controllare il flusso di traffico tra i servizi. Puoi usare questa funzionalità per implementare canary deployment, A/B testing e altri processi per rendere i rilasci software più affidabili e più veloci.
+Service Mesh in Kubernetes
+
+Per Kubernetes, sono disponibili diverse soluzioni di service mesh. Una delle soluzioni di service mesh più diffuse è Istio.
+Tipicamente, la soluzione di service mesh utilizza il pattern sidecar proxy. Un proxy viene distribuito come container sidecar accanto a ciascun servizio. Quindi, un Pod per un servizio ha almeno il container del servizio e il container del sidecar proxy.
+Il container sidecar proxy facilita la comunicazione tra il servizio e la service mesh. È responsabile della logica di business del servizio. Inoltre, il container sidecar proxy può essere iniettato automaticamente nel Pod se lo etichetti di conseguenza. Nel progetto Kyma, l’iniezione del sidecar può essere attivata a livello di namespace o di Deployment. Se attivata, ogni Pod incluso nel namespace o nel Deployment etichettato di conseguenza riceve automaticamente l’iniezione del container sidecar proxy.
+Architettura della Service Mesh
+
+Le service mesh sono tipicamente composte da due componenti principali: il control plane e il data plane.
+Il control plane è responsabile della gestione e della configurazione dei proxy per instradare il traffico.
+Il data plane rappresenta la comunicazione tra i servizi. Le reti di servizi utilizzano proxy per inoltrare tutto il traffico in entrata e in uscita da e verso i servizi all’interno della rete di servizi. È inoltre responsabile del traffico del cluster in ingresso (ingress) e in uscita (egress).
+
+Riepilogo
+
+Una service mesh è un livello infrastrutturale che gestisce la comunicazione tra i servizi, disaccoppiando questo compito dal livello applicativo. Man mano che il numero di microservizi cresce, una service mesh aiuta a gestire la complessità crescente della comunicazione tra i servizi. Fornisce diversi vantaggi, come mutual TLS, autenticazione delle richieste, raccolta dei segnali di osservabilità, gestione del traffico e altro ancora. In Kubernetes, le service mesh come Istio utilizzano il pattern sidecar proxy.
+Approfondimento
+Service Mesh Istio
+
+Discovering Istio
+Introduzione alla Service Mesh Istio
+
+Vuoi esplorare le possibilità offerte da Istio. Hai sentito che Istio è utile per attività come la gestione del traffico, il service discovery e la sicurezza. Inoltre, vuoi comprendere meglio queste attività e come Istio può aiutarti a risolverle.
+Che cos’è Istio?
+
+Istio è una soluzione di service mesh open source che estende Kubernetes. Usa Istio per beneficiare di un modo più efficiente per proteggere, connettere e monitorare i tuoi servizi.
+Una service mesh Istio può anche estendersi su più cluster, macchine virtuali e altri componenti che non eseguono Kubernetes.
+
+Poiché Istio segue il paradigma della service mesh, è dotato di un control plane e di un data plane. Il control plane di Istio non tocca alcun pacchetto di rete o richiesta. Invece, configura il data plane affinché svolga il lavoro. Il data plane è un insieme di proxy intelligenti che intercettano e controllano tutta la comunicazione di rete tra i microservizi. Il data plane applica le policy, raccoglie la telemetria e instrada le richieste.
+Come funziona Istio?
+
+Come introdotto sopra, Istio comprende un control plane e un data plane. Il data plane è un insieme di proxy che intercettano e controllano la comunicazione di rete nella tua service mesh.
+Nella service mesh Istio vengono utilizzati diversi proxy per gestire il traffico in ingresso nel cluster (ingress), tra i servizi (service proxy) e in uscita dal cluster (egress). I service proxy vengono tipicamente distribuiti come container sidecar accanto a ciascun servizio. Insieme, vengono raggruppati in un unico Pod. La comunicazione service-to-service è tecnicamente una comunicazione proxy-to-proxy.
+Istio utilizza un ingress gateway per gestire il traffico in ingresso nel cluster. L’ingress gateway è un proxy dedicato distribuito nel namespace istio-system.
+Per gestire il traffico in uscita dalla tua service mesh, puoi farlo direttamente dal sidecar proxy oppure usare un egress gateway. L’egress gateway può anche essere usato per applicare policy al traffico che esce dalla tua service mesh. Istio utilizza il proxy Envoy come service proxy.
+Un punto fondamentale è che Istio installa la propria API in Kubernetes come Custom Resource Definitions (CRD), quindi puoi usare strumenti nativi di Kubernetes come kubectl per gestire le risorse di Istio.
+Istio come parte del modulo Istio
+
+In SAP BTP, Kyma runtime, Istio viene installato dal modulo Istio. Istio non può solo essere usato per proteggere, connettere e monitorare i tuoi servizi, ma Kyma fornisce anche astrazioni di alto livello per Istio. Per esempio, quando esponi i tuoi workload usando le APIRules fornite dal modulo API Gateway, vengono anche create automaticamente in background risorse Istio come VirtualService, AuthorizationPolicy o RequestAuthentication.
+I componenti di Istio sono installati nel namespace istio-system.
+Riepilogo
+
+Istio è una soluzione open source di service mesh che estende Kubernetes. È composta da un control plane e da un data plane. Il data plane è costituito da sidecar proxy distribuiti come container sidecar accanto ai servizi, mentre il control plane gestisce la configurazione di questi sidecar proxy. In SAP BTP, Kyma runtime, il modulo Istio installa Istio nel tuo cluster e ti permette di gestirlo usando le risorse custom di Istio.
+Approfondimenti
+Istio
+Envoy
+Modulo Istio
+La Service Mesh Istio
+
+Using Istio
+Gestione del traffico con Istio: Scenario di utilizzo
+
+Hai già utilizzato le APIRules per esporre i tuoi servizi verso l’esterno. Per proteggere, connettere e monitorare i servizi, vuoi usare Istio e conoscere meglio le sue funzionalità e i suoi meccanismi.
+Gestione del traffico con Istio
+La gestione del traffico, in sintesi, è la capacità di prendere il controllo del flusso del traffico nella tua service mesh. Senza gestione del traffico, le richieste vengono instradate verso qualsiasi istanza di servizio disponibile. In molti casi, questo non è desiderabile. Per esempio, vuoi reindirizzare il traffico in base a regole, ad esempio per inoltrare solo una certa percentuale di traffico verso una nuova versione di un servizio (cioè un canary deployment). Oppure, prima di consentire ai clienti di usare la nuova versione di un servizio, vuoi testarla internamente. Quindi puoi instradare il traffico verso la versione più recente del servizio solo per gli utenti interni (cioè dogfooding). La gestione del traffico ti consente di implementare questi scenari.
+
+L’immagine raffigura uno scenario in cui instradi solo una parte del traffico verso una nuova versione di un servizio backend. Il traffico viene suddiviso tra la versione precedente del servizio e quella nuova. Con una configurazione di questo tipo, puoi testare la nuova versione del servizio in produzione solo su un sottoinsieme degli utenti e tornare rapidamente indietro se qualcosa va storto.
+Se la nuova versione del servizio funziona come previsto, puoi aumentare la percentuale di traffico instradata verso la nuova versione del servizio.
+Ma come funziona? Istio mette a disposizione un insieme di Custom Resource Definitions (CRD) che puoi usare per definire regole di traffico.
+In Istio, hai diverse risorse che puoi usare per la gestione del traffico:
+Gateway
+È un Load Balancer che opera al margine della mesh. Il Gateway gestisce le connessioni HTTP/TCP in ingresso o in uscita.
+VirtualService
+Descrive una configurazione che influenza l’instradamento del traffico. Puoi usarlo per esporre più servizi dietro un unico punto di ingresso (Gateway).
+DestinationRule
+Specifica regole che si applicano al traffico destinato al servizio dopo l’instradamento.
+Per un elenco completo delle risorse di gestione del traffico di Istio, vedi Traffic Management.
+
+Gateway
+
+Con l’installazione di Istio su Kubernetes, viene installato per impostazione predefinita un Ingress Gateway. Questo Gateway è esposto tramite l’indirizzo IP esterno del tuo cluster.
+Puoi configurare l’Istio Ingress Gateway predefinito per esporre i tuoi servizi usando un nome di dominio personalizzato. Puoi anche configurare più risorse Gateway per esporre i tuoi servizi tramite domini differenti. In Kyma, il modulo API Gateway configura il Gateway kyma-gateway, che è abilitato per impostazione predefinita.
+Una risorsa Gateway ha questo aspetto:
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: foo-gateway
+spec:
+    selector:
+        istio: ingressgateway 
+    servers:
+        - port:
+            number: 80
+            name: http
+            protocol: HTTP
+          hosts:
+- "*.foo.com"
+
+VirtualService
+
+Puoi usare le risorse VirtualService per definire le regole di instradamento dei tuoi servizi in base ai percorsi delle richieste HTTP, agli header o ai parametri di query.
+Una risorsa VirtualService ha questo aspetto:
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: shop-route
+spec:
+  gateways:
+    - foo-namespace/foo-gateway
+  hosts:
+    - shop.foo.com
+  http:
+  - route:
+    - destination:
+        host: shop
+        subset: v1
+      weight: 90
+    - destination:
+        host: shop
+        subset: v2
+weight: 10
+
+Questa risorsa VirtualService definisce una regola di instradamento per il servizio shop. La regola instrada il 90% del traffico verso la versione v1 del servizio e il 10% verso la versione v2.
+Istio supporta molte più funzionalità per definire regole di instradamento. Puoi trovare maggiori informazioni nella documentazione di VirtualService.
+DestinationRule
+
+Puoi usare DestinationRule per raggruppare i tuoi Kubernetes Services in subset e definire regole per ciascun subset.
+Una risorsa DestinationRule ha questo aspetto:
+
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: shop-route
+spec:
+    host: shop
+    subsets:
+    - name: v1
+      labels:
+        version: v1
+    - name: v2
+      labels:
+version: v2
+
+Nel esempio sopra, il servizio shop è raggruppato in due subset in base alle versioni.
+Per saperne di più, consulta la documentazione di DestinationRules.
+Sicurezza con Istio
+
+Le funzionalità di sicurezza di Istio ti permettono di controllare la sicurezza della service mesh. Con Istio, non devi implementare da solo funzionalità di sicurezza come la crittografia del traffico. Istio ti consente di proteggere la comunicazione service-to-service nella tua service mesh cifrando il traffico. Queste funzionalità di sicurezza sono essenziali per difenderti dagli attacchi man-in-the-middle e prevenire accessi non autorizzati ai tuoi servizi validando l’identità del chiamante.
+Proteggere la comunicazione tra i servizi nel tuo cluster è uno dei principali casi d’uso di Istio. Istio fornisce la crittografia del traffico tramite mutual TLS (mTLS) e ti permette di autenticare l’identità del chiamante. Mutual TLS è un protocollo che consente al client e al server di autenticarsi reciprocamente. Mutual TLS è un protocollo che consente al client e al server di autenticarsi reciprocamente. A differenza di TLS, che consente solo al server di autenticare il client, mTLS è un protocollo che consente l’autenticazione reciproca tramite la presentazione di certificati tra le due parti.
+Per saperne di più sulle funzionalità di sicurezza di Istio, consulta Security.
+Osservabilità con Istio
+
+Poiché Istio intercetta tutto il traffico nella tua service mesh, può fornirti dati di telemetria dettagliati per tutta la comunicazione tra servizi. Questa telemetria fornisce osservabilità nella service mesh. Per offrire osservabilità sulla base dei dati di telemetria raccolti, Istio mette a disposizione i seguenti tipi:
+Metriche
+Le metriche sono misurazioni numeriche utilizzate per monitorare lo stato di un sistema. Istio fornisce un insieme di metriche usate per monitorare lo stato di salute della mesh, come latenza, traffico, errori e così via.
+Tracce distribuite
+In un’architettura cloud-native a microservizi, una richiesta utente spesso attraversa decine di microservizi diversi. Con il distributed tracing, puoi tracciare il percorso di una richiesta attraverso l’intera service mesh. Il distributed tracing ti consente di monitorare le prestazioni dei tuoi servizi e di identificare i colli di bottiglia.
+Log di accesso
+Istio può anche fornirti log di accesso per tutto il traffico che attraversa la service mesh. I log di accesso forniscono informazioni dettagliate sul traffico, come la sorgente e la destinazione della richiesta oppure il codice di risposta.
+
+
+
+
+Integrazione di Istio in SAP BTP, Kyma Runtime
+
+In SAP BTP, Kyma runtime, il modulo Telemetry fornisce funzionalità di osservabilità che possono aiutarti a raccogliere tutti i dati rilevanti in un cluster Kyma, per esempio quelli forniti dalla service mesh Istio. Il modulo Telemetry arricchisce inoltre i dati e li invia a un backend per ulteriori analisi. Per saperne di più, vedi Describing Observability in Kyma.
+Riepilogo
+
+Istio fornisce CRD che puoi usare per gestire e reindirizzare il traffico verso i tuoi Services, come Gateway, VirtualServices e DestinationRules. Inoltre, migliora la sicurezza della comunicazione service-to-service e fornisce la crittografia del traffico tramite mTLS. Istio genera anche dati di telemetria come metriche, distributed tracing e log di accesso per tutta la comunicazione tra servizi all’interno della service mesh Istio. Se vuoi analizzare ulteriormente questi dati, puoi usare le funzionalità offerte dal modulo Telemetry di Kyma.
+Approfondimenti
+Osservabilità
+Funzionalità di gestione del traffico di Istio
+Funzionalità di sicurezza di Istio
+Funzionalità di osservabilità di Istio
+
+
+
+Discovering Kyma Eventing
+
+Introduzione a Kyma Eventing
+In Kyma, puoi inviare e ricevere eventi con l'aiuto del back end di elaborazione del modulo Eventing. Il modulo ha l'obiettivo di rendere più semplice il processo di sottoscrizione e pubblicazione degli eventi. Elimina la necessità per gli utenti di eseguire autonomamente protocolli o operazioni di back end.
+Comprendere il processo di Eventing in Kyma
+Il processo del modulo Eventing coinvolge le seguenti tecnologie:
+NATS (un sistema di messaggistica open-source)
+NATS JetStream (fornisce il back end)
+Richieste HTTP POST (consegnate tramite richieste POST in termini di invio e ricezione degli eventi)
+Subscription custom resources (CR) (astraggono la creazione di diverse primitive Kubernetes)
+Ora, la domanda è: come si presenta il processo reale di Kyma Eventing? Prima di tutto, è importante menzionare che il modulo Eventing si basa sul pattern di messaggistica Pub/Sub. Questo significa che i messaggi che vengono attivati nel modulo Eventing non vengono inviati agli iscritti tramite un percorso diretto, ma vengono invece pubblicati in un back end di messaggistica, dove vengono elaborati, filtrati e poi inviati agli iscritti.
+VIDEO
+Uso di Eventing in SAP BTP, Kyma Runtime
+Comprendere questo processo è importante quando si utilizza SAP BTP, Kyma runtime per eseguire estensioni, che devono essere eseguite quando viene emesso un determinato evento. Per esempio, i sistemi SAP SuccessFactors potrebbero pubblicare un evento che indica che un nuovo assunto è entrato in azienda. Puoi configurare la tua estensione per sottoscrivere l'evento ed eseguire ulteriori azioni con questi dati. Per esempio, iscrivere il nuovo assunto a una sessione di onboarding.
+Tenendo presente il flusso di consegna e di elaborazione di Kyma, puoi utilizzare il modulo Eventing all'interno di SAP BTP per due scenari:
+Quando soluzioni SAP e non SAP collegate consumano business events:
+Nota
+Solo le soluzioni CX supportano il modulo Eventing, per esempio: SAP Commerce Cloud, SAP Sales Cloud, FSM. Altre soluzioni come SAP S/4HANA attualmente non inviano eventi utilizzando il modulo Eventing, poiché li inviano direttamente a Event Mesh, da dove devi configurare un webhook. Per maggiori informazioni, vedi Use SAP BTP, Kyma runtime to extend SAP Marketing Cloud.
+
+Quando i microservizi event-driven utilizzano eventi in-cluster:
+
+Nel dashboard di Kyma, puoi visualizzare e aggiornare le Subscriptions per uno specifico workload, oppure puoi farlo a livello di namespace in Configuration→ Subscriptions.
+
+Riepilogo
+In Kyma, puoi inviare e ricevere eventi con l'aiuto del back end di elaborazione del modulo Eventing. Durante questo processo vengono utilizzate tecnologie come NATS (in SAP BTP, puoi sostituire questo back end con SAP Event Mesh), JetStream, richieste HTTP POST, così come le Subscription CR. Puoi utilizzare il modulo Eventing in SAP BTP, Kyma runtime per due scenari fondamentali:
+Business Events consumati da soluzioni SAP e non SAP collegate
+
+Eventi in-cluster utilizzati per microservizi event-driven
+Inoltre, in SAP BTP, Kyma runtime puoi utilizzare il dashboard di Kyma per accedere a funzionalità utili e per esaminare gli eventi.
+Approfondimenti
+Kyma Eventing
+
+Creating a Subscription using Kyma Eventing
+
+Prerequisiti
+Prima di iniziare, assicurati che siano soddisfatti i seguenti prerequisiti:
+Hai creato un'istanza SAP BTP, Kyma runtime nel sottoaccount SAP BTP. Vedi Deploying a Kubernetes Cluster with Kyma on SAP BTP.
+Hai configurato kubectl per interagire con la tua istanza SAP BTP, Kyma runtime, e hai accesso al dashboard di Kyma. Vedi Setting and Configuring Kubectl for Kyma and Accessing Your Kyma Runtime Instance Using Kyma Dashboard.
+Hai aggiunto i moduli Eventing, NATS e Serverless. Vedi Adding Kyma Modules.
+Scenario d'uso
+Crea una Subscription che si sottoscrive a più tipi di evento e attiva il workload con un evento in SAP BTP, Kyma runtime.
+Dopo aver imparato che puoi sottoscriverti a un evento utilizzando SAP BTP, Kyma runtime, metterai in pratica questa conoscenza sottoscrivendoti a più di un tipo di evento utilizzando una risorsa personalizzata Subscription. Attiverai anche gli eventi e verificherai che siano stati consegnati con successo.
+Nota
+Raccomandiamo fortemente di utilizzare un servizio Free Tier, poiché i servizi che non sono inclusi nel Free Tier comportano costi aggiuntivi per te.
+Flusso delle attività
+In questo esercizio, eseguirai i seguenti passaggi:
+Configura un nuovo namespace.
+Crea una Function.
+Configura una Subscription con vari tipi di evento.
+Attiva il workload con un evento.
+Conferma la consegna dell'evento.
+Attività 1: Configurare il back end NATS
+Passaggi
+Nel dashboard di Kyma, scegli Modify Modules.
+Seleziona il modulo Eventing e scegli Edit.
+Scegli NATS come tipo di back end.
+Scegli Save.
+Risultato
+Quando scegli il tipo di back end, lo stato del modulo Eventing diventa Ready.
+Attività 2: Creare un nuovo namespace
+Passaggi
+Dal cockpit SAP BTP, segui il link al dashboard di Kyma.
+Vai su Namespaces e seleziona Create.
+Come nome, inserisci eventing e seleziona Create.
+Risultato
+Se l'operazione ha successo, vedi i dettagli del namespace per il tuo nuovo namespace. Il namespace ha stato Active.
+Attività 3: Creare una Function
+Passaggi
+Nel dashboard di Kyma, seleziona il namespace che hai creato nell'attività precedente.
+Vai su Workloads→Functions.
+Il namespace non contiene ancora Functions.
+
+
+Seleziona Create e inserisci i seguenti parametri:
+Name: lastorder
+Language: JavaScript
+Runtime: Node.js 20
+Sostituisci il codice sorgente nell'editor della Function:
+module.exports = {
+  main: async function (event, context) {
+  console.log("Received event:", event.data);
+  return;
+  }
+}
+
+Seleziona Create.
+Risultato
+Se l'operazione ha successo, dopo pochi secondi lo stato della Function è Running.
+Attività 4: Sottoscriversi a vari tipi di evento
+Passaggi
+Nel namespace eventing, vai su Configuration→Subscriptions e seleziona Create.
+Configura la Subscription con i seguenti parametri:
+Name: lastorder-sub
+Types: order.received.v1 e order.changed.v1
+Service: lastorder
+Passa alla scheda YAML.
+Nella sezione spec, aggiungi source: myapp.
+...
+spec:
+  source: myapp
+…
+
+Seleziona Create.
+Risultato
+Se l'operazione ha successo, dopo pochi secondi lo stato della Subscription è Ready.
+Attività 5: Attivare il workload con un evento
+Passaggi
+Nota
+Per specificare il payload dell'evento, puoi inviare eventi basati sulla specifica CloudEvents. Sono inoltre disponibili vari SDK, così da poter pubblicare/emetterli e sottoscriverli/consumarli nelle tue applicazioni personalizzate scritte in una varietà di diversi linguaggi di programmazione.
+Apri una finestra del terminale ed esegui:
+kubectl -n kyma-system port-forward service/eventing-publisher-proxy 3000:80
+Per pubblicare l'evento order.received.v1 e attivare la Function, apri un'altra finestra del terminale ed esegui:
+curl -v -X POST \
+    -H "ce-specversion: 1.0" \
+    -H "ce-type: order.received.v1" \
+    -H "ce-source: myapp" \
+    -H "ce-eventtypeversion: v1" \
+    -H "ce-id: cc99dcdd-6f6d-43d6-afef-d024eb276584" \
+    -H "content-type: application/json" \
+    -d "{\"orderCode\":\"3211213\", \"orderStatus\":\"received\"}" \
+http://localhost:3000/publish
+
+Per pubblicare l'evento order.changed.v1 e attivare la Function, nella stessa finestra del terminale, esegui:
+curl -v -X POST \
+    -H "ce-specversion: 1.0" \
+    -H "ce-type: order.changed.v1" \
+    -H "ce-source: myapp" \
+    -H "ce-eventtypeversion: v1" \
+    -H "ce-id: 94064655-7e9e-4795-97a3-81bfd497aac6" \
+    -H "content-type: application/json" \
+    -d "{\"orderCode\":\"3211213\", \"orderStatus\":\"changed\"}" \
+http://localhost:3000/publish
+
+Nel namespace eventing, vai su Workloads→Functions e scegli la tua Function lastorder.
+Trova la sezione Replicas della Function e scegli il nome della replica.
+Sotto Containers, scegli View Logs.
+Risultato
+Se gli eventi sono stati consegnati con successo, li vedi nei log come nel seguente esempio:
+> nodejs20-runtime@0.1.0 start
+> node server.js
+user code loaded in 0sec 0.654321ms
+Received event: { orderCode: '3211213', orderStatus: 'received' }
+Received event: { orderCode: '3211213', orderStatus: 'changed' }
+
+Congratulazioni! Hai completato con successo questo esercizio sul modulo Eventing in SAP BTP, Kyma runtime. Hai creato una Subscription che si sottoscrive a due tipi di evento e hai attivato un workload con un evento.
+
+
+
+Using and Monitoring Storage
+Utilizzo dello storage in Kubernetes: scenario aziendale
+VIDEO
+
+Tu, come sviluppatore, hai ricevuto l’incarico di creare un database che memorizzi i dati in uno storage persistente. Vuoi esplorare come funziona lo storage in Kubernetes e come utilizzarlo nelle tue applicazioni.
+Come utilizzare lo storage in Kubernetes?
+
+Quando esegui container stateless in Kubernetes, tutti i file su disco sono temporanei. Questo significa che, se un container va in crash, viene eliminato o viene scalato, i dati vengono persi. Questo perché ogni nuovo container viene creato con uno stato pulito.
+In Kubernetes, la gestione dello storage cloud è diversa dal cloud computing. Tuttavia, Kubernetes fornisce un insieme di primitive di storage che puoi utilizzare per gestire lo storage all’interno di un cluster Kubernetes e collegare uno storage persistente ai container.
+Volumes: i volumi vengono montati nei Pod in un percorso specifico.
+PersistentVolumes (PVs): rappresentano lo storage fisico e forniscono un’interfaccia verso lo storage.
+PersistentVolumeClaims (PVCs): richieste di storage effettuate da un volume per ottenere storage da un PersistentVolume.
+StorageClasses: forniscono un modo agli amministratori per descrivere le classi di storage che offrono.
+
+
+
+Kubernetes di per sé non è un sistema di storage. L’infrastruttura sottostante deve fornire lo storage fisico e l’amministratore del cluster deve collegarlo a Kubernetes. Questo storage fisico può essere, ad esempio, un disco locale su un nodo, uno storage basato su NFS oppure un sistema di storage di un cloud provider, come AWS EBS o Azure Disks.
+L’amministratore del cluster esegue il provisioning dei PersistentVolume nel cluster, che astraggono lo storage fisico e lo rendono disponibile al cluster. Nota che i PersistentVolume non sono legati a un namespace. Sono disponibili per tutti i namespace del cluster. Anche una StorageClass può eseguire dinamicamente il provisioning dei PersistentVolume.
+D’altra parte, gli utenti Kubernetes distribuiscono applicazioni che richiedono uno stato persistente anche dopo i riavvii. Per farlo, devono richiedere storage al cluster. Questo avviene creando una PersistentVolumeClaim per un Pod. Questa claim è una richiesta di storage che viene soddisfatta da un PersistentVolume. La PersistentVolumeClaim viene associata a un PersistentVolume. Il Pod monta la PersistentVolumeClaim come volume in un percorso specifico, in modo che l’applicazione possa leggere o scrivere dati nel PersistentVolume.
+Come viene fornito lo storage in SAP BTP, Kyma runtime?
+
+SAP esegue il provisioning del cluster Kubernetes sottostante utilizzando il progetto "Gardener" sull’hyperscaler che preferisci, come AWS, Azure o GCP. L’hyperscaler fornisce lo storage fisico.
+SAP BTP, Kyma runtime include un insieme predefinito di StorageClass.
+
+Quando vai nella dashboard di Kyma e selezioni la storage class predefinita, puoi vedere che le etichette indicano che questa storage class è gestita da Gardener.
+Nell’esempio seguente, SAP BTP, Kyma runtime è stato predisposto su Microsoft Azure e utilizza Azure Disks come backend di storage. Dopo aver creato un PersistentVolume, puoi creare più PersistentVolumeClaims, che vengono associate al PersistentVolume, fino a quando la sua capacità non viene utilizzata. L’immagine mostra un esempio di relazione tra PersistentVolumes e PersistentVolumeClaims su SAP BTP, Kyma runtime in esecuzione su Microsoft Azure:
+
+Montaggio di un volume in un container
+
+In genere, è consigliato evitare di rendere persistenti i dati nel file system virtuale del relativo container. Al contrario, è consigliabile montare un volume all’interno del container. Per fare questo, la definizione del Pod deve specificare il volume e il punto di montaggio all’interno del container.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+    - name: my-frontend
+      image: nginx
+      volumeMounts:
+      - mountPath: "/var/www/html"
+        name: my-volume
+  volumes:
+  - name: my-volume
+    persistentVolumeClaim:
+claimName: my-claim
+
+In questo esempio, il Pod monta il volume my-volume nel percorso /var/www/html all’interno del container. Il Pod richiede il volume tramite la PersistentVolumeClaim my-claim, e la PersistentVolumeClaim cerca il PersistentVolume nel cluster.
+Puoi definire una PersistentVolumeClaim nella definizione del Pod oppure crearla separatamente. Creare una PersistentVolumeClaim separata è utile se vuoi riutilizzare la stessa PersistentVolumeClaim per più Pod.
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-claim
+spec:
+  storageClassName: manual
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+storage: 1Gi
+
+Se viene trovata un’associazione tra la PersistentVolumeClaim e il PersistentVolume, il Pod può essere creato. Tuttavia, una volta che un Pod utilizza la PersistentVolumeClaim, la PersistentVolumeClaim viene associata al PersistentVolume. L’eliminazione di un Pod non comporta l’eliminazione della PersistentVolumeClaim, e la PersistentVolumeClaim rimane comunque associata al PersistentVolume.
+Guarda un esempio di un PersistentVolume che memorizza i dati su un nodo in un disco locale:
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: my-persistent-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+path: "/mnt/data"
+
+Puoi anche montare un volume e definire una PersistentVolumeClaim in un Deployment o in uno StatefulSet. Questo approccio è più tipico, poiché di solito non si crea un Pod manualmente ma lo si definisce in una risorsa padre.
+Integrazione del monitoraggio dello storage nella dashboard di Kyma
+La dashboard di Kyma fornisce una vista delle Persistent Volume Claims a livello di namespace.
+
+Facendo clic sulla Persistent Volume Claim, puoi vedere i dettagli della claim e i Pod che la stanno utilizzando.
+I Persistent Volumes sono visibili nella dashboard di Kyma a livello di cluster:
+
+Riepilogo
+
+In questa lezione hai imparato i concetti di storage in Kubernetes. Hai anche imparato come montare un volume in un container.
+Approfondimenti
+Storage in Kubernetes
+
+
+
+Discovering StatefulSets
+Che cosa sono gli StatefulSet in Kubernetes?
+
+Hai già distribuito le tue applicazioni nel cluster utilizzando Deployment e ReplicaSet, tuttavia queste risorse non sono adatte per applicazioni stateful come i database. Scopri di più sulle applicazioni stateful e su come distribuirle in Kubernetes.
+In Kubernetes, distribuire applicazioni stateless è semplice. Puoi usare un Deployment, che crea un ReplicaSet, che a sua volta crea dei Pod. Se un Pod fallisce, il ReplicaSet ne crea uno nuovo. Questi Pod vengono identificati in base alla loro specifica e alle label applicate. Tuttavia, i Pod creati da un ReplicaSet hanno un hash casuale assegnato alla fine del loro nome, come hello-kyma-59fd556764-fkr6d. Questo perché i Pod sono stateless e possono essere sostituiti da qualsiasi altro Pod con le stesse specifiche e label.
+Al contrario, le applicazioni stateful hanno spesso bisogno di un identificatore univoco e coerente, come un hostname stabile. Questo rende complicata la natura dei ReplicaSet, poiché assegnerebbero casualmente un nuovo nome al Pod, rendendo difficile identificare il Pod e collegarsi ad esso. Per questo motivo, Kubernetes fornisce gli StatefulSet.
+In base alla documentazione ufficiale di Kubernetes, puoi usare gli StatefulSet quando il tuo workload richiede una o più delle seguenti funzionalità:
+Identificatori di rete stabili e univoci
+Storage stabile e persistente
+Distribuzione e scalabilità ordinate e senza interruzioni
+Rolling update automatici e ordinati
+Quindi, uno StatefulSet gestisce un gruppo di Pod con identità univoche e persistenti e hostname stabili che Kubernetes mantiene anche in caso di rischedulazione.
+Come funziona uno StatefulSet?
+
+Quando si crea uno StatefulSet, i Pod vengono creati in ordine sequenziale. Questo significa che il primo Pod viene creato con il nome my-stateful-app-0, il secondo con il nome my-stateful-app-1 e così via. Il numero massimo è uguale al numero di repliche specificato nello StatefulSet. Questo comportamento è diverso da quello di un ReplicaSet, in cui i Pod vengono creati contemporaneamente in ordine casuale.
+Lo StatefulSet inizia creando il Pod con l’indice più basso e aspetta che diventi pronto. Solo allora procede a creare il Pod successivo, garantendo che i Pod vengano creati in sequenza e che ciascun Pod sia pronto prima che venga avviato il successivo. Inoltre, puoi collegare storage persistente a un Pod stateful per evitare la perdita di dati se il Pod viene eliminato. Questo è particolarmente utile per applicazioni come i database che devono mantenere i dati. Se il Pod del database va in crash o viene eliminato, i dati restano disponibili nello storage persistente.
+
+
+
+Guarda un esempio di manifest per uno StatefulSet:
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: my-stateful-app
+spec:
+  selector:
+    matchLabels:
+      app: my-stateful-app
+  serviceName: my-stateful-app
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: my-stateful-app
+    spec:
+      containers:
+      - name: my-stateful-app
+        image: ghcr.io/sap-samples/kyma-runtime-learning-journey/hello-kyma:1.0.0
+        ports:
+        - containerPort: 8080
+name: web
+
+Una parte importante da considerare è la definizione del Service per uno StatefulSet come un cosiddetto headless Service. Quando si utilizza un Service che bilancia il traffico verso i Pod gestiti da un ReplicaSet, il Service identifica i Pod tramite le loro label, poiché ai Pod viene assegnato un hash casuale alla fine del nome. Con gli StatefulSet, invece, i Pod vengono identificati dai loro nomi stabili, come my-stateful-app-1. In questo contesto, non è necessario avere un load balancer con un unico indirizzo IP come Service per bilanciare il traffico verso Pod con nomi casuali.
+Guarda un esempio di manifest di un headless Service:
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-stateful-app
+spec:
+  clusterIP: None
+  selector:
+    app: my-stateful-app
+  ports:
+  - name: web
+port: 80
+
+Nota
+In Kubernetes, un Service è considerato headless se il suo clusterIP è impostato su None. Questo significa che il Service non ha un cluster IP.
+Riepilogo
+
+In questa lezione hai imparato che gli StatefulSet vengono utilizzati per distribuire applicazioni stateful, come database o message broker. Ora puoi anche distinguere gli StatefulSet dai ReplicaSet, poiché creano i Pod in ordine sequenziale con un indice univoco e un nome stabile. Inoltre, hai imparato che puoi utilizzare un headless Service per collegarti ai Pod di uno StatefulSet.
+Approfondimenti
+StatefulSet in Kubernetes
+
+
+Connecting Storage to StatefulSets
+Scenario di utilizzo
+
+Tu, come sviluppatore, hai il compito di creare un database PostgreSQL in Kubernetes che persista i dati su un PersistentVolume.
+Flusso del task
+
+In questo esercizio, eseguirai i seguenti passaggi:
+Creare un PersistentVolume.
+Creare un PersistentVolumeClaim.
+Distribuire un database Postgres usando uno StatefulSet.
+Verificare che il PersistentVolumeClaim sia associato correttamente.
+Prerequisiti
+
+Prima di iniziare, assicurati che siano soddisfatti i seguenti prerequisiti:
+Hai creato un'istanza SAP BTP, Kyma runtime nel subaccount SAP BTP. Vedi Deploying a Kubernetes Cluster with Kyma on SAP BTP.
+Hai configurato kubectl per interagire con la tua istanza SAP BTP, Kyma runtime. Vedi Setting and Configuring Kubectl for Kyma.
+Task 1: Creare un PersistentVolume
+
+Passaggi
+Crea un PersistentVolume per il database Postgres.
+In questo task, assumerai il ruolo di amministratore del cluster e creerai un PersistentVolume per il cluster.
+Crea un file chiamato pv.yaml con il seguente contenuto:
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: my-persistent-volume
+spec:
+  storageClassName: default
+  volumeMode: Filesystem
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+path: "/mnt/data"
+
+Applica il file al cluster:
+kubectl apply -f pv.yaml
+Verifica se il PersistentVolume è stato creato:
+kubectl get pv my-persistent-volume
+Se l’operazione ha esito positivo, lo stato del PersistentVolume my-persistent-volume è Available.
+Crea un PersistentVolumeClaim per il database Postgres
+Torniamo ora al ruolo di sviluppatore. Adesso devi richiedere una porzione di storage dal PersistentVolume del cluster. Per farlo, crea un PersistentVolumeClaim.
+Crea un file chiamato pvc.yaml con il seguente contenuto:
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-claim
+spec:
+  storageClassName: default
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+storage: 5Gi
+
+Applica il file al cluster:
+kubectl apply -f pvc.yaml
+Verifica se il PersistentVolumeClaim è stato creato:
+kubectl get pvc postgres-claim
+kubectl get pvc postgres-claim
+Lo stato del PersistentVolumeClaim postgres-claim è impostato su Pending. Questo perché è in attesa del primo consumer che lo associ. Creerai questo primo consumer nel task successivo.
+Crea uno StatefulSet per il database Postgres.
+Crea un nuovo file chiamato postgres.yaml e specifica lo StatefulSet per creare un database Postgres.
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+spec:
+  serviceName: postgres
+  selector:
+    matchLabels:
+      app: postgres
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers: # This is the container that runs the postgres image
+        - name: postgres
+          image: postgres:15.1
+          imagePullPolicy: "IfNotPresent"
+          ports:
+          - containerPort: 5432
+          env: # Environment variables that define a user
+          - name: POSTGRES_DB
+            value: "postgresdb"
+          - name: POSTGRES_USER
+            value: "admin"
+          - name: POSTGRES_PASSWORD
+            value: "password"
+          volumeMounts: # Mount a volume to the path where postgres will store data 
+          - name: data
+            mountPath: /var/lib/postgresql/data
+      volumes: # This is the volume mounted to the container
+      - name: data
+        persistentVolumeClaim:
+claimName: postgres-claim
+
+Applica il file per creare lo StatefulSet.
+kubectl apply -f postgres.yaml
+Controlla se lo StatefulSet è stato creato correttamente.
+kubectl get statefulset postgres
+Controlla se il Pod postgres-0 è stato creato correttamente.
+kubectl get pod postgres-0
+Verifica che il PersistentVolumeClaim sia associato.
+Controlla se il PersistentVolumeClaim è associato al PersistentVolume.
+kubectl get pvc postgres-claim
+Ora lo stato del PersistentVolumeClaim è Bound.
+Nota
+Puoi anche fare delle prove con il database postgres. Puoi collegarti localmente eseguendo il port-forward del Pod postgres-0 verso la tua macchina locale.
+kubectl port-forward postgres-0 5432:5432
+Nota
+Con il client Postgres che preferisci, ora puoi connetterti al database con le credenziali specificate nel file postgres.yaml.
+Inserisci dei dati nel database, rimuovi il Pod, attendi che venga ricreato e controlla se i dati sono ancora presenti.
+Risultato
+Hai creato un'applicazione stateful usando uno StatefulSet e hai utilizzato le primitive di storage di Kubernetes per persistere i dati.
+
+Defining Service Management in SAP BTP, Kyma Runtime
+Introduzione al Service Management di SAP BTP
+
+Il service management ti consente di collegare i servizi SAP BTP al tuo cluster Kyma runtime e di gestirli. Il modulo SAP BTP Operator, che è responsabile della fornitura del service management, è composto da diverse risorse, necessarie per il provisioning di servizi di terze parti nei cluster Kubernetes. Per esempio, controller, CustomResourceDefinitions e altre.
+Come indicato sopra, quando lavori all’interno di SAP BTP, Kyma runtime, utilizzi il modulo SAP BTP Operator. Il modulo si basa sul pattern Kubernetes Operator e puoi consumare i servizi SAP BTP dal tuo cluster Kyma runtime utilizzando strumenti nativi di Kubernetes. Utilizzando il modulo SAP BTP Operator nel tuo subaccount SAP BTP, puoi consumare e gestire i servizi SAP BTP inclusi nel SAP Discovery Center. Puoi utilizzare solo i servizi sottoscritti nel rispettivo subaccount SAP BTP e, di conseguenza, puoi utilizzare solo questi servizi nel tuo Kyma runtime.
+Architettura del modulo SAP BTP Operator
+
+Per il modulo SAP BTP Operator all’interno di Kyma runtime, la Open Service Broker API (OSB API) consente la comunicazione tra il Service Broker e SAP Service Manager. Il modulo SAP BTP Operator utilizza SAP Service Manager per gestire e consumare i rispettivi servizi in SAP BTP. Il modulo SAP BTP Operator installa la propria API tramite custom resources, così che tu possa utilizzare strumenti nativi di Kubernetes per gestire i servizi SAP BTP tramite la Kubernetes API. L’illustrazione seguente fornisce una panoramica concisa dell’architettura del modulo:
+
+
+
+Service Management nel Kyma Dashboard
+
+Per accedere al service management in SAP BTP, Kyma runtime, devi seguire il link al tuo Kyma dashboard dal SAP BTP cockpit. Poi vai su Namespaces. Puoi crearne uno tuo oppure sceglierne uno esistente. Ti consigliamo di scegliere il namespace predefinito. Dopo essere entrato in un namespace, vai su Service Management e scegli Service Instances oppure Service Bindings.
+In alternativa, puoi accedere al service management utilizzando strumenti nativi di Kubernetes (kubectl).
+Riepilogo
+
+In SAP BTP, Kyma runtime, il service management ti consente di collegare i servizi SAP BTP ai cluster Kubernetes e di gestirli utilizzando il modulo SAP BTP Operator. Puoi trovare i servizi SAP BTP nel SAP Discovery Center. All’interno dell’architettura del modulo SAP BTP Operator, SAP Service Manager utilizza la specifica Open Service Broker API (OSB API) per gestire le risorse su SAP BTP.
+Inoltre, ora sai come accedere al service management nel Kyma dashboard.
+
+
+Setting Up a Service Instance and a Service Binding in SAP BTP, Kyma Runtime
+Scenario di utilizzo
+
+Dopo aver imparato che puoi utilizzare i servizi offerti da SAP BTP in SAP BTP, Kyma runtime, questo esercizio ti mostrerà come creare service instances e service bindings nel Kyma dashboard. Imparerai anche come visualizzarli nel SAP BTP cockpit.
+Flusso del task
+
+In questo esercizio, eseguirai i seguenti passaggi:
+Impostare un nuovo namespace.
+Creare una service instance utilizzando il Kyma dashboard.
+Verificare se la service instance è stata creata nel SAP BTP cockpit.
+Creare un service binding utilizzando il Kyma dashboard.
+Verificare se il service binding è stato creato nel SAP BTP cockpit.
+Prerequisiti
+
+Prima di iniziare, assicurati che siano soddisfatti i seguenti prerequisiti:
+Hai creato un’istanza SAP BTP, Kyma runtime nel subaccount SAP BTP. Vedi Deploying a Kubernetes Cluster with Kyma on SAP BTP.
+Hai configurato kubectl per interagire con la tua istanza SAP BTP, Kyma runtime, e hai accesso al Kyma dashboard. Vedi Setting and Configuring Kubectl for Kyma and Accessing Your Kyma Runtime Instance Using Kyma Dashboard.
+Hai un entitlement per il piano di servizio Free Tier di SAP Credential Store.
+Suggerimento
+In questo esercizio, utilizziamo il servizio SAP Credential Store per esemplificare il processo di service management in Kyma runtime. Per utilizzare questo servizio, devi prima assegnare un entitlement al tuo subaccount. Per sapere come farlo, vedi Manage Entitlements Using the Cockpit. Invece di creare un’istanza di SAP Credential Store, puoi utilizzare un altro servizio SAP BTP. Sceglilo dal SAP Discovery Center e assicurati di aver assegnato al tuo subaccount l’entitlement necessario.
+Task 1: Impostare un nuovo namespace
+
+Passaggi
+Dalla panoramica del tuo subaccount nel SAP BTP cockpit, segui il link al Kyma dashboard.
+Vai su Namespaces e scegli Create.
+Nel campo Name, inserisci service-management e scegli Create.
+Se l’operazione ha successo, il Kyma dashboard visualizza i dettagli del namespace service-management. Il suo stato è active.
+Task 2: Creare una service instance utilizzando il Kyma dashboard
+
+Passaggi
+Per creare una service instance con il servizio SAP Credential Store, segui questi passaggi:
+Vai su Service Management → Service Instances e scegli Create.
+Inserisci i seguenti parametri obbligatori:
+Name: credential-store
+Offering Name: credstore
+Plan Name: free
+Nota
+Se utilizzi un servizio diverso, puoi controllare i parametri Offering Name e Plan Name nel Service Marketplace del SAP BTP cockpit.
+Scegli Create.
+Risultato
+Se l’operazione ha successo, la service instance appare nel Kyma dashboard. Il suo stato è Provisioned.
+Task 3: Controllare la service instance nel SAP BTP Cockpit
+
+Passaggi
+Vai nel tuo SAP BTP cockpit e poi su Services → Instances and Subscriptions.
+Controlla se l’istanza Credential Store è visualizzata nell’elenco delle istanze. Se non lo è, torna al tuo Kyma dashboard per ricontrollare che lo stato della service instance che hai impostato sia Provisioned.
+Nota
+Puoi creare, eliminare e gestire service instances e service bindings solo nel Kyma dashboard. Non puoi farlo nel SAP BTP cockpit. Tuttavia, se vuoi controllare i dettagli del servizio, come i nomi del servizio o i piani, puoi farlo nel SAP BTP cockpit.
+Task 4: Creare un service binding utilizzando il Kyma dashboard
+
+Passaggi
+Crea un service binding per la service instance che hai appena impostato. Questo crea automaticamente un Kubernetes Secret con i metadati e le credenziali del binding. Segui questi passaggi:
+Nel Kyma dashboard, vai nel namespace service-management.
+Vai su Service Management → Service Bindings e scegli Create.
+Inserisci i seguenti parametri richiesti:
+Name: credstore-binding
+Service Instance Name: credential-store
+Scegli Create.
+Risultato
+Se l’operazione ha successo, il Kyma dashboard visualizza i dettagli del service binding credstore-binding. Il suo stato è Provisioned.
+Task 5: Controllare il service binding nel SAP BTP Cockpit
+
+Passaggi
+Per verificare che il service binding che hai impostato nel tuo Kyma dashboard sia stato creato con successo anche nel SAP BTP cockpit, segui questi passaggi:
+Vai nel tuo SAP BTP Cockpit e poi su Services → Instances and Subscriptions.
+Fai clic sulla service instance credential-store per visualizzarne i dettagli. Vedi il service binding credstore-binding.
+Nota
+Puoi creare, eliminare e gestire service instances e service bindings solo nel Kyma dashboard. Non puoi farlo nel SAP BTP cockpit. Tuttavia, se vuoi controllare i dettagli del servizio, come i nomi del servizio o i piani, puoi farlo nel SAP BTP cockpit.
+Risultato
+Congratulazioni! Hai completato con successo questo esercizio sul service management in SAP BTP, Kyma runtime. Hai creato una service instance e un service binding nel Kyma dashboard e ne hai verificato lo stato nel SAP BTP cockpit.
+
+Describing Observability in Kyma
+Introduzione all’Observability
+
+Ora stai eseguendo alcuni workload utilizzando SAP BTP, Kyma runtime e vuoi ottenere maggiori informazioni sulle tue applicazioni in esecuzione. A questo scopo, vuoi iniziare a raccogliere e analizzare i segnali di telemetria della tua applicazione, come log, trace e metriche. In questa lezione imparerai le funzionalità di telemetria di Kyma per raccogliere i dati rilevanti e analizzare questi dati con SAP Cloud Logging.
+Che cos’è l’Observability?
+
+Observability significa la capacità di un sistema di fornire informazioni sul proprio stato interno. Queste informazioni possono essere utilizzate per monitorare il comportamento del sistema e diagnosticare i problemi. L’observability è un concetto chiave nelle applicazioni basate su microservizi, dove il numero di componenti è elevato e le interazioni tra di essi sono complesse. Le applicazioni possono esporre informazioni sul proprio stato interno utilizzando log, metriche e trace. Collettivamente, queste informazioni sono chiamate "telemetria".
+Il modulo Telemetry di Kyma
+Panoramica
+SAP BTP, Kyma runtime include il modulo Telemetry, che fornisce una Kubernetes API per raccogliere e inviare i tipici dati di telemetria del tuo workload strumentato verso backend di observability, come SAP Cloud Logging.
+
+Raccolta dei log applicativi
+
+I log applicativi sono essenziali per l’esercizio e la risoluzione dei problemi delle applicazioni. Idealmente, i log vengono archiviati in un sistema esterno per diversi giorni e possono essere facilmente filtrati.
+Il modulo Telemetry include una soluzione per la raccolta dei log basata su OpenTelemetry Collector. Utilizzando un’API chiamata LogPipeline, puoi raccogliere i log applicativi in modo trasparente. Quando specifichi un endpoint SAP Cloud Logging come destinazione, ottieni accesso immediato ai dati di log per un intervallo di tempo configurabile. Inoltre, se i log dell’applicazione sono in formato JSON, il log verrà analizzato e inviato alla destinazione in modo da consentirti di effettuare ricerche e filtri su tutti gli attributi del log.
+Il modulo Telemetry utilizza Fluent Bit per la raccolta e l’elaborazione dei log. Supporta un protocollo basato su HTTP specifico di Fluent Bit e quindi consente l’integrazione con tutti i backend che supportano questo protocollo.
+
+Raccolta delle trace
+
+Le trace distribuite ti aiutano a comprendere il comportamento dell’applicazione e le relazioni tra le azioni del frontend e l’implementazione del backend. Possono registrare la catena delle richieste attraverso diversi workload e catene di esecuzione all’interno di un’applicazione. Le trace sono costituite da span emessi dai singoli componenti che prendono parte a una trace. Se raccogli tutti gli span e li invii a un backend di observability, puoi analizzare le trace distribuite in esecuzione nel tuo SAP BTP, Kyma runtime.
+Il modulo Telemetry include una soluzione per la raccolta delle trace distribuite basata su OpenTelemetry Collector. Utilizzando un’API chiamata TracePipeline, puoi stabilire un gateway centralizzato a livello di cluster, verso il quale le applicazioni strumentate possono inviare dati di span. Istio e molti altri moduli di Kyma sono preconfigurati per inviare gli span a questo gateway. Se specifichi un endpoint SAP Cloud Logging come destinazione, ottieni accesso immediato ai dati di trace con alcune visualizzazioni. Per vedere la correlazione tra log e trace, arricchisci i log della tua applicazione con un attributo trace ID.
+Per strumentare i dati di span all’interno della tua applicazione, utilizza gli SDK OpenTelemetry disponibili. Inoltre, sono disponibili molte auto-instrumentations per la maggior parte dei linguaggi e degli strumenti. Assicurati che la tua applicazione invii i dati di span utilizzando il protocollo OpenTelemetry (OTLP), poiché questo è il formato utilizzato dal gateway.
+
+Raccolta delle metriche
+
+Le metriche sono statistiche aggregate che riflettono nel tempo lo stato interno di un componente, a differenza di log e trace, che sono orientati alla richiesta. Riflettono lo stato interno di un componente. Statistiche tipiche come il numero di richieste elaborate o il numero di utenti registrati possono essere molto utili per monitorare lo stato corrente e la salute di un componente. Inoltre, puoi definire avvisi proattivi e reattivi se le metriche stanno per raggiungere determinate soglie oppure se le hanno già superate.
+Il modulo Telemetry fornisce un’API MetricPipeline, che stabilisce un gateway centralizzato a livello di cluster basato su OpenTelemetry Collector, al quale i workload strumentati possono inviare dati di metrica. Se specifichi un endpoint SAP Cloud Logging come destinazione, ottieni accesso immediato ai dati di metrica con un metric explorer di base.
+Inoltre, la MetricPipeline supporta diversi tipi di scenari di input per raccogliere facilmente le metriche:
+Dal runtime Kubernetes sulla tua applicazione
+Dai sidecar Istio
+Da qualsiasi applicazione che espone metriche in formato Prometheus
+Per strumentare i dati di metrica all’interno della tua applicazione, utilizza gli SDK OpenTelemetry disponibili. Inoltre, sono disponibili molte auto-instrumentations per la maggior parte dei linguaggi e degli strumenti. Assicurati che la tua applicazione invii i dati di span utilizzando il protocollo OpenTelemetry (OTLP), poiché questo è il formato utilizzato dal gateway.
+
+Integrazione con SAP Cloud Logging
+
+L’integrazione con SAP Cloud Logging avviene nei seguenti passaggi:
+Crea un’istanza di SAP Cloud Logging con un account e rendi disponibile un Kubernetes Secret con le credenziali dell’account. SAP Cloud Logging è un servizio SAP BTP e l’istanza viene creata tramite le normali funzionalità di service management.
+Con il modulo SAP BTP Operator, puoi definire una risorsa ServiceInstance, facendo riferimento al service plan da utilizzare e fornendo parametri aggiuntivi per la configurazione del servizio.
+Devi inoltre creare una risorsa ServiceBinding, che richiede un account nel servizio. Qui puoi configurare la rotazione regolare delle credenziali.
+Il ServiceBinding attiva la generazione di un Kubernetes Secret che contiene le credenziali.
+Definisci una LogPipeline con la Telemetry API che faccia riferimento al Secret che contiene le credenziali.
+Con il modulo Telemetry, puoi definire una LogPipeline, che crea nel cluster gli agent o i gateway rilevanti per la raccolta dei dati di telemetria.
+La LogPipeline fa riferimento al Secret con le credenziali del servizio, che viene utilizzato dall’agente di log per inviare i dati.
+Quando la rotazione automatica delle credenziali del ServiceBinding aggiorna il Secret, l’agente di log viene riconfigurato con le nuove credenziali.
+Il seguente diagramma illustra l’integrazione con la LogPipeline come esempio. Lo stesso è supportato per le funzionalità TracePipeline e MetricPipeline.
+
+Riepilogo
+
+In questa lezione hai imparato i diversi aspetti del modulo Telemetry in Kyma e come integrarli con SAP Cloud Logging, per ottenere accesso immediato ai dati di telemetria per analisi e alerting.
+Nel prossimo esercizio, metterai in pratica l’integrazione con SAP Cloud Logging utilizzando la Kyma Telemetry API e inizierai a esplorare i dati disponibili.
+Approfondimenti
+Telemetry module in Kyma
+OpenTelemetry
+SAP Cloud Logging
+Integrate with SAP Cloud Logging
+Observability with Istio
+
+Collecting Application Logs and Shipping them to SAP Cloud Logging
+Scenario di utilizzo
+Dopo aver distribuito la tua applicazione basata su microservizi su Kyma, vuoi monitorarla continuamente con le funzionalità di telemetria di Kyma e con l’integrazione a SAP Cloud Logging.
+Flusso delle attività
+In questo esercizio, eseguirai le seguenti attività:
+Distribuire un’applicazione di esempio che produce log applicativi.
+Provisioning di un’istanza del servizio SAP Cloud Logging e creazione di un service binding con rotazione delle credenziali.
+Configurare una risorsa Kyma Telemetry LogPipeline che fa riferimento al binding.
+Aggiungere il deep linking alla dashboard di Kyma.
+Usare SAP Cloud Logging per esplorare i log.
+Prerequisiti
+Prima di iniziare, assicurati che siano soddisfatti i seguenti prerequisiti:
+Hai creato un’istanza SAP BTP, Kyma runtime nel subaccount SAP BTP. Vedi Deploying a Kubernetes Cluster with Kyma on SAP BTP.
+Hai configurato kubectl per interagire con la tua istanza SAP BTP, Kyma runtime. Vedi Setting and Configuring Kubectl for Kyma.
+Hai aggiunto il modulo Serverless. Vedi Adding Kyma Modules.
+Hai un’entitlement per un piano SAP Cloud Logging.
+Task 1: Distribuire un’applicazione di esempio che produce log applicativi
+Passaggi
+In questo task, creerai un nuovo Deployment e Service hello-kyma in un nuovo namespace chiamato telemetry-exercise. Il deployment usa l’immagine ghcr.io/sap-samples/kyma-runtime-learning-journey/hello-kyma:1.0.0, che scrive i log applicativi delle richieste in ingresso su stdout in formato JSON.
+Crea un nuovo namespace chiamato telemetry-exercise:
+kubectl create namespace telemetry-exercise
+Nel namespace telemetry-exercise, crea un nuovo Deployment chiamato hello-kyma:
+kubectl apply -n telemetry-exercise -f https://raw.githubusercontent.com/SAP-samples/kyma-runtime-learning-journey/main/unit_9/hello-kyma-deployment-svc.yaml
+Verifica se il Deployment è stato creato:
+kubectl get deployments -n telemetry-exercise
+Se l’operazione ha avuto successo, ottieni il seguente output:
+NAME         READY   UP-TO-DATE   AVAILABLE   AGE
+hello-kyma   1/1     1            1           2m
+Esegui il port-forward del Service hello-kyma verso la tua macchina locale:
+kubectl port-forward -n telemetry-exercise svc/hello-kyma 8080:8080
+Lascia aperta questa finestra del terminale e apri http://localhost:8080 in una nuova scheda del browser. Ottieni il messaggio Hello Kyma! (Versione 1.0.0).
+Interrompi il port-forwarding premendo Ctrl+C nella finestra del terminale.
+Verifica che i log vengano scritti su stdout per ogni richiesta:
+kubectl logs -n telemetry-exercise -l app=hello-kyma
+I log recuperati con kubectl vengono memorizzati temporaneamente nel file system del Node. Questi log vengono ruotati frequentemente e vanno persi quando il Pod o il Node viene ripianificato. La seguente configurazione raccoglie i log dal file system del Node, li archivia a lungo termine in SAP Cloud Logging e li rende ricercabili tra Pod e namespace.
+Task 2: Eseguire il provisioning di un’istanza SAP Cloud Logging e creare un binding con rotazione delle credenziali
+Passaggi
+Usando il modulo SAP BTP Operator (che è presente nel tuo cluster Kyma per impostazione predefinita), definisci una nuova istanza per SAP Cloud Logging:
+cat <<EOF | kubectl -n telemetry-exercise apply -f -
+apiVersion: services.cloud.sap.com/v1
+kind: ServiceInstance
+metadata:
+    name: cloud-logging
+spec:
+    serviceOfferingName: cloud-logging
+    servicePlanName: standard
+    externalName: Cloud Logging
+    parameters:
+      ingest_otlp: # must be enabled for trace and metric data ingestion
+          enabled: true
+EOF
+Per l’istanza che hai appena creato, definisci un nuovo Service Binding con la rotazione delle credenziali abilitata:
+cat <<EOF | kubectl -n telemetry-exercise apply -f -
+apiVersion: services.cloud.sap.com/v1
+kind: ServiceBinding
+metadata:
+    name: cloud-logging
+spec:
+    serviceInstanceName: cloud-logging
+    externalName: cloud-logging
+    secretName: cloud-logging
+    credentialsRotationPolicy:
+      enabled: true
+      rotationFrequency: 720h
+      rotatedBindingTTL: 24h
+EOF
+La rotazione delle credenziali ruota periodicamente le credenziali nel Secret generato, mantenendo in parallelo valide le vecchie credenziali per il TTL specificato. Ogni volta che il contenuto del Secret cambia, la risorsa LogPipeline definita nel passaggio seguente ricarica dinamicamente il valore del Secret. Questo garantisce che le credenziali non scadano e vengano ruotate frequentemente.
+Per verificare la configurazione, controlla lo stato dell’istanza di servizio e del binding:
+kubectl -n telemetry-exercise get serviceinstance
+kubectl -n telemetry-exercise get servicebinding
+Sono necessari diversi minuti affinché l’istanza venga sottoposta a provisioning e vengano creati il binding e il relativo Secret Kubernetes. Tuttavia, puoi già proseguire con i passaggi successivi perché il LogPipeline acquisisce dinamicamente il valore del Secret non appena è pronto.
+Task 3: Configurare un LogPipeline di Kyma Telemetry che fa riferimento al Service Binding
+Passaggi
+Crea un LogPipeline:
+cat <<EOF | kubectl apply -f -
+apiVersion: telemetry.kyma-project.io/v1alpha1
+kind: LogPipeline
+metadata:
+  name: cloud-logging
+spec:
+  output:
+      http:
+        dedot: true
+        host:
+            valueFrom:
+              secretKeyRef:
+                  name: cloud-logging
+                  namespace: telemetry-exercise
+                  key: ingest-mtls-endpoint
+        tls:
+            cert:
+              valueFrom:
+                  secretKeyRef:
+                    name: cloud-logging
+                    namespace: telemetry-exercise
+                    key: ingest-mtls-cert
+            key:
+              valueFrom:
+                  secretKeyRef:
+                    name: cloud-logging
+                    namespace: telemetry-exercise
+                    key: ingest-mtls-key
+        uri: /customindex/kyma
+EOF
+Nota
+Questo esempio usa un LogPipeline, ma il modulo Telemetry non è limitato ai log. Puoi integrare trace e metriche in modo simile.
+Task 4: Usare SAP Cloud Logging per esplorare i log
+Passaggi
+La configurazione di SAP Cloud Logging ha comportato anche la creazione di un Secret. Questo Secret contiene i dettagli per inviare i dati a SAP Cloud Logging e per accedere alla dashboard di SAP Cloud Logging.
+Nota
+Questo esempio semplifica la configurazione usando la Basic Authentication con un secret condiviso per l’accesso alla dashboard di SAP Cloud Logging. Tuttavia, quando usi Kyma in ambienti live, è consigliato usare il single sign-on (SSO), per esempio con una configurazione SAML. Se usi SSO, nel Secret generato non vengono fornite credenziali per l’accesso alla dashboard di SAP Cloud Logging.
+Per vedere le tue credenziali, ispeziona il Secret:
+kubectl -n telemetry-exercise get secret cloud-logging -o go-template='{{range $key, $value := .data}}{{$key}}={{$value|base64decode}}{{"\n"}}{{end}}'
+L’attributo dashboards-endpoint contiene l’URL della dashboard di SAP Cloud Logging. Gli attributi dashboards-username e dashboards-password contengono le credenziali per l’autenticazione.
+Apri l’URL preso da dashboards-endpoint e autenticati con le credenziali.
+Nella sezione Discover, ispeziona gli indici logs-json-kyma-*. Tutti i log sono immediatamente disponibili per essere interrogati con gli attributi di log utilizzati.
+Task 5: Aggiungere il deep linking alla dashboard di Kyma
+Passaggi
+Per aggiungere navigazione e deep link alla dashboard di Kyma, segui Use SAP Cloud Logging Dashboards.
+Per provare i nuovi link, vai nella dashboard di Kyma, scegli un namespace e seleziona Discover Logs in SAP Cloud Logging.
+Risultato
+Bravo! Hai completato questo esercizio. Hai usato il modulo Telemetry per raccogliere e visualizzare i log della tua estensione con SAP Cloud Logging.
+
+Explaining ConfigMaps and Secrets
+Scenario d’uso per ConfigMap e Secret
+VIDEO
+Supponendo che tu abbia già distribuito delle applicazioni, potresti considerare di metterle in sicurezza. Alcune applicazioni necessitano di configurazioni con dati sensibili come password o chiavi API. Quindi, come memorizzare questi dati in modo sicuro e iniettarli nella tua applicazione?
+Perché usare ConfigMap e Secret?
+Le applicazioni tipicamente hanno bisogno di una certa configurazione. Quando si tratta di applicazioni distribuite, è probabile che ciascuna applicazione debba accedere a un database, a una coda di messaggi o a un servizio SMTP per inviare email. Inoltre, le applicazioni spesso devono essere configurate con dati sensibili come password o chiavi API.
+Questi servizi di supporto dovrebbero essere trattati come risorse collegate. Non è consigliato usare configurazioni hard-coded in un’applicazione. Al contrario, l’applicazione dovrebbe essere configurata per usare le risorse collegate. Questo consente di cambiare facilmente i servizi di supporto senza dover aggiornare l’applicazione. Tipicamente, l’applicazione viene configurata usando variabili d’ambiente, che sono semplici coppie chiave-valore passate all’applicazione all’avvio. Per esempio, le variabili d’ambiente potrebbero memorizzare la stringa di connessione al database, l’indirizzo del server SMTP e le credenziali, e altro ancora. Lo stesso vale anche per dati sensibili come password o chiavi API.
+Quando distribuisci workload su Kubernetes, puoi definire direttamente le variabili d’ambiente nel manifest Deployment. Tuttavia, questa non è una buona pratica, perché questi manifest vengono spesso memorizzati in sistemi di controllo versione come Git. Questo significa che il sistema di controllo versione memorizza i dati sensibili in chiaro. In questo modo, i dati non sono criptati e chiunque abbia accesso al sistema di controllo versione può leggerli.
+Cosa sono ConfigMap e Secret in Kubernetes?
+Kubernetes ha due risorse native per memorizzare dati di configurazione separati dall’applicazione: ConfigMap e Secret.
+Le ConfigMap devono essere usate per dati non sensibili. I Secret dovrebbero essere usati per dati sensibili come password o chiavi API. Nota che esiste anche una limitazione sulla dimensione dei dati memorizzati in ConfigMap e Secret. Sia le ConfigMap sia i Secret possono memorizzare fino a 1 MB di dati. Tutto ciò che supera questo limite dovrebbe essere montato nell’applicazione come storage.
+Uso delle ConfigMap
+Vedi un esempio di ConfigMap:
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-config
+data:
+    my-key: "my-value"
+    my-other-key: "my-other-value"
+
+    # You can also use file-like key-value pairs
+    my-file-like-key: |
+        # This "file" contains a bash script
+        /bin/bash
+        echo "Hello World"
+    my-other-file-like-key: |
+        # This "file" contains a JSON object
+        {
+            "key": "value"
+        }
+
+Le ConfigMap sono un modo semplice ma potente per memorizzare dati di configurazione. Ma come si usano nella tua applicazione?
+Per farlo, puoi assegnare una ConfigMap a un container in un manifest Deployment come nell’esempio seguente:
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-kyma-config
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-kyma-config
+  template:
+    metadata:
+      labels:
+        app: hello-kyma-config
+    spec:
+      containers:
+        - name: my-container
+          image: bash
+          envFrom: # 1. Use all keys as environment variables
+            - configMapRef:
+                name: my-config
+          env: # 2. Use only specific keys as environment variables
+            - name: MY_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: my-config
+key: my-key
+
+Esistono molti altri modi per usare le ConfigMap nella tua applicazione. Vedi Configure a Pod to Use a ConfigMap per maggiori informazioni.
+Uso dei Secret
+Vedi un esempio di Secret:
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-secret
+type: Opaque # default type
+data:
+    username: "YWRtaW4=" # This is the base64 encoded string "admin"
+password: "dG9wc2VjcmV0" # This is the base64 encoded string "topsecret"
+
+Il manifest sopra crea un Secret con due chiavi: username e password. Kubernetes include anche diversi tipi di Secret che puoi usare per memorizzare diversi tipi di dati sensibili. Per esempio, il tipo kubernetes.io/dockerconfigjson memorizza un file di configurazione Docker. Questo è utile se vuoi scaricare immagini da un registro Docker privato.
+Usare i Secret nella tua applicazione è molto simile all’uso delle ConfigMap. Puoi assegnare un Secret a un container in un manifest Deployment come nell’esempio seguente:
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-kyma-secret
+spec:
+  selector:
+    matchLabels:
+      app: hello-kyma-secret
+  template:
+    metadata:
+      labels:
+        app: hello-kyma-secret
+    spec:
+      containers:
+        - name: my-container
+          image: ghcr.io/sap-samples/kyma-runtime-learning-journey/hello-kyma:1.0.0
+          envFrom: # 1. Use all keys as environment variables
+            - secretRef:
+                name: my-secret
+          env: # 2. Use only specific keys as environment variables
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: my-secret
+key: password
+
+Differenza tra il montaggio e l'iniezione di ConfigMap e Secret
+Le ConfigMap e i Secret in Kubernetes consentono di fornire dati di configurazione ai Pod in fase di runtime. Esistono due modi per farlo: il montaggio e l'iniezione.
+Il montaggio comporta la creazione di un volume nel Pod e l'aggiunta della ConfigMap o del Secret come volume a quel Pod. Questo consente di accedere ai dati nella ConfigMap o nel Secret come file nel volume.
+Per esempio, se hai una ConfigMap chiamata my-config con una chiave config.txt, puoi montarla nel tuo Pod in questo modo:
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+  - name: my-container
+    image: bash
+    volumeMounts:
+    - name: my-config-volume
+      mountPath: /etc/config
+  volumes:
+  - name: my-config-volume
+    configMap:
+name: my-config
+
+Quindi, accedi ai dati nel file config.txt in /etc/config/config.txt all’interno del tuo container.
+L’iniezione, invece, comporta l’inserimento diretto dei dati nel Pod come variabili d’ambiente o argomenti della riga di comando.
+Per esempio, se hai un Secret chiamato my-secret con una chiave password.txt, puoi iniettarlo nel tuo Pod in questo modo:
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+  - name: my-container
+    image: bash
+    env:
+    - name: MY_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: my-secret
+key: password.txt
+
+Puoi quindi accedere al valore di password.txt come variabile d’ambiente MY_PASSWORD nel tuo container.
+In generale, il montaggio è utile quando hai bisogno di accedere ai dati come file nel tuo container. L’iniezione è utile quando hai bisogno di passare i dati alla tua applicazione come variabili d’ambiente o argomenti della riga di comando.
+
+ConfigMap e Secret nella dashboard di Kyma
+Nella dashboard di Kyma, puoi creare, visualizzare, modificare ed eliminare ConfigMap e Secret. Puoi anche usare la dashboard per creare un nuovo Deployment e assegnargli una ConfigMap o un Secret.
+Sia per le ConfigMap sia per i Secret, puoi vedere una panoramica di tutte le risorse esistenti create nel namespace corrente facendo clic sulla corrispondente voce di menu nella navigazione.
+
+Dopo aver fatto clic su una ConfigMap o un Secret, puoi vedere i dettagli della risorsa. Puoi anche modificare la risorsa facendo clic sul pulsante Edit.
+
+Per i Secret, i valori sono codificati in base64 per impostazione predefinita. Puoi scegliere Decode per decodificare i valori in testo semplice.
+
+Riepilogo
+Questa lezione ha spiegato il concetto di ConfigMap e Secret. Hai imparato quando e come usarli e come crearli e gestirli nella dashboard di Kyma.
+Approfondimenti ulteriori
+Secret
+ConfigMap
+
+Configuring a Deployment to Use a ConfigMap
+Scenario di utilizzo
+
+Vuoi distribuire un’applicazione su SAP BTP, Kyma runtime, che deve essere configurata con variabili d’ambiente. Vuoi memorizzare queste variabili d’ambiente in una ConfigMap e iniettarle nella tua applicazione.
+Flusso delle attività
+In questo esercizio, eseguirai i seguenti passaggi:
+Crea una ConfigMap.
+Distribuisci un’applicazione con la ConfigMap e verifica il risultato.
+Prerequisiti
+Prima di iniziare, assicurati che siano soddisfatti i seguenti prerequisiti:
+Hai creato un’istanza SAP BTP, Kyma runtime nella sottosottoscrizione SAP BTP. Vedi Deploying a Kubernetes Cluster with Kyma on SAP BTP.
+Hai configurato kubectl per interagire con la tua istanza SAP BTP, Kyma runtime. Vedi Setting and Configuring Kubectl for Kyma.
+Attività 1: Creare una ConfigMap
+Passaggi
+Crea un nuovo file chiamato config-map.yaml. Puoi specificare il tuo nome e un messaggio di saluto:
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: name-greeting
+data:
+    GREETING: "Hello"
+FIRSTNAME: "Kyma"
+
+Applica la ConfigMap usando kubectl.
+kubectl apply -f config-map.yaml
+Verifica se la ConfigMap è stata creata:
+kubectl get configmaps
+Risultato
+Se l’operazione ha avuto successo, l’elenco stampato contiene la ConfigMap name-greeting.
+Attività 2: Distribuire un’applicazione con la ConfigMap
+Passaggi
+Crea un nuovo file chiamato deployment.yaml che specifichi la configurazione del Deployment:
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-configmap
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-configmap
+  template:
+    metadata:
+      labels:
+        app: test-configmap
+    spec:
+      containers:
+      - name: test-configmap
+        image: bash
+        envFrom:
+        - configMapRef:
+            name: name-greeting
+        command: ["echo"]
+args: ["$(GREETING) $(FIRSTNAME)!"]
+
+Applica il Deployment usando kubectl.
+kubectl apply -f deployment.yaml
+Recupera il nome del Pod.
+kubectl get pods -l app=test-configmap
+Recupera l’output del Pod.
+kubectl logs <pod-name>
+In alternativa, puoi anche recuperare i log usando il selettore di etichette:
+kubectl logs -l app=test-configmap
+Elimina il Deployment.
+kubectl delete deployment test-configmap
+Risultato
+In questo esercizio, hai creato una ConfigMap e distribuito un’applicazione che utilizza la ConfigMap.
+Approfondimenti ulteriori
+Configurare un Pod per usare una ConfigMap
